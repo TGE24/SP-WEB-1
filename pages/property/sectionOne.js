@@ -1,5 +1,5 @@
 import React from "react";
-import { PropSectionOne } from "./styled";
+import { PropSectionOne } from "../../styles/propertyStyled";
 
 export default () => {
   return (

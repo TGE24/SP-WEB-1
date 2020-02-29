@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Select } from "antd";
-import { PropSectionTwo } from "./styled";
+import { PropSectionTwo } from "../../styles/propertyStyled";
 
 const { Option } = Select;
 
