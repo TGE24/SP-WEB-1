@@ -1,13 +1,32 @@
 import React from "react";
-import { Row, Col } from "antd";
+import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
+
+const { Option } = Select;
+
+function handleChange(value) {
+  console.log(`selected ${value}`);
+}
 
 export default () => {
   return (
     <PropSectionTwo>
       <div className="row-head">
         <h1>Houses for rent</h1>
-        <div className="sort-by">sksks</div>
+        <div className="sort-by">
+          <img src="../assets/icons/sort-by.png" alt="" />
+          <Select
+            defaultValue="Sorted By"
+            style={{ width: 160 }}
+            onChange={handleChange}
+          >
+            <Option value="jack">General Listing</Option>
+            <Option value="lucy">Spread Exclusive </Option>
+            <Option value="lucy">Mortgage </Option>
+            <Option value="lucy">For Sale </Option>
+            <Option value="lucy">For Rent </Option>
+          </Select>
+        </div>
       </div>
       <Row>
         <Col xs={24} sm={2} md={10} lg={6} xl={6}>
