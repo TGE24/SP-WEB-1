@@ -10,7 +10,7 @@ export default () => {
         <div className="sort-by">sksks</div>
       </div>
       <Row>
-        <Col xs={24} sm={2} md={6} lg={6} xl={6}>
+        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
           <div className="prop-cards">
             <div className="image">
               <img src="../assets/prop1.png" alt="" />
@@ -50,7 +50,7 @@ export default () => {
             </div>
           </div>
         </Col>
-        <Col xs={24} sm={2} md={6} lg={6} xl={6}>
+        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
           <div className="prop-cards">
             <div className="image">
               <img src="../assets/prop2.png" alt="" />
@@ -90,7 +90,7 @@ export default () => {
             </div>
           </div>
         </Col>
-        <Col xs={24} sm={2} md={6} lg={6} xl={6}>
+        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
           <div className="prop-cards">
             <div className="image">
               <img src="../assets/prop3.png" alt="" />
@@ -130,7 +130,7 @@ export default () => {
             </div>
           </div>
         </Col>
-        <Col xs={24} sm={2} md={6} lg={6} xl={6}>
+        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
           <div className="prop-cards">
             <div className="image">
               <img src="../assets/prop4.png" alt="" />
