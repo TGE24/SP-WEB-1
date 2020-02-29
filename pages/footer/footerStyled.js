@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
   background-color: #515c6f;
-  min-height: 328px;
+  height: 340px;
 
   @media screen and (max-width: 767px) {
     #footer-logo {
@@ -26,7 +26,7 @@ export const FooterContainer = styled.footer`
     font-size: 25px;
     font-weight: bold;
     @media screen and (max-width: 767px) {
-      font-size: 11px;
+      font-size: 20px;
     }
   }
   .container-item {
@@ -53,7 +53,7 @@ export const FooterContainer = styled.footer`
         color: #c4c4c4;
       }
       @media screen and (max-width: 767px) {
-        font-size: 10px;
+        font-size: 13px;
       }
     }
   }
