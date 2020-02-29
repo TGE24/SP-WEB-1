@@ -69,6 +69,16 @@ export const PropSectionTwo = styled.section`
         font-size: 20px;
       }
     }
+    .sort-by {
+      .ant-select-selection {
+        border: none !important;
+      }
+      .ant-select-selection-selected-value {
+        color: #515c6f;
+        font-weight: 500;
+        font-size: 14.5341px;
+      }
+    }
   }
 
   .prop-cards {
