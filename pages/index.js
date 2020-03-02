@@ -1,10 +1,3 @@
-import Property from "./property";
-import Footer from "./footer";
-import AboutUs from "./about-us";
+import Home from "../src/pages/home";
 
-export default () => (
-  <>
-    <Property />
-    <Footer />
-  </>
-);
+export default Home;
