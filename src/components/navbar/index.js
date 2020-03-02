@@ -3,6 +3,7 @@ import RightMenu from "./rightmenu";
 import styled from "styled-components";
 import { LockOutlined } from "@ant-design/icons";
 import { Menu, Drawer, Button, Affix } from "antd";
+import Link from "next/link";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined
@@ -49,7 +50,9 @@ const Navbar = () => {
       >
         <nav className="menuBar">
           <div className="logo">
-            <a href="">logo</a>
+            <Link href="/">
+              <a>logo</a>
+            </Link>
           </div>
           <div className="menuCon">
             <div className="rightMenu">
@@ -76,12 +79,23 @@ const Navbar = () => {
             >
               <Menu mode="vertical">
                 <Menu.Item key="mail">
-                  <a href="">Home</a>
+                  <Link href="/">
+                    <a>Home</a>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="mail1">
-                  <a href="">Properties</a>
+                  <Link href="/properties">
+                    <a>Properties</a>
+                  </Link>
                 </Menu.Item>
-                <SubMenu key="mail2" title={<a href="">Services</a>}>
+                <SubMenu
+                  key="mail2"
+                  title={
+                    <Link href="/services">
+                      <a>Services</a>
+                    </Link>
+                  }
+                >
                   <MenuItemGroup title="Item 1">
                     <Menu.Item key="setting:1">Option 1</Menu.Item>
                     <Menu.Item key="setting:2">Option 2</Menu.Item>
@@ -90,10 +104,14 @@ const Navbar = () => {
                   </MenuItemGroup>
                 </SubMenu>
                 <Menu.Item key="mail3">
-                  <a href="">About Us</a>
+                  <Link href="/about">
+                    <a>About Us</a>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="mail4">
-                  <a href="">Careers</a>
+                  <Link href="/careers">
+                    <a>Careers</a>
+                  </Link>
                 </Menu.Item>
                 <Menu.Item key="mail5">
                   <a href="">
@@ -101,7 +119,7 @@ const Navbar = () => {
                       style={{ background: "#f9a602" }}
                       icon={<LockOutlined />}
                     >
-                      Search
+                      Sign In
                     </Button>
                   </a>
                 </Menu.Item>

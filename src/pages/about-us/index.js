@@ -2,11 +2,13 @@ import React from "react";
 import { Row, Col } from "antd";
 import { AboutUsContainer } from "./styled";
 import Footer from "../../components/footer";
+import NavBar from "../../components/navbar";
 
 export default () => {
   return (
     <>
       <AboutUsContainer>
+        <NavBar />
         <div className="sectionOne">
           <div className="over-lay">
             <h1>Who we are</h1>
