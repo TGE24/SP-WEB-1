@@ -5,9 +5,13 @@ export const FooterContainer = styled.footer`
   height: 340px;
 
   @media screen and (max-width: 767px) {
+    height: 396px;
     #footer-logo {
       display: none;
     }
+  }
+  @media screen and (max-width: 1255px) {
+    height: 422px;
   }
   img {
     margin-top: 2rem !important;
