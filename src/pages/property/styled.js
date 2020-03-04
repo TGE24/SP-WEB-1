@@ -53,7 +53,7 @@ export const PropSectionOne = styled.section`
 
 export const PropSectionTwo = styled.section`
   width: 80%;
-  margin: 4rem 8rem;
+  margin: 8rem;
   display: flex;
   flex-direction: column;
   .row-head {

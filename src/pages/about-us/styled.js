@@ -10,6 +10,21 @@ export const AboutUsContainer = styled.section`
     margin: 0;
     height: 60vh;
     background: url("../assets/aboutus.png");
+    @media screen and (max-width: 767px) {
+      background: none;
+      height: 34vh;
+    }
+    img {
+      display: none;
+      @media screen and (max-width: 767px) {
+        display: block;
+        height: 29vh;
+        width: 100%;
+      }
+    }
+    @media screen and (max-width: 1255px) {
+      height: 29vh;
+    }
     .over-lay {
       position: absolute;
       top: 0;
@@ -40,7 +55,7 @@ export const AboutUsContainer = styled.section`
         height: 34vh;
       }
       @media screen and (max-width: 1255px) {
-        height: 34vh;
+        height: 29vh;
       }
     }
   }
@@ -61,9 +76,19 @@ export const AboutUsContainer = styled.section`
       color: #515c6f;
       font-size: 17px;
     }
+    @media screen and (max-width: 767px) {
+      margin-top: 1rem;
+      h1 {
+        font-size: 26px;
+      }
+      h2 {
+        font-size: 12px;
+      }
+    }
   }
   .sectionThree {
     margin: 4rem 9rem 0 9rem;
+
     .side-image {
       width: 100%;
       height: 445.36px;
@@ -106,19 +131,95 @@ export const AboutUsContainer = styled.section`
         color: #797979;
       }
     }
+    @media screen and (max-width: 767px) {
+      margin: 2em;
+      .side-text {
+        width: 100%;
+        height: auto;
+        box-shadow: 3.52588px 3.52588px 8.81471px rgba(81, 92, 111, 0.12);
+        margin-left: 0;
+
+        h1 {
+          font-size: 26px;
+        }
+        h2 {
+          font-size: 15px;
+        }
+        h3 {
+          font-size: 15px;
+          margin: 1rem;
+        }
+      }
+    }
+    @media screen and (max-width: 1255px) {
+      margin: 4rem 1rem 0 1rem;
+    }
   }
   .sectionFour {
     margin: 0 9rem;
     width: 78.7%;
-    height: 558px;
+    height: 461px;
     background: linear-gradient(
       180deg,
       #f5f4f4 33.8%,
       rgba(245, 244, 244, 0) 100%
     );
+    .left-content {
+      margin: 6rem 0 0 2rem;
+      h1 {
+        color: #515c6f;
+        font-size: 30px;
+        text-align: left;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 16px;
+        color: #797979;
+      }
+    }
+    .right-content {
+      // align-items: center;
+      .circle {
+        width: 100%;
+        height: 492px;
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          #c4c4c4 0%,
+          rgba(196, 196, 196, 0) 100%
+        );
+      }
+      .image {
+        width: 100%;
+        height: 522px;
+        position: absolute;
+        top: 0;
+        img {
+          width: 100%;
+          margin: 2rem 0 0 0;
+        }
+      }
+    }
 
-    .container {
-      // margin: 2rem 2rem;
+    @media screen and (max-width: 767px) {
+      margin: 0;
+      width: 100%;
+      height: 506px;
+      .left-content {
+        margin: 1rem 0 0 2rem;
+      }
+    }
+    @media screen and (max-width: 1255px) {
+      width: 100%;
+      margin: 0;
+    }
+    @media screen and (max-width: 800px) {
+      .right-content {
+        .image {
+          img {
+            height: 418px;
+          }
+        }
+      }
     }
   }
 `;
