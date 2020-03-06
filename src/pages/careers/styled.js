@@ -132,3 +132,66 @@ export const CareerSectionTwo = styled.section`
     }
   }
 `;
+
+export const CareerSectionThree = styled.section`
+  height: 730px;
+  background: #f5f4f4;
+  width: 100%;
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 9rem;
+    h1 {
+      margin-top: 3rem;
+      color: #515c6f;
+      font-size: 30px;
+
+      font-weight: 600;
+      text-align: center;
+    }
+    h2 {
+      color: #515c6f;
+      font-size: 20px;
+
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .left-content {
+    margin: 6rem 0 0 2rem;
+    h1 {
+      color: #515c6f;
+      font-size: 25px;
+      text-align: left;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0rem 0rem 1rem 1rem;
+      font-size: 16px;
+      color: #797979;
+    }
+    img {
+      // margin: 0rem 0rem 1rem 1rem;
+    }
+  }
+  .vertical-line {
+    margin: 6rem 0 0 2rem;
+    height: 292px;
+    width: 2px;
+    background: #797979;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    .container,
+    .left-content {
+      margin: 1rem 0 0 1rem;
+      h2 {
+        margin: 0rem 0rem 1rem 0rem;
+        font-size: 13px;
+      }
+    }
+  }
+`;
