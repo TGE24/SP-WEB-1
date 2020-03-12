@@ -3,7 +3,7 @@ import careers from ".";
 
 export const CareerSectionOne = styled.section`
   width: 100%;
-  height: 80vh;
+  height: 50vh;
 
   background-image: url("../assets/aboutus.png");
   background-size: cover;
@@ -14,7 +14,7 @@ export const CareerSectionOne = styled.section`
     left: 0px;
     top: 0px;
     width: 100%;
-    height: 80vh;
+    height: 50vh;
     background: rgba(0, 0, 0, 0.43);
     justify-content: center;
     align-items: center;
@@ -129,6 +129,207 @@ export const CareerSectionTwo = styled.section`
       .career-card {
         height: auto;
       }
+    }
+  }
+`;
+
+export const CareerSectionThree = styled.section`
+  height: 730px;
+  background: #f5f4f4;
+  width: 100%;
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 9rem;
+    h1 {
+      margin-top: 3rem;
+      color: #515c6f;
+      font-size: 30px;
+
+      font-weight: 600;
+      text-align: center;
+    }
+    h2 {
+      color: #515c6f;
+      font-size: 20px;
+
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .left-content {
+    margin: 6rem 0 0 2rem;
+    h1 {
+      color: #515c6f;
+      font-size: 25px;
+      text-align: left;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0rem 0rem 1rem 1rem;
+      font-size: 16px;
+      color: #797979;
+    }
+    img {
+      // margin: 0rem 0rem 1rem 1rem;
+    }
+  }
+  .vertical-line {
+    margin: 6rem 0 0 2rem;
+    height: 292px;
+    width: 2px;
+    background: #797979;
+  }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    .container,
+    .left-content {
+      margin: 1rem 0 0 1rem;
+      h2 {
+        margin: 0rem 0rem 1rem 0rem;
+        font-size: 13px;
+      }
+    }
+  }
+`;
+
+export const CareerSectionFour = styled.section`
+  .sectionFour {
+    margin: 0 9rem;
+    width: 78.7%;
+    height: 461px;
+
+    .left-content {
+      margin: 6rem 0 0 2rem;
+      h1 {
+        color: #515c6f;
+        font-size: 30px;
+        text-align: left;
+        font-weight: 600;
+      }
+      h2 {
+        font-size: 16px;
+        color: #797979;
+      }
+    }
+    .right-content {
+      // align-items: center;
+      .circle {
+        width: 100%;
+        height: 492px;
+        background: radial-gradient(
+          50% 50% at 50% 50%,
+          #c4c4c4 0%,
+          rgba(196, 196, 196, 0) 100%
+        );
+      }
+      .image {
+        width: 100%;
+        height: 522px;
+        position: absolute;
+        top: 0;
+        img {
+          width: 100%;
+          margin: 2rem 0 0 0;
+        }
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      margin: 0;
+      width: 100%;
+      height: 506px;
+      .left-content {
+        margin: 1rem 0 0 2rem;
+      }
+    }
+    @media screen and (max-width: 1255px) {
+      width: 100%;
+      margin: 0;
+    }
+    @media screen and (max-width: 800px) {
+      .right-content {
+        .image {
+          img {
+            height: 418px;
+          }
+        }
+      }
+    }
+  }
+`;
+export const CareerSectionFive = styled.section`
+  height: 730px;
+  background: #f5f4f4;
+  width: 100%;
+  .container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1rem 9rem;
+    h1 {
+      margin-top: 3rem;
+      color: #515c6f;
+      font-size: 30px;
+
+      font-weight: 600;
+      text-align: center;
+    }
+    h2 {
+      color: #515c6f;
+      font-size: 20px;
+
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+  .cards {
+    margin: 6rem 9rem;
+    .expert-card {
+      width: 314px;
+      height: 428px;
+      background: #ffffff;
+      box-shadow: 4px 4px 9px rgba(81, 92, 111, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #515c6f;
+      .image-cicle {
+        width: 123.01px;
+        height: 123.01px;
+        border-radius: 100%;
+        img {
+          height: inherit;
+          width: inherit;
+          border-radius: 100%;
+        }
+      }
+      h1 {
+        color: #515c6f;
+        font-weight: 600;
+        font-size: 26px;
+      }
+      h2 {
+        color: #515c6f;
+        font-weight: 600;
+        font-size: 20px;
+      }
+      h3 {
+        color: #515c6f;
+        font-weight: 500;
+        font-size: 22.3454px;
+      }
+    }
+    h2 {
+      text-align: end;
+      font-size: 18px;
+      line-height: 27px;
+      color: #fcad0a;
+      margin: 1rem;
     }
   }
 `;
