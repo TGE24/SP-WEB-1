@@ -1,14 +1,12 @@
 import React from "react";
 import { Row, Col } from "antd";
 import { AboutUsContainer } from "./styled";
-import Footer from "../../components/footer";
-import NavBar from "../../components/navbar";
+import Layout from "../../components/Layout";
 
 export default () => {
   return (
-    <>
+    <Layout title="About us">
       <AboutUsContainer>
-        <NavBar />
         <div className="sectionOne">
           <img src="../assets/aboutus.png" alt="" />
           <div className="over-lay">
@@ -191,7 +189,6 @@ export default () => {
           </Row>
         </div>
       </AboutUsContainer>
-      <Footer />
-    </>
+    </Layout>
   );
 };

@@ -16,6 +16,7 @@
     "null-loader": "2.0.0",
     "react": "16.13.0",
     "react-dom": "16.13.0",
+    "react-image-gallery": "1.0.6",
     "styled-components": "5.0.1"
   },
   "license": "ISC",
