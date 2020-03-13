@@ -1,0 +1,58 @@
+.prop-header {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/assets/single.png");
+  background-position: center top;
+  height: 322px;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.prop-header h1 {
+  font-size: 64px;
+  color: white;
+  margin: 0;
+}
+
+.prop-header p {
+  font-size: 20px;
+  color: white;
+  margin: 0;
+}
+
+.container {
+  padding: 110px;
+}
+
+.prop-heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  width: 337px;
+}
+
+.image-gallery-thumbnails-wrapper {
+  position: relative;
+  bottom: 75px;
+}
+.image-gallery-left-nav .image-gallery-svg,
+.image-gallery-right-nav .image-gallery-svg {
+  height: 60px !important;
+  width: 60px;
+}
+
+.purchase-btn {
+  background: rgb(249, 166, 2) !important;
+  position: absolute !important;
+  right: 0 !important;
+  /* bottom: 73px; */
+  border: none !important;
+}

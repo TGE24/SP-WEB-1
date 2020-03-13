@@ -7,10 +7,10 @@ import SectionFive from "./SectionFive";
 import SectionSix from "./SectionSix";
 import SectionSeven from "./SectionSeven";
 import SectionEight from "./SectionEight";
-import Footer from "../../components/footer";
+import Layout from "../../components/Layout";
 
 export default () => (
-  <>
+  <Layout>
     <SectionOne />
     <SectionTwo />
     <SectionThree />
@@ -19,6 +19,5 @@ export default () => (
     <SectionSix />
     <SectionSeven />
     <SectionEight />
-    <Footer />
-  </>
+  </Layout>
 );

@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
+import Link from "next/link";
 
 const { Option } = Select;
 
@@ -28,168 +29,102 @@ export default () => {
           </Select>
         </div>
       </div>
-      <Row>
-        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
-          <div className="prop-cards">
-            <div className="image">
-              <img src="../assets/prop1.png" alt="" />
-              <div className="apartment">
-                <h4>Apartment</h4>
-              </div>
-              <div className="feature">
-                <h4>Featured</h4>
-              </div>
-            </div>
+      <Row gutter={[12, 12]}>
+        {Properties.map((item, index) => (
+          <Link href="/properties/[pid]" as={`/properties/${index}`}>
+            <Col
+              xs={24}
+              sm={2}
+              md={10}
+              lg={6}
+              xl={6}
+              key={index}
+              style={{ cursor: "pointer" }}
+            >
+              <div className="prop-cards">
+                <div className="image">
+                  <img src={item.image} alt="" />
+                  <div className="apartment">
+                    <h4>{item.propertyType}</h4>
+                  </div>
+                  <div className="feature">
+                    <h4>Featured</h4>
+                  </div>
+                </div>
 
-            <div className="prop-details">
-              <div className="inner-container">
-                <h2>Ancient Bungalo Ancient </h2>
-                <h4>
-                  <img src="../assets/icons/location.png" alt="" /> 45 ntoe asi
-                  layout , Calabar
-                </h4>
+                <div className="prop-details">
+                  <div className="inner-container">
+                    <h2>{item.propertyName}</h2>
+                    <h4>
+                      <img
+                        src="../assets/icons/location.png"
+                        alt=""
+                      />
+                      {item.propertyAddress}
+                    </h4>
+                  </div>
+                </div>
+                <div className="prop-icons">
+                  {item.features.map((item, index) => (
+                    <div className="icon">
+                      <h4>
+                        <img src={item} alt="" /> 6
+                      </h4>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="prop-icons">
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/house.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bathroom.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bed.png" alt="" /> 6
-                </h4>
-              </div>
-            </div>
-          </div>
-        </Col>
-        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
-          <div className="prop-cards">
-            <div className="image">
-              <img src="../assets/prop2.png" alt="" />
-              <div className="apartment">
-                <h4>Apartment</h4>
-              </div>
-              <div className="feature">
-                <h4>Featured</h4>
-              </div>
-            </div>
-
-            <div className="prop-details">
-              <div className="inner-container">
-                <h2>Ancient Bungalo Ancient </h2>
-                <h4>
-                  <img src="../assets/icons/location.png" alt="" /> 45 ntoe asi
-                  layout , Calabar
-                </h4>
-              </div>
-            </div>
-            <div className="prop-icons">
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/house.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bathroom.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bed.png" alt="" /> 6
-                </h4>
-              </div>
-            </div>
-          </div>
-        </Col>
-        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
-          <div className="prop-cards">
-            <div className="image">
-              <img src="../assets/prop3.png" alt="" />
-              <div className="apartment">
-                <h4>House</h4>
-              </div>
-              <div className="feature">
-                <h4>Featured</h4>
-              </div>
-            </div>
-
-            <div className="prop-details">
-              <div className="inner-container">
-                <h2>Ancient Bungalo Ancient </h2>
-                <h4>
-                  <img src="../assets/icons/location.png" alt="" /> 45 ntoe asi
-                  layout , Calabar
-                </h4>
-              </div>
-            </div>
-            <div className="prop-icons">
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/house.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bathroom.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bed.png" alt="" /> 6
-                </h4>
-              </div>
-            </div>
-          </div>
-        </Col>
-        <Col xs={24} sm={2} md={10} lg={6} xl={6}>
-          <div className="prop-cards">
-            <div className="image">
-              <img src="../assets/prop4.png" alt="" />
-              <div className="apartment">
-                <h4>House</h4>
-              </div>
-              <div className="feature">
-                <h4>Featured</h4>
-              </div>
-            </div>
-
-            <div className="prop-details">
-              <div className="inner-container">
-                <h2>Ancient Bungalo Ancient </h2>
-                <h4>
-                  <img src="../assets/icons/location.png" alt="" /> 45 ntoe asi
-                  layout , Calabar
-                </h4>
-              </div>
-            </div>
-            <div className="prop-icons">
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/house.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bathroom.png" alt="" /> 6
-                </h4>
-              </div>
-              <div className="icon">
-                <h4>
-                  <img src="../assets/icons/bed.png" alt="" /> 6
-                </h4>
-              </div>
-            </div>
-          </div>
-        </Col>
+            </Col>
+          </Link>
+        ))}
       </Row>
     </PropSectionTwo>
   );
 };
+
+const Properties = [
+  {
+    image: "../assets/prop1.png",
+    propertyType: "Apartment",
+    proprtyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout , Calabar",
+    features: [
+      "../assets/icons/house.png",
+      "../assets/icons/bathroom.png",
+      "../assets/icons/bed.png"
+    ]
+  },
+  {
+    image: "../assets/prop2.png",
+    propertyType: "Apartment",
+    proprtyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout , Calabar",
+    features: [
+      "../assets/icons/house.png",
+      "../assets/icons/bathroom.png",
+      "../assets/icons/bed.png"
+    ]
+  },
+  {
+    image: "../assets/prop3.png",
+    propertyType: "Apartment",
+    proprtyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout , Calabar",
+    features: [
+      "../assets/icons/house.png",
+      "../assets/icons/bathroom.png",
+      "../assets/icons/bed.png"
+    ]
+  },
+  {
+    image: "../assets/prop4.png",
+    propertyType: "Apartment",
+    proprtyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout , Calabar",
+    features: [
+      "../assets/icons/house.png",
+      "../assets/icons/bathroom.png",
+      "../assets/icons/bed.png"
+    ]
+  }
+];
