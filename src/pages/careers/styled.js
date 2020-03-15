@@ -332,4 +332,20 @@ export const CareerSectionFive = styled.section`
       margin: 1rem;
     }
   }
+  @media screen and (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    .container,
+    .cards {
+      margin: 1rem 0 0 1rem;
+      .expert-card {
+        width: 94%;
+      }
+      h2 {
+        margin: 0rem 0rem 1rem 0rem;
+        font-size: 13px;
+      }
+    }
+  }
 `;
