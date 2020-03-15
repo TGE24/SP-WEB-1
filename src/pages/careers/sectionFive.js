@@ -48,7 +48,6 @@ export default () => {
             </div>
           </Col>
         </Row>
-        <h2>See More</h2>
       </div>
     </CareerSectionFive>
   );
