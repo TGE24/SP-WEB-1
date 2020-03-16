@@ -12,12 +12,13 @@ a {
 .menuBar {
   padding: 0 20px;
   border-bottom: 1px solid transparent;
-  overflow: auto;
+  overflow: hidden;
   z-index: 1;
 }
 .logo {
   width: 150px;
   float: left;
+  padding: 20px 0;
 }
 .logo a {
   display: inline-block;

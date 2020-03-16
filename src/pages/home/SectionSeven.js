@@ -1,11 +1,11 @@
 import { Layout, Row, Col, Card } from "antd";
-import { Services, SectionThree } from "./styled";
-import "./index.css";
+import { Services, SectionSeven } from "./styled";
+import Jump from "react-reveal/Jump";
 
 const { Content } = Layout;
 
 export default () => (
-  <SectionThree>
+  <SectionSeven>
     <Content
       style={{
         padding: "50px"
@@ -14,49 +14,57 @@ export default () => (
       <Services>
         <h3>Best Real Estate Deals</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <img
+          src="/assets/prev.png"
+          alt="Previous"
+          className="previous"
+        />
         <Row gutter={[0, 12]}>
           {location.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={6} xl={6} key={index}>
-              <Card
-                title={
-                  <div
-                    style={{
-                      backgroundImage: `url(${item.image})`,
-                      height: "182.19px",
-                      backgroundRepeat: "no-repeat"
-                    }}
-                  ></div>
-                }
-                style={{ width: 253.86 }}
-              >
-                <p
-                  style={{
-                    fontSize: "15px",
-                    textAlign: "start",
-                    margin: 0
-                  }}
+              <Jump>
+                <Card
+                  title={
+                    <div
+                      style={{
+                        backgroundImage: `url(${item.image})`,
+                        height: "182.19px",
+                        backgroundRepeat: "no-repeat"
+                      }}
+                    ></div>
+                  }
+                  style={{ width: 253.86 }}
                 >
-                  <span
+                  <p
                     style={{
-                      color: "#F9A602",
                       fontSize: "15px",
-                      marginRight: "18px"
+                      textAlign: "start",
+                      margin: 0
                     }}
                   >
-                    Ancient Bungalo Ancient
-                  </span>{" "}
-                  <span style={{ float: "right" }}>₦436</span>
-                </p>
-                <p style={{ fontSize: "15px", textAlign: "start" }}>
-                  Calabar / Nigeria
-                </p>
-              </Card>
+                    <span
+                      style={{
+                        color: "#F9A602",
+                        fontSize: "15px",
+                        marginRight: "18px"
+                      }}
+                    >
+                      Ancient Bungalo Ancient
+                    </span>{" "}
+                    <span style={{ float: "right" }}>₦436</span>
+                  </p>
+                  <p style={{ fontSize: "15px", textAlign: "start" }}>
+                    Calabar / Nigeria
+                  </p>
+                </Card>
+              </Jump>
             </Col>
           ))}
         </Row>
+        <img src="/assets/next.png" alt="Next" className="next" />
       </Services>
     </Content>
-  </SectionThree>
+  </SectionSeven>
 );
 
 const location = [

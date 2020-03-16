@@ -1,6 +1,5 @@
 import { Layout, Carousel, Rate } from "antd";
 import { SectionSix, Testimony, Testimonials } from "./styled";
-import "./index.css";
 
 const { Content } = Layout;
 

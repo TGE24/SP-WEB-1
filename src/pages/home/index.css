@@ -61,14 +61,21 @@ body {
   padding: 0 !important;
 }
 .ant-card-body {
-  padding: 0 !important;
+  padding: 0 0 0 0 !important;
 }
 
 @media (max-width: 767px) {
   .background {
     text-align: center;
+    height: 70vh;
   }
   .background h1 {
-    font-size: 38px;
+    font-size: 26px;
+    font-weight: 100;
+  }
+  .background p {
+    font-size: 13px;
+    color: white;
+    margin: 0 40px;
   }
 }

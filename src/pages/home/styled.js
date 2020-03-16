@@ -41,21 +41,25 @@ export const Services = styled.div`
     }
   }
   @media (max-width: 767px) {
-    padding: 0;
+    padding: 8px;
     h3 {
-      font-size: 36px;
+      font-size: 26px;
+      font-weight: 300;
       line-height: normal;
     }
     h5 {
-      font-size: 17px;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: normal;
     }
     .card {
       p {
-        width: 186px;
+        width: 100%;
+        font-size: 12px;
       }
       h4 {
         font-size: 18px;
-        font-weight: bold;
+        font-weight: 300;
       }
       .ellipse {
         width: 80px;
@@ -95,6 +99,9 @@ export const Testimony = styled.div`
     position: relative;
     bottom: 62px;
   }
+  @media (max-width: 767px) {
+    width: 100% !important;
+  }
 `;
 
 export const Testimonials = styled.div`
@@ -120,11 +127,14 @@ h5 {
 @media (max-width: 767px) {
   padding: 0;
   h3 {
-    font-size: 36px;
+    font-size: 26px;
+    font-weight: 300;
     line-height: normal;
   }
   h5 {
-    font-size: 17px;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: normal;
   }
 }
  `;
@@ -147,13 +157,29 @@ export const Rep = styled.div`
       font-size: 16px;
     }
   }
+  @media (max-width: 767px) {
+    width: 100%;
+    .description {
+      padding: 65px 0 0 0;
+      h5 {
+        font-size: 18px;
+        margin: 0;
+      }
+      h6 {
+        font-size: 13px;
+      }
+      hr {
+        margin: 0;
+      }
+    }
+  }
 `;
 
 export const SectionTwo = styled.div`
   margin: 0;
   @media (max-width: 767px) {
     .ant-layout-content {
-      padding: 65px 0 !important;
+      padding: 150px 0 26px 0 !important;
     }
   }
 `;
@@ -165,22 +191,160 @@ export const SectionThree = styled.div`
   }
   @media (max-width: 767px) {
     .ant-layout-content {
-      padding: 30px !important;
+      padding: 15px !important;
+    }
+    .ant-card-body {
+      padding: 0 0 12px 0 !important;
+    }
+  }
+`;
+
+export const SectionSeven = styled.div`
+  margin: 0;
+  .button {
+    background: #f9a602;
+  }
+  .previous {
+    display: none;
+  }
+  .next {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .ant-layout-content {
+      padding: 15px !important;
+    }
+    .ant-card-bordered {
+      width: 100% !important;
+    }
+    .ant-card-body {
+      padding: 1em 1em 0 1em !important;
+    }
+    .ant-row {
+      flex-direction: row;
+      flex-flow: unset !important;
+      overflow: auto;
+    }
+    .previous {
+      display: initial;
+      position: relative;
+      top: 118px;
+      height: 36px;
+      z-index: 9999;
+      right: 142px;
+    }
+    .next {
+      display: initial;
+      position: relative;
+      bottom: 200px;
+      height: 36px;
+      z-index: 9999;
+      left: 140px;
+    }
+  }
+`;
+
+export const SectionEight = styled.div`
+  margin: 0;
+  .button {
+    background: #f9a602;
+  }
+  .previous {
+    display: none;
+  }
+  .next {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .ant-layout-content {
+      padding: 15px !important;
+    }
+    .ant-card-bordered {
+      width: 338px !important;
+    }
+    .ant-card-body {
+      padding: 40px 0 0 0 !important;
+      h5 {
+        font-size: 18px;
+      }
+    }
+    .ant-row {
+      flex-direction: row;
+      flex-flow: unset !important;
+      overflow: auto;
+    }
+    .previous {
+      display: initial;
+      position: relative;
+      top: 140px;
+      height: 36px;
+      z-index: 9999;
+      right: 142px;
+    }
+    .next {
+      display: initial;
+      position: relative;
+      bottom: 186px;
+      height: 36px;
+      z-index: 9999;
+      left: 140px;
+    }
+  }
+`;
+
+export const SectionFive = styled.div`
+  margin: 0;
+  .button {
+    background: #f9a602;
+  }
+  @media (max-width: 767px) {
+    .ant-layout-content {
+      padding: 15px !important;
     }
     .ant-card-bordered {
       width: unset !important;
+    }
+    .ant-card-body {
+      padding: 0 0 12px 0 !important;
     }
   }
 `;
 
 export const SectionFour = styled.div`
   margin: 0;
+  .previous {
+    display: none;
+  }
+  .next {
+    display: none;
+  }
   @media (max-width: 767px) {
     .ant-layout-content {
       padding: 30px !important;
     }
     .ant-card-bordered {
       width: unset !important;
+    }
+    .ant-row {
+      flex-direction: row;
+      flex-flow: unset !important;
+      overflow: auto;
+    }
+    .previous {
+      display: initial;
+      position: relative;
+      top: 140px;
+      height: 36px;
+      z-index: 9999;
+      right: 142px;
+    }
+    .next {
+      display: initial;
+      position: relative;
+      bottom: 166px;
+      height: 36px;
+      z-index: 9999;
+      left: 140px;
     }
   }
 `;
