@@ -56,3 +56,13 @@
   /* bottom: 73px; */
   border: none !important;
 }
+
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: rgb(249, 166, 2) !important;
+  border-color: rgb(249, 166, 2) !important;
+}
+
+.ant-checkbox-disabled.ant-checkbox-checked
+  .ant-checkbox-inner::after {
+  border-color: white !important;
+}

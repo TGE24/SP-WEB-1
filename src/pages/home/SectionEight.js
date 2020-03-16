@@ -1,11 +1,11 @@
 import { Layout, Row, Col } from "antd";
-import { Services, Rep, SectionThree } from "./styled";
-import "./index.css";
+import { Services, Rep, SectionEight } from "./styled";
+import Flash from "react-reveal/Flash";
 
 const { Content } = Layout;
 
 export default () => (
-  <SectionThree>
+  <SectionEight>
     <Content
       style={{
         padding: "60px 50px",
@@ -15,26 +15,34 @@ export default () => (
       <Services>
         <h3>Our Representatives</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <img
+          src="/assets/prev.png"
+          alt="Previous"
+          className="previous"
+        />
         <Row gutter={[24, 24]}>
           {reps.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
-              <Rep>
-                <img src={item.image} alt="human" />
-                <div className="description">
-                  <h5 style={{ color: "#FEC486" }}>{item.name}</h5>
-                  <hr />
-                  <h5>{item.role}</h5>
-                  <h6>{item.company}</h6>
-                  <h6>{item.phone}</h6>
-                  <h6 style={{ color: "#FEC486" }}>{item.email}</h6>
-                </div>
-              </Rep>
+              <Flash>
+                <Rep>
+                  <img src={item.image} alt="human" />
+                  <div className="description">
+                    <h5 style={{ color: "#FEC486" }}>{item.name}</h5>
+                    <hr />
+                    <h5>{item.role}</h5>
+                    <h6>{item.company}</h6>
+                    <h6>{item.phone}</h6>
+                    <h6 style={{ color: "#FEC486" }}>{item.email}</h6>
+                  </div>
+                </Rep>
+              </Flash>
             </Col>
           ))}
         </Row>
+        <img src="/assets/next.png" alt="Next" className="next" />
       </Services>
     </Content>
-  </SectionThree>
+  </SectionEight>
 );
 
 const reps = [

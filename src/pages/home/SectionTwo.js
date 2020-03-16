@@ -1,6 +1,6 @@
 import { Layout, Row, Col, Card } from "antd";
 import { Services, SectionTwo } from "./styled";
-import "./index.css";
+import Flip from "react-reveal/Flip";
 
 const { Content } = Layout;
 
@@ -8,7 +8,7 @@ export default () => (
   <SectionTwo>
     <Content
       style={{
-        padding: "82px 50px 0 50px",
+        padding: "82px 50px 50px 50px",
         background: "whitesmoke"
       }}
     >
@@ -18,13 +18,15 @@ export default () => (
         <Row>
           {services.map((item, index) => (
             <Col xs={12} sm={18} md={12} lg={6} xl={6} key={index}>
-              <div className="card">
-                <div className="ellipse">
-                  <img src={item.image} alt="home-icon" />
+              <Flip top>
+                <div className="card">
+                  <div className="ellipse">
+                    <img src={item.image} alt="home-icon" />
+                  </div>
+                  <h4>{item.title}</h4>
+                  <p>{item.description}</p>
                 </div>
-                <h4>{item.title}</h4>
-                <p>{item.description}</p>
-              </div>
+              </Flip>
             </Col>
           ))}
         </Row>
