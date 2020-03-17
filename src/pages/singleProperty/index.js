@@ -1,7 +1,8 @@
 import "./index.css";
 import Layout from "../../components/Layout";
-import { Row, Col, Button, Divider, List } from "antd";
+import { Row, Col, Button, Divider, List, Checkbox } from "antd";
 import ImageGallery from "react-image-gallery";
+import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
 
 const images = [
   {
@@ -18,7 +19,12 @@ const images = [
   }
 ];
 
-export default () => (
+const mapStyles = {
+  width: "833px",
+  height: "529px"
+};
+
+const App = props => (
   <Layout title="Properties">
     <div className="prop-header">
       <h1>A Place to call home</h1>
@@ -119,7 +125,7 @@ export default () => (
           <div
             style={{
               width: "840px",
-              height: "437px",
+              // height: "437px",
               background: "#F5F4F4",
               padding: "29.68px"
             }}
@@ -131,7 +137,7 @@ export default () => (
               renderItem={item => (
                 <List.Item
                   style={{
-                    fontSize: "19px",
+                    fontSize: "17px",
                     display: "flex",
                     borderBottom: "0.957303px dashed #C1C1C1",
                     margin: "11px",
@@ -159,13 +165,69 @@ export default () => (
               ipsum dolor sit
             </h4>
           </div>
-          <div style={{margintop: "80px"}}>
-                    <h2>VIDEO</h2>
-                    <hr />
-                    <video width="840" height="482">
-
-                    </video>
-                  </div>
+          <div style={{ marginTop: "80px" }}>
+            <h2>VIDEO</h2>
+            <hr />
+            <video width="840" height="482"></video>
+          </div>
+          <div style={{ marginTop: "80px" }}>
+            <h2>PROPERTY AMENITIES</h2>
+            <hr />
+            <div
+              style={{
+                width: "840px"
+              }}
+            >
+              <List
+                grid={{ gutter: 8, column: 2 }}
+                dataSource={data2}
+                renderItem={item => (
+                  <List.Item
+                    style={{
+                      fontSize: "15px",
+                      display: "flex",
+                      borderBottom: "0.957303px dashed #C1C1C1",
+                      margin: "11px",
+                      padding: "0"
+                    }}
+                  >
+                    <span>
+                      <img
+                        style={{
+                          width: "25px",
+                          height: "25px",
+                          margin: "0 14px"
+                        }}
+                        src={item.icon}
+                        alt="icon"
+                      />
+                      {item.title}
+                    </span>
+                    <span>
+                      <Checkbox
+                        defaultChecked={item.checked}
+                        disabled
+                      ></Checkbox>
+                    </span>
+                  </List.Item>
+                )}
+              />
+            </div>
+          </div>
+          <div style={{ marginTop: "80px" }}>
+            <h2>LOCATION</h2>
+            <hr />
+            <div style={mapStyles}>
+              <Map
+                google={props.google}
+                zoom={8}
+                style={mapStyles}
+                initialCenter={{ lat: 47.444, lng: -122.176 }}
+              >
+                <Marker position={{ lat: 48.0, lng: -122.0 }} />
+              </Map>
+            </div>
+          </div>
         </Col>
         <Col span={6}>
           <div
@@ -215,6 +277,10 @@ export default () => (
     </div>
   </Layout>
 );
+
+export default GoogleApiWrapper({
+  apiKey: "AIzaSyAIG1DU3FMktCyOZkjuVZvz8CrS8f-6cB8"
+})(App);
 
 const data = [
   {
@@ -272,5 +338,68 @@ const data = [
   {
     title: "Bathroom",
     description: "2"
+  }
+];
+
+const data2 = [
+  {
+    icon: "/assets/icons/conditioner.png",
+    title: "Air Conditioner",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/household.png",
+    title: "Washing Machine",
+    checked: false
+  },
+  {
+    icon: "/assets/icons/pool.png",
+    title: "Swimming Pool",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/pool.png",
+    title: "Balcony",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/household.png",
+    title: "Cable TV",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/conditioner.png",
+    title: "Solar",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/conditioner.png",
+    title: "Air Conditioner",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/household.png",
+    title: "Washing Machine",
+    checked: false
+  },
+  {
+    icon: "/assets/icons/pool.png",
+    title: "Swimming Pool",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/conditioner.png",
+    title: "Balcony",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/household.png",
+    title: "Cable TV",
+    checked: true
+  },
+  {
+    icon: "/assets/icons/pool.png",
+    title: "Solar",
+    checked: true
   }
 ];

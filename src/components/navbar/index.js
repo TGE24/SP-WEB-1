@@ -16,7 +16,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const Wrap = styled.div`
   .ant-affix {
     background: ${({ navColor }) =>
-      navColor === true ? "#f9a602bf" : "none"};
+      navColor === true ? "rgba(139, 139, 139, 0.75)" : "none"};
     transition: background 500ms;
   }
 `;
@@ -51,7 +51,7 @@ const Navbar = () => {
         <nav className="menuBar">
           <div className="logo">
             <Link href="/">
-              <a>logo</a>
+              <img src="/assets/logo.png" alt="Logo" />
             </Link>
           </div>
           <div className="menuCon">
@@ -69,7 +69,7 @@ const Navbar = () => {
             </Button>
             <Drawer
               style={{
-                marginTop: `${visible ? "70px" : 0}`,
+                marginTop: `${visible ? "53px" : 0}`,
                 height: "300px !important"
               }}
               placement="top"

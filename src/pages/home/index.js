@@ -1,4 +1,5 @@
 import "./index.css";
+import Flip from "react-reveal/Flip";
 import SectionOne from "./SectionOne";
 import SectionTwo from "./SectionTwo";
 import SectionThree from "./SectionThree";
@@ -14,7 +15,9 @@ export default () => (
     <SectionOne />
     <SectionTwo />
     <SectionThree />
-    <SectionFour />
+    <Flip right>
+      <SectionFour />
+    </Flip>
     <SectionFive />
     <SectionSix />
     <SectionSeven />
