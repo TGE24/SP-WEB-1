@@ -4,10 +4,7 @@ import styled from "styled-components";
 import { LockOutlined } from "@ant-design/icons";
 import { Menu, Drawer, Button, Affix } from "antd";
 import Link from "next/link";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined
-} from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import "./index.css";
 
 const SubMenu = Menu.SubMenu;
@@ -15,9 +12,9 @@ const MenuItemGroup = Menu.ItemGroup;
 
 const Wrap = styled.div`
   .ant-affix {
-    background: ${({ navColor }) =>
-      navColor === true ? "rgba(139, 139, 139, 0.75)" : "none"};
-    transition: background 500ms;
+    background: #fff;
+
+    transition: background 1000ms;
   }
 `;
 
@@ -58,11 +55,7 @@ const Navbar = () => {
             <div className="rightMenu">
               <RightMenu />
             </div>
-            <Button
-              className="barsMenu"
-              type="primary"
-              onClick={showDrawer}
-            >
+            <Button className="barsMenu" type="primary" onClick={showDrawer}>
               {React.createElement(
                 showDrawer ? MenuUnfoldOutlined : MenuFoldOutlined
               )}

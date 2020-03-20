@@ -29,6 +29,13 @@ export const PropSectionOne = styled.section`
       color: #ffffff;
       font-size: 20px;
     }
+    // .search {
+    //   width: calc(100% - 10px);
+    //   margin-left: 17rem;
+    //   @media screen and (max-width: 767px) {
+    //     margin-left: 2rem;
+    //   }
+    // }
     @media screen and (max-width: 767px) {
       h1 {
         font-size: 26px;
@@ -69,8 +76,12 @@ export const PropSectionTwo = styled.section`
         font-size: 20px;
       }
     }
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+      justify-content: ;
+    }
     .sort-by {
-      .ant-select-selection {
+      .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
         border: none !important;
       }
       .ant-select-selection-selected-value {
@@ -164,6 +175,6 @@ export const PropSectionTwo = styled.section`
   }
 
   @media screen and (max-width: 767px) {
-    margin: 4rem 2rem;
+    margin: 8rem 1rem;
   }
 `;

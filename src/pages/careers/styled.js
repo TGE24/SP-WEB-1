@@ -21,7 +21,7 @@ export const CareerSectionOne = styled.section`
     h1 {
       color: #ffffff;
       font-weight: bold;
-      font-size: 60px;
+      font-size: 53px;
       text-align: center;
     }
     h2 {
@@ -197,6 +197,19 @@ export const CareerSectionThree = styled.section`
 `;
 
 export const CareerSectionFour = styled.section`
+  button {
+    border: none;
+    background: #f9a602;
+    border-radius: 5.07115px;
+    width: 89px;
+    font-weight: 600;
+    font-size: 10.4598px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #ffffff;
+    height: 26px;
+    margin-bottom: 1rem;
+  }
   .sectionFour {
     margin: 0 9rem;
     width: 78.7%;
