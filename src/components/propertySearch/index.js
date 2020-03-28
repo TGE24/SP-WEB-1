@@ -23,7 +23,7 @@ const tailLayout = {
 
 const Demo = () => {
   return (
-    <Tabs className="tabs" type="card">
+    <Tabs className="prop-tabs" type="card">
       <TabPane tab="RENT" key="1">
         <Form
           {...layout}
