@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Card, Tag, Button } from "antd";
+import { Layout, Button, Row, Col, Card, Tag } from "antd";
 import { Services, SectionThree } from "./styled";
 import { SearchOutlined } from "@ant-design/icons";
 import Zoom from "react-reveal/Zoom";
