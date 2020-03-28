@@ -4,7 +4,7 @@ body {
   font-family: "Poppins";
 }
 
-.ant-col-xl-6 {
+.column-6 {
   display: flex;
   justify-content: center;
   align-items: center;
