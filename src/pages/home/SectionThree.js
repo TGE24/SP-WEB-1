@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Card, Tag, Button } from "antd";
+import { Layout, Button, Row, Col, Card, Tag } from "antd";
 import { Services, SectionThree } from "./styled";
 import { SearchOutlined } from "@ant-design/icons";
 import Zoom from "react-reveal/Zoom";
@@ -18,7 +18,15 @@ export default () => (
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
         <Row gutter={[6, 12]}>
           {realEstates.map((item, index) => (
-            <Col xs={24} sm={18} md={12} lg={6} xl={6} key={index}>
+            <Col
+              xs={24}
+              sm={18}
+              md={12}
+              lg={6}
+              xl={6}
+              key={index}
+              className="column-6"
+            >
               <Zoom bottom>
                 <Card
                   hoverable

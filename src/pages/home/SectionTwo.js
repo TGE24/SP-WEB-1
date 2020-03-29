@@ -17,7 +17,15 @@ export default () => (
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
         <Row>
           {services.map((item, index) => (
-            <Col xs={12} sm={18} md={12} lg={6} xl={6} key={index}>
+            <Col
+              xs={12}
+              sm={18}
+              md={12}
+              lg={6}
+              xl={6}
+              key={index}
+              className="column-6"
+            >
               <Flip top>
                 <div className="card">
                   <div className="ellipse">

@@ -21,7 +21,7 @@ export default () => (
         />
         <Row gutter={[0, 12]}>
           {location.map((item, index) => (
-            <Col xs={24} sm={18} md={12} lg={6} xl={6} key={index}>
+            <Col xs={24} sm={18} md={12} lg={6} xl={6} key={index} className="column-6">
               <Jump>
                 <Card
                   title={

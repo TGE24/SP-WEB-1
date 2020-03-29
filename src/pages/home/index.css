@@ -1,11 +1,10 @@
-@import "~antd/dist/antd.css";
 @import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 
 body {
   font-family: "Poppins";
 }
 
-.ant-col-xl-6 {
+.column-6 {
   display: flex;
   justify-content: center;
   align-items: center;

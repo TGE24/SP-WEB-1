@@ -38,23 +38,25 @@ export const PropSectionOne = styled.section`
     // }
     @media screen and (max-width: 767px) {
       h1 {
-        font-size: 26px;
+        font-size: 36px;
+        margin: 0;
       }
       h2 {
-        font-size: 12px;
+        font-size: 17px;
+        margin: 0;
       }
-      height: 34vh;
+      height: 60vh;
     }
     @media screen and (max-width: 1255px) {
-      height: 34vh;
+      height: 60vh;
     }
   }
 
   @media screen and (max-width: 767px) {
-    height: 34vh;
+    height: 60vh;
   }
   @media screen and (max-width: 1255px) {
-    height: 34vh;
+    height: 60vh;
   }
 `;
 
@@ -175,6 +177,29 @@ export const PropSectionTwo = styled.section`
   }
 
   @media screen and (max-width: 767px) {
-    margin: 8rem 1rem;
+    width: 93%;
+    margin: 10rem 1rem 4rem 1rem;
+    .sort-icon {
+      display: none;
+    }
+    .select-sort {
+      width: 120px !important;
+    }
+    .apartment {
+      left: 61% !important;
+    }
+    .prop-cards {
+      .prop-details {
+        h2 {
+          font-size: 12.9276px;
+        }
+        h4 {
+          font-size: 9.9276px;
+        }
+        .inner-container {
+          margin: 1rem;
+        }
+      }
+    }
   }
 `;

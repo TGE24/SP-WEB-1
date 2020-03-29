@@ -15,11 +15,12 @@ export default () => {
       <div className="row-head">
         <h1>Houses for rent</h1>
         <div className="sort-by">
-          {/* <img src="../assets/icons/sort-by.png" alt="" /> */}
+          <img src="../assets/icons/sort-by.png" alt="" className="sort-icon" />
           <Select
             defaultValue="Sorted By"
             style={{ width: 160 }}
             onChange={handleChange}
+            className="select-sort"
           >
             <Option value="jack">General Listing</Option>
             <Option value="lucy">Spread Exclusive </Option>
@@ -29,7 +30,7 @@ export default () => {
           </Select>
         </div>
       </div>
-      <Row gutter={[12, 12]}>
+      <Row gutter={[12, 16]}>
         {Properties.map((item, index) => (
           <Link
             href="/properties/[pid]"
@@ -37,13 +38,13 @@ export default () => {
             key={index}
           >
             <Col
-              xs={24}
-              sm={2}
+              xs={12}
+              sm={12}
               md={10}
               lg={6}
               xl={6}
               key={index}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", padding: 0 }}
             >
               <div className="prop-cards">
                 <div className="image">
@@ -67,7 +68,7 @@ export default () => {
                 </div>
                 <div className="prop-icons">
                   {item.features.map((item, index) => (
-                    <div className="icon">
+                    <div className="icon" key={index}>
                       <h4>
                         <img src={item} alt="" /> 6
                       </h4>
@@ -87,8 +88,8 @@ const Properties = [
   {
     image: "../assets/prop1.png",
     propertyType: "Apartment",
-    proprtyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout , Calabar",
+    propertyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout, Calabar",
     features: [
       "../assets/icons/house.png",
       "../assets/icons/bathroom.png",
@@ -98,8 +99,8 @@ const Properties = [
   {
     image: "../assets/prop2.png",
     propertyType: "Apartment",
-    proprtyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout , Calabar",
+    propertyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout, Calabar",
     features: [
       "../assets/icons/house.png",
       "../assets/icons/bathroom.png",
@@ -109,8 +110,8 @@ const Properties = [
   {
     image: "../assets/prop3.png",
     propertyType: "Apartment",
-    proprtyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout , Calabar",
+    propertyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout, Calabar",
     features: [
       "../assets/icons/house.png",
       "../assets/icons/bathroom.png",
@@ -120,8 +121,8 @@ const Properties = [
   {
     image: "../assets/prop4.png",
     propertyType: "Apartment",
-    proprtyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout , Calabar",
+    propertyName: "Ancient Bungalo Ancient",
+    propertyAddress: "45 ntoe asi layout, Calabar",
     features: [
       "../assets/icons/house.png",
       "../assets/icons/bathroom.png",
