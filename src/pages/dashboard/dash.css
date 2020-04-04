@@ -1,145 +1,51 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
-
-body {
-    font-family: "Poppins";
+.container {
+    margin: 3rem 2rem;
 }
 
-#components-layout-demo-side .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
-}
-
-.site-layout .site-layout-background {
-    background: #fff;
-
-}
-
-.site-layout-background .ant-layout-sider {
-    background: #fff;
-
-    box-shadow: 0px 4px 9px rgba(81, 92, 111, 0.12);
-
-}
-
-.profile {
-    margin: 1rem;
-    background-color: white;
+.container .row-header {
     display: flex;
     flex-direction: row;
-    justify-content: start;
-    align-items: center;
-
-
+    justify-content: space-between;
 }
 
-.profile .circle {
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    background: #8B95A6;
-}
-
-.profile .profile-content {
+.sold-card {
+    width: 98%;
+    margin-top: 1rem;
+    margin-right: 1rem;
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
-
 }
 
-.profile .profile-content h2 {
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 20px;
-
-    color: #FCAD0A;
-}
-
-.profile .profile-content .logout {
-    display: flex;
-    width: 64px;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: start;
-
-}
-
-.profile .profile-content .logout h3 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 14px;
-
-    /* Secondary Colour */
-
-    color: #515C6F;
-}
-
-.line {
-    width: 89%;
-    border: 0.7px solid #E9E9E9;
-    margin: 1rem;
-}
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    border-left: 3px solid #FCAD0A;
-    background: #fcad0a1f;
-    color: #515C6F;
-    font-size: 18px;
-
-}
-
-.ant-menu:not(.ant-menu-horizontal) .ant-menu-item {
-    color: #515C6F;
-    font-size: 18px;
-}
-
-
-.ant-menu-inline {
-    margin-left: 1rem;
-
-    width: 95%;
-}
-
-.content {
+.sold-card .image,
+.sold-card .image img {
     width: 100%;
-    min-height: 80vh;
-    background: #FFFFFF;
-    box-shadow: 0px 4px 10px rgba(81, 92, 111, 0.12);
+
 }
 
-.content .dash-header {
-    height: 66px;
-    background: #FCAD0A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sold-card h1 {
+    margin-top: 5px;
+    font-size: 18px;
+    line-height: 27px;
+
+
+
+    color: #515C6F;
 }
 
-.content .dash-header h1 {
+.container .row-header h1 {
     font-weight: 600;
-    font-size: 26px;
-    text-align: center;
-
-    color: #FFFFFF;
-
+    font-size: 20px;
+    color: #515c6f;
+    text-transform: capitalize;
 }
 
-.ant-menu-vertical .ant-menu-item::after,
-.ant-menu-vertical-left .ant-menu-item::after,
-.ant-menu-vertical-right .ant-menu-item::after,
-.ant-menu-inline .ant-menu-item::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-right: 3px solid #FCAD0A;
-    -webkit-transform: scaleY(0.0001);
-    transform: scaleY(0.0001);
-    opacity: 0;
-    -webkit-transition: opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
-    transition: opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
-    transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
-    transition: transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), -webkit-transform 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
-    content: '';
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector:focus {
+    border: none !important;
+}
+
+.ant-select-selection-selected-value {
+    color: #515c6f;
+    font-weight: 500;
+    font-size: 14.5341px;
 }

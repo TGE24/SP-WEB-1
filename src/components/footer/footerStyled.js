@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
   background-color: #515c6f;
-  height: 340px;
+  height: auto;
   .container {
     display: flex;
     flex-direction: column;
@@ -102,18 +102,22 @@ export const FooterContainer = styled.footer`
   }
   .line {
     margin-left: 1.5rem;
-    margin-top: 3rem;
+    margin-top: -4rem;
+
     height: 1px;
     width: 97%;
     background: #c4c4c4;
     @media screen and (max-width: 767px) {
       width: 88%;
+      margin-top: 3rem;
     }
   }
   .copy {
+    background-color: #515c6f;
     color: #c4c4c4;
     margin-top: 1rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
+
     text-align: center;
     font-size: 10px;
   }
