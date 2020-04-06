@@ -10,7 +10,7 @@ export default ({ children, title = "Dashboard", active = "" }) => {
   const [collapse, setcollapse] = useState(false);
   const [visible, setVisible] = useState(true);
 
-  const onCollapse = collapsed => {
+  const onCollapse = (collapsed) => {
     console.log(collapsed);
     setcollapse(!collapse);
   };
@@ -42,7 +42,7 @@ export default ({ children, title = "Dashboard", active = "" }) => {
                 md: "768px",
                 lg: "992px",
                 xl: "1200px",
-                xxl: "1600px"
+                xxl: "1600px",
               }}
               width={300}
             >
