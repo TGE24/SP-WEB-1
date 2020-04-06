@@ -94,6 +94,21 @@ a {
 .ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
   border-bottom-color: transparent;
 }
+.ant-modal-header {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: none;
+  border-left: 10px solid #fcad0a;
+}
+.ant-modal-title {
+  color: #fff;
+}
+.ant-modal-close-x {
+  color: white;
+}
+.nav-siginIn:hover {
+  border: none;
+  color: black;
+}
 
 @media (max-width: 767px) {
   .barsMenu {
@@ -120,5 +135,8 @@ a {
   }
   .ant-drawer-top.ant-drawer-open .ant-drawer-content-wrapper {
     height: unset !important;
+  }
+  .ant-drawer-right.ant-drawer-open .ant-drawer-content-wrapper {
+    width: 100% !important;
   }
 }
