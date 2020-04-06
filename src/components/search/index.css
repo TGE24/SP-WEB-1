@@ -10,7 +10,7 @@
 .ant-tabs .ant-tabs-top-content,
 .ant-tabs .ant-tabs-bottom-content {
   width: 100%;
-  background: white;
+  background: white !important;
   padding: 37px;
   border-radius: 6px;
 }
@@ -21,16 +21,16 @@
 }
 
 .form-button {
-  color: white;
-  background: #f9a602;
+  color: white !important;
+  background: #f9a602 !important;
   border-radius: 7px;
 }
 
 .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
   height: 40px;
-  color: white;
-  background: #f9a602;
-  border-color: #f9a602;
+  color: white !important;
+  background: #f9a602 !important;
+  border-color: #f9a602 !important;
 }
 
 @media (max-width: 767px) {
@@ -39,19 +39,23 @@
     position: absolute;
     bottom: 60px;
   }
+
   .ant-tabs-bar {
     margin: 0 !important;
   }
   .ant-col-xs-24 {
     margin-bottom: 13px;
   }
+
   .ant-col-offset-8 {
     margin-left: 0;
   }
+
   .ant-form-inline .ant-form-item {
     margin-right: 0;
     margin-bottom: 13px;
   }
+
   .ant-tabs .ant-tabs-top-content,
   .ant-tabs .ant-tabs-bottom-content {
     padding: 0;

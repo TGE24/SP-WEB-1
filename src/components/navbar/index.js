@@ -17,9 +17,9 @@ const MenuItemGroup = Menu.ItemGroup;
 
 const Wrap = styled.div`
   .ant-affix {
-    background: ${({ navColor }) =>
-      navColor === true ? "rgba(139, 139, 139, 0.75)" : "none"};
-    transition: background 500ms;
+    background: #fff;
+
+    transition: background 1000ms;
   }
 `;
 

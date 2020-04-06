@@ -15,11 +15,7 @@ export default () => {
       <div className="row-head">
         <h1>Houses for rent</h1>
         <div className="sort-by">
-          <img
-            src="../assets/icons/sort-by.png"
-            alt=""
-            className="sort-icon"
-          />
+          <img src="../assets/icons/sort-by.png" alt="" className="sort-icon" />
           <Select
             defaultValue="Sorted By"
             style={{ width: 160 }}
@@ -65,10 +61,7 @@ export default () => {
                   <div className="inner-container">
                     <h2>{item.propertyName}</h2>
                     <h4>
-                      <img
-                        src="../assets/icons/location.png"
-                        alt=""
-                      />
+                      <img src="../assets/icons/location.png" alt="" />
                       {item.propertyAddress}
                     </h4>
                   </div>

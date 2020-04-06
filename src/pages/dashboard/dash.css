@@ -1,0 +1,51 @@
+.container {
+    margin: 3rem 2rem;
+}
+
+.container .row-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sold-card {
+    width: 98%;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sold-card .image,
+.sold-card .image img {
+    width: 100%;
+
+}
+
+.sold-card h1 {
+    margin-top: 5px;
+    font-size: 18px;
+    line-height: 27px;
+
+
+
+    color: #515C6F;
+}
+
+.container .row-header h1 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #515c6f;
+    text-transform: capitalize;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector,
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector:focus {
+    border: none !important;
+}
+
+.ant-select-selection-selected-value {
+    color: #515c6f;
+    font-weight: 500;
+    font-size: 14.5341px;
+}

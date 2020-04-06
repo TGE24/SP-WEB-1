@@ -64,6 +64,7 @@ export default () => {
                     nibh nullam diam.
                   </h2>
                 </Col>
+                <button>Apply</button>
               </Row>
             </div>
           </Col>

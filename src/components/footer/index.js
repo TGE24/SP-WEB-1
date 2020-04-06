@@ -6,7 +6,9 @@ export default () => (
   <FooterContainer>
     <Row>
       <Col xs={12} sm={2} md={8} lg={8} xl={5} id="footer-logo">
-        <img src="../assets/logo-placeholder.png" alt="" />
+        <div className="container">
+          <img src="/assets/logo.png" alt="Logo" />
+        </div>
       </Col>
       <Col xs={12} sm={2} md={8} lg={8} xl={5}>
         <div className="container-item">
