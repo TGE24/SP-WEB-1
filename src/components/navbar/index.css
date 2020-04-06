@@ -3,7 +3,7 @@ a {
   color: black;
 }
 
-.ant-menu-horizontal>.ant-menu-item>a {
+.ant-menu-horizontal > .ant-menu-item > a {
   display: block;
   color: black;
 }
@@ -91,7 +91,6 @@ a {
   left: 0;
   height: 2px;
   background: #f9a602 !important;
-
 }
 
 .barsBtn:after {
@@ -103,8 +102,8 @@ a {
   padding: 0;
 }
 
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-item,
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-submenu {
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
   display: inline-block;
   width: 100%;
 }
@@ -113,19 +112,30 @@ a {
   border-bottom: none;
 }
 
-.ant-drawer-body .ant-menu-horizontal>.ant-menu-item a:hover {
+.ant-drawer-body .ant-menu-horizontal > .ant-menu-item a:hover {
   border-bottom-color: #f9a602 !important;
   color: #f9a602 !important;
-
+}
+.ant-modal-header {
+  background: rgba(0, 0, 0, 0.7);
+  border-bottom: none;
+  border-left: 10px solid #fcad0a;
+}
+.ant-modal-title {
+  color: #fff;
+}
+.ant-modal-close-x {
+  color: white;
+}
+.nav-siginIn:hover {
+  border: none;
+  color: black;
 }
 
-.ant-menu-horizontal>.ant-menu-item>a:hover {
+.ant-menu-horizontal > .ant-menu-item > a:hover {
   color: #f9a602 !important;
   border-bottom-color: #f9a602 !important;
-
 }
-
-
 
 @media (max-width: 767px) {
   .barsMenu {
@@ -158,5 +168,8 @@ a {
 
   .ant-drawer-top.ant-drawer-open .ant-drawer-content-wrapper {
     height: unset !important;
+  }
+  .ant-drawer-right.ant-drawer-open .ant-drawer-content-wrapper {
+    width: 100% !important;
   }
 }

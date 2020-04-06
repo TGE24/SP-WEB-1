@@ -4,6 +4,11 @@ const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 module.exports = withCss({
   webpack: (config, { isServer }) => {
+    config.plugins.push(
+      new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+      })
+    );
     if (isServer) {
       const antStyles = /antd\/.*?\/style\/css.*?/;
       const origExternals = [...config.externals];
@@ -25,11 +30,6 @@ module.exports = withCss({
         test: antStyles,
         use: "null-loader"
       });
-      config.plugins.push(
-        new FilterWarningsPlugin({
-          exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
-        })
-      );
     }
     return config;
   }
