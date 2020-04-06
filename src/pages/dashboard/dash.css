@@ -1,6 +1,6 @@
 .container {
   margin: 2rem 2rem;
-  padding: 0;
+  padding: 0 !important;
 }
 
 .container .row-header {
