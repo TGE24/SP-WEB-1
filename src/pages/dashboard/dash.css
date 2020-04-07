@@ -26,7 +26,6 @@
   margin-top: 5px;
   font-size: 18px;
   line-height: 27px;
-
   color: #515c6f;
 }
 
@@ -84,7 +83,6 @@
 .wallet-header h2 {
   font-size: 11px;
   line-height: 16px;
-
   color: #ffffff;
 }
 
@@ -139,11 +137,8 @@
   font-size: 15px;
   line-height: 20px;
   /* or 133% */
-
   text-align: center;
-
   /* Primary Color */
-
   color: #fd901c;
 }
 
@@ -178,7 +173,6 @@
   font-size: 18px;
   line-height: 150%;
   margin: 0;
-
   color: #515c6f;
 }
 
@@ -186,7 +180,6 @@
   font-size: 14px;
   line-height: 20px;
   margin: 0;
-
   color: #515c6f;
 }
 
@@ -206,7 +199,6 @@
   width: 114px;
   font-size: 11px;
   line-height: 13px;
-
   color: #515c6f;
 }
 
@@ -233,7 +225,6 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 13px;
-
   color: #ffffff;
 }
 
@@ -246,4 +237,72 @@
   position: absolute;
   top: 52%;
   left: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.setting-banner .circle .anticon {
+  font-size: 27px;
+  color: #515c6f;
+  left: 67%;
+  top: 59%;
+  position: absolute;
+}
+
+.setting-form {
+  margin-top: 9rem;
+  padding-bottom: 1rem;
+}
+
+.setting-form .input-control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-control label {
+  font-size: 18px;
+  line-height: 27px;
+  color: #515C6F;
+  margin-bottom: 5px;
+}
+
+.input-control .ant-input {
+  color: #515C6F;
+  border: 1px solid #C1C1C1;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #FBFBFB;
+  font-size: 16px;
+}
+
+.form-container {
+  margin-bottom: 1rem;
+}
+
+.input-control .ant-input-group.ant-input-group-compact>*:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.input-control .ant-input-group.ant-input-group-compact>*:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.setting-form button {
+
+  border: none;
+  background: #f9a602;
+  border-radius: 5.07115px;
+  width: 229px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  height: 48px;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
 }
