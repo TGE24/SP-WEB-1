@@ -1,5 +1,5 @@
 import Search from "../../components/search";
-import { Layout } from "antd";
+import { Layout, Button } from "antd";
 import Zoom from "react-reveal/Zoom";
 import Rotate from "react-reveal/Rotate";
 
@@ -18,6 +18,7 @@ export default () => (
             home
           </p>
         </Rotate>
+        <Button className="buy-now">Buy Now</Button>
         <Search />
       </div>
     </Content>

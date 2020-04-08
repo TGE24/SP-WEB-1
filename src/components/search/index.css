@@ -35,9 +35,9 @@
 
 @media (max-width: 767px) {
   .tabs {
-    width: calc(100% - 26px);
+    width: calc(100% - 51px);
     position: absolute;
-    bottom: 60px;
+    bottom: 100px;
   }
 
   .ant-tabs-bar {

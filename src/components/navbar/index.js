@@ -22,6 +22,50 @@ const Wrap = styled.div`
     transition: background 1000ms;
   }
 `;
+const Contacts = styled.div`
+  padding: 0 0 4px 33px;
+  background: black;
+  font-size: 12px;
+  color: white;
+  display: flex;
+  .contacts-details {
+    .details {
+      margin-right: 10px;
+      img {
+        margin: 0 10px;
+      }
+    }
+  }
+  .social-cont {
+    position: absolute;
+    right: 69px;
+    .socials {
+      margin: 0 10px;
+      cursor: pointer;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 6px;
+    font-size: 8px;
+    justify-content: space-between;
+    .contacts-details {
+      .details {
+        margin-right: 0;
+        img {
+          margin: 0 5px;
+          height: 14px;
+        }
+      }
+    }
+    .social-cont {
+      position: unset;
+      .socials {
+        margin: 0 6px;
+        cursor: pointer;
+      }
+    }
+  }
+`;
 
 const Navbar = () => {
   const [navColor, setNavColor] = useState(false);
@@ -90,6 +134,45 @@ const Navbar = () => {
             setNavColor(affixed);
           }}
         >
+          <Contacts>
+            <div className="contacts-details">
+              <span className="details">
+                <img src="/assets/icons/mail.png" alt="mail" />
+                hello@spreadprolimited.com{" "}
+              </span>
+              <span className="details">
+                <img src="/assets/icons/phone.png" alt="phone" />
+                +2348182739942{" "}
+              </span>
+            </div>
+            <div className="social-cont">
+              <img
+                className="socials"
+                src="/assets/icons/fbSmall.png"
+                alt="fb"
+              />
+              <img
+                className="socials"
+                src="/assets/icons/igSmall.png"
+                alt="ig"
+              />
+              <img
+                className="socials"
+                src="/assets/icons/in.png"
+                alt="in"
+              />
+              <img
+                className="socials"
+                src="/assets/icons/twitterSmall.png"
+                alt="twitter"
+              />
+              <img
+                className="socials"
+                src="/assets/icons/snapchat.png"
+                alt="snap"
+              />
+            </div>
+          </Contacts>
           <nav className="menuBar">
             <div className="logo">
               <Link href="/">
@@ -114,7 +197,7 @@ const Navbar = () => {
               </Button>
               <Drawer
                 style={{
-                  marginTop: `${visible ? "53px" : 0}`,
+                  marginTop: `${visible ? "79px" : 0}`,
                   height: "300px !important",
                 }}
                 placement="top"

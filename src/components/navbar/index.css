@@ -140,7 +140,12 @@ a {
 @media (max-width: 767px) {
   .barsMenu {
     display: inline-block;
-    margin-top: 18px;
+    margin-top: 12px;
+    background: #f9a602;
+    border: none;
+  }
+  .barsMenu:hover {
+    background: #f9a602;
   }
 
   .rightMenu {
