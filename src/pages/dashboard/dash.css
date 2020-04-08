@@ -264,16 +264,25 @@
 .input-control label {
   font-size: 18px;
   line-height: 27px;
-  color: #515C6F;
+  color: #515c6f;
   margin-bottom: 5px;
 }
 
 .input-control .ant-input {
-  color: #515C6F;
-  border: 1px solid #C1C1C1;
+  color: #515c6f;
+  border: 1px solid #c1c1c1;
   box-sizing: border-box;
   border-radius: 10px;
-  background: #FBFBFB;
+  background: #fbfbfb;
+  font-size: 16px;
+}
+
+.input-control .ant-input-affix-wrapper {
+  color: #515c6f;
+  border: 1px solid #c1c1c1;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #fbfbfb !important;
   font-size: 16px;
 }
 
@@ -281,18 +290,44 @@
   margin-bottom: 1rem;
 }
 
-.input-control .ant-input-group.ant-input-group-compact>*:last-child {
+.input-control .ant-input-group.ant-input-group-compact > *:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
-.input-control .ant-input-group.ant-input-group-compact>*:first-child {
+.input-control .ant-input-group.ant-input-group-compact > *:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
 .setting-form button {
+  border: none;
+  background: #f9a602;
+  border-radius: 5.07115px;
+  width: 229px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 16px;
+  text-transform: capitalize;
+  color: #ffffff;
+  height: 48px;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
 
+/******************************************* Change Password Styles *******************************************/
+
+.changep-form {
+  padding-bottom: 1rem;
+}
+
+.changep-form .input-control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.changep-form button {
   border: none;
   background: #f9a602;
   border-radius: 5.07115px;
