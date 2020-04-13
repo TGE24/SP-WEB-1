@@ -1,12 +1,26 @@
+import React, {useState} from "react"
 import Search from "../../components/search";
-import { Layout, Button } from "antd";
+import { Layout, Button, Modal } from "antd";
 import Zoom from "react-reveal/Zoom";
 import Rotate from "react-reveal/Rotate";
+import ModalContent from "../../components/modals/buyNow.js"
 
 const { Content } = Layout;
 
-export default () => (
+export default () => {
+  const [showModal, setShowModal] = useState(false);
+return (
   <>
+        <Modal
+          title="Buy Property"
+          visible={showModal}
+          onOk={() => setShowModal(!showModal)}
+          onCancel={() => setShowModal(!showModal)}
+          width={700}
+          style={{ top: 20 }}
+        >
+        <ModalContent />
+        </Modal>
     <Content>
       <div className="background">
         <Zoom right cascade>
@@ -14,13 +28,13 @@ export default () => (
         </Zoom>
         <Rotate top right cascade>
           <p>
-            enjoy the beauty and luxry of peace and beauty away from
+            enjoy the beauty and luxury of peace and beauty away from
             home
-          </p>
+          </p> 
         </Rotate>
-        <Button className="buy-now">Buy Now</Button>
+        <Button className="buy-now" onClick={() => setShowModal(!showModal)} >Buy Now</Button>
         <Search />
       </div>
     </Content>
   </>
-);
+);}

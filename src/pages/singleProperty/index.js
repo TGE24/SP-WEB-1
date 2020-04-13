@@ -12,16 +12,18 @@ import {
   Card,
   Tag,
   Input,
-  Modal
+  Modal,
+  Collapse,
 } from "antd";
 import ImageGallery from "react-image-gallery";
 import Map from "../../components/Map";
 
 const { Meta } = Card;
+const { Panel } = Collapse;
 
 const mapStyles = {
   width: "833px",
-  height: "529px"
+  height: "529px",
 };
 
 const App = () => {
@@ -42,7 +44,9 @@ const App = () => {
             style={{
               background: "rgb(249, 166, 2)",
               border: "none",
-              color: "white"
+              color: "white",
+              textTransform: "uppercase",
+              fontWeight: "500",
             }}
           >
             Online Inspection
@@ -52,21 +56,19 @@ const App = () => {
             style={{
               background: "rgb(249, 166, 2)",
               border: "none",
-              color: "white"
+              color: "white",
+              textTransform: "uppercase",
+              fontWeight: "500",
             }}
           >
-            Online Inspection
-          </Button>
+            Physical Inspection
+          </Button>,
         ]}
       >
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Id
-          nibh laoreet aliquam penatibus enim dolor scelerisque. Sed
-          libero malesuada arcu leo, auctor. Nulla ut sit auctor
-          lacus. Cursus tincidunt ornare mattis eget egestas tincidunt
-          nullam diam. malesuada arcu leo, auctor. Nulla ut sit auctor
-          lacus. Cursus tincidunt ornare mattis eget egestas tincidunt
-          nullam diam.
+          Take a tour to our sites today...From our virtual tour to
+          the physical tour. We ensure we show you everything you need
+          to know about our property.
         </p>
       </Modal>
       <Layout title="Properties">
@@ -78,7 +80,7 @@ const App = () => {
         </div>
 
         <div className="container">
-          <Row gutter={[16, 16]} className="cont-row">
+          <Row gutter={[24, 24]} className="cont-row">
             <Col xs={24} sm={24} md={18} lg={18} xl={18}>
               <div>
                 <div className="prop-heading">
@@ -89,7 +91,7 @@ const App = () => {
                     <Button
                       style={{
                         background: "#F9A602",
-                        margin: "10px"
+                        margin: "10px",
                       }}
                     >
                       For Rent
@@ -97,7 +99,7 @@ const App = () => {
                     <Button
                       style={{
                         background: "#515C6F",
-                        margin: "10px"
+                        margin: "10px",
                       }}
                     >
                       Mortgage
@@ -105,7 +107,7 @@ const App = () => {
                     <Button
                       style={{
                         background: "#515C6F",
-                        margin: "10px"
+                        margin: "10px",
                       }}
                     >
                       For Sale
@@ -117,7 +119,7 @@ const App = () => {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <img
@@ -131,7 +133,7 @@ const App = () => {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <img
@@ -145,7 +147,7 @@ const App = () => {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <img
@@ -159,7 +161,7 @@ const App = () => {
                     style={{
                       display: "flex",
                       flexDirection: "column",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   >
                     <img
@@ -188,7 +190,7 @@ const App = () => {
                 style={{
                   width: "840px",
                   background: "#F5F4F4",
-                  padding: "29.68px"
+                  padding: "29.68px",
                 }}
                 className="prop-details"
               >
@@ -196,14 +198,14 @@ const App = () => {
                   grid={{ gutter: 8, column: 2 }}
                   bordered
                   dataSource={data}
-                  renderItem={item => (
+                  renderItem={(item) => (
                     <List.Item
                       style={{
                         fontSize: "17px",
                         display: "flex",
                         borderBottom: "0.957303px dashed #C1C1C1",
                         margin: "11px",
-                        padding: "0"
+                        padding: "0",
                       }}
                       className="prop-item"
                     >
@@ -233,39 +235,27 @@ const App = () => {
               </div>
               <div
                 style={{ marginTop: "80px" }}
-                className="prop-video-cont"
-              >
-                <h2>VIDEO</h2>
-                <hr />
-                <video
-                  width="840"
-                  height="482"
-                  className="prop-video"
-                ></video>
-              </div>
-              <div
-                style={{ marginTop: "80px" }}
                 className="prop-amenities"
               >
                 <h2>PROPERTY AMENITIES</h2>
                 <hr />
                 <div
                   style={{
-                    width: "840px"
+                    width: "840px",
                   }}
                   className="amenities-details"
                 >
                   <List
                     grid={{ gutter: 8, column: 2 }}
                     dataSource={data2}
-                    renderItem={item => (
+                    renderItem={(item) => (
                       <List.Item
                         style={{
                           fontSize: "15px",
                           display: "flex",
                           borderBottom: "0.957303px dashed #C1C1C1",
                           margin: "11px",
-                          padding: "0"
+                          padding: "0",
                         }}
                         className="amenities-list"
                       >
@@ -274,7 +264,7 @@ const App = () => {
                             style={{
                               width: "25px",
                               height: "25px",
-                              margin: "0 14px"
+                              margin: "0 14px",
                             }}
                             src={item.icon}
                             alt="icon"
@@ -293,22 +283,41 @@ const App = () => {
                   />
                 </div>
               </div>
-              <div style={{ marginTop: "80px" }} className="location">
-                <h2>LOCATION</h2>
-                <hr />
-                <div style={mapStyles} className="map-cont">
-                  <Map
-                    isMarkerShown
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                    loadingElement={
-                      <div style={{ height: `100%` }} />
-                    }
-                    containerElement={
-                      <div style={{ height: `100%` }} />
-                    }
-                    mapElement={<div style={{ height: `100%` }} />}
-                  />
-                </div>
+              <div
+                style={{ marginTop: "80px" }}
+                className="prop-amenities"
+              >
+                <Collapse>
+                  <Panel header="VIDEO" key="1" disabled>
+                    <div className="prop-video-cont">
+                      <video
+                        width="840"
+                        height="482"
+                        className="prop-video"
+                      ></video>
+                    </div>
+                  </Panel>
+
+                  <Panel header="LOCATION" key="2" disabled>
+                    <div className="location">
+                      <div style={mapStyles} className="map-cont">
+                        <Map
+                          isMarkerShown
+                          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                          loadingElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                          containerElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                          mapElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                        />
+                      </div>
+                    </div>
+                  </Panel>
+                </Collapse>
               </div>
               <div
                 style={{ marginTop: "80px" }}
@@ -338,14 +347,14 @@ const App = () => {
                                 display: "flex",
                                 justifyContent: "space-between",
                                 position: "relative",
-                                bottom: "24px"
+                                bottom: "24px",
                               }}
                             >
                               <Tag
                                 color="#313131"
                                 style={{
                                   position: "relative",
-                                  width: "66px"
+                                  width: "66px",
                                 }}
                               >
                                 Featured
@@ -354,7 +363,7 @@ const App = () => {
                                 color="#F9A602"
                                 style={{
                                   position: "relative",
-                                  width: "60.07px"
+                                  width: "60.07px",
                                 }}
                               >
                                 {item.type}
@@ -372,7 +381,7 @@ const App = () => {
                             display: "flex",
                             justifyContent: "space-between",
                             marginTop: "14px",
-                            padding: "0 20px"
+                            padding: "0 20px",
                           }}
                         >
                           {item.features.map((item2, index) => (
@@ -391,7 +400,7 @@ const App = () => {
                           style={{
                             background: "rgb(249, 166, 2)",
                             color: "white",
-                            fontSize: "9px"
+                            fontSize: "9px",
                           }}
                         >
                           BROWSE
@@ -410,7 +419,7 @@ const App = () => {
                   background: "whitesmoke",
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
                 className="avatar-cont"
               >
@@ -423,7 +432,7 @@ const App = () => {
                           width: "150.58px",
                           height: "150.58px",
                           borderRadius: "100%",
-                          backgroundSize: "cover"
+                          backgroundSize: "cover",
                         }}
                       ></div>
                       <div>
@@ -462,7 +471,7 @@ const App = () => {
                       textAlign: "left",
                       fontSize: "10px",
                       marginTop: "10px",
-                      lineHeight: "2"
+                      lineHeight: "2",
                     }}
                   >
                     <span className="propFeat">
@@ -511,7 +520,7 @@ const App = () => {
                       textAlign: "left",
                       fontSize: "10px",
                       marginTop: "10px",
-                      lineHeight: "2"
+                      lineHeight: "2",
                     }}
                   >
                     <span className="propFeat">
@@ -560,7 +569,7 @@ const App = () => {
                       textAlign: "left",
                       fontSize: "10px",
                       marginTop: "10px",
-                      lineHeight: "15px"
+                      lineHeight: "15px",
                     }}
                   >
                     <span className="propFeat">
@@ -595,7 +604,7 @@ const App = () => {
                       background: "#F5F4F4",
                       display: "flex",
                       textAlign: "left",
-                      marginTop: "10px"
+                      marginTop: "10px",
                     }}
                   >
                     <span style={{ width: "254px" }}>
@@ -607,7 +616,7 @@ const App = () => {
                     <span
                       style={{
                         borderLeft: "1px solid #C4C4C4",
-                        padding: "10px"
+                        padding: "10px",
                       }}
                     >
                       <img
@@ -622,7 +631,7 @@ const App = () => {
                       background: "#F5F4F4",
                       display: "flex",
                       textAlign: "left",
-                      marginTop: "10px"
+                      marginTop: "10px",
                     }}
                   >
                     <span style={{ width: "254px" }}>
@@ -634,7 +643,7 @@ const App = () => {
                     <span
                       style={{
                         borderLeft: "1px solid #C4C4C4",
-                        padding: "10px"
+                        padding: "10px",
                       }}
                     >
                       <img
@@ -649,7 +658,7 @@ const App = () => {
                       background: "#F5F4F4",
                       display: "flex",
                       textAlign: "left",
-                      marginTop: "10px"
+                      marginTop: "10px",
                     }}
                   >
                     <span style={{ width: "254px" }}>
@@ -661,7 +670,7 @@ const App = () => {
                     <span
                       style={{
                         borderLeft: "1px solid #C4C4C4",
-                        padding: "10px"
+                        padding: "10px",
                       }}
                     >
                       <img
@@ -676,7 +685,7 @@ const App = () => {
                       background: "#F5F4F4",
                       display: "flex",
                       textAlign: "left",
-                      marginTop: "10px"
+                      marginTop: "10px",
                     }}
                   >
                     <span style={{ width: "254px" }}>
@@ -688,7 +697,7 @@ const App = () => {
                     <span
                       style={{
                         borderLeft: "1px solid #C4C4C4",
-                        padding: "10px"
+                        padding: "10px",
                       }}
                     >
                       <img
@@ -709,8 +718,8 @@ const App = () => {
                         rules={[
                           {
                             required: true,
-                            message: "Enter your name"
-                          }
+                            message: "Enter your name",
+                          },
                         ]}
                       >
                         <Input type="text" placeholder="Name" />
@@ -724,8 +733,8 @@ const App = () => {
                         rules={[
                           {
                             required: true,
-                            message: "Enter your email"
-                          }
+                            message: "Enter your email",
+                          },
                         ]}
                       >
                         <Input type="text" placeholder="Email" />
@@ -739,8 +748,8 @@ const App = () => {
                         rules={[
                           {
                             required: true,
-                            message: "Enter Your Message"
-                          }
+                            message: "Enter Your Message",
+                          },
                         ]}
                       >
                         <Input.TextArea
@@ -768,138 +777,138 @@ export default App;
 const images = [
   {
     original: "/assets/single-prop.png",
-    thumbnail: "/assets/single-prop.png"
+    thumbnail: "/assets/single-prop.png",
   },
   {
     original: "/assets/single-prop1.png",
-    thumbnail: "/assets/single-prop1.png"
+    thumbnail: "/assets/single-prop1.png",
   },
   {
     original: "/assets/single-prop2.png",
-    thumbnail: "/assets/single-prop2.png"
-  }
+    thumbnail: "/assets/single-prop2.png",
+  },
 ];
 
 const data = [
   {
     title: "Price",
-    description: "₦460"
+    description: "₦460",
   },
   {
     title: "Reference",
-    description: "1789"
+    description: "1789",
   },
   {
     title: "Year built",
-    description: "1999"
+    description: "1999",
   },
   {
     title: "Contact Agent",
-    description: "₦460"
+    description: "₦460",
   },
   {
     title: "Status",
-    description: "Available"
+    description: "Available",
   },
   {
     title: "Type",
-    description: "House"
+    description: "House",
   },
   {
     title: "Home Area",
-    description: "130 SqrFt"
+    description: "130 SqrFt",
   },
   {
     title: "Dimension",
-    description: "20 x 30 FT"
+    description: "20 x 30 FT",
   },
   {
     title: "Material",
-    description: "Brick"
+    description: "Brick",
   },
   {
     title: "Location",
-    description: "Calabar"
+    description: "Calabar",
   },
   {
     title: "Bed",
-    description: "2"
+    description: "2",
   },
   {
     title: "Room",
-    description: "2"
+    description: "2",
   },
   {
     title: "Garadges",
-    description: "2"
+    description: "2",
   },
   {
     title: "Bathroom",
-    description: "2"
-  }
+    description: "2",
+  },
 ];
 
 const data2 = [
   {
     icon: "/assets/icons/conditioner.png",
     title: "Air Conditioner",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/household.png",
     title: "Washing Machine",
-    checked: false
+    checked: false,
   },
   {
     icon: "/assets/icons/pool.png",
     title: "Swimming Pool",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/pool.png",
     title: "Balcony",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/household.png",
     title: "Cable TV",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/conditioner.png",
     title: "Solar",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/conditioner.png",
     title: "Air Conditioner",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/household.png",
     title: "Washing Machine",
-    checked: false
+    checked: false,
   },
   {
     icon: "/assets/icons/pool.png",
     title: "Swimming Pool",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/conditioner.png",
     title: "Balcony",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/household.png",
     title: "Cable TV",
-    checked: true
+    checked: true,
   },
   {
     icon: "/assets/icons/pool.png",
     title: "Solar",
-    checked: true
-  }
+    checked: true,
+  },
 ];
 
 const realEstate = [
@@ -908,22 +917,22 @@ const realEstate = [
     title: "Bungalow",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl2.png",
     title: "duplex",
     type: "Rent",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl3.png",
     title: "One Room",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
-  }
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
+  },
 ];
 
 const contactDetails = [
@@ -931,12 +940,12 @@ const contactDetails = [
     name: "Rick Ross",
     image: "/assets/contact1.png",
     email: "classicui4@gmail.com",
-    phone: "+234 08182739942"
+    phone: "+234 08182739942",
   },
   {
     name: "Rick Ross",
     image: "/assets/contact.png",
     email: "classicui4@gmail.com",
-    phone: "+234 08182739942"
-  }
+    phone: "+234 08182739942",
+  },
 ];

@@ -153,21 +153,17 @@ export const CareerSectionThree = styled.section`
     h2 {
       color: #515c6f;
       font-size: 20px;
-
       font-weight: 500;
-      text-align: center;
     }
   }
   .left-content {
-    margin: 6rem 0 0 2rem;
     h1 {
       color: #515c6f;
       font-size: 25px;
-      text-align: left;
       font-weight: 600;
     }
     h2 {
-      margin: 0rem 0rem 1rem 1rem;
+      // margin: 0rem 0rem 1rem 1rem;
       font-size: 16px;
       color: #797979;
     }
@@ -176,8 +172,8 @@ export const CareerSectionThree = styled.section`
     }
   }
   .vertical-line {
-    margin: 6rem 0 0 2rem;
-    height: 292px;
+  margin: 6rem 0 0 6rem;
+    height: 350px;
     width: 2px;
     background: #797979;
   }

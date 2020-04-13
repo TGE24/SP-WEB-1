@@ -18,7 +18,6 @@ const MenuItemGroup = Menu.ItemGroup;
 const Wrap = styled.div`
   .ant-affix {
     background: #fff;
-
     transition: background 1000ms;
   }
 `;
@@ -125,7 +124,7 @@ const Navbar = () => {
         style={{
           position: "absolute",
           width: "-webkit-fill-available",
-          zIndex: 1,
+          zIndex: 10,
         }}
       >
         <Affix

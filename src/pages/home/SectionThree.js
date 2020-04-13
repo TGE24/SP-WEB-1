@@ -14,8 +14,8 @@ export default () => (
       }}
     >
       <Services>
-        <h3>Latest Real Estates</h3>
-        <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <h3>Latest Properties</h3>
+        <h5>First reserved, first served</h5>
         <Row gutter={[6, 12]}>
           {realEstates.map((item, index) => (
             <Col
