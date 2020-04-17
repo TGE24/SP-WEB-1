@@ -10,11 +10,11 @@ export default () => (
   <SectionThree>
     <Content
       style={{
-        padding: "82px 50px 50px 50px"
+        padding: "82px 50px 50px 50px",
       }}
     >
       <Services>
-        <h3>Latest Properties</h3>
+        <h3>Latest Real Estates</h3>
         <h5>First reserved, first served</h5>
         <Row gutter={[6, 12]}>
           {realEstates.map((item, index) => (
@@ -38,14 +38,14 @@ export default () => (
                           display: "flex",
                           justifyContent: "space-between",
                           position: "relative",
-                          bottom: "24px"
+                          bottom: "24px",
                         }}
                       >
                         <Tag
                           color="#313131"
                           style={{
                             position: "relative",
-                            width: "66px"
+                            width: "66px",
                           }}
                         >
                           Featured
@@ -54,7 +54,7 @@ export default () => (
                           color="#F9A602"
                           style={{
                             position: "relative",
-                            width: "60.07px"
+                            width: "60.07px",
                           }}
                         >
                           {item.type}
@@ -63,16 +63,13 @@ export default () => (
                     </>
                   }
                 >
-                  <Meta
-                    title={item.title}
-                    description={item.location}
-                  />
+                  <Meta title={item.title} description={item.location} />
                   <div
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
                       marginTop: "14px",
-                      padding: "0 13px"
+                      padding: "0 13px",
                     }}
                   >
                     {item.features.map((item2, index) => (
@@ -82,10 +79,7 @@ export default () => (
                       </div>
                     ))}
                   </div>
-                  <Button
-                    className="button"
-                    icon={<SearchOutlined />}
-                  >
+                  <Button className="button" icon={<SearchOutlined />}>
                     Search
                   </Button>
                 </Card>
@@ -104,27 +98,27 @@ const realEstates = [
     title: "Bungalow",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl2.png",
     title: "duplex",
     type: "Rent",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl3.png",
     title: "One Room",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl1.png",
     title: "Mansion",
     type: "Rent",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
-  }
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
+  },
 ];

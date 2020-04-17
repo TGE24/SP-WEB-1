@@ -134,7 +134,7 @@ export const CareerSectionTwo = styled.section`
 `;
 
 export const CareerSectionThree = styled.section`
-  height: 730px;
+  min-height: 730px;
   background: #f5f4f4;
   width: 100%;
   .container {
@@ -157,6 +157,7 @@ export const CareerSectionThree = styled.section`
     }
   }
   .left-content {
+    margin: 4rem 0 0 2rem;
     h1 {
       color: #515c6f;
       font-size: 25px;
@@ -166,14 +167,15 @@ export const CareerSectionThree = styled.section`
       // margin: 0rem 0rem 1rem 1rem;
       font-size: 16px;
       color: #797979;
+      text-align: left;
     }
     img {
       // margin: 0rem 0rem 1rem 1rem;
     }
   }
   .vertical-line {
-  margin: 6rem 0 0 6rem;
-    height: 350px;
+    margin: 6rem 0 0 2rem;
+    height: 450px;
     width: 2px;
     background: #797979;
   }

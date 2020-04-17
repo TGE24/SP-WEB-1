@@ -6,10 +6,7 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "../../components/modals/signIn";
 import SignUp from "../../components/modals/signUp";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import "./index.css";
 
 const SubMenu = Menu.SubMenu;
@@ -91,7 +88,7 @@ const Navbar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "rgb(0,0,0,0.88)",
+          background: "rgb(0,0,0,0.7)",
         }}
         headerStyle={{
           background: "rgb(0,0,0,0.7)",
@@ -109,13 +106,18 @@ const Navbar = () => {
       </Drawer>
       <Modal
         title="LOGIN"
+        style={{ border: "1.77918px solid #FFFFFF", borderRadius: "6px" }}
         onCancel={() => setShowModal(!showModal)}
         visible={showModal}
         bodyStyle={{
-          background: "rgba(0, 0, 0, 0.88)",
+          background: "rgb(0,0,0,0.7)",
           color: "white",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
         footer={null}
+        footerStyle={{ background: "rgb(0,0,0,0.7)", display: "none" }}
       >
         <SignIn setShowDrawer={setShowDrawer} />
       </Modal>
@@ -185,11 +187,7 @@ const Navbar = () => {
                   setShowDrawer={setShowDrawer}
                 />
               </div>
-              <Button
-                className="barsMenu"
-                type="primary"
-                onClick={drawer}
-              >
+              <Button className="barsMenu" type="primary" onClick={drawer}>
                 {React.createElement(
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}
