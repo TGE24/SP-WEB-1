@@ -1,11 +1,16 @@
 import { Form, Input, Button, Checkbox } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import "./index.css";
+import Auth from "../../../helpers/auth";
 
 const NormalLoginForm = (props) => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    Auth.login({ ...values });
   };
+  if (Auth.isLoggedIn()) {
+    return Auth.loginRedirect();
+  }
 
   return (
     <Form
@@ -16,9 +21,7 @@ const NormalLoginForm = (props) => {
     >
       <Form.Item
         name="email"
-        rules={[
-          { required: true, message: "Please input your Email!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Email!" }]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
@@ -27,9 +30,7 @@ const NormalLoginForm = (props) => {
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[
-          { required: true, message: "Please input your Password!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Password!" }]}
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -44,11 +45,7 @@ const NormalLoginForm = (props) => {
       </Form.Item>
 
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-        >
+        <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
       </Form.Item>
