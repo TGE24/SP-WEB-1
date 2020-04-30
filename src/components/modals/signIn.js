@@ -14,6 +14,9 @@ const NormalLoginForm = (props) => {
   const handleFaceBookAuth = () => {
     Auth.facebookLogin();
   };
+  const handleGoogleAuth = () => {
+    Auth.googleLogin();
+  };
 
   return (
     <Form
@@ -91,6 +94,7 @@ const NormalLoginForm = (props) => {
             className="social-icons"
             src="/assets/icons/google.png"
             alt="Google"
+            onClick={handleGoogleAuth}
           />
         </div>
       </Form.Item>
