@@ -6,10 +6,7 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "../../components/modals/signIn";
 import SignUp from "../../components/modals/signUp";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import "./index.css";
 
 const SubMenu = Menu.SubMenu;
@@ -155,11 +152,7 @@ const Navbar = () => {
                 src="/assets/icons/igSmall.png"
                 alt="ig"
               />
-              <img
-                className="socials"
-                src="/assets/icons/in.png"
-                alt="in"
-              />
+              <img className="socials" src="/assets/icons/in.png" alt="in" />
               <img
                 className="socials"
                 src="/assets/icons/twitterSmall.png"
@@ -185,11 +178,7 @@ const Navbar = () => {
                   setShowDrawer={setShowDrawer}
                 />
               </div>
-              <Button
-                className="barsMenu"
-                type="primary"
-                onClick={drawer}
-              >
+              <Button className="barsMenu" type="primary" onClick={drawer}>
                 {React.createElement(
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}

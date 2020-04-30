@@ -1,7 +1,9 @@
 import request from "./request";
 import db from "./db";
+import axios from "axios";
 
 const Auth = {
+  user: {},
   token: null,
   isLoggedIn: () => (Auth.token ? true : false),
 
@@ -23,6 +25,33 @@ const Auth = {
       .catch((err) => {
         console.error(err);
       });
+  },
+  facebookLogin: () => {
+    request(
+      {
+        url: "/login/facebook",
+      },
+      false
+    ).then((res) => {
+      Auth.user = res.data.user;
+      Auth.token = res.data.access_token;
+      db.setItem("token", Auth.token);
+      Auth.loginRedirect();
+      return Promise.resolve("Login Successful");
+    });
+  },
+  signup: (input) => {
+    request(
+      {
+        url: "/user",
+        method: "POST",
+        data: input,
+      },
+      false
+    ).then((res) => {
+      Auth.user = res.data.user;
+      return Promise.resolve("Registration Completed");
+    });
   },
 
   loginRedirect: () => {

@@ -1,16 +1,19 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Divider } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import "./index.css";
 import Auth from "../../../helpers/auth";
 
 const NormalLoginForm = (props) => {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
     Auth.login({ ...values });
   };
   if (Auth.isLoggedIn()) {
     return Auth.loginRedirect();
   }
+
+  const handleFaceBookAuth = () => {
+    Auth.facebookLogin();
+  };
 
   return (
     <Form
@@ -44,12 +47,12 @@ const NormalLoginForm = (props) => {
         </a>
       </Form.Item>
 
-      <Form.Item>
+      <Form.Item className="center-align">
         <Button type="primary" htmlType="submit" className="login-form-button">
           Log in
         </Button>
       </Form.Item>
-      <Form.Item>
+      <Form.Item className="center-align">
         <p style={{ color: "white" }}>
           Not a member yet?{" "}
           <span
@@ -59,6 +62,35 @@ const NormalLoginForm = (props) => {
             Signup
           </span>
         </p>
+      </Form.Item>
+      <Form.Item className="center-align">
+        <Divider>OR</Divider>
+      </Form.Item>
+      <Form.Item className="center-align">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <img
+            className="social-icons"
+            src="/assets/icons/facebook.png"
+            alt="Facebook"
+            onClick={handleFaceBookAuth}
+          />
+          <img
+            className="social-icons"
+            src="/assets/icons/twitter.png"
+            alt="Twitter"
+          />
+          <img
+            className="social-icons"
+            src="/assets/icons/google.png"
+            alt="Google"
+          />
+        </div>
       </Form.Item>
     </Form>
   );
