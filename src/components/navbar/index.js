@@ -157,11 +157,7 @@ const Navbar = () => {
                 src="/assets/icons/igSmall.png"
                 alt="ig"
               />
-              <img
-                className="socials"
-                src="/assets/icons/in.png"
-                alt="in"
-              />
+              <img className="socials" src="/assets/icons/in.png" alt="in" />
               <img
                 className="socials"
                 src="/assets/icons/twitterSmall.png"

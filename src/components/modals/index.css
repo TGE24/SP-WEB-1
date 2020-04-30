@@ -10,6 +10,16 @@
 
 .login-form-forgot {
   float: left;
+  color: white;
+}
+
+.center-align .ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-align .ant-divider-inner-text {
+  color: white;
 }
 
 .ant-col-rtl .login-form-forgot {

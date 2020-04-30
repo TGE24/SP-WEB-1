@@ -11,7 +11,9 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "antd": "4.0.0",
+    "axios": "0.19.2",
     "babel-plugin-import": "^1.9.1",
+    "localforage": "1.7.3",
     "next": "latest",
     "null-loader": "2.0.0",
     "react": "16.13.0",
@@ -19,6 +21,7 @@
     "react-google-maps": "9.4.5",
     "react-image-gallery": "1.0.6",
     "react-reveal": "1.2.2",
+    "react-toastify": "5.5.0",
     "styled-components": "5.0.1",
     "webpack-filter-warnings-plugin": "1.2.1"
   },

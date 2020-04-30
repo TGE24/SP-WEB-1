@@ -6,7 +6,7 @@ module.exports = withCss({
   webpack: (config, { isServer }) => {
     config.plugins.push(
       new FilterWarningsPlugin({
-        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
       })
     );
     if (isServer) {
@@ -21,16 +21,15 @@ module.exports = withCss({
             callback();
           }
         },
-        ...(typeof origExternals[0] === "function"
-          ? []
-          : origExternals)
+        ...(typeof origExternals[0] === "function" ? [] : origExternals),
       ];
 
       config.module.rules.unshift({
         test: antStyles,
-        use: "null-loader"
+        use: "null-loader",
       });
     }
     return config;
-  }
+  },
 });
+

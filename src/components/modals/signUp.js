@@ -1,24 +1,36 @@
-import { Form, Input, Button, Checkbox, Divider } from "antd";
-import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { Form, Input, Button, Checkbox, Divider, DatePicker } from "antd";
+import {
+  MailOutlined,
+  LockOutlined,
+  UserOutlined,
+  PhoneOutlined,
+} from "@ant-design/icons";
 import "./index.css";
+import Auth from "../../../helpers/auth";
 
 const NormalLoginForm = (props) => {
+  const [formData, setFormData] = useState({});
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    delete values.dob;
+    const submitData = { ...formData, ...values };
+    Auth.signup({ ...submitData });
+    console.log(Auth.user);
   };
-
   return (
-    <Form
-      name="signup"
-      className="signup-form"
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-    >
+    <Form name="signup" className="signup-form" onFinish={onFinish}>
+      <Form.Item
+        name="name"
+        rules={[{ required: true, message: "Please input your Full name!" }]}
+      >
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Full Name"
+        />
+      </Form.Item>
       <Form.Item
         name="email"
-        rules={[
-          { required: true, message: "Please input your Email!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Email!" }]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
@@ -26,33 +38,66 @@ const NormalLoginForm = (props) => {
         />
       </Form.Item>
       <Form.Item
-        name="password"
-        rules={[
-          { required: true, message: "Please input your Password!" },
-        ]}
+        name="phone"
+        rules={[{ required: true, message: "Please input your phone number!" }]}
       >
-        <Input.Password
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
+        <Input
+          prefix={<PhoneOutlined className="site-form-item-icon" />}
+          placeholder="Phone Number"
         />
       </Form.Item>
+      <Form.Item
+        name="dob"
+        rules={[{ required: true, message: "Please input your date of birth" }]}
+      >
+        <DatePicker
+          format="YYYY-MM-DD"
+          onChange={(_, dateString) => {
+            formData.dob = dateString;
+            setFormData({ ...formData });
+          }}
+          style={{ width: "100%" }}
+        />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: "Please input your password!",
+          },
+        ]}
+        hasFeedback
+      >
+        <Input.Password placeholder="Password" />
+      </Form.Item>
 
-      <Form.Item name="remember">
-        <Checkbox>
-          <span style={{ color: "white" }}>I agree to the </span>
-          <a href="#" style={{ color: "#fcad0a" }}>
-            terms
-          </a>
-        </Checkbox>
+      <Form.Item
+        name="password_confirmation"
+        dependencies={["password"]}
+        hasFeedback
+        rules={[
+          {
+            required: true,
+            message: "Please confirm your password!",
+          },
+          ({ getFieldValue }) => ({
+            validator(rule, value) {
+              if (!value || getFieldValue("password") === value) {
+                return Promise.resolve();
+              }
+              return Promise.reject(
+                "The two passwords that you entered do not match!"
+              );
+            },
+          }),
+        ]}
+      >
+        <Input.Password placeholder="Confirm Password" />
       </Form.Item>
 
       <Form.Item>
-        <Button
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-        >
+        <Button type="primary" htmlType="submit" className="login-form-button">
           Sign Up
         </Button>
       </Form.Item>

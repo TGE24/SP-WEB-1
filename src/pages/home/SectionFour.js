@@ -8,17 +8,13 @@ export default () => (
     <Content
       style={{
         padding: "82px 50px 50px 50px",
-        background: "whitesmoke"
+        background: "whitesmoke",
       }}
     >
       <Services>
         <h3>Best Real Estate Locations</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
-        <img
-          src="/assets/prev.png"
-          alt="Previous"
-          className="previous"
-        />
+        <img src="/assets/prev.png" alt="Previous" className="previous" />
         <Row gutter={[16, 16]}>
           {locations.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
@@ -30,7 +26,7 @@ export default () => (
                   backgroundRepeat: "no-repeat",
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <h1
@@ -40,7 +36,7 @@ export default () => (
                     fontStyle: "normal",
                     fontWeight: "300",
                     fontSize: "60px",
-                    lineHeight: "67px"
+                    lineHeight: "67px",
                   }}
                 >
                   {item.city}
@@ -58,26 +54,26 @@ export default () => (
 const locations = [
   {
     image: "/assets/l1.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l2.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l3.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l4.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l5.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l6.png",
-    city: "Rome"
-  }
+    city: "Rome",
+  },
 ];
