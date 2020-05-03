@@ -44,6 +44,20 @@ const Auth = {
       return Promise.resolve("Login Successful");
     });
   },
+  googleLogin: () => {
+    request(
+      {
+        url: "/login/google",
+      },
+      false
+    ).then((res) => {
+      Auth.user = res.data.user;
+      Auth.token = res.data.access_token;
+      db.setItem("token", Auth.token);
+      Auth.loginRedirect();
+      return Promise.resolve("Login Successful");
+    });
+  },
   signup: (input) => {
     request(
       {

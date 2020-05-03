@@ -14,6 +14,9 @@ const NormalLoginForm = (props) => {
   const handleFaceBookAuth = () => {
     Auth.facebookLogin();
   };
+  const handleGoogleAuth = () => {
+    Auth.googleLogin();
+  };
 
   return (
     <Form
@@ -29,6 +32,7 @@ const NormalLoginForm = (props) => {
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder="Email"
+          size="large"
         />
       </Form.Item>
       <Form.Item
@@ -39,6 +43,7 @@ const NormalLoginForm = (props) => {
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
           placeholder="Password"
+          size="large"
         />
       </Form.Item>
       <Form.Item>
@@ -89,6 +94,7 @@ const NormalLoginForm = (props) => {
             className="social-icons"
             src="/assets/icons/google.png"
             alt="Google"
+            onClick={handleGoogleAuth}
           />
         </div>
       </Form.Item>

@@ -9,7 +9,7 @@ export default () => (
     <Content
       style={{
         padding: "82px 50px 50px 50px",
-        background: "whitesmoke"
+        background: "whitesmoke",
       }}
     >
       <Services>
@@ -45,27 +45,28 @@ export default () => (
 
 const services = [
   {
-    title: "Find a Home",
+    title: "Estate Development & Construction",
     image: "/assets/home.png",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+      "We develop bare properties into exquisite building, estate and cities.We employ the best equipment with the latest modern technology for its construction operation. ",
   },
+
   {
-    title: "Secure a Property",
-    image: "/assets/lock.png",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-  },
-  {
-    title: "Land Development",
+    title: "Property Management",
     image: "/assets/sketch.png",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+      "We have a large portfolio of verified property meticulously managed by our professional facility managers to give you the best of Service.",
   },
   {
-    title: "Find a Home",
+    title: "Real Estate Investment",
     image: "/assets/home.png",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
-  }
+      "We give our clients the access to unbeatable and unprecedented profitable real estate properties, investment for a great ROI even up to 200% ROI on some properties.",
+  },
+  {
+    title: "Property Savings",
+    image: "/assets/lock.png",
+    description:
+      "To provide property for people of all class, we've ensure to create a savings platform where everyone can save at their convenient to either rent or buy properties. Property savers enjoy up to 70% discount on some properties.",
+  },
 ];
