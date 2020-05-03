@@ -17,9 +17,13 @@ const Auth = {
       false
     )
       .then((res) => {
-        Auth.token = res.data.access_token;
-
-        db.setItem("token", Auth.token);
+        const User = {
+          token: res.data.access_token,
+          user: res.data.user,
+        };
+        Auth.token = User.token;
+        Auth.user = User.user;
+        db.setItem("User", User);
         Auth.loginRedirect();
       })
       .catch((err) => {
@@ -56,7 +60,7 @@ const Auth = {
 
   loginRedirect: () => {
     if (Auth.token) {
-      window.location.assign("/dashboard");
+      window.location.assign("http://dashboard-spuser.netlify.app/");
     }
   },
 

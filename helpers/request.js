@@ -3,7 +3,7 @@ import axios from "axios";
 import Auth from "./auth";
 
 const instance = axios.create({
-  baseURL: "https://spreadprolimited.com/api",
+  baseURL: "http://spreadprolimited.com/api",
   timeout: 30000,
 });
 
