@@ -11,12 +11,12 @@ const NormalLoginForm = (props) => {
     return Auth.loginRedirect();
   }
 
-  const handleFaceBookAuth = () => {
-    Auth.facebookLogin();
-  };
-  const handleGoogleAuth = () => {
-    Auth.googleLogin();
-  };
+  // const handleFaceBookAuth = () => {
+  //   Auth.facebookLogin();
+  // };
+  // const handleGoogleAuth = () => {
+  //   Auth.googleLogin();
+  // };
 
   return (
     <Form
@@ -83,7 +83,7 @@ const NormalLoginForm = (props) => {
             className="social-icons"
             src="/assets/icons/facebook.png"
             alt="Facebook"
-            onClick={handleFaceBookAuth}
+            // onClick={handleFaceBookAuth}
           />
           <img
             className="social-icons"
@@ -94,7 +94,7 @@ const NormalLoginForm = (props) => {
             className="social-icons"
             src="/assets/icons/google.png"
             alt="Google"
-            onClick={handleGoogleAuth}
+            // onClick={handleGoogleAuth}
           />
         </div>
       </Form.Item>

@@ -3,7 +3,7 @@ import db from "./db";
 import axios from "axios";
 
 const Auth = {
-  user: {},
+  user: null,
   token: null,
   isLoggedIn: () => (Auth.token ? true : false),
 
@@ -67,7 +67,14 @@ const Auth = {
       },
       false
     ).then((res) => {
-      Auth.user = res.data.user;
+      const User = {
+        token: res.data.token,
+        user: res.data.user,
+      };
+      Auth.token = User.token;
+      Auth.user = User.user;
+      db.setItem("User", User);
+      Auth.loginRedirect();
       return Promise.resolve("Registration Completed");
     });
   },
