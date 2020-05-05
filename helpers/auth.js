@@ -7,6 +7,16 @@ const Auth = {
   token: null,
   isLoggedIn: () => (Auth.token ? true : false),
 
+  init: () => {
+    return db
+      .getItem("User")
+      .then((User) => {
+        Auth.token = User.token;
+        Auth.user = User.user;
+      })
+      .catch((err) => console.error(err));
+  },
+
   login: (input) => {
     request(
       {
