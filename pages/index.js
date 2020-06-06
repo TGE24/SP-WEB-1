@@ -4,9 +4,6 @@ import Theme from "../Theme";
 import Auth from "../helpers/auth";
 
 export default () => {
-	useEffect(() => {
-		Auth.init();
-	}, []);
 	return (
 		<Theme>
 			<Home />

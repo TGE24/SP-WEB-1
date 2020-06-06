@@ -1,21 +1,12 @@
 import request from "./request";
 import db from "./db";
+import Cookies from "js-cookie";
 import axios from "axios";
 
 const Auth = {
   user: null,
   token: null,
   isLoggedIn: () => (Auth.token ? true : false),
-
-  init: () => {
-    return db
-      .getItem("User")
-      .then((User) => {
-        Auth.token = User.token;
-        Auth.user = User.user;
-      })
-      .catch((err) => console.error(err));
-  },
 
   login: (input) => {
     request(
@@ -34,6 +25,9 @@ const Auth = {
         Auth.token = User.token;
         Auth.user = User.user;
         db.setItem("User", User);
+        Cookies.set("User", JSON.stringify(User), {
+          domain: ".spreadprolimited.com",
+        });
         Auth.loginRedirect();
       })
       .catch((err) => {
@@ -46,13 +40,17 @@ const Auth = {
         url: "/login/facebook",
       },
       false
-    ).then((res) => {
-      Auth.user = res.data.user;
-      Auth.token = res.data.access_token;
-      db.setItem("token", Auth.token);
-      Auth.loginRedirect();
-      return Promise.resolve("Login Successful");
-    });
+    )
+      .then((res) => {
+        Auth.user = res.data.user;
+        Auth.token = res.data.access_token;
+        db.setItem("token", Auth.token);
+        Auth.loginRedirect();
+        return Promise.resolve("Login Successful");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   googleLogin: () => {
     request(
@@ -60,13 +58,17 @@ const Auth = {
         url: "/login/google",
       },
       false
-    ).then((res) => {
-      Auth.user = res.data.user;
-      Auth.token = res.data.access_token;
-      db.setItem("token", Auth.token);
-      Auth.loginRedirect();
-      return Promise.resolve("Login Successful");
-    });
+    )
+      .then((res) => {
+        Auth.user = res.data.user;
+        Auth.token = res.data.access_token;
+        db.setItem("token", Auth.token);
+        Auth.loginRedirect();
+        return Promise.resolve("Login Successful");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
   signup: (input) => {
     request(
@@ -76,32 +78,41 @@ const Auth = {
         data: input,
       },
       false
-    ).then((res) => {
-      const User = {
-        token: res.data.token,
-        user: res.data.user,
-      };
-      Auth.token = User.token;
-      Auth.user = User.user;
-      db.setItem("User", User);
-      Auth.loginRedirect();
-      return Promise.resolve("Registration Completed");
-    });
+    )
+      .then((res) => {
+        const User = {
+          token: res.data.token,
+          user: res.data.user,
+        };
+        Auth.token = User.token;
+        Auth.user = User.user;
+        db.setItem("User", User);
+        Auth.loginRedirect();
+        return Promise.resolve("Registration Completed");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 
   loginRedirect: () => {
     if (Auth.token) {
-      window.location.assign("http://dashboard-spuser.netlify.app/");
+      window.location.assign("https://user.spreadprolimited.com/");
     }
   },
 
   logoutRedirect: () => {
-    window.location.assign("/");
+    window.location.assign("https://spreadprolimited.com/");
   },
 
   logout: () => {
-    db.removeItem("token", Auth.token);
-    Auth.logoutRedirect();
+    db.removeItem("token", Auth.token)
+      .then(() => {
+        Auth.logoutRedirect();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   },
 };
 

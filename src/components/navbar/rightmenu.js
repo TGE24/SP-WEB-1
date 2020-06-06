@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Menu, Button, Modal, Drawer } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import Auth from "../../../helpers/auth";
 
 const RightMenu = (props) => {
   return (
@@ -33,20 +32,16 @@ const RightMenu = (props) => {
             <a>Careers</a>
           </Link>
         </Menu.Item>
-        {Auth.isLoggedIn() ? (
-          <Menu.Item key="mail5">
-            <Button
-              style={{ background: "#f9a602", marginBottom: "19px" }}
-              className="nav-siginIn"
-              icon={<LockOutlined />}
-              onClick={() => props.setShowModal(true)}
-            >
-              Sign In
-            </Button>
-          </Menu.Item>
-        ) : (
-          ""
-        )}
+        <Menu.Item key="mail5">
+          <Button
+            style={{ background: "#f9a602", marginBottom: "19px" }}
+            className="nav-siginIn"
+            icon={<LockOutlined />}
+            onClick={() => props.setShowModal(true)}
+          >
+            Sign In
+          </Button>
+        </Menu.Item>
       </Menu>
     </>
   );

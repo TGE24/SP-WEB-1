@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
 import Link from "next/link";
+import HousesModel from "../../models/HouseProperty";
 
 const { Option } = Select;
 
@@ -10,6 +11,12 @@ function handleChange(value) {
 }
 
 export default () => {
+  const [houses, setHouses] = useState([]);
+  useEffect(() => {
+    HousesModel.getHouses().then(() => {
+      setHouses(HousesModel.houses.houses);
+    });
+  }, []);
   return (
     <PropSectionTwo>
       <div className="row-head">
@@ -31,10 +38,10 @@ export default () => {
         </div>
       </div>
       <Row gutter={[12, 16]}>
-        {Properties.map((item, index) => (
+        {houses?.map((item, index) => (
           <Link
             href="/properties/[pid]"
-            as={`/properties/${index}`}
+            as={`/properties/${item?.slug}`}
             key={index}
           >
             <Col
@@ -48,9 +55,9 @@ export default () => {
             >
               <div className="prop-cards">
                 <div className="image">
-                  <img src={item.image} alt="" />
+                  <img src={item?.take_two_images[0]?.img_url} alt="" />
                   <div className="apartment">
-                    <h4>{item.propertyType}</h4>
+                    <h4>{item?.house_subcategory?.subcategory_name}</h4>
                   </div>
                   <div className="feature">
                     <h4>Featured</h4>
@@ -59,19 +66,17 @@ export default () => {
 
                 <div className="prop-details">
                   <div className="inner-container">
-                    <h2>{item.propertyName}</h2>
+                    <h2>{item?.name}</h2>
                     <h4>
                       <img src="../assets/icons/location.png" alt="" />
-                      {item.propertyAddress}
+                      {item?.location}
                     </h4>
                   </div>
                 </div>
                 <div className="prop-icons">
-                  {item.features.map((item, index) => (
+                  {item?.amenities.map((item, index) => (
                     <div className="icon" key={index}>
-                      <h4>
-                        <img src={item} alt="" /> 6
-                      </h4>
+                      <h4>{index}</h4>
                     </div>
                   ))}
                 </div>
@@ -83,50 +88,3 @@ export default () => {
     </PropSectionTwo>
   );
 };
-
-const Properties = [
-  {
-    image: "../assets/prop1.png",
-    propertyType: "Apartment",
-    propertyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout, Calabar",
-    features: [
-      "../assets/icons/house.png",
-      "../assets/icons/bathroom.png",
-      "../assets/icons/bed.png"
-    ]
-  },
-  {
-    image: "../assets/prop2.png",
-    propertyType: "Apartment",
-    propertyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout, Calabar",
-    features: [
-      "../assets/icons/house.png",
-      "../assets/icons/bathroom.png",
-      "../assets/icons/bed.png"
-    ]
-  },
-  {
-    image: "../assets/prop3.png",
-    propertyType: "Apartment",
-    propertyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout, Calabar",
-    features: [
-      "../assets/icons/house.png",
-      "../assets/icons/bathroom.png",
-      "../assets/icons/bed.png"
-    ]
-  },
-  {
-    image: "../assets/prop4.png",
-    propertyType: "Apartment",
-    propertyName: "Ancient Bungalo Ancient",
-    propertyAddress: "45 ntoe asi layout, Calabar",
-    features: [
-      "../assets/icons/house.png",
-      "../assets/icons/bathroom.png",
-      "../assets/icons/bed.png"
-    ]
-  }
-];
