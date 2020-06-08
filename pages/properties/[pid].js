@@ -1,8 +1,19 @@
 import Property from "../../src/pages/singleProperty";
 import Theme from "../../Theme";
+import HousesModel from "../../src/models/HouseProperty";
 
-export default () => (
-  <Theme>
-    <Property />
-  </Theme>
-);
+const PropertyDetail = ({ HouseProp }) => {
+	return (
+		<Theme>
+			<Property HouseProp={HouseProp} />
+		</Theme>
+	);
+};
+
+PropertyDetail.getInitialProps = async ({ query }) => {
+	const HouseQuery = await HousesModel.getHouse(query.pid);
+	const House = await HousesModel.house;
+	return { HouseProp: House };
+};
+
+export default PropertyDetail;

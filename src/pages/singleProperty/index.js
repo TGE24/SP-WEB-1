@@ -16,7 +16,6 @@ import {
 } from "antd";
 import ImageGallery from "react-image-gallery";
 import Map from "../../components/Map";
-import { useRouter } from "next/router";
 import HousesModel from "../../models/HouseProperty";
 
 const { Meta } = Card;
@@ -26,19 +25,14 @@ const mapStyles = {
   height: "529px",
 };
 
-const App = () => {
+const App = ({ HouseProp }) => {
   const [visible, setVisible] = useState(false);
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
-  const router = useRouter();
-  const { pid } = router.query;
+
   useEffect(() => {
-    if (pid) {
-      HousesModel.getHouse(pid).then(() => {
-        setHouseDetails(HousesModel.house);
-      });
-    }
-  }, [pid]);
+    setHouseDetails(HouseProp);
+  }, [HouseProp]);
 
   useEffect(() => {
     let newArray = [];

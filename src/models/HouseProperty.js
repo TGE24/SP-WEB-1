@@ -15,11 +15,12 @@ const Houses = {
       return Promise.resolve("Fetch completed");
     });
   },
-  onlineInspection: () => {
+  onlineInspection: (data) => {
     return request(
       {
         method: "POST",
-        url: "/online-inspection",
+        url: "/payment",
+        data,
       },
       true
     )

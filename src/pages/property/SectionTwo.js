@@ -10,13 +10,13 @@ function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
-export default () => {
+export default ({ HousesProp }) => {
   const [houses, setHouses] = useState([]);
+
   useEffect(() => {
-    HousesModel.getHouses().then(() => {
-      setHouses(HousesModel.houses.houses);
-    });
-  }, []);
+    setHouses(HousesProp);
+  }, [HousesProp]);
+
   return (
     <PropSectionTwo>
       <div className="row-head">
