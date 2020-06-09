@@ -11,7 +11,9 @@ const PropertyDetail = ({ HouseProp }) => {
 };
 
 PropertyDetail.getInitialProps = async ({ query }) => {
-	const HouseQuery = await HousesModel.getHouse(query.pid);
+	const HouseQuery = await HousesModel.getHouse(
+		query?.pid || "house-9rxu2pvmko"
+	);
 	const House = await HousesModel.house;
 	return { HouseProp: House };
 };
