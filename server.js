@@ -20,7 +20,7 @@ app
 			return handle(req, res);
 		});
 
-		server.listen(3000, (err) => {
+		server.listen(7777, (err) => {
 			if (err) throw err;
 			console.log("Server started on 3000");
 		});
