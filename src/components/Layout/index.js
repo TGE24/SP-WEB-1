@@ -3,6 +3,7 @@ import Navbar from "../navbar";
 import Footer from "../footer";
 import "./layout.css";
 import "./nprogress.css";
+import "antd/dist/antd.css";
 
 export default ({ children, title = "Spread Properties Nigeria" }) => (
   <div>
