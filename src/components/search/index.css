@@ -1,3 +1,4 @@
+@import "~antd/dist/antd.css";
 .tabs {
   width: calc(100% - 304px);
   box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.2);
