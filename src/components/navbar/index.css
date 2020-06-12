@@ -66,8 +66,9 @@ a {
   height: 32px;
   padding: 6px;
   margin-top: 8px;
-  display: none;
+  display: none !important;
   background: none;
+  background: #f9a602 !important;
 }
 
 .menuCon .ant-menu-horizontal {
@@ -79,7 +80,6 @@ a {
   width: 20px;
   height: 2px;
   background: #f9a602 !important;
-
   position: relative;
 }
 
@@ -101,6 +101,17 @@ a {
 
 .ant-drawer-body {
   padding: 0;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-submenu-selected {
+  color: #f9a602 !important;
+  border-bottom: 2px solid #f9a602 !important;
+}
+
+.ant-menu-item:active,
+.ant-menu-submenu-title:active {
+  background: #f3c46633 !important;
 }
 
 .ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
@@ -140,13 +151,13 @@ a {
 
 @media (max-width: 767px) {
   .barsMenu {
-    display: inline-block;
+    display: inline-block !important;
     margin-top: 12px;
-    background: #f9a602;
-    border: none;
+    background: #f9a602 !important;
+    border: none !important;
   }
   .barsMenu:hover {
-    background: #f9a602;
+    background: #f9a602 !important;
   }
 
   .rightMenu {

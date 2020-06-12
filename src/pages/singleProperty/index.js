@@ -16,6 +16,7 @@ import {
 import ImageGallery from "react-image-gallery";
 import Map from "../../components/Map";
 import HousesModel from "../../models/HouseProperty";
+import { usePaystackPayment } from "react-paystack";
 
 const { Meta } = Card;
 
@@ -30,6 +31,18 @@ const App = ({ HouseProp }) => {
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
   const [formData, setFormData] = useState({});
+  const config = {
+    reference: "" + Math.floor(Math.random() * 1000000000 + 1),
+    email: formData.email,
+    amount: 100000,
+    publicKey: "pk_test_cc5a16f36a9c190775dcc8eeefeeeddd3b209d46",
+  };
+
+  const onSuccess = (res) => {
+    console.log(res);
+  };
+
+  const initializePayment = usePaystackPayment(config);
 
   useEffect(() => {
     setHouseDetails(HouseProp);
@@ -113,8 +126,6 @@ const App = ({ HouseProp }) => {
     setVisible(false);
   };
 
-  console.log(formData);
-
   const handleOnlineInspection = () => {
     formData.amount = "1000";
     formData.property_slug = houseDetails?.slug;
@@ -134,7 +145,7 @@ const App = ({ HouseProp }) => {
         title="ONLINE INSPECTION"
         visible={onlineInspection}
         onCancel={() => setOnlineInspection(!onlineInspection)}
-        onOk={handleOnlineInspection}
+        onOk={() => initializePayment(onSuccess)}
         okText="Submit"
       >
         <Form layout="vertical">

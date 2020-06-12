@@ -54,6 +54,7 @@ body {
   background-position: center top;
   height: 100vh;
   color: white;
+  padding-top: 12%;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
