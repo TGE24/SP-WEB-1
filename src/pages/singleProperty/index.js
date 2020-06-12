@@ -36,10 +36,22 @@ const App = ({ HouseProp }) => {
     email: formData.email,
     amount: 100000,
     publicKey: "pk_test_cc5a16f36a9c190775dcc8eeefeeeddd3b209d46",
+    metadata: {
+      property_slug: houseDetails?.slug,
+    },
   };
 
+  console.log(HouseProp);
+
   const onSuccess = (res) => {
-    console.log(res);
+    res.property_slug = config.metadata.property_slug;
+    res.amount = config.amount;
+    res.email = config.email;
+    res.payment_plan = "online-inspection";
+    res.property_type = "house";
+    HousesModel.onlineInspection({ ...res }).then((response) => {
+      console.log(response);
+    });
   };
 
   const initializePayment = usePaystackPayment(config);
