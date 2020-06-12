@@ -8,41 +8,36 @@ const { TabPane } = Tabs;
 
 const layout = {
   labelCol: {
-    span: 8
+    span: 8,
   },
   wrapperCol: {
-    span: 16
-  }
+    span: 16,
+  },
 };
 const tailLayout = {
   wrapperCol: {
     offset: 8,
-    span: 16
-  }
+    span: 16,
+  },
 };
 
 const Demo = () => {
   return (
     <Tabs className="tabs" type="card">
       <TabPane tab="RENT" key="1">
-        <Form
-          {...layout}
-          name="basic"
-          layout="inline"
-          className="search-form"
-        >
+        <Form {...layout} name="basic" layout="inline" className="search-form">
           <Form.Item
             name="location"
             rules={[
               {
                 required: true,
-                message: "Select a location"
-              }
+                message: "Select a location",
+              },
             ]}
           >
             <Select
               showSearch
-              style={{ width: 250 }}
+              style={{ width: 250, marginBottom: "16px" }}
               placeholder="Select a location"
               optionFilterProp="children"
             >
@@ -57,13 +52,13 @@ const Demo = () => {
             rules={[
               {
                 required: true,
-                message: "Select a property type"
-              }
+                message: "Select a property type",
+              },
             ]}
           >
             <Select
               showSearch
-              style={{ width: 250 }}
+              style={{ width: 250, marginBottom: "16px" }}
               placeholder="Select a property type"
               optionFilterProp="children"
             >
@@ -78,13 +73,13 @@ const Demo = () => {
             rules={[
               {
                 required: true,
-                message: "Select a price range"
-              }
+                message: "Select a price range",
+              },
             ]}
           >
             <Select
               showSearch
-              style={{ width: 250 }}
+              style={{ width: 250, marginBottom: "16px" }}
               placeholder="Select a price range"
               optionFilterProp="children"
             >

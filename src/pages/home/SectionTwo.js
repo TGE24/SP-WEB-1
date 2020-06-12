@@ -45,28 +45,28 @@ export default () => (
 
 const services = [
   {
-    title: "Estate Development & Construction",
+    title: "Estate Management",
     image: "/assets/home.png",
     description:
-      "We develop bare properties into exquisite building, estate and cities.We employ the best equipment with the latest modern technology for its construction operation. ",
+      "We develop bare properties into exquisite building, estate and cities.We employ the best equipment with the latest modern technology...",
   },
 
   {
     title: "Property Management",
     image: "/assets/sketch.png",
     description:
-      "We have a large portfolio of verified property meticulously managed by our professional facility managers to give you the best of Service.",
+      "We have a large portfolio of verified property meticulously managed by our professional facility managers to give you the best of...",
   },
   {
     title: "Real Estate Investment",
     image: "/assets/home.png",
     description:
-      "We give our clients the access to unbeatable and unprecedented profitable real estate properties, investment for a great ROI even up to 200% ROI on some properties.",
+      "We give our clients the access to unbeatable and unprecedented profitable real estate properties, investment for a great ROI...",
   },
   {
     title: "Property Savings",
     image: "/assets/lock.png",
     description:
-      "To provide property for people of all class, we've ensure to create a savings platform where everyone can save at their convenient to either rent or buy properties. Property savers enjoy up to 70% discount on some properties.",
+      "To provide property for people of all class, we've ensure to create a savings platform where everyone can save at their...",
   },
 ];

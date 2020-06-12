@@ -5745,6 +5745,11 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-paystack@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-paystack/-/react-paystack-3.0.0.tgz#d49105762138d10ceb970eaf01b72a2b0e5d0af5"
+  integrity sha512-5m9BV8KQd8adKunrJsVJuoROBlsIzajr3k9qWL4y5eEz4UQAgtanBAktkOOMeOGCLJ7Ub46VyVjVSy7wPOzFWg==
+
 react-reveal@1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-reveal/-/react-reveal-1.2.2.tgz#f47fbc44debc4c185ae2163a215a9e822c7adfef"
