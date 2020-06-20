@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD:src/pages/service/sectionOne.js
 import { ServiceSectionOne } from "./style";
+=======
+import { PropSectionOne } from "../../styles/propertyStyled";
+>>>>>>> staging:pages/property/sectionOne.js
 
 export default () => {
   return (
