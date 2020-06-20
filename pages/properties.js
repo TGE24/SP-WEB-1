@@ -8,6 +8,8 @@ const AllProperties = ({ houses }) => {
 AllProperties.getInitialProps = async () => {
 	const HousesQuery = await HousesModel.getHouses();
 	const Houses = await HousesModel.houses.houses;
-	return { houses: Houses };
+	return {
+		houses: Houses,
+	};
 };
 export default AllProperties;
