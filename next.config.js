@@ -3,6 +3,10 @@ const withCss = require("@zeit/next-css");
 const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 module.exports = withCss({
+  env: {
+    baseURL: "https://spreadprolimited.com/api",
+    paystackKey: "pk_test_cc5a16f36a9c190775dcc8eeefeeeddd3b209d46",
+  },
   webpack: (config, { isServer }) => {
     config.plugins.push(
       new FilterWarningsPlugin({
@@ -32,4 +36,3 @@ module.exports = withCss({
     return config;
   },
 });
-
