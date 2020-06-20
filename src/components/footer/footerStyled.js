@@ -102,8 +102,6 @@ export const FooterContainer = styled.footer`
   }
   .line {
     margin-left: 1.5rem;
-    margin-top: -4rem;
-
     height: 1px;
     width: 97%;
     background: #c4c4c4;
