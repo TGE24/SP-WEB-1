@@ -1,5 +1,5 @@
 import { Row, Col } from "antd";
-import { FooterContainer } from "../../styles/footerStyled";
+import { FooterContainer } from "../../../styles/footerStyled";
 // import logo from "../assets/logo-placeholder.png";
 const date = new Date().getFullYear;
 export default () => (
