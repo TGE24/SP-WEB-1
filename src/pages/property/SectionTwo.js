@@ -46,60 +46,58 @@ export default ({ HousesProp }) => {
             key={index}
             passHref
           >
-            <a>
-              <Col
-                xs={12}
-                sm={12}
-                md={10}
-                lg={6}
-                xl={6}
-                key={index}
-                style={{ cursor: "pointer", padding: 0 }}
-              >
-                <div className="prop-cards">
-                  <div className="image">
-                    <img src={item?.take_two_images[0]?.img_url} alt="" />
-                    <div className="apartment">
-                      <h4>{item?.house_subcategory?.subcategory_name}</h4>
-                    </div>
-                    <div className="feature">
-                      <h4>Featured</h4>
-                    </div>
+            <Col
+              xs={12}
+              sm={12}
+              md={10}
+              lg={6}
+              xl={6}
+              key={index}
+              style={{ cursor: "pointer", padding: 0 }}
+            >
+              <div className="prop-cards">
+                <div className="image">
+                  <img src={item?.take_two_images[0]?.img_url} alt="" />
+                  <div className="apartment">
+                    <h4>{item?.house_subcategory?.subcategory_name}</h4>
                   </div>
-
-                  <div className="prop-details">
-                    <div className="inner-container">
-                      <h2>{item?.name}</h2>
-                      <h4>
-                        <img src="../assets/icons/location.png" alt="" />
-                        {item?.location}
-                      </h4>
-                    </div>
-                  </div>
-                  <div className="prop-icons">
-                    {item?.amenities.slice(0, 5).map((item, index) => (
-                      <div className="icon" key={index}>
-                        <h4>
-                          {Ammenities[item] ? (
-                            <img
-                              style={{
-                                width: "25px",
-                                height: "25px",
-                                margin: "0 14px",
-                              }}
-                              src={Ammenities[item]}
-                              alt=""
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </h4>
-                      </div>
-                    ))}
+                  <div className="feature">
+                    <h4>Featured</h4>
                   </div>
                 </div>
-              </Col>
-            </a>
+
+                <div className="prop-details">
+                  <div className="inner-container">
+                    <h2>{item?.name}</h2>
+                    <h4>
+                      <img src="../assets/icons/location.png" alt="" />
+                      {item?.location}
+                    </h4>
+                  </div>
+                </div>
+                <div className="prop-icons">
+                  {item?.amenities.slice(0, 5).map((item, index) => (
+                    <div className="icon" key={index}>
+                      <h4>
+                        {Ammenities[item] ? (
+                          <img
+                            style={{
+                              width: "25px",
+                              height: "25px",
+                              margin: "0 14px",
+                            }}
+                            src={Ammenities[item]}
+                            alt=""
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </h4>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Col>
           </Link>
         ))}
       </Row>
