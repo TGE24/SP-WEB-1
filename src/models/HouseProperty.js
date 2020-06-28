@@ -25,7 +25,8 @@ const Houses = {
       true
     )
       .then((res) => {
-        console.log(res);
+        Houses.house = res.data.house;
+        return Promise.resolve("Fetch completed");
       })
       .catch((err) => {
         console.log(err);

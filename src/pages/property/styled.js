@@ -163,6 +163,7 @@ export const PropSectionTwo = styled.section`
       margin-top: 1rem;
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-evenly;
 
       h4 {

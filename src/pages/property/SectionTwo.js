@@ -3,6 +3,7 @@ import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
 import Link from "next/link";
 import HousesModel from "../../models/HouseProperty";
+import Ammenities from "../../constants/ammenities";
 
 const { Option } = Select;
 
@@ -37,12 +38,13 @@ export default ({ HousesProp }) => {
           </Select>
         </div>
       </div>
-      <Row gutter={[12, 16]}>
+      <Row gutter={[18, 16]}>
         {houses?.map((item, index) => (
           <Link
             href="/properties/[pid]"
             as={`/properties/${item?.slug}`}
             key={index}
+            passHref
           >
             <Col
               xs={12}
@@ -74,9 +76,23 @@ export default ({ HousesProp }) => {
                   </div>
                 </div>
                 <div className="prop-icons">
-                  {item?.amenities.map((item, index) => (
+                  {item?.amenities.slice(0, 5).map((item, index) => (
                     <div className="icon" key={index}>
-                      <h4>{index}</h4>
+                      <h4>
+                        {Ammenities[item] ? (
+                          <img
+                            style={{
+                              width: "25px",
+                              height: "25px",
+                              margin: "0 14px",
+                            }}
+                            src={Ammenities[item]}
+                            alt=""
+                          />
+                        ) : (
+                          ""
+                        )}
+                      </h4>
                     </div>
                   ))}
                 </div>

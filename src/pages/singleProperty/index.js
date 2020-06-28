@@ -17,6 +17,7 @@ import ImageGallery from "react-image-gallery";
 import Map from "../../components/Map";
 import HousesModel from "../../models/HouseProperty";
 import { usePaystackPayment } from "react-paystack";
+import Ammenities from "../../constants/ammenities";
 
 const { Meta } = Card;
 
@@ -35,13 +36,11 @@ const App = ({ HouseProp }) => {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
     email: formData.email,
     amount: 100000,
-    publicKey: "pk_test_cc5a16f36a9c190775dcc8eeefeeeddd3b209d46",
+    publicKey: process.env.paystackKey,
     metadata: {
       property_slug: houseDetails?.slug,
     },
   };
-
-  console.log(HouseProp);
 
   const onSuccess = (res) => {
     res.property_slug = config.metadata.property_slug;
@@ -49,8 +48,8 @@ const App = ({ HouseProp }) => {
     res.email = config.email;
     res.payment_plan = "online-inspection";
     res.property_type = "house";
-    HousesModel.onlineInspection({ ...res }).then((response) => {
-      console.log(response);
+    HousesModel.onlineInspection({ ...res }).then((res) => {
+      setHouseDetails(res);
     });
   };
 
@@ -62,8 +61,17 @@ const App = ({ HouseProp }) => {
 
   useEffect(() => {
     let newArray = [];
-    if (houseDetails) {
-      houseDetails.take_two_images.map((item, index) => {
+    if (houseDetails?.take_two_images) {
+      houseDetails?.take_two_images?.map((item, index) => {
+        const newObj = {
+          original: item.img_url,
+          thumbnail: item.img_url,
+        };
+        newArray.push(newObj);
+        return newObj;
+      });
+    } else {
+      houseDetails?.house_image?.map((item, index) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -102,15 +110,15 @@ const App = ({ HouseProp }) => {
     },
     {
       title: "Home Area",
-      description: "130 SqrFt",
+      description: houseDetails?.home_area + "SqrFt",
     },
     {
       title: "Dimension",
-      description: "20 x 30 FT",
+      description: houseDetails?.dimension + "FT",
     },
     {
       title: "Material",
-      description: "Brick",
+      description: houseDetails?.material,
     },
     {
       title: "Location",
@@ -122,7 +130,7 @@ const App = ({ HouseProp }) => {
     },
     {
       title: "Room",
-      description: "2",
+      description: houseDetails?.rooms,
     },
     {
       title: "Garadges",
@@ -130,7 +138,7 @@ const App = ({ HouseProp }) => {
     },
     {
       title: "Bathroom",
-      description: "2",
+      description: houseDetails?.bathrooms,
     },
   ];
 
@@ -368,7 +376,7 @@ const App = ({ HouseProp }) => {
               >
                 <List
                   grid={{ gutter: 8, column: 2 }}
-                  dataSource={data2}
+                  dataSource={houseDetails?.amenities}
                   renderItem={(item) => (
                     <List.Item
                       style={{
@@ -387,17 +395,14 @@ const App = ({ HouseProp }) => {
                             height: "25px",
                             margin: "0 14px",
                           }}
-                          src={item.icon}
+                          src={Ammenities[item]}
                           alt="icon"
                           className="amenities-img"
                         />
-                        {item.title}
+                        {item}
                       </span>
                       <span>
-                        <Checkbox
-                          defaultChecked={item.checked}
-                          disabled
-                        ></Checkbox>
+                        <Checkbox defaultChecked disabled></Checkbox>
                       </span>
                     </List.Item>
                   )}
@@ -411,6 +416,7 @@ const App = ({ HouseProp }) => {
                 <video
                   width="840"
                   height="482"
+                  controls
                   className="prop-video"
                   style={{ cursor: "pointer" }}
                   poster={
@@ -418,8 +424,14 @@ const App = ({ HouseProp }) => {
                       ? "/assets/video-placeholder.jpg"
                       : ""
                   }
-                  onClick={() => setVisible(!visible)}
-                ></video>
+                  onClick={() =>
+                    !houseDetails?.video_url ? setVisible(!visible) : ""
+                  }
+                >
+                  {houseDetails?.video_url && (
+                    <source src={houseDetails?.video_url} type="video/mp4" />
+                  )}
+                </video>
               </div>
 
               <div style={{ marginTop: "80px" }} className="location">
@@ -817,7 +829,7 @@ export default App;
 const data2 = [
   {
     icon: "/assets/icons/conditioner.png",
-    title: "Air Conditioner",
+    title: "Air Conditioning",
     checked: true,
   },
   {
@@ -831,48 +843,33 @@ const data2 = [
     checked: true,
   },
   {
-    icon: "/assets/icons/pool.png",
+    icon: "/assets/icons/balcony.png",
     title: "Balcony",
     checked: true,
   },
   {
-    icon: "/assets/icons/household.png",
+    icon: "/assets/icons/cable.png",
     title: "Cable TV",
     checked: true,
   },
   {
-    icon: "/assets/icons/conditioner.png",
+    icon: "/assets/icons/solar-panel.png",
     title: "Solar",
     checked: true,
   },
   {
-    icon: "/assets/icons/conditioner.png",
-    title: "Air Conditioner",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/household.png",
-    title: "Washing Machine",
+    icon: "/assets/icons/dishwasher.png",
+    title: "Dish Washer",
     checked: false,
   },
   {
-    icon: "/assets/icons/pool.png",
-    title: "Swimming Pool",
+    icon: "/assets/icons/terrace.png",
+    title: "Terrace",
     checked: true,
   },
   {
-    icon: "/assets/icons/conditioner.png",
-    title: "Balcony",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/household.png",
-    title: "Cable TV",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/pool.png",
-    title: "Solar",
+    icon: "/assets/icons/wifi.png",
+    title: "Internet",
     checked: true,
   },
 ];

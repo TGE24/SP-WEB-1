@@ -27,7 +27,7 @@ const RightMenu = (props) => {
           </Link>
         </Menu.Item>
         <Menu.Item key="mail1">
-          <Link href="/properties">
+          <Link href="/properties" passHref>
             <a>Properties</a>
           </Link>
         </Menu.Item>
