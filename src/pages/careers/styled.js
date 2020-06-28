@@ -84,7 +84,6 @@ export const CareerSectionTwo = styled.section`
       width: 97%;
       height: auto;
       margin-bottom: 12px;
-      height: 371.72px;
       background: #ffffff;
       box-shadow: 4px 4px 9px rgba(81, 92, 111, 0.12);
       img {
