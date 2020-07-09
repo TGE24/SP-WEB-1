@@ -2,19 +2,20 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
 } from "react-google-maps";
 
 const MyMap = withScriptjs(
-  withGoogleMap(props => (
-    <GoogleMap
-      defaultZoom={8}
-      defaultCenter={{ lat: -34.397, lng: 150.644 }}
-    >
-      {props.isMarkerShown && (
-        <Marker position={{ lat: -34.397, lng: 150.644 }} />
-      )}
-    </GoogleMap>
+  withGoogleMap(({ isMarkerShown, latitude, longitude }) => (
+    <>
+      <p>{latitude}</p>
+      <p>{longitude}</p>
+      <GoogleMap defaultZoom={8} defaultCenter={{ lat: 9.082, lng: 8.6753 }}>
+        {isMarkerShown && (
+          <Marker position={{ lat: latitude, lng: longitude }} />
+        )}
+      </GoogleMap>
+    </>
   ))
 );
 

@@ -18,6 +18,8 @@ import Map from "../../src/components/Map";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../src/constants/ammenities";
 import HousesModel from "../../src/models/HouseProperty";
+import Router from "next/router";
+
 const { Meta } = Card;
 
 const mapStyles = {
@@ -41,6 +43,8 @@ const PropertyDetail = ({ HouseProp }) => {
 		},
 	};
 
+	console.log(houseDetails);
+
 	const onSuccess = (res) => {
 		res.property_slug = config.metadata.property_slug;
 		res.amount = config.amount;
@@ -49,6 +53,9 @@ const PropertyDetail = ({ HouseProp }) => {
 		res.property_type = "house";
 		HousesModel.onlineInspection({ ...res }).then((res) => {
 			setHouseDetails(res);
+			setVisible(!visible);
+			setOnlineInspection(!onlineInspection);
+			Router.reload();
 		});
 	};
 
@@ -452,6 +459,8 @@ const PropertyDetail = ({ HouseProp }) => {
 										loadingElement={<div style={{ height: `100%` }} />}
 										containerElement={<div style={{ height: `100%` }} />}
 										mapElement={<div style={{ height: `100%` }} />}
+										latitude={houseDetails?.lat}
+										longitude={houseDetails?.lng}
 									/>
 								</div>
 							</div>
