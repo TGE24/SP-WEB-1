@@ -11,6 +11,8 @@ const NormalLoginForm = (props) => {
     return Auth.loginRedirect();
   }
 
+  console.log(Auth.loading);
+
   // const handleFaceBookAuth = () => {
   //   Auth.facebookLogin();
   // };
@@ -18,6 +20,7 @@ const NormalLoginForm = (props) => {
   //   Auth.googleLogin();
   // };
 
+  console.log(Auth.loading);
   return (
     <Form
       name="normal_login"
@@ -27,7 +30,9 @@ const NormalLoginForm = (props) => {
     >
       <Form.Item
         name="email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
+        rules={[
+          { required: true, message: "Please input your Email!" },
+        ]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
@@ -37,7 +42,9 @@ const NormalLoginForm = (props) => {
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
+        rules={[
+          { required: true, message: "Please input your Password!" },
+        ]}
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -53,7 +60,12 @@ const NormalLoginForm = (props) => {
       </Form.Item>
 
       <Form.Item className="center-align">
-        <Button type="primary" htmlType="submit" className="login-form-button">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="login-form-button"
+          loading={Auth.loading}
+        >
           Log in
         </Button>
       </Form.Item>

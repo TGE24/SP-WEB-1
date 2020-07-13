@@ -1,13 +1,13 @@
 import request from "./request";
-// import db from "./db";
 import Cookies from "js-cookie";
 
 const Auth = {
-  user: null,
   token: null,
+  loading: false,
   isLoggedIn: () => (Auth.token ? true : false),
 
   login: (input) => {
+    Auth.loading = true;
     request(
       {
         url: "/user/login",
@@ -17,16 +17,17 @@ const Auth = {
       false
     )
       .then((res) => {
+        Auth.loading = false;
         const User = {
           token: res.data.access_token,
-          user: res.data.user,
         };
+        const JsonUser = JSON.stringify(User);
+        console.log(JsonUser);
         Auth.token = User.token;
-        Auth.user = User.user;
-        Cookies.set("User", JSON.stringify(User), {
+        Cookies.set("User", JsonUser, {
           domain: ".spreadprolimited.com",
         });
-        Auth.loginRedirect();
+        // Auth.loginRedirect();
       })
       .catch((err) => {
         console.error(err);
@@ -82,7 +83,7 @@ const Auth = {
         };
         Auth.token = User.token;
         Auth.user = User.user;
-        Auth.loginRedirect();
+        // Auth.loginRedirect();
         return Promise.resolve("Registration Completed");
       })
       .catch((err) => {
