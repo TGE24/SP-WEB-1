@@ -4,7 +4,7 @@ const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");
 
 module.exports = withCss({
   env: {
-    baseURL: "https://spreadprolimited.com/api",
+    baseURL: "https://api.spreadprolimited.com/api",
     paystackKey: "pk_test_cc5a16f36a9c190775dcc8eeefeeeddd3b209d46",
   },
   webpack: (config, { isServer }) => {
@@ -25,7 +25,9 @@ module.exports = withCss({
             callback();
           }
         },
-        ...(typeof origExternals[0] === "function" ? [] : origExternals),
+        ...(typeof origExternals[0] === "function"
+          ? []
+          : origExternals),
       ];
 
       config.module.rules.unshift({
