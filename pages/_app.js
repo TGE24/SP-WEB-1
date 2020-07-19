@@ -1,11 +1,18 @@
-import App from "next/app";
+import React, { useEffect } from "react";
+import Auth from "../helpers/auth";
 import Layout from "../src/components/Layout";
 
 function MyApp({ Component, pageProps }) {
-	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
-	);
+  useEffect(() => {
+    Auth.init();
+  }, []);
+
+  console.log(Auth.isLoggedIn());
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
+
 export default MyApp;

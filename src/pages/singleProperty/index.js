@@ -18,7 +18,7 @@ import Map from "../../components/Map";
 import HousesModel from "../../models/HouseProperty";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../constants/ammenities";
-import Router from "next/router";
+import Auth from "../../../helpers/auth";
 
 const { Meta } = Card;
 
@@ -42,6 +42,8 @@ const App = ({ HouseProp }) => {
       property_slug: houseDetails?.slug,
     },
   };
+
+  // console.log(Auth.token);
 
   const onSuccess = (res) => {
     res.property_slug = config.metadata.property_slug;
@@ -173,7 +175,9 @@ const App = ({ HouseProp }) => {
           <Form.Item
             name="email"
             label="Email"
-            rules={[{ required: true, message: "Please emter your email" }]}
+            rules={[
+              { required: true, message: "Please emter your email" },
+            ]}
           >
             <Input
               onChange={(e) => {
@@ -222,9 +226,9 @@ const App = ({ HouseProp }) => {
         ]}
       >
         <p>
-          Take a tour to our sites today...From our virtual tour to the physical
-          tour. We ensure we show you everything you need to know about our
-          property.
+          Take a tour to our sites today...From our virtual tour to
+          the physical tour. We ensure we show you everything you need
+          to know about our property.
         </p>
       </Modal>
       <div className="prop-header">
@@ -237,7 +241,9 @@ const App = ({ HouseProp }) => {
           <Col xs={24} sm={24} md={18} lg={18} xl={18}>
             <div>
               <div className="prop-heading">
-                <span style={{ fontSize: "30px" }}>{houseDetails?.name}</span>
+                <span style={{ fontSize: "30px" }}>
+                  {houseDetails?.name}
+                </span>
                 <span>
                   <Button
                     style={{
@@ -253,7 +259,9 @@ const App = ({ HouseProp }) => {
                       background: "#515C6F",
                       margin: "10px",
                     }}
-                    disabled={houseDetails?.transaction !== "mortgage"}
+                    disabled={
+                      houseDetails?.transaction !== "mortgage"
+                    }
                   >
                     Mortgage
                   </Button>
@@ -276,7 +284,11 @@ const App = ({ HouseProp }) => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/f1.png" alt="feature" width="min-content" />
+                  <img
+                    src="/assets/f1.png"
+                    alt="feature"
+                    width="min-content"
+                  />
                   <p>Bedroom</p>
                 </span>
                 <span
@@ -286,7 +298,11 @@ const App = ({ HouseProp }) => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/f2.png" alt="feature" width="min-content" />
+                  <img
+                    src="/assets/f2.png"
+                    alt="feature"
+                    width="min-content"
+                  />
                   <p>Rooms</p>
                 </span>
                 <span
@@ -296,7 +312,11 @@ const App = ({ HouseProp }) => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/f3.png" alt="feature" width="min-content" />
+                  <img
+                    src="/assets/f3.png"
+                    alt="feature"
+                    width="min-content"
+                  />
                   <p>Square Ft</p>
                 </span>
                 <span
@@ -306,7 +326,11 @@ const App = ({ HouseProp }) => {
                     alignItems: "center",
                   }}
                 >
-                  <img src="/assets/f1.png" alt="feature" width="min-content" />
+                  <img
+                    src="/assets/f1.png"
+                    alt="feature"
+                    width="min-content"
+                  />
                   <p>Bathrooms</p>
                 </span>
               </div>
@@ -353,20 +377,28 @@ const App = ({ HouseProp }) => {
                 )}
               />
             </div>
-            <div style={{ marginTop: "91.15px" }} className="overview-text">
+            <div
+              style={{ marginTop: "91.15px" }}
+              className="overview-text"
+            >
               <h2>PROPERTY OVERVIEW</h2>
               <hr />
               <h4>
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur adipiscing
-                elit. Dictum turpis tincidunt bibendum Lorem ipsum dolor sit
-                amet, elit. Dictum consectetur adipiscing elit. Dictum turpis
-                tincidunt bibendum Lorem ipsum dolor sit amet, elit. Dictum
-                consectetur adipiscing elit. Dictum turpis tincidunt bibendum
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur adipiscing
-                elit. Dictum turpis tincidunt bibendum Lorem ipsum dolor sit
+                Lorem ipsum dolor sit amet, elit. Dictum consectetur
+                adipiscing elit. Dictum turpis tincidunt bibendum
+                Lorem ipsum dolor sit amet, elit. Dictum consectetur
+                adipiscing elit. Dictum turpis tincidunt bibendum
+                Lorem ipsum dolor sit amet, elit. Dictum consectetur
+                adipiscing elit. Dictum turpis tincidunt bibendum
+                Lorem ipsum dolor sit amet, elit. Dictum consectetur
+                adipiscing elit. Dictum turpis tincidunt bibendum
+                Lorem ipsum dolor sit
               </h4>
             </div>
-            <div style={{ marginTop: "80px" }} className="prop-amenities">
+            <div
+              style={{ marginTop: "80px" }}
+              className="prop-amenities"
+            >
               <h2>PROPERTY AMENITIES</h2>
               <hr />
               <div
@@ -410,7 +442,10 @@ const App = ({ HouseProp }) => {
                 />
               </div>
             </div>
-            <div style={{ marginTop: "80px" }} className="prop-video-cont">
+            <div
+              style={{ marginTop: "80px" }}
+              className="prop-video-cont"
+            >
               <div className="prop-video-cont">
                 <h2>VIDEO</h2>
                 <hr />
@@ -426,11 +461,16 @@ const App = ({ HouseProp }) => {
                       : ""
                   }
                   onClick={() =>
-                    !houseDetails?.video_url ? setVisible(!visible) : ""
+                    !houseDetails?.video_url
+                      ? setVisible(!visible)
+                      : ""
                   }
                 >
                   {houseDetails?.video_url && (
-                    <source src={houseDetails?.video_url} type="video/mp4" />
+                    <source
+                      src={houseDetails?.video_url}
+                      type="video/mp4"
+                    />
                   )}
                 </video>
               </div>
@@ -442,19 +482,33 @@ const App = ({ HouseProp }) => {
                   <Map
                     isMarkerShown
                     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                    loadingElement={<div style={{ height: `100%` }} />}
-                    containerElement={<div style={{ height: `100%` }} />}
+                    loadingElement={
+                      <div style={{ height: `100%` }} />
+                    }
+                    containerElement={
+                      <div style={{ height: `100%` }} />
+                    }
                     mapElement={<div style={{ height: `100%` }} />}
                   />
                 </div>
               </div>
             </div>
-            <div style={{ marginTop: "80px" }} className="similar-prop">
+            <div
+              style={{ marginTop: "80px" }}
+              className="similar-prop"
+            >
               <h2>SIMILAR PROPERTIES</h2>
               <hr />
               <Row>
                 {realEstate.map((item, index) => (
-                  <Col xs={24} sm={24} md={12} lg={8} xl={8} key={index}>
+                  <Col
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={8}
+                    xl={8}
+                    key={index}
+                  >
                     <Card
                       hoverable
                       style={{ width: 253.86 }}
@@ -492,7 +546,10 @@ const App = ({ HouseProp }) => {
                         </>
                       }
                     >
-                      <Meta title={item.title} description={item.location} />
+                      <Meta
+                        title={item.title}
+                        description={item.location}
+                      />
                       <div
                         style={{
                           display: "flex",
@@ -503,7 +560,11 @@ const App = ({ HouseProp }) => {
                       >
                         {item.features.map((item2, index) => (
                           <div key={index}>
-                            <img src={item2} alt="features" height="25" />
+                            <img
+                              src={item2}
+                              alt="features"
+                              height="25"
+                            />
                             <h6>Bedrooms</h6>
                           </div>
                         ))}
@@ -561,11 +622,16 @@ const App = ({ HouseProp }) => {
             <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>PROPERTIES</h3>
               <div>
-                <div style={{ display: "flex" }} className="smallProperty">
+                <div
+                  style={{ display: "flex" }}
+                  className="smallProperty"
+                >
                   <span>
                     <img src="/assets/small.png" alt="small" />
                   </span>
-                  <span style={{ textAlign: "justify", margin: "20px" }}>
+                  <span
+                    style={{ textAlign: "justify", margin: "20px" }}
+                  >
                     <p>Caveman Home</p>
                     <p style={{ color: "#797979", fontSize: "10px" }}>
                       Calabar/CRS
@@ -585,23 +651,34 @@ const App = ({ HouseProp }) => {
                     30 sqft
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f2.png" alt="feature1" />5 Bedrooms
+                    <img src="/assets/f2.png" alt="feature1" />5
+                    Bedrooms
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f3.png" alt="feature1" />6 Bathrooms
+                    <img src="/assets/f3.png" alt="feature1" />6
+                    Bathrooms
                   </span>
-                  <span className="propFeat" style={{ marginTop: "20px" }}>
-                    <img src="/assets/f4.png" alt="feature1" />7 Garage
+                  <span
+                    className="propFeat"
+                    style={{ marginTop: "20px" }}
+                  >
+                    <img src="/assets/f4.png" alt="feature1" />7
+                    Garage
                   </span>
                 </div>
                 <hr />
               </div>
               <div>
-                <div style={{ display: "flex" }} className="smallProperty">
+                <div
+                  style={{ display: "flex" }}
+                  className="smallProperty"
+                >
                   <span>
                     <img src="/assets/small.png" alt="small" />
                   </span>
-                  <span style={{ textAlign: "justify", margin: "20px" }}>
+                  <span
+                    style={{ textAlign: "justify", margin: "20px" }}
+                  >
                     <p>Caveman Home</p>
                     <p style={{ color: "#797979", fontSize: "10px" }}>
                       Calabar/CRS
@@ -621,23 +698,34 @@ const App = ({ HouseProp }) => {
                     30 sqft
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f2.png" alt="feature1" />5 Bedrooms
+                    <img src="/assets/f2.png" alt="feature1" />5
+                    Bedrooms
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f3.png" alt="feature1" />6 Bathrooms
+                    <img src="/assets/f3.png" alt="feature1" />6
+                    Bathrooms
                   </span>
-                  <span className="propFeat" style={{ marginTop: "20px" }}>
-                    <img src="/assets/f4.png" alt="feature1" />7 Garage
+                  <span
+                    className="propFeat"
+                    style={{ marginTop: "20px" }}
+                  >
+                    <img src="/assets/f4.png" alt="feature1" />7
+                    Garage
                   </span>
                 </div>
                 <hr />
               </div>
               <div>
-                <div style={{ display: "flex" }} className="smallProperty">
+                <div
+                  style={{ display: "flex" }}
+                  className="smallProperty"
+                >
                   <span>
                     <img src="/assets/small.png" alt="small" />
                   </span>
-                  <span style={{ textAlign: "justify", margin: "20px" }}>
+                  <span
+                    style={{ textAlign: "justify", margin: "20px" }}
+                  >
                     <p>Caveman Home</p>
                     <p style={{ color: "#797979", fontSize: "10px" }}>
                       Calabar/CRS
@@ -657,13 +745,19 @@ const App = ({ HouseProp }) => {
                     30 sqft
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f2.png" alt="feature1" />5 Bedrooms
+                    <img src="/assets/f2.png" alt="feature1" />5
+                    Bedrooms
                   </span>
                   <span className="propFeat">
-                    <img src="/assets/f3.png" alt="feature1" />6 Bathrooms
+                    <img src="/assets/f3.png" alt="feature1" />6
+                    Bathrooms
                   </span>
-                  <span className="propFeat" style={{ marginTop: "20px" }}>
-                    <img src="/assets/f4.png" alt="feature1" />7 Garage
+                  <span
+                    className="propFeat"
+                    style={{ marginTop: "20px" }}
+                  >
+                    <img src="/assets/f4.png" alt="feature1" />7
+                    Garage
                   </span>
                 </div>
                 <hr />
@@ -754,7 +848,10 @@ const App = ({ HouseProp }) => {
                   }}
                 >
                   <span style={{ width: "254px" }}>
-                    <p style={{ margin: "0", padding: "15px" }}> E - wallet</p>
+                    <p style={{ margin: "0", padding: "15px" }}>
+                      {" "}
+                      E - wallet
+                    </p>
                   </span>
                   <span
                     style={{
@@ -811,7 +908,10 @@ const App = ({ HouseProp }) => {
                         },
                       ]}
                     >
-                      <Input.TextArea rows={4} placeholder="Message" />
+                      <Input.TextArea
+                        rows={4}
+                        placeholder="Message"
+                      />
                     </Form.Item>
                   </Col>
                 </Row>

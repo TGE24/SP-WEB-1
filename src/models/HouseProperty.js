@@ -1,4 +1,5 @@
 import request from "../../helpers/request";
+import Auth from "../../helpers/auth";
 
 const Houses = {
   houses: [],
@@ -34,9 +35,13 @@ const Houses = {
   },
   getHouse: (slug) => {
     return request(
-      {
-        url: "user/house/" + slug,
-      },
+      Auth.token
+        ? {
+            url: "user/house/" + slug,
+          }
+        : {
+            url: "house/auth_false/" + slug,
+          },
       true
     ).then((res) => {
       Houses.house = res.data.house;

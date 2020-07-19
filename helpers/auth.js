@@ -4,7 +4,27 @@ import Cookies from "js-cookie";
 const Auth = {
   token: null,
   loading: false,
+  User: null,
   isLoggedIn: () => (Auth.token ? true : false),
+
+  init: () => {
+    const token = Cookies.getJSON("User");
+    token
+      ? (Auth.token = token.token)
+      : console.error("Not Authenticated");
+    request(
+      {
+        url: "/profile",
+      },
+      true
+    )
+      .then((res) => {
+        Auth.User = res.data.user;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  },
 
   login: (input) => {
     Auth.loading = true;
@@ -25,7 +45,7 @@ const Auth = {
         console.log(JsonUser);
         Auth.token = User.token;
         Cookies.set("User", JsonUser, {
-          domain: ".spreadprolimited.com",
+          // domain: ".spreadprolimited.com",
         });
         // Auth.loginRedirect();
       })

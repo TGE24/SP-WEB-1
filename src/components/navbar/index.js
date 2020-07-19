@@ -6,7 +6,10 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "../../components/modals/signIn";
 import SignUp from "../../components/modals/signUp";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
 import "./index.css";
 
 const SubMenu = Menu.SubMenu;
@@ -106,7 +109,10 @@ const Navbar = () => {
       </Drawer>
       <Modal
         title="LOGIN"
-        style={{ border: "1.77918px solid #FFFFFF", borderRadius: "6px" }}
+        style={{
+          border: "1.77918px solid #FFFFFF",
+          borderRadius: "6px",
+        }}
         onCancel={() => setShowModal(!showModal)}
         visible={showModal}
         bodyStyle={{
@@ -117,7 +123,10 @@ const Navbar = () => {
           justifyContent: "center",
         }}
         footer={null}
-        footerStyle={{ background: "rgb(0,0,0,0.7)", display: "none" }}
+        footerStyle={{
+          background: "rgb(0,0,0,0.7)",
+          display: "none",
+        }}
       >
         <SignIn setShowDrawer={setShowDrawer} />
       </Modal>
@@ -157,7 +166,11 @@ const Navbar = () => {
                 src="/assets/icons/igSmall.png"
                 alt="ig"
               />
-              <img className="socials" src="/assets/icons/in.png" alt="in" />
+              <img
+                className="socials"
+                src="/assets/icons/in.png"
+                alt="in"
+              />
               <img
                 className="socials"
                 src="/assets/icons/twitterSmall.png"
@@ -183,7 +196,11 @@ const Navbar = () => {
                   setShowDrawer={setShowDrawer}
                 />
               </div>
-              <Button className="barsMenu" type="primary" onClick={drawer}>
+              <Button
+                className="barsMenu"
+                type="primary"
+                onClick={drawer}
+              >
                 {React.createElement(
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}
