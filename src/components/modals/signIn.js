@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/auth/action";
 import { closeModal } from "../../../store/modal/action";
 
-const NormalLoginForm = ({ setShowDrawer, setShowModal }) => {
+const NormalLoginForm = ({ setShowDrawer }) => {
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 

@@ -10,9 +10,17 @@ const MyMap = withScriptjs(
     <>
       <p>{latitude}</p>
       <p>{longitude}</p>
-      <GoogleMap defaultZoom={8} defaultCenter={{ lat: 9.082, lng: 8.6753 }}>
+      <GoogleMap
+        defaultZoom={8}
+        defaultCenter={{ lat: 9.082, lng: 8.6753 }}
+      >
         {isMarkerShown && (
-          <Marker position={{ lat: latitude, lng: longitude }} />
+          <Marker
+            position={{
+              lat: parseInt(latitude),
+              lng: parseInt(longitude),
+            }}
+          />
         )}
       </GoogleMap>
     </>

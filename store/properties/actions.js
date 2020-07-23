@@ -24,3 +24,11 @@ export const getHouse = (houseSlug) => async (dispatch) => {
     payload,
   });
 };
+
+export const onlineInspection = (data) => async (dispatch) => {
+  const payload = api.post("/payment", data);
+  return dispatch({
+    type: actionTypes.ONLINE_INSPECTION.default,
+    payload,
+  });
+};

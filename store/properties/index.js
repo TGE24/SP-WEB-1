@@ -34,6 +34,27 @@ export const propertyReducer = (state = initialState, action) => {
         error: parseError(action.payload),
       };
     }
+    case actionTypes.ONLINE_INSPECTION.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case actionTypes.ONLINE_INSPECTION.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    }
+    case actionTypes.ONLINE_INSPECTION.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
 
     default:
       return state;

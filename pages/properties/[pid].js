@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Form,
   Button,
   Row,
   Col,
@@ -9,16 +8,22 @@ import {
   Checkbox,
   Card,
   Tag,
-  Input,
   Modal,
 } from "antd";
 import ImageGallery from "react-image-gallery";
 import Map from "../../src/components/Map";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../src/constants/ammenities";
-import HousesModel from "../../src/models/HouseProperty";
+import OnlineInspection from "../../src/components/modals/onlineInspection";
+import SaveForProperty from "../../src/components/modals/saveforproperty";
 import { useSelector, useDispatch } from "react-redux";
-import { getHouse } from "../../store/properties/actions";
+import RealEstateMockData from "../../src/data/realEstate.json";
+import AgentsMockData from "../../src/data/agents.json";
+import ContactForm from "../../src/components/forms/contact";
+import {
+  getHouse,
+  onlineInspection,
+} from "../../store/properties/actions";
 import { showModal } from "../../store/modal/action";
 import { useRouter } from "next/router";
 import { store } from "../../store";
@@ -32,17 +37,22 @@ const mapStyles = {
 
 const PropertyDetail = () => {
   const [visible, setVisible] = useState(false);
+  const [saveForProperty, setSaveForProperty] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState(false);
-  const [onlineInspection, setOnlineInspection] = useState(false);
+  const [onlineInspectionModal, setOnlineInspection] = useState(
+    false
+  );
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
-  const [formData, setFormData] = useState({});
+  const house = useSelector((state) => state.properties.data);
+  const user = useSelector((state) => state.user.data.user);
   const {
     auth: { data },
   } = store.getState();
+
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
-    email: formData.email,
+    email: user.email,
     amount: 100000,
     publicKey: process.env.PAYSTACK_KEY,
     metadata: {
@@ -59,19 +69,16 @@ const PropertyDetail = () => {
     }
   }, [dispatch, pid]);
 
-  const house = useSelector((state) => state.properties.data);
-
   const onSuccess = (res) => {
     res.property_slug = config.metadata.property_slug;
     res.amount = config.amount;
     res.email = config.email;
     res.payment_plan = "online-inspection";
     res.property_type = "house";
-    HousesModel.onlineInspection({ ...res }).then((res) => {
-      dispatch(getHouse(pid));
-      setVisible(!visible);
-      setOnlineInspection(!onlineInspection);
-    });
+    dispatch(onlineInspection({ ...res }));
+    dispatch(getHouse(pid));
+    setVisible(!visible);
+    setOnlineInspection(!onlineInspectionModal);
   };
 
   const initializePayment = usePaystackPayment(config);
@@ -167,47 +174,25 @@ const PropertyDetail = () => {
     setVisible(false);
   };
 
-  const handleOnlineInspection = () => {
-    formData.amount = "1000";
-    formData.property_slug = houseDetails?.slug;
-    formData.payment_plan = "online-inspection";
-    setFormData({ ...formData });
-    HousesModel.onlineInspection({ ...formData })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   return (
     <>
       <Modal
         title="ONLINE INSPECTION"
-        visible={onlineInspection}
-        onCancel={() => setOnlineInspection(!onlineInspection)}
+        visible={onlineInspectionModal}
+        onCancel={() => setOnlineInspection(!onlineInspectionModal)}
         onOk={() => initializePayment(onSuccess)}
         okText="Submit"
       >
-        <Form layout="vertical">
-          <Form.Item
-            name="email"
-            label="Email"
-            rules={[
-              { required: true, message: "Please emter your email" },
-            ]}
-          >
-            <Input
-              onChange={(e) => {
-                formData.email = e.target.value;
-                setFormData({ ...formData });
-              }}
-            />
-          </Form.Item>
-          <Form.Item name="amount" label="Amount">
-            <Input defaultValue={1000} prefix="₦" disabled />
-          </Form.Item>
-        </Form>
+        <OnlineInspection email={user?.email} />
+      </Modal>
+      <Modal
+        title="SAVE FOR PROPERTY"
+        visible={saveForProperty}
+        onCancel={() => setSaveForProperty(!saveForProperty)}
+        // onOk={() => initializePayment(onSuccess)}
+        okText="Submit"
+      >
+        <SaveForProperty email={user?.email} />
       </Modal>
       <Modal
         title="INSPECT PROPERTY NOW"
@@ -225,7 +210,7 @@ const PropertyDetail = () => {
             }}
             onClick={() => {
               data?.token
-                ? setOnlineInspection(!onlineInspection)
+                ? setOnlineInspection(!onlineInspectionModal)
                 : dispatch(showModal());
               setVisible(!visible);
             }}
@@ -266,12 +251,14 @@ const PropertyDetail = () => {
               textTransform: "uppercase",
               fontWeight: "500",
             }}
-            // onClick={() => {
-            //   data?.token
-            //     ? setOnlineInspection(!onlineInspection)
-            //     : dispatch(showModal());
-            //   setVisible(!visible);
-            // }}
+            onClick={() => {
+              data?.token
+                ? setSaveForProperty(!saveForProperty)
+                : dispatch(showModal());
+            }}
+            disabled={
+              !houseDetails?.payment_type === "save for property"
+            }
           >
             Save for property
           </Button>,
@@ -452,17 +439,7 @@ const PropertyDetail = () => {
             >
               <h2>PROPERTY OVERVIEW</h2>
               <hr />
-              <h4>
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur
-                adipiscing elit. Dictum turpis tincidunt bibendum
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur
-                adipiscing elit. Dictum turpis tincidunt bibendum
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur
-                adipiscing elit. Dictum turpis tincidunt bibendum
-                Lorem ipsum dolor sit amet, elit. Dictum consectetur
-                adipiscing elit. Dictum turpis tincidunt bibendum
-                Lorem ipsum dolor sit
-              </h4>
+              <h4>{houseDetails?.overview}</h4>
             </div>
             <div
               style={{ marginTop: "80px" }}
@@ -550,7 +527,7 @@ const PropertyDetail = () => {
                 <div style={mapStyles} className="map-cont">
                   <Map
                     isMarkerShown
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                    googleMapURL={process.env.GOOGLE_API_URL}
                     loadingElement={
                       <div style={{ height: `100%` }} />
                     }
@@ -571,7 +548,7 @@ const PropertyDetail = () => {
               <h2>SIMILAR PROPERTIES</h2>
               <hr />
               <Row>
-                {realEstate.map((item, index) => (
+                {RealEstateMockData.map((item, index) => (
                   <Col
                     xs={24}
                     sm={24}
@@ -669,7 +646,7 @@ const PropertyDetail = () => {
               className="avatar-cont"
             >
               <div style={{ textAlign: "center", margin: "18px" }}>
-                {contactDetails.map((item, index) => (
+                {AgentsMockData.map((item, index) => (
                   <React.Fragment key={index}>
                     <div
                       style={{
@@ -837,30 +814,36 @@ const PropertyDetail = () => {
             <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>PAYMENT</h3>
               <div>
-                <div
-                  style={{
-                    width: "312px",
-                    background: "#F5F4F4",
-                    display: "flex",
-                    textAlign: "left",
-                    marginTop: "10px",
-                  }}
-                >
-                  <span style={{ width: "254px" }}>
-                    <p style={{ margin: "0", padding: "15px" }}>
-                      {" "}
-                      Save for property
-                    </p>
-                  </span>
-                  <span
+                {houseDetails?.payment_type ===
+                  "save for property" && (
+                  <div
                     style={{
-                      borderLeft: "1px solid #C4C4C4",
-                      padding: "10px",
+                      width: "312px",
+                      background: "#F5F4F4",
+                      display: "flex",
+                      textAlign: "left",
+                      marginTop: "10px",
                     }}
                   >
-                    <img src="/assets/icons/save.png" alt="iconic" />
-                  </span>
-                </div>
+                    <span style={{ width: "254px" }}>
+                      <p style={{ margin: "0", padding: "15px" }}>
+                        {" "}
+                        Save for property
+                      </p>
+                    </span>
+                    <span
+                      style={{
+                        borderLeft: "1px solid #C4C4C4",
+                        padding: "10px",
+                      }}
+                    >
+                      <img
+                        src="/assets/icons/save.png"
+                        alt="iconic"
+                      />
+                    </span>
+                  </div>
+                )}
                 <div
                   style={{
                     width: "312px",
@@ -889,57 +872,7 @@ const PropertyDetail = () => {
             </div>
             <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>CONTACT</h3>
-              <Form>
-                <Row gutter={16}>
-                  <Col span={24}>
-                    <Form.Item
-                      name="name"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Enter your name",
-                        },
-                      ]}
-                    >
-                      <Input type="text" placeholder="Name" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col span={24}>
-                    <Form.Item
-                      name="email"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Enter your email",
-                        },
-                      ]}
-                    >
-                      <Input type="text" placeholder="Email" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={24}>
-                    <Form.Item
-                      name="message"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Enter Your Message",
-                        },
-                      ]}
-                    >
-                      <Input.TextArea
-                        rows={4}
-                        placeholder="Message"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Button className="message-btn">Send Message</Button>
-              </Form>
+              <ContactForm />
             </div>
           </Col>
         </Row>
@@ -949,90 +882,3 @@ const PropertyDetail = () => {
 };
 
 export default PropertyDetail;
-
-const data2 = [
-  {
-    icon: "/assets/icons/conditioner.png",
-    title: "Air Conditioning",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/household.png",
-    title: "Washing Machine",
-    checked: false,
-  },
-  {
-    icon: "/assets/icons/pool.png",
-    title: "Swimming Pool",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/balcony.png",
-    title: "Balcony",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/cable.png",
-    title: "Cable TV",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/solar-panel.png",
-    title: "Solar",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/dishwasher.png",
-    title: "Dish Washer",
-    checked: false,
-  },
-  {
-    icon: "/assets/icons/terrace.png",
-    title: "Terrace",
-    checked: true,
-  },
-  {
-    icon: "/assets/icons/wifi.png",
-    title: "Internet",
-    checked: true,
-  },
-];
-
-const realEstate = [
-  {
-    image: "/assets/rl1.png",
-    title: "Bungalow",
-    type: "Buy",
-    location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
-  },
-  {
-    image: "/assets/rl2.png",
-    title: "duplex",
-    type: "Rent",
-    location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
-  },
-  {
-    image: "/assets/rl3.png",
-    title: "One Room",
-    type: "Buy",
-    location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
-  },
-];
-
-const contactDetails = [
-  {
-    name: "Rick Ross",
-    image: "/assets/contact1.png",
-    email: "classicui4@gmail.com",
-    phone: "+234 08182739942",
-  },
-  {
-    name: "Rick Ross",
-    image: "/assets/contact.png",
-    email: "classicui4@gmail.com",
-    phone: "+234 08182739942",
-  },
-];

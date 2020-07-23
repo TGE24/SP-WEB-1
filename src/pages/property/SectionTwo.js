@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
 import Link from "next/link";
-import HousesModel from "../../models/HouseProperty";
 import Ammenities from "../../constants/ammenities";
 
 const { Option } = Select;

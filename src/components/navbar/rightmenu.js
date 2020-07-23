@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { Menu, Button } from "antd";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
@@ -6,6 +7,7 @@ import NProgress from "nprogress";
 import { store } from "../../../store";
 import { showModal } from "../../../store/modal/action";
 import { useDispatch } from "react-redux";
+import { getUser } from "../../../store/user/actions";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -23,6 +25,12 @@ const RightMenu = () => {
   const {
     auth: { data },
   } = store.getState();
+
+  useEffect(() => {
+    if (data?.token) {
+      dispatch(getUser());
+    }
+  }, [dispatch, data]);
 
   const dispatch = useDispatch();
 

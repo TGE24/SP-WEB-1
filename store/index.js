@@ -18,7 +18,7 @@ const persistConfig = {
   key: "Spreadprolimited",
   storage,
   stateReconciler: autoMergeLevel2,
-  whitelist: ["auth"],
+  whitelist: ["auth", "user"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
