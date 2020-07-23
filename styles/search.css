@@ -1,0 +1,66 @@
+.tabs {
+  width: calc(100% - 304px);
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  position: absolute;
+  bottom: -137px;
+}
+
+.ant-tabs .ant-tabs-top-content,
+.ant-tabs .ant-tabs-bottom-content {
+  width: 100%;
+  background: white !important;
+  padding: 37px;
+  border-radius: 6px;
+}
+
+.ant-tabs-bar {
+  margin: 0 0 0 100px !important;
+  border-bottom: none !important;
+}
+
+.form-button {
+  color: white !important;
+  background: #f9a602 !important;
+  border-radius: 7px;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  height: 40px;
+  color: white !important;
+  background: #f9a602 !important;
+  border-color: #f9a602 !important;
+}
+
+@media (max-width: 767px) {
+  .tabs {
+    width: calc(100% - 51px);
+    position: absolute !important;
+    bottom: 100px;
+  }
+
+  .ant-tabs-bar {
+    margin: 0 !important;
+  }
+  .ant-col-xs-24 {
+    margin-bottom: 13px;
+  }
+
+  .ant-col-offset-8 {
+    margin-left: 0 !important;
+  }
+
+  .ant-form-inline .ant-form-item {
+    margin: 0 !important;
+  }
+
+  .ant-tabs .ant-tabs-top-content,
+  .ant-tabs .ant-tabs-bottom-content {
+    padding: 0;
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 17px 0 !important;
+  }
+}

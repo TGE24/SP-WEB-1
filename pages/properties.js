@@ -1,15 +1,18 @@
+import React, { useEffect } from "react";
 import Properties from "../src/pages/property";
-import HousesModel from "../src/models/HouseProperty";
+import { useSelector, useDispatch } from "react-redux";
+import { getHouses } from "../store/properties/actions";
 
-const AllProperties = ({ houses }) => {
-	return <Properties HousesProp={houses} />;
+const AllProperties = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getHouses());
+  }, [dispatch]);
+
+  // const loading = useSelector((state) => state.Properties.loading);
+  const houses = useSelector((state) => state.properties.data);
+
+  return <Properties HousesProp={houses?.houses} />;
 };
 
-AllProperties.getInitialProps = async () => {
-	const HousesQuery = await HousesModel.getHouses();
-	const Houses = await HousesModel.houses.houses;
-	return {
-		houses: Houses,
-	};
-};
 export default AllProperties;

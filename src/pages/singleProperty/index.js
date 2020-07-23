@@ -18,7 +18,6 @@ import Map from "../../components/Map";
 import HousesModel from "../../models/HouseProperty";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../constants/ammenities";
-import Auth from "../../../helpers/auth";
 
 const { Meta } = Card;
 

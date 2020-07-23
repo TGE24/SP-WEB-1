@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Steps, Button, message } from "antd";
 import { WalletOutlined, SolutionOutlined } from "@ant-design/icons";
-import "./index.css";
-
 const { Step } = Steps;
 
 const PaymentMethod = () => {

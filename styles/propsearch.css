@@ -1,0 +1,40 @@
+.prop-tabs {
+  width: calc(100% - 304px);
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  position: absolute;
+  bottom: -58px;
+}
+
+@media (max-width: 767px) {
+  .prop-tabs {
+    width: calc(100% - 26px);
+    position: absolute;
+    bottom: -130px;
+  }
+  .ant-tabs-bar {
+    margin: 0 !important;
+  }
+  /* .form-button {
+    margin: 10px 0 0 -23px;
+  } */
+  .ant-col-xs-24 {
+    margin-bottom: 13px;
+  }
+  .ant-col-offset-8 {
+    margin-left: 0;
+  }
+  .ant-form-inline .ant-form-item {
+    margin-right: 0;
+    margin-bottom: 13px;
+  }
+  .ant-tabs .ant-tabs-top-content,
+  .ant-tabs .ant-tabs-bottom-content {
+    padding: 0;
+  }
+  .search-form {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 17px 0;
+  }
+}

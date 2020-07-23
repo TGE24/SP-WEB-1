@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Button, Select, Tabs } from "antd";
-import "./index.css";
 import { SearchOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -25,7 +24,12 @@ const Demo = () => {
   return (
     <Tabs className="tabs" type="card">
       <TabPane tab="RENT" key="1">
-        <Form {...layout} name="basic" layout="inline" className="search-form">
+        <Form
+          {...layout}
+          name="basic"
+          layout="inline"
+          className="search-form"
+        >
           <Form.Item
             name="location"
             rules={[

@@ -10,10 +10,8 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
-import "./index.css";
-
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+import { useSelector, useDispatch } from "react-redux";
+import { closeModal } from "../../../store/modal/action";
 
 const Wrap = styled.div`
   .ant-affix {
@@ -69,8 +67,9 @@ const Contacts = styled.div`
 const Navbar = () => {
   const [navColor, setNavColor] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [showDrawer, setShowDrawer] = useState(false);
+  const show = useSelector((state) => state.modal.show);
+  const [showModal, setShowModal] = useState(show);
 
   const drawer = () => {
     setVisible(!visible);
@@ -79,6 +78,7 @@ const Navbar = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -113,8 +113,8 @@ const Navbar = () => {
           border: "1.77918px solid #FFFFFF",
           borderRadius: "6px",
         }}
-        onCancel={() => setShowModal(!showModal)}
-        visible={showModal}
+        onCancel={() => dispatch(closeModal())}
+        visible={show}
         bodyStyle={{
           background: "rgb(0,0,0,0.7)",
           color: "white",
@@ -128,7 +128,10 @@ const Navbar = () => {
           display: "none",
         }}
       >
-        <SignIn setShowDrawer={setShowDrawer} />
+        <SignIn
+          setShowDrawer={setShowDrawer}
+          setShowModal={setShowModal}
+        />
       </Modal>
       <Wrap
         navColor={navColor}
@@ -191,10 +194,7 @@ const Navbar = () => {
             </div>
             <div className="menuCon">
               <div className="rightMenu">
-                <RightMenu
-                  setShowModal={setShowModal}
-                  setShowDrawer={setShowDrawer}
-                />
+                <RightMenu setShowDrawer={setShowDrawer} />
               </div>
               <Button
                 className="barsMenu"

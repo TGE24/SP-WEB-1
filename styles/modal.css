@@ -1,0 +1,49 @@
+.login-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.signup-form {
+  width: 69%;
+  text-align: center;
+}
+
+.login-form-forgot {
+  float: left;
+  color: white;
+}
+
+.center-align .ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-align .ant-divider-inner-text {
+  color: white;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.login-form-button {
+  width: 177.92px;
+  background: #fcad0a;
+  border: none;
+  border-radius: 5.07115px;
+  height: 48px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 16px;
+}
+
+.login-form-button:hover {
+  background: #fcad0a;
+}
+
+.social-icons {
+  width: 41px;
+  height: 41px;
+  margin: 7px;
+  cursor: pointer;
+}

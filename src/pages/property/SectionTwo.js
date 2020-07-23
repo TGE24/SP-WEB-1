@@ -23,7 +23,11 @@ export default ({ HousesProp }) => {
       <div className="row-head">
         <h1>Houses for rent</h1>
         <div className="sort-by">
-          <img src="../assets/icons/sort-by.png" alt="" className="sort-icon" />
+          <img
+            src="../assets/icons/sort-by.png"
+            alt=""
+            className="sort-icon"
+          />
           <Select
             defaultValue="Sorted By"
             style={{ width: 160 }}
@@ -57,9 +61,14 @@ export default ({ HousesProp }) => {
             >
               <div className="prop-cards">
                 <div className="image">
-                  <img src={item?.take_two_images[0]?.img_url} alt="" />
+                  <img
+                    src={item?.take_two_images[0]?.img_url}
+                    alt=""
+                  />
                   <div className="apartment">
-                    <h4>{item?.house_subcategory?.subcategory_name}</h4>
+                    <h4>
+                      {item?.house_subcategory?.subcategory_name}
+                    </h4>
                   </div>
                   <div className="feature">
                     <h4>Featured</h4>
@@ -70,7 +79,10 @@ export default ({ HousesProp }) => {
                   <div className="inner-container">
                     <h2>{item?.name}</h2>
                     <h4>
-                      <img src="../assets/icons/location.png" alt="" />
+                      <img
+                        src="../assets/icons/location.png"
+                        alt=""
+                      />
                       {item?.location}
                     </h4>
                   </div>

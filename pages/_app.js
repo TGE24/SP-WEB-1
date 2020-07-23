@@ -1,17 +1,27 @@
-import React, { useEffect } from "react";
-import Auth from "../helpers/auth";
+import App from "next/app";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import Layout from "../src/components/Layout";
+import "antd/dist/antd.css";
+import "../styles/layout.css";
+import "../styles/nprogress.css";
+import "../styles/modal.css";
+import "../styles/navbar.css";
+import "../styles/search.css";
+import "../styles/propsearch.css";
+import "../styles/home.css";
+import "../styles/index.css";
+import { store, persistor } from "../store";
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    Auth.init();
-  }, []);
-
-  console.log(Auth.isLoggedIn());
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={<div>Loading</div>}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </PersistGate>
+    </Provider>
   );
 }
 

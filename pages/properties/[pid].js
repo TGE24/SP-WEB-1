@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/index.css";
 import {
   Form,
   Button,
@@ -18,8 +17,11 @@ import Map from "../../src/components/Map";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../src/constants/ammenities";
 import HousesModel from "../../src/models/HouseProperty";
-import Router from "next/router";
-import Auth from "../../helpers/auth";
+import { useSelector, useDispatch } from "react-redux";
+import { getHouse } from "../../store/properties/actions";
+import { showModal } from "../../store/modal/action";
+import { useRouter } from "next/router";
+import { store } from "../../store";
 
 const { Meta } = Card;
 
@@ -28,27 +30,36 @@ const mapStyles = {
   height: "529px",
 };
 
-const PropertyDetail = ({ HouseProp }) => {
+const PropertyDetail = () => {
   const [visible, setVisible] = useState(false);
+  const [paymentPlan, setPaymentPlan] = useState(false);
   const [onlineInspection, setOnlineInspection] = useState(false);
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
   const [formData, setFormData] = useState({});
+  const {
+    auth: { data },
+  } = store.getState();
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
     email: formData.email,
     amount: 100000,
-    publicKey: process.env.paystackKey,
+    publicKey: process.env.PAYSTACK_KEY,
     metadata: {
       property_slug: houseDetails?.slug,
     },
   };
+  const router = useRouter();
+  const dispatch = useDispatch();
+  const { pid } = router.query;
 
   useEffect(() => {
-    Auth.init();
-  }, []);
+    if (pid !== undefined) {
+      dispatch(getHouse(pid));
+    }
+  }, [dispatch, pid]);
 
-  console.log(houseDetails);
+  const house = useSelector((state) => state.properties.data);
 
   const onSuccess = (res) => {
     res.property_slug = config.metadata.property_slug;
@@ -57,18 +68,17 @@ const PropertyDetail = ({ HouseProp }) => {
     res.payment_plan = "online-inspection";
     res.property_type = "house";
     HousesModel.onlineInspection({ ...res }).then((res) => {
-      setHouseDetails(res);
+      dispatch(getHouse(pid));
       setVisible(!visible);
       setOnlineInspection(!onlineInspection);
-      //   Router.reload();
     });
   };
 
   const initializePayment = usePaystackPayment(config);
 
   useEffect(() => {
-    setHouseDetails(HouseProp);
-  }, [HouseProp]);
+    setHouseDetails(house?.house);
+  }, [house]);
 
   useEffect(() => {
     let newArray = [];
@@ -94,7 +104,7 @@ const PropertyDetail = ({ HouseProp }) => {
     setImages(newArray);
   }, [houseDetails]);
 
-  const data = [
+  const ammenitiesData = [
     {
       title: "Price",
       description: houseDetails?.price,
@@ -214,9 +224,10 @@ const PropertyDetail = ({ HouseProp }) => {
               fontWeight: "500",
             }}
             onClick={() => {
-              Auth.token
+              data?.token
                 ? setOnlineInspection(!onlineInspection)
-                : console.log("Not authenticated");
+                : dispatch(showModal());
+              setVisible(!visible);
             }}
           >
             Online Inspection
@@ -240,6 +251,45 @@ const PropertyDetail = ({ HouseProp }) => {
           the physical tour. We ensure we show you everything you need
           to know about our property.
         </p>
+      </Modal>
+      <Modal
+        title="SELECT PAYMENT PLANS"
+        visible={paymentPlan}
+        onCancel={() => setPaymentPlan(!paymentPlan)}
+        footer={[
+          <Button
+            key="back"
+            style={{
+              background: "rgb(249, 166, 2)",
+              border: "none",
+              color: "white",
+              textTransform: "uppercase",
+              fontWeight: "500",
+            }}
+            // onClick={() => {
+            //   data?.token
+            //     ? setOnlineInspection(!onlineInspection)
+            //     : dispatch(showModal());
+            //   setVisible(!visible);
+            // }}
+          >
+            Save for property
+          </Button>,
+          <Button
+            key="submit"
+            style={{
+              background: "rgb(249, 166, 2)",
+              border: "none",
+              color: "white",
+              textTransform: "uppercase",
+              fontWeight: "500",
+            }}
+          >
+            Outright Payment
+          </Button>,
+        ]}
+      >
+        <p>Please select one of the two options</p>
       </Modal>
       <div className="prop-header">
         <h1>A Place to call home</h1>
@@ -360,7 +410,7 @@ const PropertyDetail = ({ HouseProp }) => {
               />
               <Button
                 className="purchase-btn"
-                onClick={() => setVisible(!visible)}
+                onClick={() => setPaymentPlan(!paymentPlan)}
               >
                 Purchase
               </Button>
@@ -378,7 +428,7 @@ const PropertyDetail = ({ HouseProp }) => {
               <List
                 grid={{ gutter: 8, column: 2 }}
                 bordered
-                dataSource={data}
+                dataSource={ammenitiesData}
                 renderItem={(item) => (
                   <List.Item
                     style={{
@@ -823,55 +873,7 @@ const PropertyDetail = ({ HouseProp }) => {
                   <span style={{ width: "254px" }}>
                     <p style={{ margin: "0", padding: "15px" }}>
                       {" "}
-                      Down Payment
-                    </p>
-                  </span>
-                  <span
-                    style={{
-                      borderLeft: "1px solid #C4C4C4",
-                      padding: "10px",
-                    }}
-                  >
-                    <img src="/assets/icons/save1.png" alt="iconic" />
-                  </span>
-                </div>
-                <div
-                  style={{
-                    width: "312px",
-                    background: "#F5F4F4",
-                    display: "flex",
-                    textAlign: "left",
-                    marginTop: "10px",
-                  }}
-                >
-                  <span style={{ width: "254px" }}>
-                    <p style={{ margin: "0", padding: "15px" }}>
-                      {" "}
                       Outright Payment
-                    </p>
-                  </span>
-                  <span
-                    style={{
-                      borderLeft: "1px solid #C4C4C4",
-                      padding: "10px",
-                    }}
-                  >
-                    <img src="/assets/icons/save1.png" alt="iconic" />
-                  </span>
-                </div>
-                <div
-                  style={{
-                    width: "312px",
-                    background: "#F5F4F4",
-                    display: "flex",
-                    textAlign: "left",
-                    marginTop: "10px",
-                  }}
-                >
-                  <span style={{ width: "254px" }}>
-                    <p style={{ margin: "0", padding: "15px" }}>
-                      {" "}
-                      E - wallet
                     </p>
                   </span>
                   <span
@@ -944,14 +946,6 @@ const PropertyDetail = ({ HouseProp }) => {
       </div>
     </>
   );
-};
-
-PropertyDetail.getInitialProps = async ({ query }) => {
-  const HouseQuery = await HousesModel.getHouse(
-    query?.pid || "house-9rxu2pvmko"
-  );
-  const House = await HousesModel.house;
-  return { HouseProp: House };
 };
 
 export default PropertyDetail;

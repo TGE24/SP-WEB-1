@@ -1,26 +1,19 @@
-import { Form, Input, Button, Checkbox, Divider } from "antd";
+import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
-import "./index.css";
-import Auth from "../../../helpers/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../store/auth/action";
+import { closeModal } from "../../../store/modal/action";
 
-const NormalLoginForm = (props) => {
+const NormalLoginForm = ({ setShowDrawer, setShowModal }) => {
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const onFinish = (values) => {
-    Auth.login({ ...values });
+    dispatch(login(values)).then(() => {
+      dispatch(closeModal());
+    });
   };
-  if (Auth.isLoggedIn()) {
-    return Auth.loginRedirect();
-  }
 
-  console.log(Auth.loading);
-
-  // const handleFaceBookAuth = () => {
-  //   Auth.facebookLogin();
-  // };
-  // const handleGoogleAuth = () => {
-  //   Auth.googleLogin();
-  // };
-
-  console.log(Auth.loading);
   return (
     <Form
       name="normal_login"
@@ -64,7 +57,7 @@ const NormalLoginForm = (props) => {
           type="primary"
           htmlType="submit"
           className="login-form-button"
-          loading={Auth.loading}
+          loading={loading}
         >
           Log in
         </Button>
@@ -73,7 +66,7 @@ const NormalLoginForm = (props) => {
         <p style={{ color: "white" }}>
           Not a member yet?{" "}
           <span
-            onClick={() => props.setShowDrawer(true)}
+            onClick={() => setShowDrawer(true)}
             style={{ color: "#FCAD0A", cursor: "pointer" }}
           >
             Signup

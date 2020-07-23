@@ -3,7 +3,9 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
-import Auth from "../../../helpers/auth";
+import { store } from "../../../store";
+import { showModal } from "../../../store/modal/action";
+import { useDispatch } from "react-redux";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -17,7 +19,13 @@ Router.onRouteChangeError = () => {
   NProgress.done();
 };
 
-const RightMenu = (props) => {
+const RightMenu = () => {
+  const {
+    auth: { data },
+  } = store.getState();
+
+  const dispatch = useDispatch();
+
   return (
     <>
       <Menu mode="horizontal">
@@ -46,15 +54,27 @@ const RightMenu = (props) => {
             <a>Careers</a>
           </Link>
         </Menu.Item>
-        {!Auth.User && (
+        {!data?.token && (
           <Menu.Item key="mail5">
             <Button
               style={{ background: "#f9a602", marginBottom: "19px" }}
               className="nav-siginIn"
               icon={<LockOutlined />}
-              onClick={() => props.setShowModal(true)}
+              onClick={() => {
+                dispatch(showModal());
+              }}
             >
               Sign In
+            </Button>
+          </Menu.Item>
+        )}
+        {data?.token && (
+          <Menu.Item key="mail5">
+            <Button
+              style={{ background: "#f9a602", marginBottom: "19px" }}
+              className="nav-siginIn"
+            >
+              Dashboard
             </Button>
           </Menu.Item>
         )}

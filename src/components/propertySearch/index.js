@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Button, Select, Tabs } from "antd";
-import "./index.css";
 import { SearchOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -8,17 +7,17 @@ const { TabPane } = Tabs;
 
 const layout = {
   labelCol: {
-    span: 8
+    span: 8,
   },
   wrapperCol: {
-    span: 16
-  }
+    span: 16,
+  },
 };
 const tailLayout = {
   wrapperCol: {
     offset: 8,
-    span: 16
-  }
+    span: 16,
+  },
 };
 
 const Demo = () => {
@@ -36,8 +35,8 @@ const Demo = () => {
             rules={[
               {
                 required: true,
-                message: "Select a location"
-              }
+                message: "Select a location",
+              },
             ]}
           >
             <Select
@@ -57,8 +56,8 @@ const Demo = () => {
             rules={[
               {
                 required: true,
-                message: "Select a property type"
-              }
+                message: "Select a property type",
+              },
             ]}
           >
             <Select
@@ -78,8 +77,8 @@ const Demo = () => {
             rules={[
               {
                 required: true,
-                message: "Select a price range"
-              }
+                message: "Select a price range",
+              },
             ]}
           >
             <Select

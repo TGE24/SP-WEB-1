@@ -1,24 +1,27 @@
 import axios from "axios";
+import { store } from "../store";
+// import { logout } from "store/auth/actions";
+// import authActionTypes from "store/auth/actionTypes";
 
-import Auth from "./auth";
-
-const instance = axios.create({
-  baseURL: process.env.baseURL,
-  timeout: 30000,
+const request = axios.create({
+  baseURL: "https://api.spreadprolimited.com/api",
 });
 
-const request = (opt, secure) => {
-  if (secure) {
-    if (opt.headers) {
-      opt.headers["Authorization"] = `Bearer ${Auth.token}`;
-    } else {
-      opt.headers = {
-        Authorization: `Bearer ${Auth.token}`,
-      };
-    }
-  }
+request.interceptors.request.use((config) => {
+  const {
+    auth: { data },
+  } = store.getState();
 
-  return instance.request(opt);
-};
+  if (!data?.token) return config;
+
+  const newConfig = {
+    ...config,
+    headers: {
+      ...config.headers,
+      Authorization: `Bearer ${data.token}`,
+    },
+  };
+  return newConfig;
+});
 
 export default request;
