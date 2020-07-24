@@ -45,14 +45,14 @@ const PropertyDetail = () => {
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
   const house = useSelector((state) => state.properties.data);
-  const user = useSelector((state) => state.user.data.user);
+  const user = useSelector((state) => state?.user?.data?.user);
   const {
     auth: { data },
   } = store.getState();
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
-    email: user.email,
+    email: user?.email,
     amount: 100000,
     publicKey: process.env.PAYSTACK_KEY,
     metadata: {
