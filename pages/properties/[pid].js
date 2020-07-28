@@ -16,6 +16,7 @@ import { usePaystackPayment } from "react-paystack";
 import Ammenities from "../../src/constants/ammenities";
 import OnlineInspection from "../../src/components/modals/onlineInspection";
 import SaveForProperty from "../../src/components/modals/saveforproperty";
+import OutrightPayment from "../../src/components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
 import RealEstateMockData from "../../src/data/realEstate.json";
 import AgentsMockData from "../../src/data/agents.json";
@@ -23,6 +24,7 @@ import ContactForm from "../../src/components/forms/contact";
 import {
   getHouse,
   onlineInspection,
+  verifyPayment,
 } from "../../store/properties/actions";
 import { showModal } from "../../store/modal/action";
 import { useRouter } from "next/router";
@@ -38,6 +40,7 @@ const mapStyles = {
 const PropertyDetail = () => {
   const [visible, setVisible] = useState(false);
   const [saveForProperty, setSaveForProperty] = useState(false);
+  const [outrightPayment, setOutrightPayment] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState(false);
   const [onlineInspectionModal, setOnlineInspection] = useState(
     false
@@ -45,6 +48,9 @@ const PropertyDetail = () => {
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
   const house = useSelector((state) => state.properties.data);
+  const verifyData = useSelector(
+    (state) => state.properties.paystackData
+  );
   const user = useSelector((state) => state?.user?.data?.user);
   const {
     auth: { data },
@@ -70,15 +76,19 @@ const PropertyDetail = () => {
   }, [dispatch, pid]);
 
   const onSuccess = (res) => {
-    res.property_slug = config.metadata.property_slug;
-    res.amount = config.amount;
-    res.email = config.email;
-    res.payment_plan = "online-inspection";
-    res.property_type = "house";
-    dispatch(onlineInspection({ ...res }));
-    dispatch(getHouse(pid));
-    setVisible(!visible);
-    setOnlineInspection(!onlineInspectionModal);
+    dispatch(verifyPayment(res.reference)).then((response) => {
+      if (response?.value?.data?.data?.status === "success") {
+        res.property_slug = config.metadata.property_slug;
+        res.amount = config.amount;
+        res.email = config.email;
+        res.payment_plan = "online-inspection";
+        res.property_type = "house";
+        dispatch(onlineInspection({ ...res }));
+        dispatch(getHouse(pid));
+        setVisible(!visible);
+        setOnlineInspection(!onlineInspectionModal);
+      }
+    });
   };
 
   const initializePayment = usePaystackPayment(config);
@@ -90,7 +100,7 @@ const PropertyDetail = () => {
   useEffect(() => {
     let newArray = [];
     if (houseDetails?.take_two_images) {
-      houseDetails?.take_two_images?.map((item, index) => {
+      houseDetails?.take_two_images?.map((item) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -99,7 +109,7 @@ const PropertyDetail = () => {
         return newObj;
       });
     } else {
-      houseDetails?.house_image?.map((item, index) => {
+      houseDetails?.house_image?.map((item) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -186,6 +196,18 @@ const PropertyDetail = () => {
         <OnlineInspection email={user?.email} />
       </Modal>
       <Modal
+        title="OUTRIGHT PAYMENT"
+        visible={outrightPayment}
+        onCancel={() => setOutrightPayment(!outrightPayment)}
+        // onOk={() => initializePayment(onSuccess)}
+        okText="Submit"
+      >
+        <OutrightPayment
+          email={user?.email}
+          price={houseDetails?.price}
+        />
+      </Modal>
+      <Modal
         title="SAVE FOR PROPERTY"
         visible={saveForProperty}
         onCancel={() => setSaveForProperty(!saveForProperty)}
@@ -260,7 +282,7 @@ const PropertyDetail = () => {
               !houseDetails?.payment_type === "save for property"
             }
           >
-            Save for property
+            Instalmental Payment
           </Button>,
           <Button
             key="submit"
@@ -270,6 +292,11 @@ const PropertyDetail = () => {
               color: "white",
               textTransform: "uppercase",
               fontWeight: "500",
+            }}
+            onClick={() => {
+              data?.token
+                ? setOutrightPayment(!outrightPayment)
+                : dispatch(showModal());
             }}
           >
             Outright Payment

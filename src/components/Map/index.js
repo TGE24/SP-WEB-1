@@ -17,8 +17,10 @@ const MyMap = withScriptjs(
         {isMarkerShown && (
           <Marker
             position={{
-              lat: parseInt(latitude),
-              lng: parseInt(longitude),
+              // lat: parseInt(latitude),
+              // lng: parseInt(longitude),
+              lat: 9.082,
+              lng: 8.6753,
             }}
           />
         )}
