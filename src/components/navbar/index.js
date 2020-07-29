@@ -67,8 +67,9 @@ const Contacts = styled.div`
 const Navbar = () => {
   const [navColor, setNavColor] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [showDrawer, setShowDrawer] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(showsignup);
   const show = useSelector((state) => state.modal.show);
+  const showsignup = useSelector((state) => state.modal.signup);
   const [showModal, setShowModal] = useState(show);
 
   const drawer = () => {
@@ -130,7 +131,7 @@ const Navbar = () => {
       >
         <SignIn
           setShowDrawer={setShowDrawer}
-          setShowModal={setShowModal}
+          showDrawer={showDrawer}
         />
       </Modal>
       <Wrap
@@ -247,7 +248,7 @@ const Navbar = () => {
                       style={{ background: "#f9a602" }}
                       className="nav-siginIn"
                       icon={<LockOutlined />}
-                      onClick={() => setShowModal(!showDrawer)}
+                      onClick={() => setShowModal(!showModal)}
                     >
                       Sign In
                     </Button>

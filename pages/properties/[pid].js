@@ -25,6 +25,7 @@ import {
   getHouse,
   onlineInspection,
   verifyPayment,
+  outrightPayment,
 } from "../../store/properties/actions";
 import { showModal } from "../../store/modal/action";
 import { useRouter } from "next/router";
@@ -40,7 +41,7 @@ const mapStyles = {
 const PropertyDetail = () => {
   const [visible, setVisible] = useState(false);
   const [saveForProperty, setSaveForProperty] = useState(false);
-  const [outrightPayment, setOutrightPayment] = useState(false);
+  const [outrightPaymentModal, setOutrightPayment] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState(false);
   const [onlineInspectionModal, setOnlineInspection] = useState(
     false
@@ -48,9 +49,6 @@ const PropertyDetail = () => {
   const [houseDetails, setHouseDetails] = useState();
   const [images, setImages] = useState([]);
   const house = useSelector((state) => state.properties.data);
-  const verifyData = useSelector(
-    (state) => state.properties.paystackData
-  );
   const user = useSelector((state) => state?.user?.data?.user);
   const {
     auth: { data },
@@ -65,6 +63,17 @@ const PropertyDetail = () => {
       property_slug: houseDetails?.slug,
     },
   };
+
+  const outrightConfig = {
+    reference: "" + Math.floor(Math.random() * 1000000000 + 1),
+    email: user?.email,
+    amount: houseDetails?.price * 100,
+    publicKey: process.env.PAYSTACK_KEY,
+    metadata: {
+      property_slug: houseDetails?.slug,
+    },
+  };
+
   const router = useRouter();
   const dispatch = useDispatch();
   const { pid } = router.query;
@@ -91,7 +100,26 @@ const PropertyDetail = () => {
     });
   };
 
+  const onOutrightSuccess = (res) => {
+    dispatch(verifyPayment(res.reference)).then((response) => {
+      if (response?.value?.data?.data?.status === "success") {
+        res.property_slug = outrightConfig.metadata.property_slug;
+        res.amount = outrightConfig.amount;
+        res.email = outrightConfig.email;
+        res.payment_plan = "outright";
+        res.property_type = "house";
+        dispatch(outrightPayment({ ...res }));
+        // dispatch(getHouse(pid));
+        setPaymentPlan(!paymentPlan);
+        setOutrightPayment(!outrightPaymentModal);
+      }
+    });
+  };
+
   const initializePayment = usePaystackPayment(config);
+  const initializeOutrightPayment = usePaystackPayment(
+    outrightConfig
+  );
 
   useEffect(() => {
     setHouseDetails(house?.house);
@@ -197,9 +225,9 @@ const PropertyDetail = () => {
       </Modal>
       <Modal
         title="OUTRIGHT PAYMENT"
-        visible={outrightPayment}
-        onCancel={() => setOutrightPayment(!outrightPayment)}
-        // onOk={() => initializePayment(onSuccess)}
+        visible={outrightPaymentModal}
+        onCancel={() => setOutrightPayment(!outrightPaymentModal)}
+        onOk={() => initializeOutrightPayment(onOutrightSuccess)}
         okText="Submit"
       >
         <OutrightPayment
@@ -295,7 +323,7 @@ const PropertyDetail = () => {
             }}
             onClick={() => {
               data?.token
-                ? setOutrightPayment(!outrightPayment)
+                ? setOutrightPayment(!outrightPaymentModal)
                 : dispatch(showModal());
             }}
           >

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../../store/auth/action";
 import { closeModal } from "../../../store/modal/action";
 
-const NormalLoginForm = ({ setShowDrawer }) => {
+const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -66,7 +66,10 @@ const NormalLoginForm = ({ setShowDrawer }) => {
         <p style={{ color: "white" }}>
           Not a member yet?{" "}
           <span
-            onClick={() => setShowDrawer(true)}
+            onClick={() => {
+              setShowDrawer(!showDrawer);
+              dispatch(closeModal());
+            }}
             style={{ color: "#FCAD0A", cursor: "pointer" }}
           >
             Signup

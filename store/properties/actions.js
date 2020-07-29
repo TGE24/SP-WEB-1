@@ -34,6 +34,14 @@ export const onlineInspection = (data) => async (dispatch) => {
   });
 };
 
+export const outrightPayment = (data) => async (dispatch) => {
+  const payload = api.post("/payment", data);
+  return dispatch({
+    type: actionTypes.OUTRIGHT_PAYMENT.default,
+    payload,
+  });
+};
+
 export const verifyPayment = (reference) => async (dispatch) => {
   let config = {
     headers: {

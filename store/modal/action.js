@@ -11,3 +11,15 @@ export const closeModal = () => (dispatch) => {
     type: modalActionTypes.CLOSE_MODAL,
   });
 };
+
+export const showSignup = () => (dispatch) => {
+  return dispatch({
+    type: modalActionTypes.SIGNUP_MODAL,
+  });
+};
+
+export const closeSignup = () => (dispatch) => {
+  return dispatch({
+    type: modalActionTypes.CLOSE_SIGNUP,
+  });
+};

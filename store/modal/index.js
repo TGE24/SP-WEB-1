@@ -2,6 +2,7 @@ import modalActionTypes from "./type";
 
 const initialState = {
   show: false,
+  signup: false,
 };
 
 export const modalReducer = (state = initialState, action) => {
@@ -16,6 +17,18 @@ export const modalReducer = (state = initialState, action) => {
       return {
         ...state,
         show: false,
+      };
+    }
+    case modalActionTypes.SIGNUP_MODAL: {
+      return {
+        ...state,
+        signup: true,
+      };
+    }
+    case modalActionTypes.CLOSE_SIGNUP: {
+      return {
+        ...state,
+        signup: false,
       };
     }
 

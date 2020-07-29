@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  Checkbox,
-  Divider,
-  DatePicker,
-} from "antd";
+import { Form, Input, Button, Divider, DatePicker } from "antd";
 import {
   MailOutlined,
-  LockOutlined,
   UserOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
+import { signup } from "../../../store/auth/action";
+import { closeSignup } from "../../../store/modal/action";
+import { useDispatch, useSelector } from "react-redux";
 
 const NormalLoginForm = (props) => {
   const [formData, setFormData] = useState({});
+  const { loading } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
   const onFinish = (values) => {
     delete values.dob;
     const submitData = { ...formData, ...values };
-    // Auth.signup({ ...submitData });
-    console.log(Auth.user);
+    dispatch(signup(submitData)).then((res) => {
+      dispatch(closeSignup());
+    });
   };
   return (
     <Form name="signup" className="signup-form" onFinish={onFinish}>
@@ -79,6 +78,17 @@ const NormalLoginForm = (props) => {
         />
       </Form.Item>
       <Form.Item
+        name="address"
+        rules={[
+          {
+            required: true,
+            message: "Please input your resedential address",
+          },
+        ]}
+      >
+        <Input placeholder="Resedential Address" />
+      </Form.Item>
+      <Form.Item
         name="password"
         rules={[
           {
@@ -120,6 +130,7 @@ const NormalLoginForm = (props) => {
           type="primary"
           htmlType="submit"
           className="login-form-button"
+          loading={loading}
         >
           Sign Up
         </Button>

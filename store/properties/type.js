@@ -5,4 +5,5 @@ export default {
   GET_HOUSE: actionTypes("GET_HOUSE"),
   ONLINE_INSPECTION: actionTypes("ONLINE_INSPECTION"),
   VERIFY_PAYMENT: actionTypes("VERIFY_PAYMENT"),
+  OUTRIGHT_PAYMENT: actionTypes("OUTRIGHT_PAYMENT"),
 };
