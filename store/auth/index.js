@@ -10,6 +10,7 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
+    //login
     case authActionTypes.LOGIN.pending: {
       return {
         ...state,
@@ -41,6 +42,8 @@ export const authReducer = (state = initialState, action) => {
         error: parseError(action.payload),
       };
     }
+
+    // signup
     case authActionTypes.SIGN_UP.pending: {
       return {
         ...state,
@@ -73,6 +76,104 @@ export const authReducer = (state = initialState, action) => {
       };
     }
 
+    // google authentication
+    case authActionTypes.GOOGLE_SIGNUP.pending: {
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case authActionTypes.GOOGLE_SIGNUP.fulfilled: {
+      const token = JSON.stringify(action.payload.data.token);
+      Cookies.set("token", token, {
+        // domain: ".spreadprolimited.com",
+      });
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          token: action.payload.data.token,
+        },
+      };
+    }
+
+    case authActionTypes.GOOGLE_SIGNUP.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+    // twitter authentication
+    case authActionTypes.TWITTER_SIGNUP.pending: {
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case authActionTypes.TWITTER_SIGNUP.fulfilled: {
+      const token = JSON.stringify(action.payload.data.token);
+      Cookies.set("token", token, {
+        // domain: ".spreadprolimited.com",
+      });
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          token: action.payload.data.token,
+        },
+      };
+    }
+
+    case authActionTypes.TWITTER_SIGNUP.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+    // facebook authentication
+    case authActionTypes.FACEBOOK_SIGNUP.pending: {
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case authActionTypes.FACEBOOK_SIGNUP.fulfilled: {
+      const token = JSON.stringify(action.payload.data.token);
+      Cookies.set("token", token, {
+        // domain: ".spreadprolimited.com",
+      });
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          token: action.payload.data.token,
+        },
+      };
+    }
+
+    case authActionTypes.FACEBOOK_SIGNUP.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+
+    //verify email
     case authActionTypes.VERIFY_EMAIL.pending: {
       return {
         ...state,
