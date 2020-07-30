@@ -42,3 +42,15 @@ export const signup = (data) => async (dispatch) => {
     payload,
   });
 };
+export const googleAuth = () => async (dispatch) => {
+  const payload = api.get("/login/google");
+  return dispatch({ type: authActionTypes.GOOGLE_SIGNUP.default, payload });
+};
+export const twitterAuth = () => async (dispatch) => {
+  const payload = api.get("/login/twitter");
+  return dispatch({ type: authActionTypes.TWITTER_SIGNUP.default, payload });
+};
+export const facebookAuth = () => async (dispatch) => {
+  const payload = api.get("/login/facebook");
+  return dispatch({ type: authActionTypes.FACEBOOK_SIGNUP.default, payload });
+};

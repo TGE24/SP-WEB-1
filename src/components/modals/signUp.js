@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Divider, DatePicker } from "antd";
+import { MailOutlined, UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import {
-  MailOutlined,
-  UserOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
-import { signup } from "../../../store/auth/action";
+  signup,
+  googleAuth,
+  twitterAuth,
+  facebookAuth,
+} from "../../../store/auth/action";
 import { closeSignup } from "../../../store/modal/action";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -14,6 +15,24 @@ const NormalLoginForm = (props) => {
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const handleGoogleSignup = () => {
+    console.log("hello");
+    dispatch(googleAuth()).then((res) => {
+      dispatch(closeSignup());
+    });
+  };
+  const handleTwitterSignup = () => {
+    console.log("hello");
+    dispatch(twitterAuth()).then((res) => {
+      dispatch(closeSignup());
+    });
+  };
+  const handleFacebookSignup = () => {
+    console.log("hello");
+    dispatch(facebookAuth()).then((res) => {
+      dispatch(closeSignup());
+    });
+  };
   const onFinish = (values) => {
     delete values.dob;
     const submitData = { ...formData, ...values };
@@ -25,9 +44,7 @@ const NormalLoginForm = (props) => {
     <Form name="signup" className="signup-form" onFinish={onFinish}>
       <Form.Item
         name="name"
-        rules={[
-          { required: true, message: "Please input your Full name!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Full name!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -36,9 +53,7 @@ const NormalLoginForm = (props) => {
       </Form.Item>
       <Form.Item
         name="email"
-        rules={[
-          { required: true, message: "Please input your Email!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Email!" }]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
@@ -144,16 +159,19 @@ const NormalLoginForm = (props) => {
             className="social-icons"
             src="/assets/icons/facebook.png"
             alt="Facebook"
+            onClick={handleFacebookSignup}
           />
           <img
             className="social-icons"
             src="/assets/icons/twitter.png"
             alt="Twitter"
+            onClick={handleTwitterSignup}
           />
           <img
             className="social-icons"
             src="/assets/icons/google.png"
             alt="Google"
+            onClick={handleGoogleSignup}
           />
         </div>
       </Form.Item>
