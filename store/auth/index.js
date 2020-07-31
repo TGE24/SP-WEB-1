@@ -10,7 +10,9 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case authActionTypes.LOGIN.pending: {
+    case authActionTypes.LOGIN.pending:
+    case authActionTypes.VERIFY_EMAIL.pending:
+    case authActionTypes.SIGN_UP.pending: {
       return {
         ...state,
         data: null,
@@ -19,7 +21,9 @@ export const authReducer = (state = initialState, action) => {
       };
     }
 
-    case authActionTypes.LOGIN.fulfilled: {
+    case authActionTypes.LOGIN.fulfilled:
+    case authActionTypes.VERIFY_EMAIL.fulfilled:
+    case authActionTypes.SIGN_UP.fulfilled: {
       const token = JSON.stringify(action.payload.data.access_token);
       Cookies.set("token", token, {
         // domain: ".spreadprolimited.com",
@@ -34,62 +38,9 @@ export const authReducer = (state = initialState, action) => {
       };
     }
 
-    case authActionTypes.LOGIN.rejected: {
-      return {
-        ...state,
-        loading: false,
-        error: parseError(action.payload),
-      };
-    }
-    case authActionTypes.SIGN_UP.pending: {
-      return {
-        ...state,
-        data: null,
-        loading: true,
-        error: null,
-      };
-    }
-
-    case authActionTypes.SIGN_UP.fulfilled: {
-      const token = JSON.stringify(action.payload.data.token);
-      Cookies.set("token", token, {
-        // domain: ".spreadprolimited.com",
-      });
-      return {
-        ...state,
-        loading: false,
-        error: null,
-        data: {
-          token: action.payload.data.token,
-        },
-      };
-    }
-
+    case authActionTypes.LOGIN.rejected:
+    case authActionTypes.VERIFY_EMAIL.rejected:
     case authActionTypes.SIGN_UP.rejected: {
-      return {
-        ...state,
-        loading: false,
-        error: parseError(action.payload),
-      };
-    }
-
-    case authActionTypes.VERIFY_EMAIL.pending: {
-      return {
-        ...state,
-        loading: true,
-        error: null,
-      };
-    }
-
-    case authActionTypes.VERIFY_EMAIL.fulfilled: {
-      return {
-        ...state,
-        loading: false,
-        error: null,
-      };
-    }
-
-    case authActionTypes.VERIFY_EMAIL.rejected: {
       return {
         ...state,
         loading: false,

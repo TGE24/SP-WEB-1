@@ -7,7 +7,8 @@ import {
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import { verify } from "../../store/auth/action";
-import { useDispatch } from "react-redux";
+import { getUser } from "../../store/user/actions";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 export default () => {
@@ -16,11 +17,19 @@ export default () => {
   const { token } = router.query;
   const dispatch = useDispatch();
   const data = { email: email };
+  const loading = useSelector((state) => state?.auth?.loading);
 
   const handleVerification = () => {
-    dispatch(verify(data, token)).then((res) => {
-      console.log(res);
-    });
+    dispatch(verify(data, token))
+      .then((res) => {
+        if (res?.value.status === 200) {
+          dispatch(getUser());
+          router.push("/");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <section className="verification-container">
@@ -43,6 +52,7 @@ export default () => {
           type="primary"
           icon={<SendOutlined />}
           onClick={handleVerification}
+          loading={loading}
         >
           Submit
         </Button>

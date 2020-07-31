@@ -106,7 +106,10 @@ const Navbar = () => {
         }}
         footer={null}
       >
-        <SignUp />
+        <SignUp
+          setShowDrawer={setShowDrawer}
+          showDrawer={showDrawer}
+        />
       </Drawer>
       <Modal
         title="LOGIN"
@@ -258,6 +261,7 @@ const Navbar = () => {
             </div>
           </nav>
         </Affix>
+        il.comil.com
       </Wrap>
     </>
   );
