@@ -48,6 +48,38 @@ export const authReducer = (state = initialState, action) => {
       };
     }
 
+    case authActionTypes.VERIFY_EMAIL.pending: {
+      return {
+        ...state,
+        data: null,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case authActionTypes.VERIFY_EMAIL.fulfilled: {
+      const token = JSON.stringify(action.payload.data.token);
+      Cookies.set("token", token, {
+        // domain: ".spreadprolimited.com",
+      });
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        data: {
+          token: action.payload.data.token,
+        },
+      };
+    }
+
+    case authActionTypes.VERIFY_EMAIL.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+
     default:
       return state;
   }

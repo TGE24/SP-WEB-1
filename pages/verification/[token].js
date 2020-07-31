@@ -23,8 +23,8 @@ export default () => {
     dispatch(verify(data, token))
       .then((res) => {
         if (res?.value.status === 200) {
-          dispatch(getUser());
           router.push("/");
+          dispatch(getUser());
         }
       })
       .catch((err) => {

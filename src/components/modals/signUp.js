@@ -13,24 +13,6 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const handleGoogleSignup = () => {
-    console.log("hello");
-    dispatch(googleAuth()).then((res) => {
-      dispatch(closeSignup());
-    });
-  };
-  const handleTwitterSignup = () => {
-    console.log("hello");
-    dispatch(twitterAuth()).then((res) => {
-      dispatch(closeSignup());
-    });
-  };
-  const handleFacebookSignup = () => {
-    console.log("hello");
-    dispatch(facebookAuth()).then((res) => {
-      dispatch(closeSignup());
-    });
-  };
   const onFinish = (values) => {
     delete values.dob;
     const submitData = { ...formData, ...values };
@@ -167,19 +149,16 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
             className="social-icons"
             src="/assets/icons/facebook.png"
             alt="Facebook"
-            onClick={handleFacebookSignup}
           />
           <img
             className="social-icons"
             src="/assets/icons/twitter.png"
             alt="Twitter"
-            onClick={handleTwitterSignup}
           />
           <img
             className="social-icons"
             src="/assets/icons/google.png"
             alt="Google"
-            onClick={handleGoogleSignup}
           />
         </div>
       </Form.Item>
