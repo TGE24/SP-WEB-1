@@ -11,7 +11,6 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case authActionTypes.LOGIN.pending:
-    case authActionTypes.VERIFY_EMAIL.pending:
     case authActionTypes.SIGN_UP.pending: {
       return {
         ...state,
@@ -22,7 +21,6 @@ export const authReducer = (state = initialState, action) => {
     }
 
     case authActionTypes.LOGIN.fulfilled:
-    case authActionTypes.VERIFY_EMAIL.fulfilled:
     case authActionTypes.SIGN_UP.fulfilled: {
       const token = JSON.stringify(action.payload.data.access_token);
       Cookies.set("token", token, {
@@ -39,7 +37,6 @@ export const authReducer = (state = initialState, action) => {
     }
 
     case authActionTypes.LOGIN.rejected:
-    case authActionTypes.VERIFY_EMAIL.rejected:
     case authActionTypes.SIGN_UP.rejected: {
       return {
         ...state,
