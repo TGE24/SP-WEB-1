@@ -5,11 +5,6 @@ import {
   UserOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import {
-  MailOutlined,
-  UserOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
 import { signup } from "../../../store/auth/action";
 import { useDispatch, useSelector } from "react-redux";
 
