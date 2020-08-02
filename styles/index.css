@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.slider-image {
+  height: 100px;
+}
+
 .prop-header h1 {
   font-size: 64px;
   color: white;

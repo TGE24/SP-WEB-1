@@ -2,7 +2,17 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.footer`
   background-color: #515c6f;
-  height: 340px;
+  height: 245px;
+  position: relative;
+  margin-top: 60px;
+  @media screen and (max-width: 767px) {
+    height: 314px;
+  }
+
+  news-letter {
+    position: relative;
+    top: 60px;
+  }
 
   @media screen and (max-width: 767px) {
     #footer-logo {
@@ -10,11 +20,14 @@ export const FooterContainer = styled.footer`
     }
   }
   img {
-    margin-top: 2rem !important;
+    position: relative;
+    top: 108px;
+    left: 55px;
   }
   .ant-row {
     margin-right: 1.5rem !important;
     margin-left: 1.5rem !important;
+    margin: 47px 0;
 
     @media screen and (max-width: 767px) {
       margin-right: 1rem !important;
@@ -35,7 +48,6 @@ export const FooterContainer = styled.footer`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    // align-items: center;
     @media screen and (max-width: 767px) {
       #news {
         font-size: 19px;
@@ -93,7 +105,6 @@ export const FooterContainer = styled.footer`
   }
   .line {
     margin-left: 1.5rem;
-    margin-top: 3rem;
     height: 1px;
     width: 97%;
     background: #c4c4c4;
@@ -102,10 +113,9 @@ export const FooterContainer = styled.footer`
     }
   }
   .copy {
-    color: #c4c4c4;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    color: black;
     text-align: center;
     font-size: 10px;
+    padding: 14px 0;
   }
 `;

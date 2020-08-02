@@ -261,7 +261,6 @@ const Navbar = () => {
             </div>
           </nav>
         </Affix>
-        il.comil.com
       </Wrap>
     </>
   );

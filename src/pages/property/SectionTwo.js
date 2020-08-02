@@ -3,6 +3,8 @@ import { Row, Col, Select } from "antd";
 import { PropSectionTwo } from "./styled";
 import Link from "next/link";
 import Ammenities from "../../constants/ammenities";
+import { useSelector } from "react-redux";
+import Loader from "./Loader";
 
 const { Option } = Select;
 
@@ -12,6 +14,7 @@ function handleChange(value) {
 
 export default ({ HousesProp }) => {
   const [houses, setHouses] = useState([]);
+  const { loading } = useSelector((state) => state.properties);
 
   useEffect(() => {
     setHouses(HousesProp);
@@ -42,6 +45,7 @@ export default ({ HousesProp }) => {
         </div>
       </div>
       <Row gutter={[18, 16]}>
+        {loading && <Loader />}
         {houses?.map((item, index) => (
           <Link
             href="/properties/[pid]"

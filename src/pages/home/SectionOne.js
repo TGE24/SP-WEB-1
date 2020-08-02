@@ -28,12 +28,10 @@ export default () => {
           </Zoom>
           <Rotate top right cascade>
             <p>
-              enjoy the beauty and luxury of peace and beauty away from home
+              enjoy the beauty and luxury of peace and beauty away
+              from home
             </p>
           </Rotate>
-          <Button className="buy-now" onClick={() => setShowModal(!showModal)}>
-            Buy Now
-          </Button>
           <Search />
         </div>
       </Content>

@@ -16,7 +16,7 @@ import { store, persistor } from "../store";
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <PersistGate persistor={persistor} loading={<div>Loading</div>}>
+      <PersistGate persistor={persistor}>
         <Layout>
           <Component {...pageProps} />
         </Layout>

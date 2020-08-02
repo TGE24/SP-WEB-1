@@ -24,17 +24,8 @@
   .ant-col-offset-8 {
     margin-left: 0;
   }
-  .ant-form-inline .ant-form-item {
-    margin-right: 0;
-    margin-bottom: 13px;
-  }
   .ant-tabs .ant-tabs-top-content,
   .ant-tabs .ant-tabs-bottom-content {
     padding: 0;
-  }
-  .search-form {
-    display: flex;
-    justify-content: center;
-    padding: 30px 0 17px 0;
   }
 }
