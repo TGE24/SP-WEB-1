@@ -1,3 +1,10 @@
-import About from "../src/pages/about-us";
+import About from "pages/about-us";
+import Layout from "components/Layout";
 
-export default About;
+export default () => {
+  return (
+    <Layout>
+      <About />
+    </Layout>
+  );
+};

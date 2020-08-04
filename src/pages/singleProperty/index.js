@@ -26,10 +26,10 @@ import {
   onlineInspection,
   verifyPayment,
   outrightPayment,
-} from "../../../store/properties/actions";
-import { showModal } from "../../../store/modal/action";
+} from "../../store/properties/actions";
+import { showModal } from "../../store/modal/action";
 import { useRouter } from "next/router";
-import { store } from "../../../store";
+import { store } from "../../store";
 
 const { Meta } = Card;
 

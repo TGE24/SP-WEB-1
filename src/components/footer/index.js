@@ -1,5 +1,5 @@
 import { Row, Col } from "antd";
-import { FooterContainer } from "../../../styles/footerStyled";
+import { FooterContainer } from "styles/footerStyled";
 export default () => (
   <FooterContainer>
     <div>

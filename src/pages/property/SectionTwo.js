@@ -15,7 +15,6 @@ function handleChange(value) {
 export default ({ HousesProp }) => {
   const [houses, setHouses] = useState([]);
   const { loading } = useSelector((state) => state.properties);
-
   useEffect(() => {
     setHouses(HousesProp);
   }, [HousesProp]);

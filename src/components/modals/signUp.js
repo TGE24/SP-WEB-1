@@ -5,7 +5,7 @@ import {
   UserOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import { signup } from "../../../store/auth/action";
+import { signup } from "store/auth/action";
 import { useDispatch, useSelector } from "react-redux";
 
 const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {

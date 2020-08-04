@@ -1,8 +1,8 @@
 import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../../store/auth/action";
-import { closeModal } from "../../../store/modal/action";
+import { login } from "store/auth/action";
+import { closeModal } from "store/modal/action";
 
 const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
   const { loading } = useSelector((state) => state.auth);

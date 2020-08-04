@@ -1,3 +1,10 @@
-import Service from "../src/pages/service";
+import Service from "pages/service";
+import Layout from "components/Layout";
 
-export default Service;
+export default () => {
+  return (
+    <Layout>
+      <Service />
+    </Layout>
+  );
+};

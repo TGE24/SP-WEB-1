@@ -6,8 +6,8 @@ import {
   SendOutlined,
 } from "@ant-design/icons";
 import { useRouter } from "next/router";
-import { verify } from "../../store/auth/action";
-import { getUser } from "../../store/user/actions";
+import { verify } from "store/auth/action";
+import { getUser } from "store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 

@@ -4,10 +4,10 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import Router from "next/router";
 import NProgress from "nprogress";
-import { store } from "../../../store";
-import { showModal } from "../../../store/modal/action";
+import { store } from "store";
+import { showModal } from "store/modal/action";
 import { useDispatch } from "react-redux";
-import { getUser } from "../../../store/user/actions";
+import { getUser } from "store/user/actions";
 
 Router.onRouteChangeStart = () => {
   NProgress.start();
@@ -81,6 +81,7 @@ const RightMenu = () => {
             <Button
               style={{ background: "#f9a602", marginBottom: "19px" }}
               className="nav-siginIn"
+              onClick={() => Router.push("/dashboard/wallet")}
             >
               Dashboard
             </Button>
