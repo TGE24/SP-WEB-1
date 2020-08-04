@@ -8,20 +8,28 @@ export default () => (
   <SectionSeven>
     <Content
       style={{
-        padding: "50px"
+        padding: "50px",
       }}
     >
       <Services>
         <h3>Best Real Estate Deals</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
-        <img
+        {/* <img
           src="/assets/prev.png"
           alt="Previous"
           className="previous"
-        />
+        /> */}
         <Row gutter={[0, 12]}>
           {location.map((item, index) => (
-            <Col xs={24} sm={18} md={12} lg={6} xl={6} key={index} className="column-6">
+            <Col
+              xs={24}
+              sm={18}
+              md={12}
+              lg={6}
+              xl={6}
+              key={index}
+              className="column-6"
+            >
               <Jump>
                 <Card
                   title={
@@ -29,7 +37,7 @@ export default () => (
                       style={{
                         backgroundImage: `url(${item.image})`,
                         height: "182.19px",
-                        backgroundRepeat: "no-repeat"
+                        backgroundRepeat: "no-repeat",
                       }}
                     ></div>
                   }
@@ -39,14 +47,14 @@ export default () => (
                     style={{
                       fontSize: "15px",
                       textAlign: "start",
-                      margin: 0
+                      margin: 0,
                     }}
                   >
                     <span
                       style={{
                         color: "#F9A602",
                         fontSize: "15px",
-                        marginRight: "18px"
+                        marginRight: "18px",
                       }}
                     >
                       Ancient Bungalo Ancient
@@ -61,7 +69,7 @@ export default () => (
             </Col>
           ))}
         </Row>
-        <img src="/assets/next.png" alt="Next" className="next" />
+        {/* <img src="/assets/next.png" alt="Next" className="next" /> */}
       </Services>
     </Content>
   </SectionSeven>
@@ -70,34 +78,34 @@ export default () => (
 const location = [
   {
     image: "/assets/l1.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l2.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l3.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l4.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l5.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l6.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l6.png",
-    city: "Rome"
+    city: "Rome",
   },
   {
     image: "/assets/l6.png",
-    city: "Rome"
-  }
+    city: "Rome",
+  },
 ];

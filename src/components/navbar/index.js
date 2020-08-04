@@ -11,8 +11,9 @@ import {
   MenuFoldOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "store/modal/action";
+import { closeModal, showModal } from "store/modal/action";
 import { store } from "store";
+import Router from "next/router";
 
 const Wrap = styled.div`
   .ant-affix {
@@ -71,9 +72,12 @@ const Navbar = () => {
   const [showDrawer, setShowDrawer] = useState(showsignup);
   const show = useSelector((state) => state.modal.show);
   const showsignup = useSelector((state) => state.modal.signup);
-  const [showModal, setShowModal] = useState(show);
   const {
     user: { data },
+  } = store.getState();
+
+  const {
+    auth: { data: authData },
   } = store.getState();
 
   const drawer = () => {
@@ -240,9 +244,8 @@ const Navbar = () => {
                 closable={false}
                 onClose={onClose}
                 visible={visible}
-                bodyStyle={{ textAlign: "center" }}
               >
-                <Menu mode="vertical">
+                <Menu mode="vertical" style={{ textAlign: "center" }}>
                   <Menu.Item key="mail">
                     <Link href="/">
                       <a>Home</a>
@@ -268,16 +271,36 @@ const Navbar = () => {
                       <a>Careers</a>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item key="mail5">
-                    <Button
-                      style={{ background: "#f9a602" }}
-                      className="nav-siginIn"
-                      icon={<LockOutlined />}
-                      onClick={() => setShowModal(!showModal)}
-                    >
-                      Sign In
-                    </Button>
-                  </Menu.Item>
+                  {!authData?.token && (
+                    <Menu.Item key="mail5">
+                      <Button
+                        style={{ background: "#f9a602" }}
+                        className="nav-siginIn"
+                        icon={<LockOutlined />}
+                        onClick={() => {
+                          dispatch(showModal());
+                        }}
+                      >
+                        Sign In
+                      </Button>
+                    </Menu.Item>
+                  )}
+                  {authData?.token && (
+                    <Menu.Item key="mail5">
+                      <Button
+                        style={{
+                          background: "#f9a602",
+                          marginBottom: "19px",
+                        }}
+                        className="nav-siginIn"
+                        onClick={() =>
+                          Router.push("/dashboard/wallet")
+                        }
+                      >
+                        Dashboard
+                      </Button>
+                    </Menu.Item>
+                  )}
                 </Menu>
               </Drawer>
             </div>

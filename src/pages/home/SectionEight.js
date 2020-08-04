@@ -9,17 +9,12 @@ export default () => (
     <Content
       style={{
         padding: "60px 50px",
-        background: "whitesmoke"
+        background: "whitesmoke",
       }}
     >
       <Services>
         <h3>Our Representatives</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
-        <img
-          src="/assets/prev.png"
-          alt="Previous"
-          className="previous"
-        />
         <Row gutter={[24, 24]}>
           {reps.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
@@ -39,7 +34,6 @@ export default () => (
             </Col>
           ))}
         </Row>
-        <img src="/assets/next.png" alt="Next" className="next" />
       </Services>
     </Content>
   </SectionEight>
@@ -52,7 +46,7 @@ const reps = [
     role: "Manager",
     company: "SpreadPro Calabar ",
     phone: "+234 789096373",
-    email: "admin@Sp.com"
+    email: "admin@Sp.com",
   },
   {
     image: "/assets/rep1.png",
@@ -60,7 +54,7 @@ const reps = [
     role: "Manager",
     company: "SpreadPro Calabar ",
     phone: "+234 789096373",
-    email: "admin@Sp.com"
+    email: "admin@Sp.com",
   },
   {
     image: "/assets/rep1.png",
@@ -68,6 +62,6 @@ const reps = [
     role: "Manager",
     company: "SpreadPro Calabar ",
     phone: "+234 789096373",
-    email: "admin@Sp.com"
-  }
+    email: "admin@Sp.com",
+  },
 ];

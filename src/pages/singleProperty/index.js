@@ -11,25 +11,25 @@ import {
   Modal,
 } from "antd";
 import ImageGallery from "react-image-gallery";
-import Map from "../../components/Map";
+import Map from "components/Map";
 import { usePaystackPayment } from "react-paystack";
-import Ammenities from "../../constants/ammenities";
-import OnlineInspection from "../../components/modals/onlineInspection";
-import SaveForProperty from "../../components/modals/saveforproperty";
-import OutrightPayment from "../../components/modals/outrightPayment";
+import Ammenities from "constants/ammenities";
+import OnlineInspection from "components/modals/onlineInspection";
+import SaveForProperty from "components/modals/saveforproperty";
+import OutrightPayment from "components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
-import RealEstateMockData from "../../data/realEstate.json";
-import AgentsMockData from "../../data/agents.json";
-import ContactForm from "../../components/forms/contact";
+import RealEstateMockData from "data/realEstate.json";
+import AgentsMockData from "data/agents.json";
+import ContactForm from "components/forms/contact";
 import {
   getHouse,
   onlineInspection,
   verifyPayment,
   outrightPayment,
-} from "../../store/properties/actions";
-import { showModal } from "../../store/modal/action";
+} from "store/properties/actions";
+import { showModal } from "store/modal/action";
 import { useRouter } from "next/router";
-import { store } from "../../store";
+import { store } from "store";
 
 const { Meta } = Card;
 
@@ -53,6 +53,7 @@ const PropertyDetail = () => {
   const {
     auth: { data },
   } = store.getState();
+  const [paymentMethod, setPaymentMethod] = useState(false);
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
@@ -218,10 +219,70 @@ const PropertyDetail = () => {
         title="ONLINE INSPECTION"
         visible={onlineInspectionModal}
         onCancel={() => setOnlineInspection(!onlineInspectionModal)}
-        onOk={() => initializePayment(onSuccess)}
+        onOk={() => setPaymentMethod(!paymentMethod)}
         okText="Submit"
       >
         <OnlineInspection email={user?.email} />
+      </Modal>
+      <Modal
+        title="PAYMENT METHOD"
+        visible={paymentMethod}
+        onCancel={() => setPaymentMethod(!paymentMethod)}
+        footer={null}
+      >
+        <>
+          <div
+            style={{
+              width: "312px",
+              background: "#F5F4F4",
+              display: "flex",
+              textAlign: "left",
+              margin: "15px auto",
+              cursor: "pointer",
+            }}
+            onClick={() => initializePayment(onSuccess)}
+          >
+            <span style={{ width: "254px" }}>
+              <p style={{ margin: "0", padding: "15px" }}>
+                {" "}
+                Pay Via Paystack
+              </p>
+            </span>
+            <span
+              style={{
+                borderLeft: "1px solid #C4C4C4",
+                padding: "10px",
+              }}
+            >
+              <img src="/assets/icons/save.png" alt="iconic" />
+            </span>
+          </div>
+          <div
+            style={{
+              width: "312px",
+              background: "#F5F4F4",
+              display: "flex",
+              textAlign: "left",
+              marginTop: "10px",
+              margin: "auto",
+            }}
+          >
+            <span style={{ width: "254px" }}>
+              <p style={{ margin: "0", padding: "15px" }}>
+                {" "}
+                E-Wallet
+              </p>
+            </span>
+            <span
+              style={{
+                borderLeft: "1px solid #C4C4C4",
+                padding: "10px",
+              }}
+            >
+              <img src="/assets/icons/save1.png" alt="iconic" />
+            </span>
+          </div>
+        </>
       </Modal>
       <Modal
         title="OUTRIGHT PAYMENT"

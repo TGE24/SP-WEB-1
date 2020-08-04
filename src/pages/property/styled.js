@@ -3,6 +3,21 @@ import styled from "styled-components";
 export const PropertyContainer = styled.div`
   width: 100%;
 `;
+export const LoaderCont = styled.div`
+  display: flex;
+  .load {
+    margin-left: 10px;
+  }
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    .load {
+      padding-bottom: 10px;
+    }
+  }
+`;
 export const PropSectionOne = styled.section`
   width: 100%;
   height: 80vh;
@@ -29,17 +44,11 @@ export const PropSectionOne = styled.section`
       color: #ffffff;
       font-size: 20px;
     }
-    // .search {
-    //   width: calc(100% - 10px);
-    //   margin-left: 17rem;
-    //   @media screen and (max-width: 767px) {
-    //     margin-left: 2rem;
-    //   }
-    // }
     @media screen and (max-width: 767px) {
       h1 {
         font-size: 36px;
         margin: 0;
+        text-align: center;
       }
       h2 {
         font-size: 17px;
@@ -69,6 +78,7 @@ export const PropSectionTwo = styled.section`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 30px;
     h1 {
       font-weight: 600;
       font-size: 30px;
@@ -83,7 +93,8 @@ export const PropSectionTwo = styled.section`
       justify-content: ;
     }
     .sort-by {
-      .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+      .ant-select-single:not(.ant-select-customize-input)
+        .ant-select-selector {
         border: none !important;
       }
       .ant-select-selection-selected-value {
@@ -106,7 +117,7 @@ export const PropSectionTwo = styled.section`
       }
       .apartment {
         position: absolute;
-        top: 0;
+        top: 2%;
         left: 72%;
         width: 68px;
         display: flex;
@@ -124,7 +135,7 @@ export const PropSectionTwo = styled.section`
       .feature {
         position: absolute;
         left: 0;
-        top: 137px;
+        top: 150px;
         width: 68px;
         display: flex;
         height: 24px;

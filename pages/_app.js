@@ -23,7 +23,7 @@ const ToastConfig = {
   bodyClassName: "toast__body",
   hideProgressBar: true,
   closeButton: false,
-  position: toast.POSITION.TOP_RIGHT,
+  position: toast.POSITION.TOP_LEFT,
 };
 
 // configure global toaster

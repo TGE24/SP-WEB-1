@@ -14,7 +14,7 @@ export default () => (
       <Services>
         <h3>Best Real Estate Locations</h3>
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
-        <img src="/assets/prev.png" alt="Previous" className="previous" />
+        {/* <img src="/assets/prev.png" alt="Previous" className="previous" /> */}
         <Row gutter={[16, 16]}>
           {locations.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
@@ -45,7 +45,7 @@ export default () => (
             </Col>
           ))}
         </Row>
-        <img src="/assets/next.png" alt="Next" className="next" />
+        {/* <img src="/assets/next.png" alt="Next" className="next" /> */}
       </Services>
     </Content>
   </SectionFour>

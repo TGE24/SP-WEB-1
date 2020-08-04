@@ -43,7 +43,7 @@ export default ({ HousesProp }) => {
           </Select>
         </div>
       </div>
-      <Row gutter={[18, 16]}>
+      <Row gutter={[18, 26]}>
         {loading && <Loader />}
         {houses?.map((item, index) => (
           <Link

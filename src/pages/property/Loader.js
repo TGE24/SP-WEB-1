@@ -1,16 +1,17 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
+import { LoaderCont } from "./styled";
 
 export default function ListLoader({ number = 4 }) {
   const list = [...Array(number).keys()];
 
   return (
-    <div style={{ display: "flex" }}>
+    <LoaderCont>
       {list.map((_, index) => (
-        <div style={{ marginLeft: 10 }} key={index}>
+        <div className="load" key={index}>
           <Skeleton width={269} height={290} />
         </div>
       ))}
-    </div>
+    </LoaderCont>
   );
 }
