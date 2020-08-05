@@ -4,14 +4,16 @@ import RightMenu from "./rightmenu";
 import styled from "styled-components";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
-import SignIn from "../../components/modals/signIn";
-import SignUp from "../../components/modals/signUp";
+import SignIn from "components/modals/signIn";
+import SignUp from "components/modals/signUp";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../../../store/modal/action";
+import { closeModal, showModal } from "store/modal/action";
+import { store } from "store";
+import Router from "next/router";
 
 const Wrap = styled.div`
   .ant-affix {
@@ -70,7 +72,13 @@ const Navbar = () => {
   const [showDrawer, setShowDrawer] = useState(showsignup);
   const show = useSelector((state) => state.modal.show);
   const showsignup = useSelector((state) => state.modal.signup);
-  const [showModal, setShowModal] = useState(show);
+  const {
+    user: { data },
+  } = store.getState();
+
+  const {
+    auth: { data: authData },
+  } = store.getState();
 
   const drawer = () => {
     setVisible(!visible);
@@ -106,7 +114,10 @@ const Navbar = () => {
         }}
         footer={null}
       >
-        <SignUp />
+        <SignUp
+          setShowDrawer={setShowDrawer}
+          showDrawer={showDrawer}
+        />
       </Drawer>
       <Modal
         title="LOGIN"
@@ -140,8 +151,26 @@ const Navbar = () => {
           position: "absolute",
           width: "-webkit-fill-available",
           zIndex: 10,
+          width: "100%",
         }}
       >
+        {data && !data?.user?.verified ? (
+          <div
+            style={{
+              background: "orange",
+              textAlign: "center",
+              padding: "5px 0",
+            }}
+          >
+            We sent you an activation code check your email and click
+            the link to verify. Didn't receive email?{" "}
+            <span style={{ textDecoration: "underline" }}>
+              Resend Mail
+            </span>
+          </div>
+        ) : (
+          ""
+        )}
         <Affix
           offsetTop={0}
           onChange={(affixed) => {
@@ -215,9 +244,8 @@ const Navbar = () => {
                 closable={false}
                 onClose={onClose}
                 visible={visible}
-                bodyStyle={{ textAlign: "center" }}
               >
-                <Menu mode="vertical">
+                <Menu mode="vertical" style={{ textAlign: "center" }}>
                   <Menu.Item key="mail">
                     <Link href="/">
                       <a>Home</a>
@@ -243,16 +271,36 @@ const Navbar = () => {
                       <a>Careers</a>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item key="mail5">
-                    <Button
-                      style={{ background: "#f9a602" }}
-                      className="nav-siginIn"
-                      icon={<LockOutlined />}
-                      onClick={() => setShowModal(!showModal)}
-                    >
-                      Sign In
-                    </Button>
-                  </Menu.Item>
+                  {!authData?.token && (
+                    <Menu.Item key="mail5">
+                      <Button
+                        style={{ background: "#f9a602" }}
+                        className="nav-siginIn"
+                        icon={<LockOutlined />}
+                        onClick={() => {
+                          dispatch(showModal());
+                        }}
+                      >
+                        Sign In
+                      </Button>
+                    </Menu.Item>
+                  )}
+                  {authData?.token && (
+                    <Menu.Item key="mail5">
+                      <Button
+                        style={{
+                          background: "#f9a602",
+                          marginBottom: "19px",
+                        }}
+                        className="nav-siginIn"
+                        onClick={() =>
+                          Router.push("/dashboard/wallet")
+                        }
+                      >
+                        Dashboard
+                      </Button>
+                    </Menu.Item>
+                  )}
                 </Menu>
               </Drawer>
             </div>

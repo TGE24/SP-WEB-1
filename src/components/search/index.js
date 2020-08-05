@@ -41,7 +41,7 @@ const Demo = () => {
           >
             <Select
               showSearch
-              style={{ width: 250, marginBottom: "16px" }}
+              style={{ width: 250 }}
               placeholder="Select a location"
               optionFilterProp="children"
             >
@@ -62,7 +62,7 @@ const Demo = () => {
           >
             <Select
               showSearch
-              style={{ width: 250, marginBottom: "16px" }}
+              style={{ width: 250 }}
               placeholder="Select a property type"
               optionFilterProp="children"
             >
@@ -83,7 +83,7 @@ const Demo = () => {
           >
             <Select
               showSearch
-              style={{ width: 250, marginBottom: "16px" }}
+              style={{ width: 250 }}
               placeholder="Select a price range"
               optionFilterProp="children"
             >

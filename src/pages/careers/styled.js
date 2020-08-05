@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import careers from ".";
 
 export const CareerSectionOne = styled.section`
   width: 100%;

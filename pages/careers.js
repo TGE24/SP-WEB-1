@@ -1,3 +1,10 @@
-import Careers from "../src/pages/careers";
+import Careers from "pages/careers";
+import Layout from "components/Layout";
 
-export default Careers;
+export default () => {
+  return (
+    <Layout>
+      <Careers />
+    </Layout>
+  );
+};

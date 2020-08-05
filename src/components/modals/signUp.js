@@ -5,11 +5,10 @@ import {
   UserOutlined,
   PhoneOutlined,
 } from "@ant-design/icons";
-import { signup } from "../../../store/auth/action";
-import { closeSignup } from "../../../store/modal/action";
+import { signup } from "store/auth/action";
 import { useDispatch, useSelector } from "react-redux";
 
-const NormalLoginForm = (props) => {
+const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
   const [formData, setFormData] = useState({});
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -17,9 +16,15 @@ const NormalLoginForm = (props) => {
   const onFinish = (values) => {
     delete values.dob;
     const submitData = { ...formData, ...values };
-    dispatch(signup(submitData)).then((res) => {
-      dispatch(closeSignup());
-    });
+    dispatch(signup(submitData))
+      .then((res) => {
+        if (res?.value?.status) {
+          setShowDrawer(!showDrawer);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <Form name="signup" className="signup-form" onFinish={onFinish}>

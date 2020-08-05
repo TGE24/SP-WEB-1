@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Select } from "antd";
+import { Row, Col } from "antd";
 import { CareerSectionFour } from "./styled";
 
 export default () => {
