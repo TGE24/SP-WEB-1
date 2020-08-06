@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select, Modal, Form } from "antd";
 import DashBoardBody from "styles/dashbord_body";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { usePaystackPayment } from "react-paystack";
-import { fundWallet } from "store/wallet/actions";
+import { fundWallet, getTransaction } from "store/wallet/actions";
 import { toastSuccess } from "helpers/Toast";
 import NumberFormat from "react-number-format";
 import { store } from "store";
+import { formatMoney } from "helpers/formatter";
+import { getUser } from "store/user/actions";
 
 const { Option } = Select;
 function handleChange(value) {
@@ -20,7 +22,15 @@ export default function Wallet() {
   const [charges, setCharges] = useState(0);
   const [actualAmount, setactualAmount] = useState(0);
   const [formData, setFormData] = useState({});
+  const wallet = useSelector((state) => state.wallet.data);
+  const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
+  let walletBalance = formatMoney(userData?.user?.property_balance?.balance);
+  useEffect(() => {
+    dispatch(getTransaction());
+  }, [dispatch]);
+
+  console.log(wallet);
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
@@ -35,11 +45,12 @@ export default function Wallet() {
     setFormData({ ...formData });
     dispatch(fundWallet(formData)).then(() => {
       setVisible(false);
-      toastSuccess(
-        `You have Added ${actualAmount - charges} to your wallet`
-      );
+      toastSuccess(`You have Added ${actualAmount - charges} to your wallet`);
+      dispatch(getTransaction());
+      dispatch(getUser());
     });
   };
+
   return (
     <>
       <Modal
@@ -53,9 +64,7 @@ export default function Wallet() {
           <Form.Item
             name="amount"
             label="Amount"
-            rules={[
-              { required: true, message: "Please enter An amount" },
-            ]}
+            rules={[{ required: true, message: "Please enter An amount" }]}
           >
             <NumberFormat
               thousandSeparator={true}
@@ -91,7 +100,7 @@ export default function Wallet() {
               </div>
               <h3>{data?.user?.name}</h3>
               <h2>Current account balance:</h2>
-              <h1>15,000.00</h1>
+              <h1>₦{walletBalance}</h1>
             </div>
             <div className="wallet-card">
               <img src="/assets/img/wold.png" alt="" />
@@ -134,58 +143,40 @@ export default function Wallet() {
             </div>
           </div>
           <div className="card-container">
-            {TranactionHistory.map((items, index) => {
-              switch (items.type) {
-                case "Add":
-                  return (
-                    <div
-                      className="transaction-card"
-                      style={{ borderLeft: "10px solid green" }}
-                      key={index}
+            {wallet?.data.map((items, index) => {
+              const time = new Date(items.created_at).toDateString();
+              const money = formatMoney(items.amount);
+              return (
+                <div
+                  className="transaction-card"
+                  style={{
+                    borderLeft:
+                      items.type === "credit"
+                        ? "10px solid green"
+                        : "10px solid #EB5757",
+                  }}
+                  key={index}
+                >
+                  <div className="leading-item">
+                    <h1>{items.description}</h1>
+                    <h2>
+                      {items.type === "credit"
+                        ? "Funded from your credit card"
+                        : ""}
+                    </h2>
+                  </div>
+                  <div className="trailing-item">
+                    <h1
+                      style={{
+                        color: items.type === "credit" ? "green" : " #EB5757",
+                      }}
                     >
-                      <div className="leading-item">
-                        <h1>{items.title}</h1>
-                        <h2>{items.descriptions}</h2>
-                      </div>
-                      <div className="trailing-item">
-                        <h1 style={{ color: "green" }}>N20,000</h1>
-                        <div className="date">{items.date}</div>
-                      </div>
-                    </div>
-                  );
-
-                case "purchases":
-                  return (
-                    <div
-                      className="transaction-card"
-                      style={{ borderLeft: "10px solid #EB5757" }}
-                      key={index}
-                    >
-                      <div className="leading-item">
-                        <h1>{items.title}</h1>
-                        <h2>{items.descriptions}</h2>
-                      </div>
-                      <div className="trailing-item">
-                        <h1 style={{ color: "#EB5757" }}>N20,000</h1>
-                        <div className="date">{items.date}</div>
-                      </div>
-                    </div>
-                  );
-
-                default:
-                  return (
-                    <div className="transaction-card" key={index}>
-                      <div className="leading-item">
-                        <h1>{items.title}</h1>
-                        <h2>{items.descriptions}</h2>
-                      </div>
-                      <div className="trailing-item">
-                        <h1>N20,000</h1>
-                        <div className="date">{items.date}</div>
-                      </div>
-                    </div>
-                  );
-              }
+                      ₦{money}
+                    </h1>
+                    <div className="date">{time}</div>
+                  </div>
+                </div>
+              );
             })}
           </div>
         </DashBoardBody.WalletRecentActivity>
