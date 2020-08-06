@@ -13,8 +13,8 @@ export const logout = () => (dispatch) => {
   return dispatch({ type: authActionTypes.RESET });
 };
 
-export const verify = (email, token) => async (dispatch) => {
-  const payload = api.get("/token/" + token + "/verify", email);
+export const verify = (token) => async (dispatch) => {
+  const payload = api.get("/token/" + token + "/verify");
   return dispatch({
     type: authActionTypes.VERIFY_EMAIL.default,
     payload,

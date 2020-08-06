@@ -3,8 +3,8 @@ import actionTypes from "./type";
 import { store } from "store";
 import axios from "axios";
 
-export const getHouses = () => async (dispatch) => {
-  const payload = api.get("/houses?page=" + 1 + "&per_page=" + 1);
+export const getHouses = (page) => async (dispatch) => {
+  const payload = api.get("/houses?page=" + page + "&limit=" + 8);
   return dispatch({
     type: actionTypes.GET_HOUSES.default,
     payload,

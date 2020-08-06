@@ -107,6 +107,7 @@ export const PropSectionTwo = styled.section`
 
   .prop-cards {
     width: 98%;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     .image {
@@ -151,6 +152,7 @@ export const PropSectionTwo = styled.section`
       }
     }
     .prop-details {
+      height: 63px;
       background: #ffffff;
       box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
       h2 {
