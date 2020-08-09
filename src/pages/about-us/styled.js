@@ -136,9 +136,11 @@ export const AboutUsContainer = styled.section`
       .side-text {
         width: 100%;
         height: auto;
-        box-shadow: 3.52588px 3.52588px 8.81471px rgba(81, 92, 111, 0.12);
+        box-shadow: 3.52588px 3.52588px 8.81471px
+          rgba(81, 92, 111, 0.12);
         margin-left: 0;
-
+        padding: 13px 10px;
+        text-align: justify;
         h1 {
           font-size: 26px;
         }
@@ -158,7 +160,7 @@ export const AboutUsContainer = styled.section`
   .sectionFour {
     margin: 0 9rem;
     width: 78.7%;
-    height: 461px;
+    // height: 461px;
     background: linear-gradient(
       180deg,
       #f5f4f4 33.8%,
@@ -175,6 +177,7 @@ export const AboutUsContainer = styled.section`
       h2 {
         font-size: 16px;
         color: #797979;
+        line-height: 1.5;
       }
     }
     .right-content {
@@ -203,7 +206,6 @@ export const AboutUsContainer = styled.section`
     @media screen and (max-width: 767px) {
       margin: 0;
       width: 100%;
-      height: 506px;
       .left-content {
         margin: 1rem 0 0 2rem;
       }
@@ -216,7 +218,7 @@ export const AboutUsContainer = styled.section`
       .right-content {
         .image {
           img {
-            height: 418px;
+            // height: 418px;
           }
         }
       }

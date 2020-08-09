@@ -13,16 +13,6 @@ function handleChange(value) {
   console.log(`selected ${value}`);
 }
 
-function itemRender(current, type, originalElement) {
-  if (type === "prev") {
-    return <a>Previous</a>;
-  }
-  if (type === "next") {
-    return <a>Next</a>;
-  }
-  return originalElement;
-}
-
 export default () => {
   const [housesArr, setHouses] = useState([]);
   const [pagination, setPagination] = useState();
@@ -95,9 +85,6 @@ export default () => {
                         {item?.house_subcategory?.subcategory_name}
                       </h4>
                     </div>
-                    <div className="feature">
-                      <h4>Featured</h4>
-                    </div>
                   </div>
 
                   <div className="prop-details">
@@ -114,7 +101,7 @@ export default () => {
                   </div>
                   <div className="prop-icons">
                     {item?.amenities
-                      .slice(0, 5)
+                      .slice(0, 4)
                       .map((item, index) => (
                         <div className="icon" key={index}>
                           <h4>
@@ -143,11 +130,12 @@ export default () => {
       </Row>
       <Pagination
         total={pagination}
-        itemRender={itemRender}
+        current={page}
         onChange={(page) => {
           setPage(page);
         }}
         hideOnSinglePage={true}
+        style={{ textAlign: "center" }}
       />
     </PropSectionTwo>
   );

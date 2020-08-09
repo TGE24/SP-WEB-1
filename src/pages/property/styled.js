@@ -89,8 +89,11 @@ export const PropSectionTwo = styled.section`
       }
     }
     @media screen and (max-width: 767px) {
-      flex-direction: column;
-      justify-content: ;
+      flex-direction: row;
+      justify-content: space-between;
+      h1 {
+        padding-top: 5px;
+      }
     }
     .sort-by {
       .ant-select-single:not(.ant-select-customize-input)

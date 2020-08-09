@@ -25,6 +25,7 @@ export const Services = styled.div`
     p {
       width: 238px;
       font-size: 15px;
+      line-height: 1.5;
     }
     h4 {
       font-size: 18px;
@@ -56,6 +57,7 @@ export const Services = styled.div`
       p {
         width: 100%;
         font-size: 12px;
+        line-height: 1.5;
       }
       h4 {
         font-size: 18px;
