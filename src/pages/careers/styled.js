@@ -30,6 +30,9 @@ export const CareerSectionOne = styled.section`
     @media screen and (max-width: 767px) {
       h1 {
         font-size: 26px;
+        width: 70%;
+        margin-bottom: 15px;
+        margin-top: 40px;
       }
       h2 {
         font-size: 12px;
@@ -209,7 +212,7 @@ export const CareerSectionFour = styled.section`
   .sectionFour {
     margin: 0 9rem;
     width: 78.7%;
-    height: 461px;
+    // height: 461px;
 
     .left-content {
       margin: 6rem 0 0 2rem;
@@ -222,6 +225,7 @@ export const CareerSectionFour = styled.section`
       h2 {
         font-size: 16px;
         color: #797979;
+        line-height: 1.8;
       }
     }
     .right-content {
@@ -250,7 +254,6 @@ export const CareerSectionFour = styled.section`
     @media screen and (max-width: 767px) {
       margin: 0;
       width: 100%;
-      height: 506px;
       .left-content {
         margin: 1rem 0 0 2rem;
       }
@@ -263,7 +266,7 @@ export const CareerSectionFour = styled.section`
       .right-content {
         .image {
           img {
-            height: 418px;
+            // height: 418px;
           }
         }
       }

@@ -1,5 +1,5 @@
 import { Layout, Row, Col } from "antd";
-import { Services, SectionTwo } from "./styled";
+import { Services, SectionTwo } from "./style";
 import Flip from "react-reveal/Flip";
 
 const { Content } = Layout;

@@ -44,6 +44,7 @@ const Contacts = styled.div`
     }
   }
   @media (max-width: 767px) {
+    display: none;
     padding: 6px;
     font-size: 8px;
     justify-content: space-between;
@@ -235,15 +236,18 @@ const Navbar = () => {
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}
               </Button>
-              <Drawer
+              <div
                 style={{
-                  marginTop: `${visible ? "79px" : 0}`,
-                  height: "300px !important",
+                  visibility: `${visible ? "visible" : "hidden"}`,
+                  opacity: `${visible ? 1 : 0}`,
+                  height: `${visible ? "300px" : "0"}`,
+                  top: "calc(100% - 1px)",
+                  position: "absolute",
+                  width: "100%",
+                  left: "0",
+                  transition:
+                    "opacity 600ms, visibility 600ms, height 300ms",
                 }}
-                placement="top"
-                closable={false}
-                onClose={onClose}
-                visible={visible}
               >
                 <Menu mode="vertical" style={{ textAlign: "center" }}>
                   <Menu.Item key="mail">
@@ -302,7 +306,7 @@ const Navbar = () => {
                     </Menu.Item>
                   )}
                 </Menu>
-              </Drawer>
+              </div>
             </div>
           </nav>
         </Affix>

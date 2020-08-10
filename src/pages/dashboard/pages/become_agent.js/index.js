@@ -7,6 +7,8 @@ import States from "data/states.json";
 import { useDispatch } from "react-redux";
 import { toastSuccess } from "helpers/Toast";
 import { becomeAgent } from "store/user/actions";
+import { getUser } from "store/user/actions";
+import Router from "next/router";
 
 export default function ChangePassword() {
   const dispatch = useDispatch();
@@ -86,9 +88,8 @@ export default function ChangePassword() {
           toastSuccess(
             `Agent ${values.name} was created successfully`
           );
-          // history.push({
-          //   pathname: "/admin/agent",
-          // });
+          dispatch(getUser());
+          Router.push("/dashboard/wallet");
         }
       });
     },

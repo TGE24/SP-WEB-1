@@ -1,14 +1,14 @@
 import React from "react";
 import SectionOne from "./sectionOne";
-import SectionTwo from "../home/SectionTwo";
+import SectionTwo from "./sectionTwo";
 
 import SectionThree from "./sectionThree";
 export default () => {
-	return (
-		<>
-			<SectionOne />
-			<SectionTwo />
-			<SectionThree />
-		</>
-	);
+  return (
+    <>
+      <SectionOne />
+      <SectionTwo />
+      <SectionThree />
+    </>
+  );
 };

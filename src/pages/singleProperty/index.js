@@ -30,6 +30,7 @@ import {
 import { showModal } from "store/modal/action";
 import { useRouter } from "next/router";
 import { store } from "store";
+import { toastSuccess } from "helpers/Toast";
 
 const { Meta } = Card;
 
@@ -84,6 +85,52 @@ const PropertyDetail = () => {
       dispatch(getHouse(pid));
     }
   }, [dispatch, pid]);
+
+  const onWalletPayment = () => {
+    dispatch(
+      onlineInspection({
+        wallet: true,
+        payment_plan: "online-inspection",
+        property_slug: config.metadata.property_slug,
+        amount: 1000,
+        property_type: "house",
+        email: config.email,
+        reference: config.reference,
+      })
+    ).then((res) => {
+      if (res?.value?.status === 200) {
+        setPaymentMethod(!paymentMethod);
+        setOnlineInspection(!onlineInspectionModal);
+        dispatch(getHouse(pid));
+        toastSuccess(
+          "Online inspection payment from wallet successful"
+        );
+      }
+    });
+  };
+
+  const onOutrightWalletPayment = () => {
+    dispatch(
+      onlineInspection({
+        wallet: true,
+        payment_plan: "outright",
+        property_slug: outrightConfig.metadata.property_slug,
+        amount: houseDetails?.price,
+        property_type: "house",
+        email: outrightConfig.email,
+        reference: outrightConfig.reference,
+      })
+    ).then((res) => {
+      if (res?.value?.status === 200) {
+        setPaymentMethod(!paymentMethod);
+        setOnlineInspection(!outrightPaymentModal);
+        setPaymentPlan(!paymentPlan);
+        // dispatch(getHouse(pid));
+        router.push("/properties");
+        toastSuccess("Property payment from wallet successful");
+      }
+    });
+  };
 
   const onSuccess = (res) => {
     dispatch(verifyPayment(res.reference)).then((response) => {
@@ -240,7 +287,11 @@ const PropertyDetail = () => {
               margin: "15px auto",
               cursor: "pointer",
             }}
-            onClick={() => initializePayment(onSuccess)}
+            onClick={() => {
+              !outrightPaymentModal
+                ? initializePayment(onSuccess)
+                : initializeOutrightPayment(onOutrightSuccess);
+            }}
           >
             <span style={{ width: "254px" }}>
               <p style={{ margin: "0", padding: "15px" }}>
@@ -265,6 +316,12 @@ const PropertyDetail = () => {
               textAlign: "left",
               marginTop: "10px",
               margin: "auto",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              outrightPaymentModal
+                ? onOutrightWalletPayment()
+                : onWalletPayment();
             }}
           >
             <span style={{ width: "254px" }}>
@@ -288,7 +345,8 @@ const PropertyDetail = () => {
         title="OUTRIGHT PAYMENT"
         visible={outrightPaymentModal}
         onCancel={() => setOutrightPayment(!outrightPaymentModal)}
-        onOk={() => initializeOutrightPayment(onOutrightSuccess)}
+        // onOk={() => initializeOutrightPayment(onOutrightSuccess)}
+        onOk={() => setPaymentMethod(!paymentMethod)}
         okText="Submit"
       >
         <OutrightPayment
@@ -448,65 +506,6 @@ const PropertyDetail = () => {
                   </Button>
                 </span>
               </div>
-              {/* <div className="features">
-                <span
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src="/assets/f1.png"
-                    alt="feature"
-                    width="min-content"
-                  />
-                  <p>Bedroom</p>
-                </span>
-                <span
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src="/assets/f2.png"
-                    alt="feature"
-                    width="min-content"
-                  />
-                  <p>Rooms</p>
-                </span>
-                <span
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src="/assets/f3.png"
-                    alt="feature"
-                    width="min-content"
-                  />
-                  <p>Square Ft</p>
-                </span>
-                <span
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <img
-                    src="/assets/f1.png"
-                    alt="feature"
-                    width="min-content"
-                  />
-                  <p>Bathrooms</p>
-                </span>
-              </div>
-               */}
               <ImageGallery
                 showPlayButton={false}
                 autoPlay={true}
