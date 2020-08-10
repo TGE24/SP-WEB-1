@@ -143,7 +143,7 @@ export default function Wallet() {
             </div>
           </div>
           <div className="card-container">
-            {wallet?.data.map((items, index) => {
+            {wallet?.data?.data.map((items, index) => {
               const time = new Date(items.created_at).toDateString();
               const money = formatMoney(items.amount);
               return (
