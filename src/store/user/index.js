@@ -36,6 +36,7 @@ export const userReducer = (state = initialState, action) => {
       };
     }
 
+    // become agent
     case userActionTypes.BECOME_AGENT.pending: {
       return {
         ...state,
@@ -51,6 +52,28 @@ export const userReducer = (state = initialState, action) => {
       };
     }
     case userActionTypes.BECOME_AGENT.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+    // become expert
+    case userActionTypes.BECOME_EXPERT.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case userActionTypes.BECOME_EXPERT.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+    }
+    case userActionTypes.BECOME_EXPERT.rejected: {
       return {
         ...state,
         loading: false,

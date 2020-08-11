@@ -59,9 +59,7 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
                 <li
                   key={index}
                   className={
-                    window.location.pathname === `${link.path}`
-                      ? "active"
-                      : ""
+                    window.location.pathname === `${link.path}` ? "active" : ""
                   }
                 >
                   <img src={link.icon} alt={link.name} />
@@ -80,9 +78,7 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
                 <li
                   key={index}
                   className={
-                    window.location.pathname === `${link.path}`
-                      ? "active"
-                      : ""
+                    window.location.pathname === `${link.path}` ? "active" : ""
                   }
                 >
                   <img src={link.icon} alt={link.name} />
@@ -132,19 +128,17 @@ const userLink = [
     matchPaths: ["/dashboard/mortgage"],
   },
   {
-    name: "Build With SpreadPro",
-    path: "/dashboard/build-spreadpro",
+    name: "My Expertise",
+    path: "/dashboard/become-expert",
     icon: "/assets/img/properties.png",
-    matchPaths: ["/dashboard/build-spreadpro"],
+    matchPaths: ["/dashboard/become-expert"],
   },
+
   {
     name: "Account Setting",
     path: "/dashboard/account-settings",
     icon: "/assets/img/account.png",
-    matchPaths: [
-      "/dashboard/account-settings",
-      "/dashboard/change-password",
-    ],
+    matchPaths: ["/dashboard/account-settings", "/dashboard/change-password"],
   },
   {
     name: "Become an agent",
@@ -186,18 +180,15 @@ const agentLink = [
     matchPaths: ["dashboard/mortgage"],
   },
   {
-    name: "Build With SpreadPro",
-    path: "/dashboard/build-spreadpro",
+    name: "My Expertise",
+    path: "/dashboard/become-expert",
     icon: "/assets/img/properties.png",
-    matchPaths: ["dashboard/build-spreadpro"],
+    matchPaths: ["/dashboard/become-expert"],
   },
   {
     name: "Account Setting",
     path: "/dashboard/account-settings",
     icon: "/assets/img/account.png",
-    matchPaths: [
-      "/dashboard/account-setting",
-      "/dashboard/change-password",
-    ],
+    matchPaths: ["/dashboard/account-setting", "/dashboard/change-password"],
   },
 ];

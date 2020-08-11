@@ -16,3 +16,10 @@ export const becomeAgent = ({ ...data }) => (dispatch) => {
     payload,
   });
 };
+export const becomeExpert = ({ ...data }) => (dispatch) => {
+  const payload = api.post("/expert", { ...data });
+  return dispatch({
+    type: userActionTypes.BECOME_EXPERT.default,
+    payload,
+  });
+};
