@@ -11,9 +11,7 @@ import { formatMoney } from "helpers/formatter";
 import { getUser } from "store/user/actions";
 
 const { Option } = Select;
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
+function handleChange(value) {}
 export default function Wallet() {
   const {
     user: { data },
@@ -29,8 +27,6 @@ export default function Wallet() {
   useEffect(() => {
     dispatch(getTransaction());
   }, [dispatch]);
-
-  console.log(wallet);
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
@@ -50,8 +46,6 @@ export default function Wallet() {
       dispatch(getUser());
     });
   };
-  const timeoo = new Date(userData?.user?.property_balance?.updated_at);
-  console.log(userData?.user?.property_balance?.updated_at);
 
   return (
     <>
