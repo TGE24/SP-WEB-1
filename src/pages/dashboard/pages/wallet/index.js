@@ -50,6 +50,8 @@ export default function Wallet() {
       dispatch(getUser());
     });
   };
+  const timeoo = new Date(userData?.user?.property_balance?.updated_at);
+  console.log(userData?.user?.property_balance?.updated_at);
 
   return (
     <>

@@ -5,6 +5,7 @@ import modalReducer from "./modal";
 import userReducer from "./user";
 import walletReducer from "./wallet";
 import reservedReducer from "./reserved_propety";
+import careersReducer from "./career";
 
 export default combineReducers({
   auth: authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   user: userReducer,
   wallet: walletReducer,
   reserved: reservedReducer,
+  careers: careersReducer,
 });
