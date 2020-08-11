@@ -86,7 +86,6 @@ export default function ChangePassword() {
                 label="CAREER TYPE"
                 options={career_id}
                 onChange={(e) => {
-                  console.log(e.target.value);
                   form.setFieldValue("career_id", e.target.value);
                 }}
                 value={form.values.career_id}
