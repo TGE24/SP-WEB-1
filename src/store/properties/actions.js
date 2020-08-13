@@ -11,6 +11,29 @@ export const getHouses = (page) => async (dispatch) => {
   });
 };
 
+export const getLands = (page) => async (dispatch) => {
+  const payload = api.get("/lands?page=" + page + "&limit=" + 8);
+  return dispatch({
+    type: actionTypes.GET_LANDS.default,
+    payload,
+  });
+};
+
+export const getLand = (landSlug) => async (dispatch) => {
+  const {
+    auth: { data },
+  } = store.getState();
+  let payload;
+  data?.token
+    ? (payload = api.get("/user/land/" + landSlug))
+    : (payload = api.get("/land/auth_false/" + landSlug));
+
+  return dispatch({
+    type: actionTypes.GET_LAND.default,
+    payload,
+  });
+};
+
 export const getHouse = (houseSlug) => async (dispatch) => {
   const {
     auth: { data },

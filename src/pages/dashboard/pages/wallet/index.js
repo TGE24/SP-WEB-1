@@ -25,12 +25,12 @@ export default function Wallet() {
   const wallet = useSelector((state) => state.wallet.data);
   const userData = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
-  let walletBalance = formatMoney(userData?.user?.property_balance?.balance);
+  let walletBalance = formatMoney(
+    userData?.user?.property_balance?.balance
+  );
   useEffect(() => {
     dispatch(getTransaction());
   }, [dispatch]);
-
-  console.log(wallet);
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
@@ -45,7 +45,9 @@ export default function Wallet() {
     setFormData({ ...formData });
     dispatch(fundWallet(formData)).then(() => {
       setVisible(false);
-      toastSuccess(`You have Added ${actualAmount - charges} to your wallet`);
+      toastSuccess(
+        `You have Added ${actualAmount - charges} to your wallet`
+      );
       dispatch(getTransaction());
       dispatch(getUser());
     });
@@ -64,7 +66,9 @@ export default function Wallet() {
           <Form.Item
             name="amount"
             label="Amount"
-            rules={[{ required: true, message: "Please enter An amount" }]}
+            rules={[
+              { required: true, message: "Please enter An amount" },
+            ]}
           >
             <NumberFormat
               thousandSeparator={true}
@@ -143,7 +147,7 @@ export default function Wallet() {
             </div>
           </div>
           <div className="card-container">
-            {wallet?.data.map((items, index) => {
+            {wallet?.data?.data?.map((items, index) => {
               const time = new Date(items.created_at).toDateString();
               const money = formatMoney(items.amount);
               return (
@@ -168,7 +172,10 @@ export default function Wallet() {
                   <div className="trailing-item">
                     <h1
                       style={{
-                        color: items.type === "credit" ? "green" : " #EB5757",
+                        color:
+                          items.type === "credit"
+                            ? "green"
+                            : " #EB5757",
                       }}
                     >
                       ₦{money}

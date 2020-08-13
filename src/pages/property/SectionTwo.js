@@ -4,54 +4,73 @@ import { PropSectionTwo } from "./styled";
 import Link from "next/link";
 import Ammenities from "../../constants/ammenities";
 import { useSelector, useDispatch } from "react-redux";
-import { getHouses } from "store/properties/actions";
+import { getHouses, getLands } from "store/properties/actions";
 import Loader from "./Loader";
 
 const { Option } = Select;
 
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
-
 export default () => {
   const [housesArr, setHouses] = useState([]);
   const [pagination, setPagination] = useState();
+  const [option, setOption] = useState("Houses");
   const [page, setPage] = useState(1);
   const { loading } = useSelector((state) => state.properties);
-  const houses = useSelector((state) => state.properties.data);
+  const properties = useSelector((state) => state.properties.data);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getHouses(page));
-  }, [dispatch, page]);
+  function handleChange(value) {
+    switch (value) {
+      case "houses":
+        setOption("Houses");
+        break;
+      case "lands":
+        setOption("Lands");
+        break;
+
+      default:
+        setOption("Houses");
+        break;
+    }
+  }
 
   useEffect(() => {
-    setHouses(houses?.houses?.data);
-    setPagination(houses?.houses?.total);
-  }, [houses]);
+    if (option === "Houses") {
+      dispatch(getHouses(page));
+    } else {
+      dispatch(getLands(page));
+    }
+  }, [dispatch, page, option]);
+
+  useEffect(() => {
+    if (option === "Houses") {
+      setHouses(properties?.houses?.data);
+      setPagination(properties?.houses?.total);
+    } else {
+      setHouses(properties?.data?.data);
+      setPagination(properties?.data?.total);
+    }
+  }, [properties, option]);
 
   return (
     <PropSectionTwo>
       <div className="row-head">
-        <h1>Houses for rent</h1>
+        <h1>{option}</h1>
         <div className="sort-by">
-          <img
-            src="../assets/icons/sort-by.png"
-            alt=""
-            className="sort-icon"
-          />
           <Select
             defaultValue="Sorted By"
             style={{ width: 160 }}
             onChange={handleChange}
             className="select-sort"
           >
-            <Option value="jack">General Listing</Option>
-            <Option value="lucy">Spread Exclusive </Option>
-            <Option value="lucy">Mortgage </Option>
-            <Option value="lucy">For Sale </Option>
-            <Option value="lucy">For Rent </Option>
+            <Option value="houses">Houses</Option>
+            <Option value="lands">Lands</Option>
           </Select>
+          <img
+            src="../assets/icons/sort-by.png"
+            alt=""
+            className="sort-icon"
+            height={17}
+          />
         </div>
       </div>
       <Row gutter={[32, 32]}>
@@ -82,7 +101,9 @@ export default () => {
                     />
                     <div className="apartment">
                       <h4>
-                        {item?.house_subcategory?.subcategory_name}
+                        {option === "Houses"
+                          ? item?.house_subcategory?.subcategory_name
+                          : item?.land_category?.land_category}
                       </h4>
                     </div>
                   </div>
@@ -90,38 +111,39 @@ export default () => {
                   <div className="prop-details">
                     <div className="inner-container">
                       <h2>{item?.name}</h2>
-                      <h4>
+                      {/* <h4>
                         <img
                           src="../assets/icons/location.png"
                           alt=""
                         />
                         {item?.location}
-                      </h4>
+                      </h4> */}
                     </div>
                   </div>
-                  <div className="prop-icons">
-                    {item?.amenities
-                      .slice(0, 4)
-                      .map((item, index) => (
-                        <div className="icon" key={index}>
-                          <h4>
-                            {Ammenities[item] ? (
-                              <img
-                                style={{
-                                  width: "25px",
-                                  height: "25px",
-                                  margin: "0 14px",
-                                }}
-                                src={Ammenities[item]}
-                                alt=""
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </h4>
-                        </div>
-                      ))}
-                  </div>
+                  {option === "Houses" && (
+                    <div className="prop-icons">
+                      {option === "Houses" &&
+                        item?.amenities
+                          ?.slice(1, 4)
+                          .map((item, index) => (
+                            <div className="icon" key={index}>
+                              {Ammenities[item] ? (
+                                <img
+                                  style={{
+                                    width: "25px",
+                                    height: "25px",
+                                    margin: "0 14px",
+                                  }}
+                                  src={Ammenities[item]}
+                                  alt=""
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </div>
+                          ))}
+                    </div>
+                  )}
                 </div>
               </Col>
             </Link>

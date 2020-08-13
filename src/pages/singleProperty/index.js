@@ -23,6 +23,7 @@ import AgentsMockData from "data/agents.json";
 import ContactForm from "components/forms/contact";
 import {
   getHouse,
+  getLand,
   onlineInspection,
   verifyPayment,
   outrightPayment,
@@ -30,7 +31,7 @@ import {
 import { showModal } from "store/modal/action";
 import { useRouter } from "next/router";
 import { store } from "store";
-import { toastSuccess } from "helpers/Toast";
+import { toastSuccess, toastWarning } from "helpers/Toast";
 
 const { Meta } = Card;
 
@@ -47,9 +48,9 @@ const PropertyDetail = () => {
   const [onlineInspectionModal, setOnlineInspection] = useState(
     false
   );
-  const [houseDetails, setHouseDetails] = useState();
+  const [propertyDetails, setPropertyDetails] = useState();
   const [images, setImages] = useState([]);
-  const house = useSelector((state) => state.properties.data);
+  const property = useSelector((state) => state.properties.data);
   const user = useSelector((state) => state?.user?.data?.user);
   const {
     auth: { data },
@@ -62,17 +63,17 @@ const PropertyDetail = () => {
     amount: 100000,
     publicKey: process.env.PAYSTACK_KEY,
     metadata: {
-      property_slug: houseDetails?.slug,
+      property_slug: propertyDetails?.slug,
     },
   };
 
   const outrightConfig = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
     email: user?.email,
-    amount: houseDetails?.price * 100,
+    amount: propertyDetails?.price * 100,
     publicKey: process.env.PAYSTACK_KEY,
     metadata: {
-      property_slug: houseDetails?.slug,
+      property_slug: propertyDetails?.slug,
     },
   };
 
@@ -81,8 +82,10 @@ const PropertyDetail = () => {
   const { pid } = router.query;
 
   useEffect(() => {
-    if (pid !== undefined) {
+    if (pid !== undefined && pid.startsWith("house")) {
       dispatch(getHouse(pid));
+    } else {
+      dispatch(getLand(pid));
     }
   }, [dispatch, pid]);
 
@@ -93,7 +96,7 @@ const PropertyDetail = () => {
         payment_plan: "online-inspection",
         property_slug: config.metadata.property_slug,
         amount: 1000,
-        property_type: "house",
+        property_type: pid?.startsWith("house") ? "house" : "land",
         email: config.email,
         reference: config.reference,
       })
@@ -115,8 +118,8 @@ const PropertyDetail = () => {
         wallet: true,
         payment_plan: "outright",
         property_slug: outrightConfig.metadata.property_slug,
-        amount: houseDetails?.price,
-        property_type: "house",
+        amount: propertyDetails?.price,
+        property_type: pid?.startsWith("house") ? "house" : "land",
         email: outrightConfig.email,
         reference: outrightConfig.reference,
       })
@@ -125,7 +128,6 @@ const PropertyDetail = () => {
         setPaymentMethod(!paymentMethod);
         setOnlineInspection(!outrightPaymentModal);
         setPaymentPlan(!paymentPlan);
-        // dispatch(getHouse(pid));
         router.push("/properties");
         toastSuccess("Property payment from wallet successful");
       }
@@ -139,9 +141,13 @@ const PropertyDetail = () => {
         res.amount = config.amount;
         res.email = config.email;
         res.payment_plan = "online-inspection";
-        res.property_type = "house";
+        res.property_type = pid?.startsWith("house")
+          ? "house"
+          : "land";
         dispatch(onlineInspection({ ...res }));
-        dispatch(getHouse(pid));
+        pid?.startsWith("house")
+          ? dispatch(getHouse(pid))
+          : dispatch(getLand(pid));
         setVisible(!visible);
         setOnlineInspection(!onlineInspectionModal);
       }
@@ -170,13 +176,15 @@ const PropertyDetail = () => {
   );
 
   useEffect(() => {
-    setHouseDetails(house?.house);
-  }, [house]);
+    pid?.startsWith("house")
+      ? setPropertyDetails(property?.house)
+      : setPropertyDetails(property?.data);
+  }, [property]);
 
   useEffect(() => {
     let newArray = [];
-    if (houseDetails?.take_two_images) {
-      houseDetails?.take_two_images?.map((item) => {
+    if (propertyDetails?.take_two_images) {
+      propertyDetails?.take_two_images?.map((item) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -185,7 +193,7 @@ const PropertyDetail = () => {
         return newObj;
       });
     } else {
-      houseDetails?.house_image?.map((item) => {
+      propertyDetails?.house_image?.map((item) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -195,48 +203,49 @@ const PropertyDetail = () => {
       });
     }
     setImages(newArray);
-  }, [houseDetails]);
+  }, [propertyDetails]);
 
   const ammenitiesData = [
     {
       title: "Price",
-      description: houseDetails?.price,
+      description: propertyDetails?.price,
     },
     {
       title: "Reference",
-      description: houseDetails?.reference,
+      description: propertyDetails?.reference,
     },
     {
       title: "Year built",
-      description: houseDetails?.year_built,
+      description: propertyDetails?.year_built,
     },
     {
       title: "Contact Agent",
-      description: houseDetails?.agent_contact,
+      description: propertyDetails?.agent_contact,
     },
     {
       title: "Status",
-      description: houseDetails?.status,
+      description: propertyDetails?.status,
     },
     {
       title: "Type",
-      description: houseDetails?.house_subcategory?.subcategory_name,
+      description:
+        propertyDetails?.house_subcategory?.subcategory_name,
     },
     {
       title: "Home Area",
-      description: houseDetails?.home_area + "SqrFt",
+      description: propertyDetails?.home_area + "SqrFt",
     },
     {
       title: "Dimension",
-      description: houseDetails?.dimension + "FT",
+      description: propertyDetails?.dimension + "FT",
     },
     {
       title: "Material",
-      description: houseDetails?.material,
+      description: propertyDetails?.material,
     },
     {
       title: "Location",
-      description: houseDetails?.location,
+      description: propertyDetails?.location,
     },
     {
       title: "Bed",
@@ -244,7 +253,7 @@ const PropertyDetail = () => {
     },
     {
       title: "Room",
-      description: houseDetails?.rooms,
+      description: propertyDetails?.rooms,
     },
     {
       title: "Garadges",
@@ -252,7 +261,30 @@ const PropertyDetail = () => {
     },
     {
       title: "Bathroom",
-      description: houseDetails?.bathrooms,
+      description: propertyDetails?.bathrooms,
+    },
+  ];
+
+  const landAmmenities = [
+    {
+      title: "Price",
+      description: propertyDetails?.price,
+    },
+    {
+      title: "Reference",
+      description: propertyDetails?.reference,
+    },
+    {
+      title: "Contact Agent",
+      description: propertyDetails?.agent_contact,
+    },
+    {
+      title: "Dimension",
+      description: propertyDetails?.dimension + "FT",
+    },
+    {
+      title: "Location",
+      description: propertyDetails?.location,
     },
   ];
 
@@ -266,7 +298,13 @@ const PropertyDetail = () => {
         title="ONLINE INSPECTION"
         visible={onlineInspectionModal}
         onCancel={() => setOnlineInspection(!onlineInspectionModal)}
-        onOk={() => setPaymentMethod(!paymentMethod)}
+        onOk={() => {
+          user?.verified
+            ? setPaymentMethod(!paymentMethod)
+            : toastWarning(
+                "Please You need to verify your account before purchasing property"
+              );
+        }}
         okText="Submit"
       >
         <OnlineInspection email={user?.email} />
@@ -345,13 +383,18 @@ const PropertyDetail = () => {
         title="OUTRIGHT PAYMENT"
         visible={outrightPaymentModal}
         onCancel={() => setOutrightPayment(!outrightPaymentModal)}
-        // onOk={() => initializeOutrightPayment(onOutrightSuccess)}
-        onOk={() => setPaymentMethod(!paymentMethod)}
+        onOk={() => {
+          user?.verified
+            ? setPaymentMethod(!paymentMethod)
+            : toastWarning(
+                "Please You need to verify your account before purchasing property"
+              );
+        }}
         okText="Submit"
       >
         <OutrightPayment
           email={user?.email}
-          price={houseDetails?.price}
+          price={propertyDetails?.price}
         />
       </Modal>
       <Modal
@@ -426,7 +469,7 @@ const PropertyDetail = () => {
                 : dispatch(showModal());
             }}
             disabled={
-              !houseDetails?.payment_type === "save for property"
+              !propertyDetails?.payment_type === "save for property"
             }
           >
             Instalmental Payment
@@ -454,7 +497,9 @@ const PropertyDetail = () => {
       </Modal>
       <div className="prop-header">
         <h1>A Place to call home</h1>
-        <p>{houseDetails?.name + ", " + houseDetails?.location}</p>
+        <p>
+          {propertyDetails?.name + ", " + propertyDetails?.location}
+        </p>
       </div>
 
       <div className="container">
@@ -463,44 +508,55 @@ const PropertyDetail = () => {
             <div>
               <div className="prop-heading">
                 <span style={{ fontSize: "30px" }}>
-                  {houseDetails?.name}
+                  {propertyDetails?.name}
                 </span>
                 <span>
+                  {pid?.startsWith("house") && (
+                    <>
+                      <Button
+                        style={{
+                          background:
+                            propertyDetails?.transaction === "rent"
+                              ? "#F9A602"
+                              : "#515C6F",
+                          margin: "10px",
+                        }}
+                        disabled={
+                          propertyDetails?.transaction !== "rent"
+                        }
+                      >
+                        For Rent
+                      </Button>
+                      <Button
+                        style={{
+                          background:
+                            propertyDetails?.transaction ===
+                            "mortgage"
+                              ? "#F9A602"
+                              : "#515C6F",
+                          margin: "10px",
+                        }}
+                        disabled={
+                          propertyDetails?.transaction !== "mortgage"
+                        }
+                      >
+                        Mortgage
+                      </Button>
+                    </>
+                  )}
                   <Button
                     style={{
                       background:
-                        houseDetails?.transaction === "rent"
-                          ? "#F9A602"
-                          : "#515C6F",
-                      margin: "10px",
-                    }}
-                    disabled={houseDetails?.transaction !== "rent"}
-                  >
-                    For Rent
-                  </Button>
-                  <Button
-                    style={{
-                      background:
-                        houseDetails?.transaction === "mortgage"
+                        propertyDetails?.transaction === "sale" ||
+                        pid?.startsWith("land")
                           ? "#F9A602"
                           : "#515C6F",
                       margin: "10px",
                     }}
                     disabled={
-                      houseDetails?.transaction !== "mortgage"
+                      propertyDetails?.transaction !== "sale" &&
+                      !pid?.startsWith("land")
                     }
-                  >
-                    Mortgage
-                  </Button>
-                  <Button
-                    style={{
-                      background:
-                        houseDetails?.transaction === "sale"
-                          ? "#F9A602"
-                          : "#515C6F",
-                      margin: "10px",
-                    }}
-                    disabled={houseDetails?.transaction !== "sale"}
                   >
                     For Sale
                   </Button>
@@ -518,92 +574,138 @@ const PropertyDetail = () => {
                 Purchase
               </Button>
             </div>
-            <h2>PROPERTY OVERVIEW</h2>
-            <hr />
-            <div
-              style={{
-                width: "840px",
-                background: "#F5F4F4",
-                padding: "29.68px",
-              }}
-              className="prop-details"
-            >
-              <List
-                grid={{ gutter: 8, column: 2 }}
-                bordered
-                dataSource={ammenitiesData}
-                renderItem={(item) => (
-                  <List.Item
+            {pid?.startsWith("house") && (
+              <>
+                <h2>PROPERTY DETAILS</h2>
+                <hr />
+                <div
+                  style={{
+                    width: "840px",
+                    background: "#F5F4F4",
+                    padding: "29.68px",
+                  }}
+                  className="prop-details"
+                >
+                  <List
+                    grid={{ gutter: 8, column: 2 }}
+                    bordered
+                    dataSource={ammenitiesData}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          fontSize: "17px",
+                          display: "flex",
+                          borderBottom: "0.957303px dashed #C1C1C1",
+                          margin: "11px",
+                          padding: "0",
+                        }}
+                        className="prop-item"
+                      >
+                        <span>{item.title}</span>
+                        <span>{item.description}</span>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </>
+            )}
+            {pid?.startsWith("land") && (
+              <>
+                <h2>PROPERTY DETAILS</h2>
+                <hr />
+                <div
+                  style={{
+                    width: "840px",
+                    background: "#F5F4F4",
+                    padding: "29.68px",
+                  }}
+                  className="prop-details"
+                >
+                  <List
+                    grid={{ gutter: 8, column: 2 }}
+                    bordered
+                    dataSource={landAmmenities}
+                    renderItem={(item) => (
+                      <List.Item
+                        style={{
+                          fontSize: "17px",
+                          display: "flex",
+                          borderBottom: "0.957303px dashed #C1C1C1",
+                          margin: "11px",
+                          padding: "0",
+                        }}
+                        className="prop-item"
+                      >
+                        <span>{item.title}</span>
+                        <span>{item.description}</span>
+                      </List.Item>
+                    )}
+                  />
+                </div>
+              </>
+            )}
+            {pid?.startsWith("house") && (
+              <>
+                <div
+                  style={{ marginTop: "91.15px" }}
+                  className="overview-text"
+                >
+                  <h2>PROPERTY OVERVIEW</h2>
+                  <hr />
+                  <h4>{propertyDetails?.overview}</h4>
+                </div>
+                <div
+                  style={{ marginTop: "80px" }}
+                  className="prop-amenities"
+                >
+                  <h2>PROPERTY AMENITIES</h2>
+                  <hr />
+                  <div
                     style={{
-                      fontSize: "17px",
-                      display: "flex",
-                      borderBottom: "0.957303px dashed #C1C1C1",
-                      margin: "11px",
-                      padding: "0",
+                      width: "840px",
                     }}
-                    className="prop-item"
+                    className="amenities-details"
                   >
-                    <span>{item.title}</span>
-                    <span>{item.description}</span>
-                  </List.Item>
-                )}
-              />
-            </div>
-            <div
-              style={{ marginTop: "91.15px" }}
-              className="overview-text"
-            >
-              <h2>PROPERTY OVERVIEW</h2>
-              <hr />
-              <h4>{houseDetails?.overview}</h4>
-            </div>
-            <div
-              style={{ marginTop: "80px" }}
-              className="prop-amenities"
-            >
-              <h2>PROPERTY AMENITIES</h2>
-              <hr />
-              <div
-                style={{
-                  width: "840px",
-                }}
-                className="amenities-details"
-              >
-                <List
-                  grid={{ gutter: 8, column: 2 }}
-                  dataSource={houseDetails?.amenities}
-                  renderItem={(item) => (
-                    <List.Item
-                      style={{
-                        fontSize: "15px",
-                        display: "flex",
-                        borderBottom: "0.957303px dashed #C1C1C1",
-                        margin: "11px",
-                        padding: "0",
-                      }}
-                      className="amenities-list"
-                    >
-                      <span>
-                        <img
+                    <List
+                      grid={{ gutter: 8, column: 2 }}
+                      dataSource={propertyDetails?.amenities}
+                      renderItem={(item) => (
+                        <List.Item
                           style={{
-                            width: "25px",
-                            height: "25px",
-                            margin: "0 14px",
+                            fontSize: "15px",
+                            display: "flex",
+                            borderBottom: "0.957303px dashed #C1C1C1",
+                            margin: "11px",
+                            padding: "0",
                           }}
-                          src={Ammenities[item]}
-                          alt="icon"
-                          className="amenities-img"
-                        />
-                        {item}
-                      </span>
-                      <span>
-                        <Checkbox defaultChecked disabled></Checkbox>
-                      </span>
-                    </List.Item>
-                  )}
-                />
-              </div>
-            </div>
+                          className="amenities-list"
+                        >
+                          <span>
+                            <img
+                              style={{
+                                width: "25px",
+                                height: "25px",
+                                margin: "0 14px",
+                              }}
+                              src={Ammenities[item]}
+                              alt="icon"
+                              className="amenities-img"
+                            />
+                            {item}
+                          </span>
+                          <span>
+                            <Checkbox
+                              defaultChecked
+                              disabled
+                            ></Checkbox>
+                          </span>
+                        </List.Item>
+                      )}
+                    />
+                  </div>
+                </div>
+              </>
+            )}
             <div
               style={{ marginTop: "80px" }}
               className="prop-video-cont"
@@ -618,19 +720,19 @@ const PropertyDetail = () => {
                   className="prop-video"
                   style={{ cursor: "pointer" }}
                   poster={
-                    !houseDetails?.video_url
+                    !propertyDetails?.video_url
                       ? "/assets/video-placeholder.jpg"
                       : ""
                   }
                   onClick={() =>
-                    !houseDetails?.video_url
+                    !propertyDetails?.video_url
                       ? setVisible(!visible)
                       : ""
                   }
                 >
-                  {houseDetails?.video_url && (
+                  {propertyDetails?.video_url && (
                     <source
-                      src={houseDetails?.video_url}
+                      src={propertyDetails?.video_url}
                       type="video/mp4"
                     />
                   )}
@@ -651,8 +753,8 @@ const PropertyDetail = () => {
                       <div style={{ height: `100%` }} />
                     }
                     mapElement={<div style={{ height: `100%` }} />}
-                    latitude={houseDetails?.lat}
-                    longitude={houseDetails?.lng}
+                    latitude={propertyDetails?.lat}
+                    longitude={propertyDetails?.lng}
                   />
                 </div>
               </div>
@@ -927,40 +1029,10 @@ const PropertyDetail = () => {
                 <hr />
               </div>
             </div>
-            <div style={{ marginTop: "53px", textAlign: "center" }}>
+            {/* <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>PAYMENT</h3>
               <div>
-                {houseDetails?.payment_type ===
-                  "save for property" && (
-                  <div
-                    style={{
-                      width: "312px",
-                      background: "#F5F4F4",
-                      display: "flex",
-                      textAlign: "left",
-                      marginTop: "10px",
-                    }}
-                  >
-                    <span style={{ width: "254px" }}>
-                      <p style={{ margin: "0", padding: "15px" }}>
-                        {" "}
-                        Save for property
-                      </p>
-                    </span>
-                    <span
-                      style={{
-                        borderLeft: "1px solid #C4C4C4",
-                        padding: "10px",
-                      }}
-                    >
-                      <img
-                        src="/assets/icons/save.png"
-                        alt="iconic"
-                      />
-                    </span>
-                  </div>
-                )}
-                <div
+                 <div
                   style={{
                     width: "312px",
                     background: "#F5F4F4",
@@ -983,9 +1055,9 @@ const PropertyDetail = () => {
                   >
                     <img src="/assets/icons/save1.png" alt="iconic" />
                   </span>
-                </div>
+                </div> 
               </div>
-            </div>
+            </div>*/}
             <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>CONTACT</h3>
               <ContactForm />
