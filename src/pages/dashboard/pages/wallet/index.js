@@ -11,9 +11,7 @@ import { formatMoney } from "helpers/formatter";
 import { getUser } from "store/user/actions";
 
 const { Option } = Select;
-function handleChange(value) {
-  console.log(`selected ${value}`);
-}
+function handleChange(value) {}
 export default function Wallet() {
   const {
     user: { data },
