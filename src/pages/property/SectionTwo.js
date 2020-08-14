@@ -22,9 +22,11 @@ export default () => {
     switch (value) {
       case "houses":
         setOption("Houses");
+        setPage(1);
         break;
       case "lands":
         setOption("Lands");
+        setPage(1);
         break;
 
       default:

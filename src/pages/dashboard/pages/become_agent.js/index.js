@@ -3,7 +3,7 @@ import DashBoardBody from "styles/dashbord_body";
 import Input from "components/input";
 import { useFormik } from "formik";
 import Select from "components/Select";
-import States from "pages/dashboard/pages/experts/node_modules/data/states.json";
+import States from "data/states.json";
 import { useDispatch } from "react-redux";
 import { toastSuccess } from "helpers/Toast";
 import { becomeAgent } from "store/user/actions";
@@ -25,7 +25,11 @@ export default function ChangePassword() {
     { name: "Public Servant" },
   ];
 
-  const status = [{ name: "Single" }, { name: "Married" }, { name: "Divorce" }];
+  const status = [
+    { name: "Single" },
+    { name: "Married" },
+    { name: "Divorce" },
+  ];
   const [lga, setLga] = useState();
   const [state, setState] = useState();
   useEffect(() => {
@@ -81,7 +85,9 @@ export default function ChangePassword() {
     onSubmit: (values) => {
       dispatch(becomeAgent(values)).then((res) => {
         if (res) {
-          toastSuccess(`Agent ${values.name} was created successfully`);
+          toastSuccess(
+            `Agent ${values.name} was created successfully`
+          );
           dispatch(getUser());
           Router.push("/dashboard/wallet");
         }
@@ -91,7 +97,8 @@ export default function ChangePassword() {
     validateOnChange: true,
   });
 
-  const onInputFocus = (name) => () => form.setFieldError(name, undefined);
+  const onInputFocus = (name) => () =>
+    form.setFieldError(name, undefined);
   return (
     <>
       <DashBoardBody.Header>
@@ -113,7 +120,9 @@ export default function ChangePassword() {
                 value={form.values.id_type}
                 error={!!form.errors.id_type && form.touched.id_type}
                 errorText={
-                  form.touched.id_type ? form.errors.id_type : undefined
+                  form.touched.id_type
+                    ? form.errors.id_type
+                    : undefined
                 }
                 onFocus={onInputFocus("id_type")}
               />
@@ -131,9 +140,13 @@ export default function ChangePassword() {
                   form.setFieldValue("id_number", e.target.value);
                 }}
                 value={form.values.id_number}
-                error={!!form.errors.id_number && form.touched.id_number}
+                error={
+                  !!form.errors.id_number && form.touched.id_number
+                }
                 errorText={
-                  form.touched.id_number ? form.errors.id_number : undefined
+                  form.touched.id_number
+                    ? form.errors.id_number
+                    : undefined
                 }
                 onFocus={onInputFocus("id_number")}
               />
@@ -151,9 +164,13 @@ export default function ChangePassword() {
                   form.setFieldValue("occupation", e.target.value);
                 }}
                 value={form.values.occupation}
-                error={!!form.errors.occupation && form.touched.occupation}
+                error={
+                  !!form.errors.occupation && form.touched.occupation
+                }
                 errorText={
-                  form.touched.occupation ? form.errors.occupation : undefined
+                  form.touched.occupation
+                    ? form.errors.occupation
+                    : undefined
                 }
                 onFocus={onInputFocus("occupation")}
               />
@@ -166,11 +183,15 @@ export default function ChangePassword() {
                 label="MARITAL STATUS"
                 options={status}
                 onChange={(e) => {
-                  form.setFieldValue("marital_status", e.target.value);
+                  form.setFieldValue(
+                    "marital_status",
+                    e.target.value
+                  );
                 }}
                 value={form.values.marital_status}
                 error={
-                  !!form.errors.marital_status && form.touched.marital_status
+                  !!form.errors.marital_status &&
+                  form.touched.marital_status
                 }
                 errorText={
                   form.touched.marital_status
@@ -191,11 +212,15 @@ export default function ChangePassword() {
                 options={States}
                 onChange={(e) => {
                   setState(e.target.value);
-                  form.setFieldValue("state_of_origin", e.target.value);
+                  form.setFieldValue(
+                    "state_of_origin",
+                    e.target.value
+                  );
                 }}
                 value={form.values.state_of_origin}
                 error={
-                  !!form.errors.state_of_origin && form.touched.state_of_origin
+                  !!form.errors.state_of_origin &&
+                  form.touched.state_of_origin
                 }
                 errorText={
                   form.touched.state_of_origin
@@ -217,7 +242,9 @@ export default function ChangePassword() {
                 }}
                 value={form.values.lga}
                 error={!!form.errors.lga && form.touched.lga}
-                errorText={form.touched.lga ? form.errors.lga : undefined}
+                errorText={
+                  form.touched.lga ? form.errors.lga : undefined
+                }
                 onFocus={onInputFocus("lga")}
               />
             </div>
@@ -234,7 +261,9 @@ export default function ChangePassword() {
               }}
               value={form.values.gender}
               error={!!form.errors.gender && form.touched.gender}
-              errorText={form.touched.gender ? form.errors.gender : undefined}
+              errorText={
+                form.touched.gender ? form.errors.gender : undefined
+              }
               onFocus={onInputFocus("gender")}
             />
           </div>
