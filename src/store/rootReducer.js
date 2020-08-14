@@ -6,6 +6,7 @@ import userReducer from "./user";
 import walletReducer from "./wallet";
 import reservedReducer from "./reserved_propety";
 import careersReducer from "./career";
+import expertiesReducer from "./expert";
 
 export default combineReducers({
   auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   wallet: walletReducer,
   reserved: reservedReducer,
   careers: careersReducer,
+  experts: expertiesReducer,
 });
