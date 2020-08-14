@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 export default () => {
   return (
     <CareerSectionThree>
-      <div className="container">
+      <div className="container-section">
         <h1>Investment</h1>
         <h2>
           Invest in SpreadPro Projects and earn continual annual return up to 10

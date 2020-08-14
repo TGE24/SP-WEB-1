@@ -90,6 +90,7 @@ export const CareerSectionTwo = styled.section`
       box-shadow: 4px 4px 9px rgba(81, 92, 111, 0.12);
       img {
         width: 100%;
+        height: 167px;
       }
       .card-details {
         margin: 1rem;
@@ -106,9 +107,10 @@ export const CareerSectionTwo = styled.section`
         h2 {
           font-size: 12px;
           line-height: 18px;
-
+          height: 66px;
           color: #313131;
           margin-bottom: 1rem;
+          overflow: hidden;
         }
         button {
           border: none;
@@ -138,7 +140,7 @@ export const CareerSectionThree = styled.section`
   min-height: 730px;
   background: #f5f4f4;
   width: 100%;
-  .container {
+  .container-section {
     display: flex;
     flex-direction: column;
 
