@@ -256,6 +256,7 @@ DashBoardBody.careerCard = styled.div`
   box-shadow: 4px 4px 9px rgba(81, 92, 111, 0.12);
   img {
     width: 100%;
+    height: 167px;
   }
 
   .badge {
@@ -279,9 +280,10 @@ DashBoardBody.careerCard = styled.div`
     h2 {
       font-size: 12px;
       line-height: 18px;
-
+      height: 66px;
       color: #313131;
       margin-bottom: 1rem;
+      overflow: hidden;
     }
     button {
       border: none;

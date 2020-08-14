@@ -11,7 +11,7 @@ export default () => {
       <SectionTwo />
       <SectionThree />
       <SectionFour />
-      <SectionFive />
+      {/* <SectionFive /> */}
     </>
   );
 };
