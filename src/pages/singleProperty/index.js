@@ -29,7 +29,7 @@ import {
   outrightPayment,
 } from "store/properties/actions";
 import { showModal } from "store/modal/action";
-import { useRouter } from "next/router";
+import { useRouter, Router } from "next/router";
 import { store } from "store";
 import { toastSuccess, toastWarning } from "helpers/Toast";
 
@@ -84,7 +84,7 @@ const PropertyDetail = () => {
   useEffect(() => {
     if (pid !== undefined && pid.startsWith("house")) {
       dispatch(getHouse(pid));
-    } else {
+    } else if (pid !== undefined && pid.startsWith("land")) {
       dispatch(getLand(pid));
     }
   }, [dispatch, pid]);
@@ -104,7 +104,9 @@ const PropertyDetail = () => {
       if (res?.value?.status === 200) {
         setPaymentMethod(!paymentMethod);
         setOnlineInspection(!onlineInspectionModal);
-        dispatch(getHouse(pid));
+        pid?.startsWith("house")
+          ? dispatch(getHouse(pid))
+          : dispatch(getLand(pid));
         toastSuccess(
           "Online inspection payment from wallet successful"
         );
@@ -144,12 +146,16 @@ const PropertyDetail = () => {
         res.property_type = pid?.startsWith("house")
           ? "house"
           : "land";
-        dispatch(onlineInspection({ ...res }));
-        pid?.startsWith("house")
-          ? dispatch(getHouse(pid))
-          : dispatch(getLand(pid));
-        setVisible(!visible);
-        setOnlineInspection(!onlineInspectionModal);
+        dispatch(onlineInspection({ ...res })).then((res) => {
+          if (res?.value?.status === 200) {
+            setPaymentMethod(!paymentMethod);
+            setOnlineInspection(!onlineInspectionModal);
+            pid?.startsWith("house")
+              ? dispatch(getHouse(pid))
+              : dispatch(getLand(pid));
+            toastSuccess("Online inspection payment successful");
+          }
+        });
       }
     });
   };
@@ -162,8 +168,11 @@ const PropertyDetail = () => {
         res.email = outrightConfig.email;
         res.payment_plan = "outright";
         res.property_type = "house";
-        dispatch(outrightPayment({ ...res }));
-        // dispatch(getHouse(pid));
+        dispatch(outrightPayment({ ...res })).then((res) => {
+          if (res?.value?.status == 200) {
+            Router.push("/properties");
+          }
+        });
         setPaymentPlan(!paymentPlan);
         setOutrightPayment(!outrightPaymentModal);
       }
@@ -192,8 +201,17 @@ const PropertyDetail = () => {
         newArray.push(newObj);
         return newObj;
       });
-    } else {
+    } else if (pid?.startsWith("house")) {
       propertyDetails?.house_image?.map((item) => {
+        const newObj = {
+          original: item.img_url,
+          thumbnail: item.img_url,
+        };
+        newArray.push(newObj);
+        return newObj;
+      });
+    } else {
+      propertyDetails?.land_image?.map((item) => {
         const newObj = {
           original: item.img_url,
           thumbnail: item.img_url,
@@ -498,7 +516,9 @@ const PropertyDetail = () => {
       <div className="prop-header">
         <h1>A Place to call home</h1>
         <p>
-          {propertyDetails?.name + ", " + propertyDetails?.location}
+          {propertyDetails?.name +
+            " " +
+            (propertyDetails?.location || "")}
         </p>
       </div>
 
