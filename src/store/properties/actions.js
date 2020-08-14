@@ -49,18 +49,10 @@ export const getHouse = (houseSlug) => async (dispatch) => {
   });
 };
 
-export const onlineInspection = (data) => async (dispatch) => {
+export const payment = (data) => async (dispatch) => {
   const payload = api.post("/payment", data);
   return dispatch({
-    type: actionTypes.ONLINE_INSPECTION.default,
-    payload,
-  });
-};
-
-export const outrightPayment = (data) => async (dispatch) => {
-  const payload = api.post("/payment", data);
-  return dispatch({
-    type: actionTypes.OUTRIGHT_PAYMENT.default,
+    type: actionTypes.PAYMENT.default,
     payload,
   });
 };

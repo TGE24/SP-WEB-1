@@ -41,24 +41,21 @@ export const propertyReducer = (state = initialState, action) => {
         error: parseError(action.payload),
       };
     }
-    case actionTypes.ONLINE_INSPECTION.pending:
-    case actionTypes.OUTRIGHT_PAYMENT.pending: {
+    case actionTypes.PAYMENT.pending: {
       return {
         ...state,
         loading: true,
         error: false,
       };
     }
-    case actionTypes.ONLINE_INSPECTION.fulfilled:
-    case actionTypes.OUTRIGHT_PAYMENT.fulfilled: {
+    case actionTypes.PAYMENT.fulfilled: {
       return {
         ...state,
         loading: false,
         error: null,
       };
     }
-    case actionTypes.ONLINE_INSPECTION.rejected:
-    case actionTypes.OUTRIGHT_PAYMENT.rejected: {
+    case actionTypes.PAYMENT.rejected: {
       return {
         ...state,
         loading: false,
