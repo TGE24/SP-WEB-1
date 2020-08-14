@@ -247,6 +247,57 @@ DashBoardBody.SettingBanner = styled.div`
   }
 `;
 
+DashBoardBody.careerCard = styled.div`
+  width: 273.15px;
+  height: auto;
+  margin-bottom: 12px;
+  background: #ffffff;
+  padding-right: 1rem;
+  box-shadow: 4px 4px 9px rgba(81, 92, 111, 0.12);
+  img {
+    width: 100%;
+  }
+
+  .badge {
+    margin: 1rem;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 11px;
+  }
+  .card-details {
+    margin: 1rem;
+    h1 {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 11px;
+      color: #f9a602;
+    }
+    hr {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 12px;
+      line-height: 18px;
+
+      color: #313131;
+      margin-bottom: 1rem;
+    }
+    button {
+      border: none;
+      background: #f9a602;
+      border-radius: 5.07115px;
+      width: 89px;
+      font-weight: 600;
+      font-size: 10.4598px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #ffffff;
+      height: 26px;
+      margin-bottom: 1rem;
+    }
+  }
+`;
 DashBoardBody.Form = styled.form`
   margin-top: 3rem;
   padding-bottom: 1rem;

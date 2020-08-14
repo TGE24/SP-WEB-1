@@ -61,7 +61,7 @@ export default function ChangePassword() {
         if (res) {
           toastSuccess(` You have now a career expert`);
 
-          Router.push("/dashboard/wallet");
+          Router.push("/dashboard/my-expertise");
         }
       });
     },
