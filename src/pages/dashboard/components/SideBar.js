@@ -129,9 +129,9 @@ const userLink = [
   },
   {
     name: "My Expertise",
-    path: "/dashboard/become-expert",
+    path: "/dashboard/my-expertise",
     icon: "/assets/img/properties.png",
-    matchPaths: ["/dashboard/become-expert"],
+    matchPaths: ["/dashboard/become-expert", "/dashboard/my-expertise"],
   },
 
   {
@@ -181,10 +181,11 @@ const agentLink = [
   },
   {
     name: "My Expertise",
-    path: "/dashboard/become-expert",
+    path: "/dashboard/my-expertise",
     icon: "/assets/img/properties.png",
-    matchPaths: ["/dashboard/become-expert"],
+    matchPaths: ["/dashboard/become-expert", "/dashboard/my-expertise"],
   },
+
   {
     name: "Account Setting",
     path: "/dashboard/account-settings",
