@@ -39,33 +39,53 @@ const RightMenu = () => {
       <Menu mode="horizontal">
         <Menu.Item key="mail">
           <Link href="/">
-            <a>Home</a>
+            <a className={window.location.pathname === `/` ? "activeNav" : ""}>
+              Home
+            </a>
           </Link>
         </Menu.Item>
         <Menu.Item key="mail1">
           <Link href="/properties" passHref>
-            <a>Properties</a>
+            <a
+              className={
+                window.location.pathname === `/properties` ? "activeNav" : ""
+              }
+            >
+              Properties
+            </a>
           </Link>
         </Menu.Item>
-        <Menu.Item key="mail2">
-          <Link href="/services">
-            <a>Services</a>
-          </Link>
-        </Menu.Item>
+        {/* <Menu.Item key="mail2">
+            <Link href="/services">
+              <a>Services</a>
+            </Link>
+          </Menu.Item> */}
         <Menu.Item key="mail3">
           <Link href="/about">
-            <a>About Us</a>
+            <a
+              className={
+                window.location.pathname === `/about` ? "activeNav" : ""
+              }
+            >
+              About Us
+            </a>
           </Link>
         </Menu.Item>
         <Menu.Item key="mail4">
           <Link href="/careers">
-            <a>Careers</a>
+            <a
+              className={
+                window.location.pathname === `/careers` ? "activeNav" : ""
+              }
+            >
+              Careers
+            </a>
           </Link>
         </Menu.Item>
         {!data?.token && (
           <Menu.Item key="mail5">
             <Button
-              style={{ background: "#f9a602", marginBottom: "19px" }}
+              style={{ background: "#f9a602" }}
               className="nav-siginIn"
               icon={<LockOutlined />}
               onClick={() => {
@@ -79,7 +99,7 @@ const RightMenu = () => {
         {data?.token && (
           <Menu.Item key="mail5">
             <Button
-              style={{ background: "#f9a602", marginBottom: "19px" }}
+              style={{ background: "#f9a602" }}
               className="nav-siginIn"
               onClick={() => Router.push("/dashboard/wallet")}
             >
