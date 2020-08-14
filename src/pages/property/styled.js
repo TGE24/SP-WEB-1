@@ -113,6 +113,13 @@ export const PropSectionTwo = styled.section`
     margin-bottom: 30px;
     display: flex;
     flex-direction: column;
+    border: 1px solid #f0f0f0;
+    &:hover {
+      box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+        0 3px 6px 0 rgba(0, 0, 0, 0.12),
+        0 5px 12px 4px rgba(0, 0, 0, 0.09);
+      border-color: transparent;
+    }
     .image {
       height: 162px;
       img {
@@ -121,8 +128,9 @@ export const PropSectionTwo = styled.section`
       }
       .apartment {
         position: absolute;
-        top: 2%;
-        left: 72%;
+        top: 0;
+        right: 6px;
+        text-transform: capitalize;
         width: 68px;
         display: flex;
         border-radius: 0 0px 0px 17px;
@@ -155,28 +163,31 @@ export const PropSectionTwo = styled.section`
       }
     }
     .prop-details {
-      height: 63px;
+      height: 30px;
       background: #ffffff;
-      box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
+      // box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
       h2 {
         font-weight: 500;
-        font-size: 13.9276px;
+        font-size: 15.9276px;
         line-height: 12px;
         color: #797979;
+        margin-bottom: 6px;
       }
       h4 {
         font-weight: 500;
         font-size: 11.9276px;
         line-height: 12px;
         color: #797979;
+        text-transform: capitalize;
       }
       .inner-container {
-        margin: 1rem;
+        margin: 1rem 0.5rem;
       }
     }
 
     .prop-icons {
       margin-top: 1rem;
+      margin-bottom: 3px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;

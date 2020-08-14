@@ -11,7 +11,9 @@ const initialState = {
 export const propertyReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_HOUSES.pending:
-    case actionTypes.GET_HOUSE.pending: {
+    case actionTypes.GET_LANDS.pending:
+    case actionTypes.GET_HOUSE.pending:
+    case actionTypes.GET_LAND.pending: {
       return {
         ...state,
         loading: true,
@@ -19,7 +21,9 @@ export const propertyReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.GET_HOUSES.fulfilled:
-    case actionTypes.GET_HOUSE.fulfilled: {
+    case actionTypes.GET_LANDS.fulfilled:
+    case actionTypes.GET_HOUSE.fulfilled:
+    case actionTypes.GET_LAND.fulfilled: {
       return {
         ...state,
         loading: false,
@@ -28,7 +32,9 @@ export const propertyReducer = (state = initialState, action) => {
       };
     }
     case actionTypes.GET_HOUSES.rejected:
-    case actionTypes.GET_HOUSE.rejected: {
+    case actionTypes.GET_LANDS.rejected:
+    case actionTypes.GET_HOUSE.rejected:
+    case actionTypes.GET_LAND.rejected: {
       return {
         ...state,
         loading: false,
