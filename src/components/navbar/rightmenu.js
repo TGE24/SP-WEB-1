@@ -97,15 +97,15 @@ const RightMenu = () => {
           </Menu.Item>
         )}
         {data?.token && (
-          <Menu.Item key="mail5">
-            <Button
-              style={{ background: "#f9a602" }}
-              className="nav-siginIn"
-              onClick={() => Router.push("/dashboard/wallet")}
-            >
-              Dashboard
-            </Button>
-          </Menu.Item>
+          // <Menu.Item key="mail5">
+          <Button
+            style={{ background: "#f9a602" }}
+            className="nav-siginIn"
+            onClick={() => Router.push("/dashboard/wallet")}
+          >
+            Dashboard
+          </Button>
+          // </Menu.Item>
         )}
       </Menu>
     </>

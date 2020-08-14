@@ -197,6 +197,102 @@ DashBoardBody.SoldCard = styled.div`
     line-height: 27px;
     color: #515c6f;
   }
+
+  .prop-cards {
+    width: 98%;
+    margin-bottom: 30px;
+    display: flex;
+    padding:
+    flex-direction: column;
+    border: 1px solid #f0f0f0;
+    &:hover {
+      box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
+        0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+      border-color: transparent;
+    }
+    .image {
+      height: 162px;
+      img {
+        width: 100%;
+        height: inherit;
+      }
+      .apartment {
+        position: absolute;
+        top: 0;
+        right: 6px;
+        text-transform: capitalize;
+        width: 68px;
+        display: flex;
+        border-radius: 0 0px 0px 17px;
+        height: 24px;
+        background: #f9a602;
+        opacity: 0.9;
+        align-items: center;
+        justify-content: center;
+        h4 {
+          font-size: 11px;
+          color: #ffffff;
+        }
+      }
+      .feature {
+        position: absolute;
+        left: 0;
+        top: 150px;
+        width: 68px;
+        display: flex;
+        height: 24px;
+        background: #313131;
+        align-items: center;
+        justify-content: center;
+        h4 {
+          font-size: 11px;
+          color: #ffffff;
+          font-weight: 500;
+          font-size: 12.8563px;
+        }
+      }
+    }
+    .prop-details {
+      height: 30px;
+      background: #ffffff;
+      // box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
+      h2 {
+        font-weight: 500;
+        font-size: 15.9276px;
+        line-height: 12px;
+        color: #797979;
+        margin-bottom: 6px;
+      }
+      h4 {
+        font-weight: 500;
+        font-size: 11.9276px;
+        line-height: 12px;
+        color: #797979;
+        text-transform: capitalize;
+      }
+      .inner-container {
+        margin: 1rem 0.5rem;
+      }
+    }
+
+    .prop-icons {
+      margin-top: 1rem;
+      margin-bottom: 3px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+
+      h4 {
+        font-weight: 600;
+        font-size: 13.2587px;
+
+        text-transform: uppercase;
+
+        color: #bdbdbd;
+      }
+    }
+  }
 `;
 
 DashBoardBody.Row = styled.div`
