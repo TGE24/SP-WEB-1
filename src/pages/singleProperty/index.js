@@ -24,12 +24,11 @@ import ContactForm from "components/forms/contact";
 import {
   getHouse,
   getLand,
-  onlineInspection,
   verifyPayment,
-  outrightPayment,
+  payment,
 } from "store/properties/actions";
 import { showModal } from "store/modal/action";
-import { useRouter, Router } from "next/router";
+import { useRouter } from "next/router";
 import { store } from "store";
 import { toastSuccess, toastWarning } from "helpers/Toast";
 
@@ -82,16 +81,16 @@ const PropertyDetail = () => {
   const { pid } = router.query;
 
   useEffect(() => {
-    if (pid !== undefined && pid.startsWith("house")) {
+    if (pid?.startsWith("house")) {
       dispatch(getHouse(pid));
-    } else if (pid !== undefined && pid.startsWith("land")) {
+    } else if (pid?.startsWith("land")) {
       dispatch(getLand(pid));
     }
   }, [dispatch, pid]);
 
-  const onWalletPayment = () => {
+  const onlineInspectionWallet = () => {
     dispatch(
-      onlineInspection({
+      payment({
         wallet: true,
         payment_plan: "online-inspection",
         property_slug: config.metadata.property_slug,
@@ -116,7 +115,7 @@ const PropertyDetail = () => {
 
   const onOutrightWalletPayment = () => {
     dispatch(
-      onlineInspection({
+      payment({
         wallet: true,
         payment_plan: "outright",
         property_slug: outrightConfig.metadata.property_slug,
@@ -136,17 +135,17 @@ const PropertyDetail = () => {
     });
   };
 
-  const onSuccess = (res) => {
+  const onlineInspectionPaystack = (res) => {
     dispatch(verifyPayment(res.reference)).then((response) => {
       if (response?.value?.data?.data?.status === "success") {
         res.property_slug = config.metadata.property_slug;
-        res.amount = config.amount;
+        res.amount = 1000;
         res.email = config.email;
         res.payment_plan = "online-inspection";
         res.property_type = pid?.startsWith("house")
           ? "house"
           : "land";
-        dispatch(onlineInspection({ ...res })).then((res) => {
+        dispatch(payment({ ...res })).then((res) => {
           if (res?.value?.status === 200) {
             setPaymentMethod(!paymentMethod);
             setOnlineInspection(!onlineInspectionModal);
@@ -160,21 +159,21 @@ const PropertyDetail = () => {
     });
   };
 
-  const onOutrightSuccess = (res) => {
+  const onOutrightPaymentPaystack = (res) => {
     dispatch(verifyPayment(res.reference)).then((response) => {
       if (response?.value?.data?.data?.status === "success") {
         res.property_slug = outrightConfig.metadata.property_slug;
-        res.amount = outrightConfig.amount;
+        res.amount = propertyDetails?.price;
         res.email = outrightConfig.email;
         res.payment_plan = "outright";
         res.property_type = "house";
-        dispatch(outrightPayment({ ...res })).then((res) => {
+        res.wallet = false;
+        dispatch(payment({ ...res })).then((res) => {
           if (res?.value?.status == 200) {
-            Router.push("/properties");
+            router.push("/properties");
           }
         });
-        setPaymentPlan(!paymentPlan);
-        setOutrightPayment(!outrightPaymentModal);
+        toastSuccess("Property payment successful");
       }
     });
   };
@@ -345,8 +344,10 @@ const PropertyDetail = () => {
             }}
             onClick={() => {
               !outrightPaymentModal
-                ? initializePayment(onSuccess)
-                : initializeOutrightPayment(onOutrightSuccess);
+                ? initializePayment(onlineInspectionPaystack)
+                : initializeOutrightPayment(
+                    onOutrightPaymentPaystack
+                  );
             }}
           >
             <span style={{ width: "254px" }}>
@@ -377,7 +378,7 @@ const PropertyDetail = () => {
             onClick={() => {
               outrightPaymentModal
                 ? onOutrightWalletPayment()
-                : onWalletPayment();
+                : onlineInspectionWallet();
             }}
           >
             <span style={{ width: "254px" }}>
@@ -1049,35 +1050,6 @@ const PropertyDetail = () => {
                 <hr />
               </div>
             </div>
-            {/* <div style={{ marginTop: "53px", textAlign: "center" }}>
-              <h3>PAYMENT</h3>
-              <div>
-                 <div
-                  style={{
-                    width: "312px",
-                    background: "#F5F4F4",
-                    display: "flex",
-                    textAlign: "left",
-                    marginTop: "10px",
-                  }}
-                >
-                  <span style={{ width: "254px" }}>
-                    <p style={{ margin: "0", padding: "15px" }}>
-                      {" "}
-                      Outright Payment
-                    </p>
-                  </span>
-                  <span
-                    style={{
-                      borderLeft: "1px solid #C4C4C4",
-                      padding: "10px",
-                    }}
-                  >
-                    <img src="/assets/icons/save1.png" alt="iconic" />
-                  </span>
-                </div> 
-              </div>
-            </div>*/}
             <div style={{ marginTop: "53px", textAlign: "center" }}>
               <h3>CONTACT</h3>
               <ContactForm />
