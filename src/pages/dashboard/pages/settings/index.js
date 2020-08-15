@@ -7,6 +7,7 @@ export default function AcountSetting() {
     user: { data },
   } = store.getState();
   const { user } = data;
+  console.log(user);
   return (
     <>
       <DashBoardBody.Header>
@@ -22,9 +23,7 @@ export default function AcountSetting() {
           </div>
           <div className="circle">
             <img src="/assets/img/user.png" alt="" />
-            <div className="camera">
-              {/* <CameraFilled size={60} /> */}
-            </div>
+            <div className="camera">{/* <CameraFilled size={60} /> */}</div>
           </div>
         </DashBoardBody.SettingBanner>
 
