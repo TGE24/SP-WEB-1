@@ -202,7 +202,6 @@ DashBoardBody.SoldCard = styled.div`
     width: 98%;
     margin-bottom: 30px;
     display: flex;
-    padding:
     flex-direction: column;
     border: 1px solid #f0f0f0;
     &:hover {
