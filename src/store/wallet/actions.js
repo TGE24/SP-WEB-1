@@ -11,7 +11,7 @@ export const fundWallet = ({ ...data }) => (dispatch) => {
 
 // get transactions
 export const getTransaction = (page) => (dispatch) => {
-  const payload = api.get("/user/transactions?page=" + page + "&limit=" + 5);
+  const payload = api.get("/user/transactions?page=" + page + "&limit=" + 10);
   return dispatch({
     type: walletActionTypes.USER_TRANSACTION.default,
     payload,
