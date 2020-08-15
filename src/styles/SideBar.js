@@ -92,9 +92,8 @@ SideBar.Links = styled.ul`
   padding-bottom: 6vh;
   padding-left: 25px;
   box-sizing: border-box;
-  font-family: "GT Walsheim", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-    "Helvetica Neue", sans-serif !important;
+  font-family: "GT Walsheim", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
   li {
     opacity: 0.5;
     display: flex;

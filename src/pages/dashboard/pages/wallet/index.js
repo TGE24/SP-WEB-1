@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Select, Modal, Form } from "antd";
+import { Select, Modal, Form, Pagination } from "antd";
 import DashBoardBody from "styles/dashbord_body";
 import { useDispatch, useSelector } from "react-redux";
 import { usePaystackPayment } from "react-paystack";
@@ -20,6 +20,8 @@ export default function Wallet() {
   } = store.getState();
   const [visible, setVisible] = useState(false);
   const [charges, setCharges] = useState(0);
+  const [pagination, setPagination] = useState();
+  const [page, setPage] = useState(1);
   const [actualAmount, setactualAmount] = useState(0);
   const [formData, setFormData] = useState({});
   const wallet = useSelector((state) => state.wallet.data);
@@ -30,8 +32,12 @@ export default function Wallet() {
     userData?.user?.property_balance?.balance
   );
   useEffect(() => {
-    dispatch(getTransaction());
-  }, [dispatch]);
+    dispatch(getTransaction(page));
+  }, [dispatch, page]);
+
+  useEffect(() => {
+    setPagination(wallet?.data?.total);
+  }, [wallet]);
 
   const config = {
     reference: "" + Math.floor(Math.random() * 1000000000 + 1),
@@ -49,10 +55,12 @@ export default function Wallet() {
       toastSuccess(
         `You have Added ${actualAmount - charges} to your wallet`
       );
-      dispatch(getTransaction());
+      setPage(0);
+      dispatch(getTransaction(page));
       dispatch(getUser());
     });
   };
+  console.log(wallet);
 
   return (
     <>
@@ -129,7 +137,12 @@ export default function Wallet() {
               YOUR RECENT ACTIVITIES
             </h1>
             <div className="sort-by">
-              <Select
+              {/* <img
+                src="/assets/icons/sort-by.png"
+                alt=""
+                className="sort-icon"
+              /> */}
+              {/* <Select
                 defaultValue="Filter"
                 style={{ width: 160 }}
                 onChange={handleChange}
@@ -140,7 +153,7 @@ export default function Wallet() {
                 <Option value="lucy">Mortgage </Option>
                 <Option value="lucy">For Sale </Option>
                 <Option value="lucy">For Rent </Option>
-              </Select>
+              </Select> */}
             </div>
           </div>
           <div className="card-container">
@@ -210,31 +223,17 @@ export default function Wallet() {
             )}
           </div>
         </DashBoardBody.WalletRecentActivity>
+        <Pagination
+          total={pagination}
+          current={page}
+          pageSize={10}
+          onChange={(page) => {
+            setPage(page);
+          }}
+          hideOnSinglePage={true}
+          style={{ textAlign: "center" }}
+        />
       </DashBoardBody>
     </>
   );
 }
-
-const TranactionHistory = [
-  {
-    type: "Add",
-    title: "Added Money",
-    amount: 2000,
-    date: new Date().toDateString(),
-    descriptions: "",
-  },
-  {
-    type: "Transfer",
-    amount: 2000,
-    title: "Transfer Funds",
-    date: new Date().toDateString(),
-    descriptions: "to Erim Godswill Uket",
-  },
-  {
-    type: "purchases",
-    amount: 2000,
-    title: "Land Purchase",
-    date: new Date().toDateString(),
-    descriptions: "to Erim Godswill Uket",
-  },
-];

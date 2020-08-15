@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const DashBoardBody = styled.section`
   margin: 2rem 2rem;
-  padding: 0 !important;
+  padding-bottom: 1rem;
+
   .row-header {
     display: flex;
     flex-direction: row;
@@ -221,7 +222,6 @@ DashBoardBody.SoldCard = styled.div`
     width: 98%;
     margin-bottom: 30px;
     display: flex;
-    padding:
     flex-direction: column;
     border: 1px solid #f0f0f0;
     &:hover {
