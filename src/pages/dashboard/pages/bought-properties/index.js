@@ -45,7 +45,7 @@ export default function ReservedProperty() {
     const newData = bought?.houses.concat(bought?.lands);
     setData(newData);
   }, [bought]);
-  console.log(data);
+
   return (
     <>
       <DashBoardBody.Header>
@@ -138,21 +138,3 @@ export default function ReservedProperty() {
     </>
   );
 }
-const Properties = [
-  {
-    image: "/assets/img/sold1.png",
-    propertyName: "Amaxzon Duplex",
-  },
-  {
-    image: "/assets/img/sold2.png",
-    propertyName: "Open yard ",
-  },
-  {
-    image: "/assets/img/sold3.png",
-    propertyName: "Open roof house",
-  },
-  {
-    image: "/assets/img/sold4.png",
-    propertyName: "Amaxzon Duplex",
-  },
-];

@@ -121,12 +121,12 @@ const userLink = [
     matchPaths: ["/dashboard/reserved-properties"],
   },
 
-  {
-    name: "Mortgage",
-    path: "/dashboard/mortgage",
-    icon: "/assets/img/mortgage.png",
-    matchPaths: ["/dashboard/mortgage"],
-  },
+  // {
+  //   name: "Mortgage",
+  //   path: "/dashboard/mortgage",
+  //   icon: "/assets/img/mortgage.png",
+  //   matchPaths: ["/dashboard/mortgage"],
+  // },
   {
     name: "My Expertise",
     path: "/dashboard/my-expertise",
@@ -173,12 +173,12 @@ const agentLink = [
     icon: "/assets/img/properties.png",
     matchPaths: ["dashboard/sold-properties"],
   },
-  {
-    name: "Mortgage",
-    path: "/dashboard/mortgage",
-    icon: "/assets/img/mortgage.png",
-    matchPaths: ["dashboard/mortgage"],
-  },
+  // {
+  //   name: "Mortgage",
+  //   path: "/dashboard/mortgage",
+  //   icon: "/assets/img/mortgage.png",
+  //   matchPaths: ["dashboard/mortgage"],
+  // },
   {
     name: "My Expertise",
     path: "/dashboard/my-expertise",

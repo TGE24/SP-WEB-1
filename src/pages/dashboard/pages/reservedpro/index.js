@@ -2,22 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Select } from "antd";
 import DashBoardBody from "styles/dashbord_body";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../../property/Loader";
 import { fetchReservedHouse } from "store/reserved_propety/actions";
 
 export default function ReservedProperty() {
   const reserved = useSelector((state) => state.reserved.data);
+  const { loading } = useSelector((state) => state.reserved);
   const [data, setData] = useState([]);
   const [option, setOption] = useState("Properties");
   const { Option } = Select;
   function handleChange(value) {
-    const newData = reserved?.house.concat(reserved?.lands);
+    const newData = reserved?.houses?.concat(reserved?.lands);
     switch (value) {
       case "all":
         setData(newData);
         setOption("Properties");
         break;
       case "house":
-        setData(reserved?.house);
+        setData(reserved?.houses);
         setOption("Houses");
         break;
       case "land":
@@ -36,14 +38,14 @@ export default function ReservedProperty() {
     dispatch(fetchReservedHouse());
   }, [dispatch]);
   useEffect(() => {
-    const newData = reserved?.house.concat(reserved?.lands);
+    const newData = reserved?.houses?.concat(reserved?.lands);
     setData(newData);
   }, [reserved]);
 
   return (
     <>
       <DashBoardBody.Header>
-        <h1>Sold Properties</h1>
+        <h1>Reserved Properties</h1>
       </DashBoardBody.Header>
       <DashBoardBody>
         <div className="row-header">
@@ -67,34 +69,68 @@ export default function ReservedProperty() {
           </div>
         </div>
         <DashBoardBody.Row>
-          {Properties.map((item, index) => (
-            <DashBoardBody.SoldCard key={index}>
-              <div className="image">
-                <img src={item.image} alt="" />
-              </div>
-              <h1>{item.propertyName}</h1>
-            </DashBoardBody.SoldCard>
-          ))}
+          {loading ? (
+            <Loader />
+          ) : (
+            data?.map((item, index) => (
+              <DashBoardBody.SoldCard key={index}>
+                <Link
+                  href="/properties/[pid]"
+                  as={`/properties/${item?.slug}`}
+                  key={index}
+                  passHref
+                >
+                  <div className="prop-cards">
+                    <div className="image">
+                      <img src={item?.take_two_images[0]?.img_url} alt="" />
+                      <div className="apartment">
+                        <h4>
+                          {option === "Houses"
+                            ? item?.house_subcategory?.subcategory_name
+                            : item?.land_category?.land_category}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <div className="prop-details">
+                      <div className="inner-container">
+                        <h2>{item?.name}</h2>
+                        {/* <h4>
+                        <img
+                          src="../assets/icons/location.png"
+                          alt=""
+                        />
+                        {item?.location}
+                      </h4> */}
+                      </div>
+                    </div>
+
+                    <div className="prop-icons">
+                      {item?.amenities?.slice(1, 4).map((item, index) => (
+                        <div className="icon" key={index}>
+                          {Ammenities[item] ? (
+                            <img
+                              style={{
+                                width: "25px",
+                                height: "25px",
+                                margin: "0 14px",
+                              }}
+                              src={Ammenities[item]}
+                              alt=""
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              </DashBoardBody.SoldCard>
+            ))
+          )}
         </DashBoardBody.Row>
       </DashBoardBody>
     </>
   );
 }
-const Properties = [
-  {
-    image: "/assets/img/sold1.png",
-    propertyName: "Amaxzon Duplex",
-  },
-  {
-    image: "/assets/img/sold2.png",
-    propertyName: "Open yard ",
-  },
-  {
-    image: "/assets/img/sold3.png",
-    propertyName: "Open roof house",
-  },
-  {
-    image: "/assets/img/sold4.png",
-    propertyName: "Amaxzon Duplex",
-  },
-];
