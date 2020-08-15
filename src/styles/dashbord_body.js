@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 const DashBoardBody = styled.section`
   margin: 2rem 2rem;
-  padding: 0 !important;
+  padding-bottom: 1rem;
+
   .row-header {
     display: flex;
     flex-direction: row;
