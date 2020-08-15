@@ -8,8 +8,7 @@ const Content = styled.section`
   padding-bottom: 100px;
   padding-right: 4%;
   padding-left: 0;
-
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1024px) {
     padding-top: 100px;
     overflow-x: hidden;
     padding-left: 16.4375px;
@@ -24,7 +23,7 @@ Content.Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1024px) {
     flex-direction: row;
     justify-content: space-between;
     padding: 30px 0;
@@ -40,7 +39,7 @@ Content.Title = styled.h1`
   font-size: 30px;
   margin-top: 20px;
   margin-bottom: 10px;
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1024px) {
     font-size: 20px;
   }
 `;

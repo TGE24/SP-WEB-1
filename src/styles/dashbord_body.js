@@ -14,6 +14,14 @@ const DashBoardBody = styled.section`
       text-transform: capitalize;
     }
   }
+  @media screen and (max-width: 1024px) {
+    margin: 2rem 1rem;
+    .row-header {
+      h1 {
+        font-size: small;
+      }
+    }
+  }
 `;
 
 DashBoardBody.Header = styled.div`
@@ -43,7 +51,7 @@ DashBoardBody.Banner = styled.div`
     justify-content: space-between;
     align-items: start;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1024px) {
       overflow: scroll;
     }
     .wallet-header {
@@ -116,7 +124,7 @@ DashBoardBody.Banner = styled.div`
     text-align: center;
 
     color: #fd901c;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1024px) {
       margin-left: 59%;
     }
   }
@@ -178,6 +186,17 @@ DashBoardBody.WalletRecentActivity = styled.div`
     font-size: 11px;
     line-height: 13px;
     color: #515c6f;
+  }
+  @media screen and (max-width: 1024px) {
+    .transaction-card .leading-item {
+      margin-left: 1rem;
+    }
+    .transaction-card .leading-item h1 {
+      font-size: smaller;
+    }
+    .transaction-card .trailing-item {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -299,6 +318,10 @@ DashBoardBody.Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 DashBoardBody.SettingBanner = styled.div`
@@ -336,7 +359,7 @@ DashBoardBody.SettingBanner = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1024px) {
       top: 49%;
       left: 33%;
     }
@@ -407,11 +430,11 @@ DashBoardBody.Form = styled.form`
       width: 48%;
       display: flex;
       flex-direction: column;
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: 1024px) {
         width: 100%;
       }
     }
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1024px) {
       flex-direction: column;
     }
   }
@@ -444,7 +467,7 @@ DashBoardBody.Form = styled.form`
     border-top: 0;
     border-right: 0;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 1024px) {
       width: 75%;
     }
   }

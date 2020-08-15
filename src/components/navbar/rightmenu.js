@@ -39,7 +39,11 @@ const RightMenu = () => {
       <Menu mode="horizontal">
         <Menu.Item key="mail">
           <Link href="/">
-            <a className={window.location.pathname === `/` ? "activeNav" : ""}>
+            <a
+              className={
+                window.location.pathname === `/` ? "activeNav" : ""
+              }
+            >
               Home
             </a>
           </Link>
@@ -48,7 +52,9 @@ const RightMenu = () => {
           <Link href="/properties" passHref>
             <a
               className={
-                window.location.pathname === `/properties` ? "activeNav" : ""
+                window.location.pathname === `/properties`
+                  ? "activeNav"
+                  : ""
               }
             >
               Properties
@@ -64,7 +70,9 @@ const RightMenu = () => {
           <Link href="/about">
             <a
               className={
-                window.location.pathname === `/about` ? "activeNav" : ""
+                window.location.pathname === `/about`
+                  ? "activeNav"
+                  : ""
               }
             >
               About Us
@@ -75,7 +83,9 @@ const RightMenu = () => {
           <Link href="/careers">
             <a
               className={
-                window.location.pathname === `/careers` ? "activeNav" : ""
+                window.location.pathname === `/careers`
+                  ? "activeNav"
+                  : ""
               }
             >
               Careers
@@ -83,21 +93,18 @@ const RightMenu = () => {
           </Link>
         </Menu.Item>
         {!data?.token && (
-          <Menu.Item key="mail5">
-            <Button
-              style={{ background: "#f9a602" }}
-              className="nav-siginIn"
-              icon={<LockOutlined />}
-              onClick={() => {
-                dispatch(showModal());
-              }}
-            >
-              Sign In
-            </Button>
-          </Menu.Item>
+          <Button
+            style={{ background: "#f9a602" }}
+            className="nav-siginIn"
+            icon={<LockOutlined />}
+            onClick={() => {
+              dispatch(showModal());
+            }}
+          >
+            Sign In
+          </Button>
         )}
         {data?.token && (
-          // <Menu.Item key="mail5">
           <Button
             style={{ background: "#f9a602" }}
             className="nav-siginIn"
@@ -105,7 +112,6 @@ const RightMenu = () => {
           >
             Dashboard
           </Button>
-          // </Menu.Item>
         )}
       </Menu>
     </>

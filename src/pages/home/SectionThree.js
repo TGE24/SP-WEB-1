@@ -63,7 +63,10 @@ export default () => (
                     </>
                   }
                 >
-                  <Meta title={item.title} description={item.location} />
+                  <Meta
+                    title={item.title}
+                    description={item.location}
+                  />
                   <div
                     style={{
                       display: "flex",
@@ -79,9 +82,9 @@ export default () => (
                       </div>
                     ))}
                   </div>
-                  <Button className="button" icon={<SearchOutlined />}>
+                  {/* <Button className="button" icon={<SearchOutlined />}>
                     Search
-                  </Button>
+                  </Button> */}
                 </Card>
               </Zoom>
             </Col>

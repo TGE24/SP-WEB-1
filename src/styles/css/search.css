@@ -48,6 +48,11 @@
     bottom: 100px;
   }
 
+  .ant-tabs-content-holder {
+    background: white;
+    padding: 25px 25px 15px 25px;
+  }
+
   .ant-tabs-bar {
     margin: 0 !important;
   }
@@ -61,6 +66,12 @@
 
   .ant-form-inline .ant-form-item {
     margin-bottom: 13px;
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .ant-tabs .ant-tabs-top-content,

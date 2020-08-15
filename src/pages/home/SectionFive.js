@@ -1,6 +1,5 @@
 import { Layout, Button, Row, Col, Card, Tag } from "antd";
 import { Services, SectionFive } from "./styled";
-import { SearchOutlined } from "@ant-design/icons";
 import Zoom from "react-reveal/Zoom";
 
 const { Content } = Layout;
@@ -10,7 +9,7 @@ export default () => (
   <SectionFive>
     <Content
       style={{
-        padding: "82px 50px 50px 50px"
+        padding: "82px 50px 50px 50px",
       }}
     >
       <Services>
@@ -18,7 +17,19 @@ export default () => (
         <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
         <Row>
           {realEstate.map((item, index) => (
-            <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
+            <Col
+              xs={24}
+              sm={18}
+              md={12}
+              lg={8}
+              xl={8}
+              key={index}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Zoom bottom>
                 <Card
                   hoverable
@@ -31,14 +42,14 @@ export default () => (
                           display: "flex",
                           justifyContent: "space-between",
                           position: "relative",
-                          bottom: "24px"
+                          bottom: "24px",
                         }}
                       >
                         <Tag
                           color="#313131"
                           style={{
                             position: "relative",
-                            width: "66px"
+                            width: "66px",
                           }}
                         >
                           Featured
@@ -47,7 +58,7 @@ export default () => (
                           color="#F9A602"
                           style={{
                             position: "relative",
-                            width: "60.07px"
+                            width: "60.07px",
                           }}
                         >
                           {item.type}
@@ -65,7 +76,7 @@ export default () => (
                       display: "flex",
                       justifyContent: "space-between",
                       marginTop: "14px",
-                      padding: "0 20px"
+                      padding: "0 20px",
                     }}
                   >
                     {item.features.map((item2, index) => (
@@ -75,12 +86,6 @@ export default () => (
                       </div>
                     ))}
                   </div>
-                  <Button
-                    className="button"
-                    icon={<SearchOutlined />}
-                  >
-                    Search
-                  </Button>
                 </Card>
               </Zoom>
             </Col>
@@ -97,20 +102,20 @@ const realEstate = [
     title: "Bungalow",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl2.png",
     title: "duplex",
     type: "Rent",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
   },
   {
     image: "/assets/rl3.png",
     title: "One Room",
     type: "Buy",
     location: "No 2 Marian Road Opposite De Choice",
-    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"]
-  }
+    features: ["/assets/f1.png", "/assets/f2.png", "/assets/f3.png"],
+  },
 ];

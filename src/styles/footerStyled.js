@@ -9,7 +9,7 @@ export const FooterContainer = styled.footer`
     height: 314px;
   }
 
-  news-letter {
+  .news-letter {
     position: relative;
     top: 60px;
   }

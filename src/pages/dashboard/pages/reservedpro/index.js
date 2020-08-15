@@ -47,13 +47,8 @@ export default function ReservedProperty() {
       </DashBoardBody.Header>
       <DashBoardBody>
         <div className="row-header">
-          <h1>Reserved {option}</h1>
+          <h1 style={{ marginTop: "10px" }}>Reserved {option}</h1>
           <div className="sort-by">
-            <img
-              src="../assets/icons/sort-by.png"
-              alt=""
-              className="sort-icon"
-            />
             <Select
               defaultValue="Sorted By"
               style={{ width: 160 }}

@@ -8,7 +8,7 @@ const SideBar = styled.section`
   background-color: #ffffff;
   color: ${Colors.textColor};
   box-sizing: border-box;
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1028px) {
     position: fixed;
     z-index: 1000;
     height: 100vh;
@@ -25,7 +25,7 @@ const SideBar = styled.section`
 `;
 SideBar.InnerCont = styled.section`
   box-shadow: 0px 4px 9px rgba(81, 92, 111, 0.12);
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1028px) {
     height: 100vh;
     padding-top: 22px;
   }
@@ -53,7 +53,7 @@ SideBar.Header = styled.header`
     margin-top: 13px;
     cursor: pointer;
   }
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1028px) {
     padding: 0 30px;
     padding-left: 0;
     margin: 20px 0;
@@ -117,7 +117,7 @@ SideBar.Links = styled.ul`
     height: 16px;
     margin-right: 21px;
   }
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 1028px) {
     border-radius: 0 30px 0 0;
     padding: 0;
     padding-bottom: 0;
@@ -136,14 +136,14 @@ SideBar.TogggleButton = styled.button`
   margin: 11px;
   text-align: right;
   float: right;
-  @media only screen and (min-width: 721px) {
+  @media only screen and (min-width: 1028px) {
     display: none;
   }
 `;
 SideBar.Logo = styled.img`
   cursor: pointer;
   margin: 10px 0 0 30px;
-  @media only screen and (max-width: 721px) {
+  @media only screen and (max-width: 1028px) {
     display: none;
   }
 `;

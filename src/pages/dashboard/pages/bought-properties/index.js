@@ -3,7 +3,6 @@ import { Select } from "antd";
 import Ammenities from "../../../../constants/ammenities";
 import DashBoardBody from "styles/dashbord_body";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchReservedHouse } from "store/reserved_propety/actions";
 import { fetchBoughtProperty } from "store/bought_property/actions";
 import Link from "next/link";
 import Loader from "../../../property/Loader";
@@ -45,7 +44,6 @@ export default function ReservedProperty() {
     const newData = bought?.houses.concat(bought?.lands);
     setData(newData);
   }, [bought]);
-  console.log(data);
   return (
     <>
       <DashBoardBody.Header>
@@ -53,13 +51,8 @@ export default function ReservedProperty() {
       </DashBoardBody.Header>
       <DashBoardBody>
         <div className="row-header">
-          <h1>Bought {option}</h1>
+          <h1 style={{ marginTop: "10px" }}>Bought {option}</h1>
           <div className="sort-by">
-            <img
-              src="../assets/icons/sort-by.png"
-              alt=""
-              className="sort-icon"
-            />
             <Select
               defaultValue="Sorted By"
               style={{ width: 160 }}
@@ -86,11 +79,15 @@ export default function ReservedProperty() {
                 >
                   <div className="prop-cards">
                     <div className="image">
-                      <img src={item?.take_two_images[0]?.img_url} alt="" />
+                      <img
+                        src={item?.take_two_images[0]?.img_url}
+                        alt=""
+                      />
                       <div className="apartment">
                         <h4>
                           {option === "Houses"
-                            ? item?.house_subcategory?.subcategory_name
+                            ? item?.house_subcategory
+                                ?.subcategory_name
                             : item?.land_category?.land_category}
                         </h4>
                       </div>
@@ -110,23 +107,25 @@ export default function ReservedProperty() {
                     </div>
 
                     <div className="prop-icons">
-                      {item?.amenities?.slice(1, 4).map((item, index) => (
-                        <div className="icon" key={index}>
-                          {Ammenities[item] ? (
-                            <img
-                              style={{
-                                width: "25px",
-                                height: "25px",
-                                margin: "0 14px",
-                              }}
-                              src={Ammenities[item]}
-                              alt=""
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      ))}
+                      {item?.amenities
+                        ?.slice(1, 4)
+                        .map((item, index) => (
+                          <div className="icon" key={index}>
+                            {Ammenities[item] ? (
+                              <img
+                                style={{
+                                  width: "25px",
+                                  height: "25px",
+                                  margin: "0 14px",
+                                }}
+                                src={Ammenities[item]}
+                                alt=""
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </Link>

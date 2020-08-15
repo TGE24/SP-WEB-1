@@ -9,6 +9,8 @@ import NumberFormat from "react-number-format";
 import { store } from "store";
 import { formatMoney } from "helpers/formatter";
 import { getUser } from "store/user/actions";
+import Loader from "./Loader";
+import { Tooltip } from "antd";
 
 const { Option } = Select;
 function handleChange(value) {}
@@ -22,6 +24,7 @@ export default function Wallet() {
   const [formData, setFormData] = useState({});
   const wallet = useSelector((state) => state.wallet.data);
   const userData = useSelector((state) => state.user.data);
+  const loading = useSelector((state) => state.wallet.loading);
   const dispatch = useDispatch();
   let walletBalance = formatMoney(
     userData?.user?.property_balance?.balance
@@ -78,7 +81,6 @@ export default function Wallet() {
                 if (fees > 2000) {
                   fees = 2000;
                 }
-
                 setCharges(fees);
                 setactualAmount(value.value);
                 formData.amount = value.value - charges;
@@ -116,20 +118,17 @@ export default function Wallet() {
           <div
             className="fund-wallet"
             onClick={() => setVisible(true)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", position: "relative" }}
           >
             <span>Fund Wallet</span>
           </div>
         </DashBoardBody.Banner>
         <DashBoardBody.WalletRecentActivity>
           <div className="row-header">
-            <h1>YOUR RECENT ACTIVITIES</h1>
+            <h1 style={{ marginTop: "10px" }}>
+              YOUR RECENT ACTIVITIES
+            </h1>
             <div className="sort-by">
-              <img
-                src="/assets/icons/sort-by.png"
-                alt=""
-                className="sort-icon"
-              />
               <Select
                 defaultValue="Filter"
                 style={{ width: 160 }}
@@ -145,44 +144,70 @@ export default function Wallet() {
             </div>
           </div>
           <div className="card-container">
-            {wallet?.data?.data?.map((items, index) => {
-              const time = new Date(items.created_at).toDateString();
-              const money = formatMoney(items.amount);
-              return (
-                <div
-                  className="transaction-card"
-                  style={{
-                    borderLeft:
-                      items.type === "credit"
-                        ? "10px solid green"
-                        : "10px solid #EB5757",
-                  }}
-                  key={index}
-                >
-                  <div className="leading-item">
-                    <h1>{items.description}</h1>
-                    <h2>
-                      {items.type === "credit"
-                        ? "Funded from your credit card"
-                        : ""}
-                    </h2>
+            {loading ? (
+              <Loader />
+            ) : (
+              wallet?.data?.data?.map((items, index) => {
+                const time = new Date(
+                  items.created_at
+                ).toDateString();
+                const money = formatMoney(items.amount);
+                return (
+                  <div
+                    className="transaction-card"
+                    style={{
+                      borderLeft:
+                        items.type === "credit"
+                          ? "10px solid green"
+                          : "10px solid #EB5757",
+                    }}
+                    key={index}
+                  >
+                    <div className="leading-item">
+                      {items?.method === "wallet" && (
+                        <Tooltip title="Wallet Payment">
+                          <img
+                            src="/assets/icons/wallet.svg"
+                            alt="Wallet"
+                            height={20}
+                          />
+                        </Tooltip>
+                      )}
+                      {items?.method === "card" && (
+                        <Tooltip title="Paystack Payment">
+                          <img
+                            src="/assets/icons/card.svg"
+                            alt="Wallet"
+                            height={20}
+                          />
+                        </Tooltip>
+                      )}
+                      <h1>{items.description}</h1>
+                      <h2>
+                        {items.type === "credit"
+                          ? "Funded from your credit card"
+                          : ""}
+                      </h2>
+                    </div>
+                    <div className="trailing-item">
+                      <h1
+                        style={{
+                          color:
+                            items.type === "credit"
+                              ? "green"
+                              : " #EB5757",
+                        }}
+                      >
+                        {items?.type === "debit"
+                          ? "-₦" + money
+                          : "₦" + money}
+                      </h1>
+                      <div className="date">{time}</div>
+                    </div>
                   </div>
-                  <div className="trailing-item">
-                    <h1
-                      style={{
-                        color:
-                          items.type === "credit"
-                            ? "green"
-                            : " #EB5757",
-                      }}
-                    >
-                      ₦{money}
-                    </h1>
-                    <div className="date">{time}</div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </DashBoardBody.WalletRecentActivity>
       </DashBoardBody>

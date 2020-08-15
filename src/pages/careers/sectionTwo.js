@@ -19,7 +19,6 @@ export default () => {
     }
   }, [dispatch]);
 
-  console.log(careers);
   return (
     <CareerSectionTwo>
       <div className="header">
@@ -28,7 +27,8 @@ export default () => {
         </Zoom>
         <Rotate top right cascade>
           <h2>
-            We have Experts in variours feel ready to provide quality services
+            We have Experts in variours feel ready to provide quality
+            services
           </h2>
         </Rotate>
       </div>

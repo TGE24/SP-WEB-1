@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const CareerSectionOne = styled.section`
   width: 100%;
   height: 50vh;
-
   background-image: url("../assets/aboutus.png");
   background-size: cover;
   .over-lay {
@@ -128,7 +127,7 @@ export const CareerSectionTwo = styled.section`
       }
     }
     @media screen and (max-width: 767px) {
-      margin: 1rem;
+      margin: auto 3rem;
       .career-card {
         height: auto;
       }
@@ -143,8 +142,10 @@ export const CareerSectionThree = styled.section`
   .container-section {
     display: flex;
     flex-direction: column;
-
-    margin: 1rem 9rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    width: 1000px;
     h1 {
       margin-top: 3rem;
       color: #515c6f;
@@ -186,6 +187,13 @@ export const CareerSectionThree = styled.section`
     margin: 0;
     width: 100%;
     height: auto;
+    .vertical-line {
+      display: none;
+    }
+    .container-section {
+      width: auto;
+      margin: auto 1em;
+    }
     .container,
     .left-content {
       margin: 1rem 0 0 1rem;

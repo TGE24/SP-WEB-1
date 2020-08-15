@@ -4,6 +4,7 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from "@ant-design/icons";
+import Router from "next/router";
 
 export default function MobileHeader({
   userData,
@@ -22,7 +23,14 @@ export default function MobileHeader({
             <MenuFoldOutlined />
           )}
         </MobileHeaderWrapper.TogggleButton>
-        <img src="/assets/img/logo.png" alt="logo" width={60} />
+        <img
+          src="/assets/img/logo.png"
+          alt="logo"
+          width={60}
+          onClick={() => {
+            Router.push("/");
+          }}
+        />
       </div>
       <MobileHeaderWrapper.Avatar
         src={userData?.picture || "/assets/img/avatar.png"}
