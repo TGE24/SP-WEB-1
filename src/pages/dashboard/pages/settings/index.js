@@ -51,7 +51,7 @@ export default function AcountSetting() {
             <div className="circle">
               <img src="/assets/img/user.png" alt="" />
               <div className="camera">
-                <CameraFilled size={100} className={} />
+                <CameraFilled size={100} />
               </div>
             </div>
           </DashBoardBody.SettingBanner>
