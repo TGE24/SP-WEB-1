@@ -76,7 +76,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
           </span>
         </p>
       </Form.Item>
-      <Form.Item className="center-align">
+      {/* <Form.Item className="center-align">
         <Divider>OR</Divider>
       </Form.Item>
       <Form.Item className="center-align">
@@ -105,7 +105,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
             // onClick={handleGoogleAuth}
           />
         </div>
-      </Form.Item>
+      </Form.Item> */}
     </Form>
   );
 };

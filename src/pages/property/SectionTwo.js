@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Select, Pagination } from "antd";
+import { Row, Col, Pagination, Radio } from "antd";
 import { PropSectionTwo } from "./styled";
 import Link from "next/link";
-import Ammenities from "../../constants/ammenities";
 import { useSelector, useDispatch } from "react-redux";
 import { getHouses, getLands } from "store/properties/actions";
 import Loader from "./Loader";
+import { formatMoney } from "helpers/formatter";
 
-const { Option } = Select;
+const radioOptions = [
+  { label: "Houses", value: "Houses" },
+  { label: "Lands", value: "Lands" },
+];
 
 export default () => {
   const [housesArr, setHouses] = useState([]);
@@ -17,23 +20,6 @@ export default () => {
   const { loading } = useSelector((state) => state.properties);
   const properties = useSelector((state) => state.properties.data);
   const dispatch = useDispatch();
-
-  function handleChange(value) {
-    switch (value) {
-      case "houses":
-        setOption("Houses");
-        setPage(1);
-        break;
-      case "lands":
-        setOption("Lands");
-        setPage(1);
-        break;
-
-      default:
-        setOption("Houses");
-        break;
-    }
-  }
 
   useEffect(() => {
     if (option === "Houses") {
@@ -52,30 +38,31 @@ export default () => {
       setPagination(properties?.data?.total);
     }
   }, [properties, option]);
-  console.log(housesArr);
   return (
     <PropSectionTwo>
       <div className="row-head">
-        <h1>{option}</h1>
+        {/* <h1>{option}</h1> */}
         <div className="sort-by">
-          <Select
-            defaultValue="Sorted By"
-            style={{ width: 160 }}
-            onChange={handleChange}
-            className="select-sort"
-          >
-            <Option value="houses">Houses</Option>
-            <Option value="lands">Lands</Option>
-          </Select>
-          <img
-            src="../assets/icons/sort-by.png"
-            alt=""
-            className="sort-icon"
-            height={17}
+          <Radio.Group
+            size="large"
+            options={radioOptions}
+            onChange={(e) => {
+              setOption(e.target.value);
+            }}
+            value={option}
+            optionType="button"
+            buttonStyle="solid"
           />
         </div>
       </div>
-      <Row gutter={[32, 32]}>
+      <Row
+        gutter={[32, 32]}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "0",
+        }}
+      >
         {loading ? (
           <Loader />
         ) : (
@@ -87,8 +74,8 @@ export default () => {
               passHref
             >
               <Col
-                xs={12}
-                sm={12}
+                xs={20}
+                sm={20}
                 md={10}
                 lg={6}
                 xl={6}
@@ -97,7 +84,10 @@ export default () => {
               >
                 <div className="prop-cards">
                   <div className="image">
-                    <img src={item?.take_two_images[0]?.img_url} alt="" />
+                    <img
+                      src={item?.take_two_images[0]?.img_url}
+                      alt=""
+                    />
                     <div className="apartment">
                       <h4>
                         {option === "Houses"
@@ -110,37 +100,10 @@ export default () => {
                   <div className="prop-details">
                     <div className="inner-container">
                       <h2>{item?.name}</h2>
-                      {/* <h4>
-                        <img
-                          src="../assets/icons/location.png"
-                          alt=""
-                        />
-                        {item?.location}
-                      </h4> */}
+                      <h4>{item?.state + ", " + item?.lga}</h4>
+                      <h4>{"₦" + formatMoney(item?.price)}</h4>
                     </div>
                   </div>
-                  {option === "Houses" && (
-                    <div className="prop-icons">
-                      {option === "Houses" &&
-                        item?.amenities?.slice(1, 4).map((item, index) => (
-                          <div className="icon" key={index}>
-                            {Ammenities[item] ? (
-                              <img
-                                style={{
-                                  width: "25px",
-                                  height: "25px",
-                                  margin: "0 14px",
-                                }}
-                                src={Ammenities[item]}
-                                alt=""
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        ))}
-                    </div>
-                  )}
                 </div>
               </Col>
             </Link>

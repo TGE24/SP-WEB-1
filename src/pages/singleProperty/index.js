@@ -19,8 +19,8 @@ import SaveForProperty from "components/modals/saveforproperty";
 import OutrightPayment from "components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
 import RealEstateMockData from "data/realEstate.json";
-import AgentsMockData from "data/agents.json";
-import ContactForm from "components/forms/contact";
+// import AgentsMockData from "data/agents.json";
+// import ContactForm from "components/forms/contact";
 import Loader from "./Loader";
 import {
   getHouse,
@@ -532,11 +532,19 @@ const PropertyDetail = () => {
                 " " +
                 (propertyDetails?.location || "")}
             </p>
+
+            <Button
+              className="purchase-btn"
+              disabled={propertyDetails?.purchased}
+              onClick={() => setPaymentPlan(!paymentPlan)}
+            >
+              {propertyDetails?.purchased ? "Purchased" : "Buy Now"}
+            </Button>
           </div>
 
           <div className="container">
             <Row gutter={[24, 24]} className="cont-row">
-              <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <div>
                   <div className="prop-heading">
                     <span style={{ fontSize: "30px" }}>
@@ -619,28 +627,22 @@ const PropertyDetail = () => {
                     autoPlay={true}
                     items={images}
                   />
-                  <Button
-                    className="purchase-btn"
-                    disabled={propertyDetails?.purchased}
-                    onClick={() => setPaymentPlan(!paymentPlan)}
-                  >
-                    {propertyDetails?.purchased
-                      ? "Purchased"
-                      : "Purchase"}
-                  </Button>
                 </div>
                 {pid?.startsWith("house") && (
                   <>
-                    <h2>PROPERTY DETAILS</h2>
-                    <hr />
+                    <div style={{ width: "840px", margin: "auto" }}>
+                      <h1>PROPERTY DETAILS</h1>
+                    </div>
                     <div
                       style={{
                         width: "840px",
                         background: "#F5F4F4",
                         padding: "29.68px",
+                        margin: "auto",
                       }}
                       className="prop-details"
                     >
+                      {/* <hr /> */}
                       <List
                         grid={{ gutter: 8, column: 2 }}
                         bordered
@@ -657,7 +659,14 @@ const PropertyDetail = () => {
                             }}
                             className="prop-item"
                           >
-                            <span>{item.title}</span>
+                            <span
+                              style={{
+                                textTransform: "uppercase",
+                                fontWeight: "bolder",
+                              }}
+                            >
+                              {item.title}
+                            </span>
                             <span>{item.description}</span>
                           </List.Item>
                         )}
@@ -667,8 +676,9 @@ const PropertyDetail = () => {
                 )}
                 {pid?.startsWith("land") && (
                   <>
-                    <h2>PROPERTY DETAILS</h2>
-                    <hr />
+                    <div style={{ width: "840px", margin: "auto" }}>
+                      <h1>PROPERTY DETAILS</h1>
+                    </div>
                     <div
                       style={{
                         width: "840px",
@@ -704,7 +714,10 @@ const PropertyDetail = () => {
                 {pid?.startsWith("house") && (
                   <>
                     <div
-                      style={{ marginTop: "91.15px" }}
+                      style={{
+                        margin: "91.15px auto ",
+                        width: "840px",
+                      }}
                       className="overview-text"
                     >
                       <h2>PROPERTY OVERVIEW</h2>
@@ -712,7 +725,10 @@ const PropertyDetail = () => {
                       <h4>{propertyDetails?.overview}</h4>
                     </div>
                     <div
-                      style={{ marginTop: "80px" }}
+                      style={{
+                        margin: "91.15px auto ",
+                        width: "840px",
+                      }}
                       className="prop-amenities"
                     >
                       <h2>PROPERTY AMENITIES</h2>
@@ -765,7 +781,7 @@ const PropertyDetail = () => {
                   </>
                 )}
                 <div
-                  style={{ marginTop: "80px" }}
+                  style={{ margin: "91.15px auto ", width: "840px" }}
                   className="prop-video-cont"
                 >
                   <div className="prop-video-cont">
@@ -800,7 +816,10 @@ const PropertyDetail = () => {
                   </div>
 
                   <div
-                    style={{ marginTop: "80px" }}
+                    style={{
+                      margin: "91.15px auto ",
+                      width: "840px",
+                    }}
                     className="location"
                   >
                     <h2>LOCATION</h2>
@@ -825,7 +844,7 @@ const PropertyDetail = () => {
                   </div>
                 </div>
                 <div
-                  style={{ marginTop: "80px" }}
+                  style={{ margin: "91.15px auto ", width: "840px" }}
                   className="similar-prop"
                 >
                   <h2>SIMILAR PROPERTIES</h2>
@@ -900,23 +919,13 @@ const PropertyDetail = () => {
                               </div>
                             ))}
                           </div>
-                          <Button
-                            className="button"
-                            style={{
-                              background: "rgb(249, 166, 2)",
-                              color: "white",
-                              fontSize: "9px",
-                            }}
-                          >
-                            BROWSE
-                          </Button>
                         </Card>
                       </Col>
                     ))}
                   </Row>
                 </div>
               </Col>
-              <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+              {/* <Col xs={24} sm={24} md={6} lg={6} xl={6}>
                 <div
                   style={{
                     width: "314px",
@@ -1129,6 +1138,7 @@ const PropertyDetail = () => {
                   <ContactForm />
                 </div>
               </Col>
+             */}
             </Row>
           </div>
         </>

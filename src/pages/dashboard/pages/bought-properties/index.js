@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select } from "antd";
+import { Radio } from "antd";
 import Ammenities from "../../../../constants/ammenities";
 import DashBoardBody from "styles/dashbord_body";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,34 +7,16 @@ import { fetchBoughtProperty } from "store/bought_property/actions";
 import Link from "next/link";
 import Loader from "../../../property/Loader";
 
+const radioOptions = [
+  { label: "Houses", value: "Houses" },
+  { label: "Lands", value: "Lands" },
+];
+
 export default function ReservedProperty() {
   const bought = useSelector((state) => state.boughtProperty.data);
   const { loading } = useSelector((state) => state.boughtProperty);
   const [data, setData] = useState([]);
   const [option, setOption] = useState("Properties");
-  const { Option } = Select;
-  function handleChange(value) {
-    const newData = bought?.houses?.concat(bought?.lands);
-    switch (value) {
-      case "all":
-        setData(newData);
-        setOption("Properties");
-        break;
-      case "house":
-        setData(bought?.houses);
-        setOption("Houses");
-        break;
-      case "land":
-        setData(bought?.lands);
-        setOption("Lands");
-        break;
-
-      default:
-        setData(newData);
-        setOption("Properties");
-        break;
-    }
-  }
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,6 +27,12 @@ export default function ReservedProperty() {
     setData(newData);
   }, [bought]);
 
+  // useEffect(() => {
+  //   if (option === "Properties") {
+  //     setData(newData);
+  //   }
+  // }, [option]);
+
   return (
     <>
       <DashBoardBody.Header>
@@ -54,16 +42,15 @@ export default function ReservedProperty() {
         <div className="row-header">
           <h1 style={{ marginTop: "10px" }}>Bought {option}</h1>
           <div className="sort-by">
-            <Select
-              defaultValue="Sorted By"
-              style={{ width: 160 }}
-              onChange={handleChange}
-              className="select-sort"
-            >
-              <Option value="all">All</Option>
-              <Option value="house">Houses</Option>
-              <Option value="land">Lands </Option>
-            </Select>
+            <Radio.Group
+              options={radioOptions}
+              onChange={(e) => {
+                setOption(e.target.value);
+              }}
+              value={option}
+              optionType="button"
+              buttonStyle="solid"
+            />
           </div>
         </div>
         <DashBoardBody.Row>

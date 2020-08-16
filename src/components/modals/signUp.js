@@ -140,7 +140,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
           Sign Up
         </Button>
       </Form.Item>
-      <Form.Item>
+      {/* <Form.Item>
         <Divider>OR</Divider>
       </Form.Item>
       <Form.Item>
@@ -161,7 +161,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
             alt="Google"
           />
         </div>
-      </Form.Item>
+      </Form.Item> */}
     </Form>
   );
 };

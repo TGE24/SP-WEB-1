@@ -6,7 +6,10 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "components/modals/signIn";
 import SignUp from "components/modals/signUp";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { closeModal, showModal } from "store/modal/action";
 import { store } from "store";
@@ -112,12 +115,15 @@ const Navbar = () => {
         }}
         footer={null}
       >
-        <SignUp setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
+        <SignUp
+          setShowDrawer={setShowDrawer}
+          showDrawer={showDrawer}
+        />
       </Drawer>
       <Modal
         title="LOGIN"
         style={{
-          border: "1.77918px solid #FFFFFF",
+          // border: "1.77918px solid #FFFFFF",
           borderRadius: "6px",
         }}
         onCancel={() => dispatch(closeModal())}
@@ -135,7 +141,10 @@ const Navbar = () => {
           display: "none",
         }}
       >
-        <SignIn setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
+        <SignIn
+          setShowDrawer={setShowDrawer}
+          showDrawer={showDrawer}
+        />
       </Modal>
       <Wrap
         navColor={navColor}
@@ -154,9 +163,11 @@ const Navbar = () => {
               padding: "5px 0",
             }}
           >
-            We sent you an activation code check your email and click the link
-            to verify. Didn't receive email?{" "}
-            <span style={{ textDecoration: "underline" }}>Resend Mail</span>
+            We sent you an activation code check your email and click
+            the link to verify. Didn't receive email?{" "}
+            <span style={{ textDecoration: "underline" }}>
+              Resend Mail
+            </span>
           </div>
         ) : (
           ""
@@ -189,7 +200,11 @@ const Navbar = () => {
                 src="/assets/icons/igSmall.png"
                 alt="ig"
               />
-              <img className="socials" src="/assets/icons/in.png" alt="in" />
+              <img
+                className="socials"
+                src="/assets/icons/in.png"
+                alt="in"
+              />
               <img
                 className="socials"
                 src="/assets/icons/twitterSmall.png"
@@ -212,7 +227,11 @@ const Navbar = () => {
               <div className="rightMenu">
                 <RightMenu setShowDrawer={setShowDrawer} />
               </div>
-              <Button className="barsMenu" type="primary" onClick={drawer}>
+              <Button
+                className="barsMenu"
+                type="primary"
+                onClick={drawer}
+              >
                 {React.createElement(
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}
@@ -226,7 +245,8 @@ const Navbar = () => {
                   position: "absolute",
                   width: "100%",
                   left: "0",
-                  transition: "opacity 600ms, visibility 600ms, height 300ms",
+                  transition:
+                    "opacity 600ms, visibility 600ms, height 300ms",
                 }}
               >
                 <Menu mode="vertical" style={{ textAlign: "center" }}>
@@ -234,7 +254,9 @@ const Navbar = () => {
                     <Link href="/">
                       <a
                         className={
-                          window.location.pathname === `/` ? "activeNav" : ""
+                          window.location.pathname === `/`
+                            ? "activeNav"
+                            : ""
                         }
                       >
                         Home
@@ -307,7 +329,9 @@ const Navbar = () => {
                           marginBottom: "19px",
                         }}
                         className="nav-siginIn"
-                        onClick={() => Router.push("/dashboard/wallet")}
+                        onClick={() =>
+                          Router.push("/dashboard/wallet")
+                        }
                       >
                         Dashboard
                       </Button>

@@ -12,6 +12,10 @@
   align-items: center;
 }
 
+.ant-drawer-title {
+  color: #fff;
+}
+
 .slider-image {
   height: 100px;
 }
@@ -35,6 +39,8 @@
 .prop-heading {
   display: flex;
   justify-content: space-between;
+  width: 840px;
+  margin: auto;
 }
 
 .features {
@@ -55,10 +61,11 @@
 
 .purchase-btn {
   background: rgb(249, 166, 2) !important;
-  position: absolute !important;
-  right: 0 !important;
+  border-radius: 20px;
+  height: 39px;
   color: white !important;
   border: none !important;
+  margin-top: 5px;
 }
 
 .message-btn {
@@ -71,6 +78,27 @@
 .ant-checkbox-checked .ant-checkbox-inner {
   background-color: rgb(249, 166, 2) !important;
   border-color: rgb(249, 166, 2) !important;
+}
+
+.ant-radio-group-solid
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  color: #000;
+  background: rgb(249, 166, 000);
+  border-color: rgb(249, 166, 2);
+}
+
+.ant-radio-button-wrapper:hover {
+  position: relative;
+  color: rgb(249, 166, 2);
+}
+.ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
+  border-right-color: rgb(249, 166, 2);
+}
+.ant-radio-group-solid
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+  color: #000;
+  background: rgb(249, 166, 000);
+  border-color: rgb(249, 166, 2);
 }
 
 .ant-checkbox-disabled.ant-checkbox-checked
@@ -130,16 +158,19 @@
   .prop-heading {
     flex-direction: column;
     text-align: center;
+    width: inherit;
   }
   .features {
     width: auto;
   }
   .prop-item {
     font-size: 14px !important;
+    flex-direction: column;
   }
   .overview-text {
     margin-top: 36.15px !important;
     text-align: center !important;
+    width: inherit !important;
   }
   .prop-video {
     width: 100%;
@@ -156,6 +187,7 @@
   .prop-video-cont {
     margin-top: 45px !important;
     text-align: center;
+    width: inherit !important;
   }
   .map-cont,
   .amenities-details,

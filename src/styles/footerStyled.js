@@ -14,24 +14,30 @@ export const FooterContainer = styled.footer`
     top: 60px;
   }
 
-  @media screen and (max-width: 767px) {
-    #footer-logo {
-      display: none;
-    }
-  }
   img {
     position: relative;
-    top: 108px;
     left: 55px;
   }
   .ant-row {
     margin-right: 1.5rem !important;
     margin-left: 1.5rem !important;
     margin: 47px 0;
+    justify-content: center;
+    align-items: center;
 
     @media screen and (max-width: 767px) {
-      margin-right: 1rem !important;
-      margin-left: 2rem !important;
+      margin: 0 !important;
+      .footer-content {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        left: 0;
+        padding: 12px;
+      }
     }
   }
   h1 {
