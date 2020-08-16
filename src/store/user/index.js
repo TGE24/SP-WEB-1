@@ -80,6 +80,28 @@ export const userReducer = (state = initialState, action) => {
         error: parseError(action.payload),
       };
     }
+    //update profile
+    case userActionTypes.UPDATE_PROFILE.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case userActionTypes.UPDATE_PROFILE.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+    }
+    case userActionTypes.UPDATE_PROFILE.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
 
     case authActionTypes.RESET: {
       return initialState;

@@ -16,6 +16,13 @@ export const becomeAgent = ({ ...data }) => (dispatch) => {
     payload,
   });
 };
+export const updateProfile = ({ ...data }) => (dispatch) => {
+  const payload = api.patch("/user", { ...data });
+  return dispatch({
+    type: userActionTypes.UPDATE_PROFILE.default,
+    payload,
+  });
+};
 export const becomeExpert = ({ ...data }) => (dispatch) => {
   const payload = api.post("/expert", { ...data });
   return dispatch({
