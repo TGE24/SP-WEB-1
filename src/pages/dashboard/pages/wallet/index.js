@@ -10,10 +10,7 @@ import { store } from "store";
 import { formatMoney } from "helpers/formatter";
 import { getUser } from "store/user/actions";
 import Loader from "./Loader";
-import { Tooltip } from "antd";
 
-const { Option } = Select;
-function handleChange(value) {}
 export default function Wallet() {
   const {
     user: { data },
@@ -60,7 +57,6 @@ export default function Wallet() {
       dispatch(getUser());
     });
   };
-  console.log(wallet);
 
   return (
     <>
@@ -177,24 +173,6 @@ export default function Wallet() {
                     key={index}
                   >
                     <div className="leading-item">
-                      {items?.method === "wallet" && (
-                        <Tooltip title="Wallet Payment">
-                          <img
-                            src="/assets/icons/wallet.svg"
-                            alt="Wallet"
-                            height={20}
-                          />
-                        </Tooltip>
-                      )}
-                      {items?.method === "card" && (
-                        <Tooltip title="Paystack Payment">
-                          <img
-                            src="/assets/icons/card.svg"
-                            alt="Wallet"
-                            height={20}
-                          />
-                        </Tooltip>
-                      )}
                       <h1>{items.description}</h1>
                       <h2>
                         {items.type === "credit"

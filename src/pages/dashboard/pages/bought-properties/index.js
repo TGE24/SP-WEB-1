@@ -41,9 +41,10 @@ export default function ReservedProperty() {
     dispatch(fetchBoughtProperty());
   }, [dispatch]);
   useEffect(() => {
-    const newData = bought?.houses.concat(bought?.lands);
+    const newData = bought?.houses?.concat(bought?.lands);
     setData(newData);
   }, [bought]);
+
   return (
     <>
       <DashBoardBody.Header>
@@ -67,7 +68,7 @@ export default function ReservedProperty() {
         </div>
         <DashBoardBody.Row>
           {loading ? (
-            <Loader />
+            <Loader number={3} />
           ) : (
             data?.map((item, index) => (
               <DashBoardBody.SoldCard key={index}>
@@ -80,29 +81,26 @@ export default function ReservedProperty() {
                   <div className="prop-cards">
                     <div className="image">
                       <img
-                        src={item?.take_two_images[0]?.img_url}
+                        src={
+                          item?.house_image
+                            ? item?.house_image[0]?.img_url
+                            : item?.land_image[0]?.img_url
+                        }
                         alt=""
                       />
-                      <div className="apartment">
+                      {/* <div className="apartment">
                         <h4>
                           {option === "Houses"
                             ? item?.house_subcategory
                                 ?.subcategory_name
                             : item?.land_category?.land_category}
                         </h4>
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className="prop-details">
                       <div className="inner-container">
                         <h2>{item?.name}</h2>
-                        {/* <h4>
-                        <img
-                          src="../assets/icons/location.png"
-                          alt=""
-                        />
-                        {item?.location}
-                      </h4> */}
                       </div>
                     </div>
 
