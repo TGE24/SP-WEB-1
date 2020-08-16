@@ -48,7 +48,7 @@ export default function ReservedProperty() {
         <h1>Reserved Properties</h1>
       </DashBoardBody.Header>
       <DashBoardBody>
-        <div className="row-header">
+        {/* <div className="row-header">
           <h1 style={{ marginTop: "10px" }}>Reserved {option}</h1>
           <div className="sort-by">
             <Select
@@ -62,10 +62,10 @@ export default function ReservedProperty() {
               <Option value="land">Lands </Option>
             </Select>
           </div>
-        </div>
+        </div> */}
         <DashBoardBody.Row>
           {loading ? (
-            <Loader />
+            <Loader number={3} />
           ) : (
             data?.map((item, index) => (
               <DashBoardBody.SoldCard key={index}>
@@ -77,11 +77,15 @@ export default function ReservedProperty() {
                 >
                   <div className="prop-cards">
                     <div className="image">
-                      <img src={item?.take_two_images[0]?.img_url} alt="" />
+                      <img
+                        src={item?.take_two_images[0]?.img_url}
+                        alt=""
+                      />
                       <div className="apartment">
                         <h4>
                           {option === "Houses"
-                            ? item?.house_subcategory?.subcategory_name
+                            ? item?.house_subcategory
+                                ?.subcategory_name
                             : item?.land_category?.land_category}
                         </h4>
                       </div>
@@ -101,23 +105,25 @@ export default function ReservedProperty() {
                     </div>
 
                     <div className="prop-icons">
-                      {item?.amenities?.slice(1, 4).map((item, index) => (
-                        <div className="icon" key={index}>
-                          {Ammenities[item] ? (
-                            <img
-                              style={{
-                                width: "25px",
-                                height: "25px",
-                                margin: "0 14px",
-                              }}
-                              src={Ammenities[item]}
-                              alt=""
-                            />
-                          ) : (
-                            ""
-                          )}
-                        </div>
-                      ))}
+                      {item?.amenities
+                        ?.slice(1, 4)
+                        .map((item, index) => (
+                          <div className="icon" key={index}>
+                            {Ammenities[item] ? (
+                              <img
+                                style={{
+                                  width: "25px",
+                                  height: "25px",
+                                  margin: "0 14px",
+                                }}
+                                src={Ammenities[item]}
+                                alt=""
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </Link>

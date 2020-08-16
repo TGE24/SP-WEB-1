@@ -226,7 +226,8 @@ DashBoardBody.SoldCard = styled.div`
     border: 1px solid #f0f0f0;
     &:hover {
       box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
-        0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
+        0 3px 6px 0 rgba(0, 0, 0, 0.12),
+        0 5px 12px 4px rgba(0, 0, 0, 0.09);
       border-color: transparent;
     }
     .image {
@@ -272,7 +273,6 @@ DashBoardBody.SoldCard = styled.div`
       }
     }
     .prop-details {
-      height: 30px;
       background: #ffffff;
       // box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
       h2 {
