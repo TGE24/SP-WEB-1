@@ -4,14 +4,13 @@ export default () => (
   <FooterContainer>
     <div>
       <Row>
-        <Col xs={12} sm={2} md={8} lg={8} xl={5} id="footer-logo">
-          <div>
-            <img src="/assets/logo.png" alt="Logo" />
-          </div>
+        <Col xs={24} sm={24} md={8} lg={8} xl={5} id="footer-logo">
+          <img src="/assets/logo.png" alt="Logo" />
         </Col>
-        <Col xs={12} sm={2} md={8} lg={8} xl={5}>
+        {/* <div className="footer-content"> */}
+        <Col xs={8} sm={8} md={8} lg={8} xl={8}>
           <div className="container-item">
-            <h1>SERVICE</h1>
+            <h1>SERVICES</h1>
             <ul>
               <li>Lorem ipsum</li>
               <li>Lorem ipsum</li>
@@ -20,7 +19,7 @@ export default () => (
             </ul>
           </div>
         </Col>
-        <Col xs={12} sm={2} md={6} lg={6} xl={5}>
+        <Col xs={8} sm={8} md={8} lg={8} xl={8}>
           <div className="container-item">
             <h1>CONTACT US</h1>
             <ul>
@@ -28,7 +27,7 @@ export default () => (
               <li>Terms & Conditions</li>
               <li>Affilate</li>
               <li>
-                <a>(+234)70-1000-7373</a>
+                <a>(+234)70-800-7373</a>
               </li>
               <li>
                 <a>info@Spreadpro.com </a>
@@ -36,8 +35,9 @@ export default () => (
             </ul>
           </div>
         </Col>
+        {/* </div> */}
 
-        <Col xs={24} sm={2} md={24} lg={24} xl={9}>
+        {/* <Col xs={24} sm={2} md={24} lg={24} xl={9}>
           <div className="news-letter">
             <h1 id="news">News Letter</h1>
             <div className="newsletter">
@@ -50,7 +50,7 @@ export default () => (
               <button>Subscribe</button>
             </div>
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </div>
     <div className="copy">

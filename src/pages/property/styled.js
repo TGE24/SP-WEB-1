@@ -7,6 +7,7 @@ export const LoaderCont = styled.div`
   display: flex;
   .load {
     margin-left: 10px;
+    width: 269px;
   }
   @media screen and (max-width: 767px) {
     flex-direction: column;
@@ -15,6 +16,7 @@ export const LoaderCont = styled.div`
     width: 100%;
     .load {
       padding-bottom: 10px;
+      width: 336px;
     }
   }
 `;
@@ -163,7 +165,6 @@ export const PropSectionTwo = styled.section`
       }
     }
     .prop-details {
-      height: 30px;
       background: #ffffff;
       // box-shadow: 0px 4.28542px 2.14271px rgba(0, 0, 0, 0.05);
       h2 {
@@ -217,6 +218,11 @@ export const PropSectionTwo = styled.section`
       left: 61% !important;
     }
     .prop-cards {
+      .image {
+        .apartment {
+          width: 116px;
+        }
+      }
       .prop-details {
         h2 {
           font-size: 12.9276px;

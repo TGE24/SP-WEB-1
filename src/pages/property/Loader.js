@@ -9,7 +9,7 @@ export default function ListLoader({ number = 4 }) {
     <LoaderCont>
       {list.map((_, index) => (
         <div className="load" key={index}>
-          <Skeleton width={269} height={290} />
+          <Skeleton height={290} />
         </div>
       ))}
     </LoaderCont>
