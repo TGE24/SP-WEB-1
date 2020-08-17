@@ -214,13 +214,10 @@ export const PropSectionTwo = styled.section`
     .select-sort {
       width: 120px !important;
     }
-    .apartment {
-      left: 61% !important;
-    }
     .prop-cards {
       .image {
         .apartment {
-          width: 116px;
+          width: 100px;
         }
       }
       .prop-details {

@@ -47,7 +47,7 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
             alt="avatar"
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h4 className="user-name">{userData?.name || "User"}</h4>
+            <h4 className="user-name">{userData?.name}</h4>
             <h5 className="logout" onClick={() => dispatch(logout())}>
               Logout
             </h5>

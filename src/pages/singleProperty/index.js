@@ -1,15 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Row,
-  Col,
-  Divider,
-  List,
-  Checkbox,
-  Card,
-  Tag,
-  Modal,
-} from "antd";
+import { Button, Row, Col, List, Card, Tag, Modal } from "antd";
 import ImageGallery from "react-image-gallery";
 import Map from "components/Map";
 import { usePaystackPayment } from "react-paystack";
@@ -19,8 +9,6 @@ import SaveForProperty from "components/modals/saveforproperty";
 import OutrightPayment from "components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
 import RealEstateMockData from "data/realEstate.json";
-// import AgentsMockData from "data/agents.json";
-// import ContactForm from "components/forms/contact";
 import Loader from "./Loader";
 import {
   getHouse,
@@ -240,8 +228,8 @@ const PropertyDetail = () => {
       description: propertyDetails?.year_built,
     },
     {
-      title: "Contact Agent",
-      description: propertyDetails?.agent_contact,
+      title: "Contact",
+      description: propertyDetails?.contact,
     },
     {
       title: "Status",
@@ -292,12 +280,8 @@ const PropertyDetail = () => {
       description: propertyDetails?.price,
     },
     {
-      title: "Reference",
-      description: propertyDetails?.reference,
-    },
-    {
-      title: "Contact Agent",
-      description: propertyDetails?.agent_contact,
+      title: "Contact",
+      description: propertyDetails?.contact,
     },
     {
       title: "Dimension",
@@ -483,27 +467,27 @@ const PropertyDetail = () => {
             visible={paymentPlan}
             onCancel={() => setPaymentPlan(!paymentPlan)}
             footer={[
-              <Button
-                key="back"
-                style={{
-                  background: "rgb(249, 166, 2)",
-                  border: "none",
-                  color: "white",
-                  textTransform: "uppercase",
-                  fontWeight: "500",
-                }}
-                onClick={() => {
-                  data?.token
-                    ? setSaveForProperty(!saveForProperty)
-                    : dispatch(showModal());
-                }}
-                disabled={
-                  !propertyDetails?.payment_type ===
-                  "save for property"
-                }
-              >
-                Instalmental Payment
-              </Button>,
+              // <Button
+              //   key="back"
+              //   style={{
+              //     background: "rgb(249, 166, 2)",
+              //     border: "none",
+              //     color: "white",
+              //     textTransform: "uppercase",
+              //     fontWeight: "500",
+              //   }}
+              //   onClick={() => {
+              //     data?.token
+              //       ? setSaveForProperty(!saveForProperty)
+              //       : dispatch(showModal());
+              //   }}
+              //   disabled={
+              //     !propertyDetails?.payment_type ===
+              //     "save for property"
+              //   }
+              // >
+              //   Instalmental Payment
+              // </Button>
               <Button
                 key="submit"
                 style={{
@@ -532,7 +516,6 @@ const PropertyDetail = () => {
                 " " +
                 (propertyDetails?.location || "")}
             </p>
-
             <Button
               className="purchase-btn"
               disabled={propertyDetails?.purchased}
@@ -547,8 +530,18 @@ const PropertyDetail = () => {
               <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                 <div>
                   <div className="prop-heading">
-                    <span style={{ fontSize: "30px" }}>
-                      {propertyDetails?.name}
+                    <span>
+                      {!propertyDetails?.location ? (
+                        <Button
+                          className="purchase-btn"
+                          disabled={propertyDetails?.purchased}
+                          onClick={() => setVisible(!visible)}
+                        >
+                          Inspect Property
+                        </Button>
+                      ) : (
+                        ""
+                      )}
                     </span>
                     <span>
                       {propertyDetails?.purchased ? (
@@ -642,7 +635,6 @@ const PropertyDetail = () => {
                       }}
                       className="prop-details"
                     >
-                      {/* <hr /> */}
                       <List
                         grid={{ gutter: 8, column: 2 }}
                         bordered
@@ -703,7 +695,14 @@ const PropertyDetail = () => {
                             }}
                             className="prop-item"
                           >
-                            <span>{item.title}</span>
+                            <span
+                              style={{
+                                textTransform: "uppercase",
+                                fontWeight: "bolder",
+                              }}
+                            >
+                              {item.title}
+                            </span>
                             <span>{item.description}</span>
                           </List.Item>
                         )}
@@ -722,7 +721,9 @@ const PropertyDetail = () => {
                     >
                       <h2>PROPERTY OVERVIEW</h2>
                       <hr />
-                      <h4>{propertyDetails?.overview}</h4>
+                      <h4 style={{ textAlign: "justify" }}>
+                        {propertyDetails?.overview}
+                      </h4>
                     </div>
                     <div
                       style={{
@@ -765,14 +766,8 @@ const PropertyDetail = () => {
                                   alt="icon"
                                   className="amenities-img"
                                 />
-                                {item}
                               </span>
-                              <span>
-                                <Checkbox
-                                  defaultChecked
-                                  disabled
-                                ></Checkbox>
-                              </span>
+                              <span>{item}</span>
                             </List.Item>
                           )}
                         />
@@ -925,220 +920,6 @@ const PropertyDetail = () => {
                   </Row>
                 </div>
               </Col>
-              {/* <Col xs={24} sm={24} md={6} lg={6} xl={6}>
-                <div
-                  style={{
-                    width: "314px",
-                    height: "548px",
-                    background: "whitesmoke",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                  className="avatar-cont"
-                >
-                  <div
-                    style={{ textAlign: "center", margin: "18px" }}
-                  >
-                    {AgentsMockData.map((item, index) => (
-                      <React.Fragment key={index}>
-                        <div
-                          style={{
-                            background: `url(${item.image}) no-repeat`,
-                            width: "150.58px",
-                            height: "150.58px",
-                            borderRadius: "100%",
-                            backgroundSize: "cover",
-                          }}
-                        ></div>
-                        <div>
-                          <h3>{item.name}</h3>
-                          <h4>{item.email}</h4>
-                          <h4>{item.phone}</h4>
-                        </div>
-                        <Divider orientation="horizontal" />
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-                <div
-                  style={{ marginTop: "53px", textAlign: "center" }}
-                >
-                  <h3>PROPERTIES</h3>
-                  <div>
-                    <div
-                      style={{ display: "flex" }}
-                      className="smallProperty"
-                    >
-                      <span>
-                        <img src="/assets/small.png" alt="small" />
-                      </span>
-                      <span
-                        style={{
-                          textAlign: "justify",
-                          margin: "20px",
-                        }}
-                      >
-                        <p>Caveman Home</p>
-                        <p
-                          style={{
-                            color: "#797979",
-                            fontSize: "10px",
-                          }}
-                        >
-                          Calabar/CRS
-                        </p>
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        textAlign: "left",
-                        fontSize: "10px",
-                        marginTop: "10px",
-                        lineHeight: "2",
-                      }}
-                    >
-                      <span className="propFeat">
-                        <img src="/assets/f1.png" alt="feature1" />
-                        30 sqft
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f2.png" alt="feature1" />5
-                        Bedrooms
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f3.png" alt="feature1" />6
-                        Bathrooms
-                      </span>
-                      <span
-                        className="propFeat"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <img src="/assets/f4.png" alt="feature1" />7
-                        Garage
-                      </span>
-                    </div>
-                    <hr />
-                  </div>
-                  <div>
-                    <div
-                      style={{ display: "flex" }}
-                      className="smallProperty"
-                    >
-                      <span>
-                        <img src="/assets/small.png" alt="small" />
-                      </span>
-                      <span
-                        style={{
-                          textAlign: "justify",
-                          margin: "20px",
-                        }}
-                      >
-                        <p>Caveman Home</p>
-                        <p
-                          style={{
-                            color: "#797979",
-                            fontSize: "10px",
-                          }}
-                        >
-                          Calabar/CRS
-                        </p>
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        textAlign: "left",
-                        fontSize: "10px",
-                        marginTop: "10px",
-                        lineHeight: "2",
-                      }}
-                    >
-                      <span className="propFeat">
-                        <img src="/assets/f1.png" alt="feature1" />
-                        30 sqft
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f2.png" alt="feature1" />5
-                        Bedrooms
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f3.png" alt="feature1" />6
-                        Bathrooms
-                      </span>
-                      <span
-                        className="propFeat"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <img src="/assets/f4.png" alt="feature1" />7
-                        Garage
-                      </span>
-                    </div>
-                    <hr />
-                  </div>
-                  <div>
-                    <div
-                      style={{ display: "flex" }}
-                      className="smallProperty"
-                    >
-                      <span>
-                        <img src="/assets/small.png" alt="small" />
-                      </span>
-                      <span
-                        style={{
-                          textAlign: "justify",
-                          margin: "20px",
-                        }}
-                      >
-                        <p>Caveman Home</p>
-                        <p
-                          style={{
-                            color: "#797979",
-                            fontSize: "10px",
-                          }}
-                        >
-                          Calabar/CRS
-                        </p>
-                      </span>
-                    </div>
-                    <div
-                      style={{
-                        textAlign: "left",
-                        fontSize: "10px",
-                        marginTop: "10px",
-                        lineHeight: "15px",
-                      }}
-                    >
-                      <span className="propFeat">
-                        <img src="/assets/f1.png" alt="feature1" />
-                        30 sqft
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f2.png" alt="feature1" />5
-                        Bedrooms
-                      </span>
-                      <span className="propFeat">
-                        <img src="/assets/f3.png" alt="feature1" />6
-                        Bathrooms
-                      </span>
-                      <span
-                        className="propFeat"
-                        style={{ marginTop: "20px" }}
-                      >
-                        <img src="/assets/f4.png" alt="feature1" />7
-                        Garage
-                      </span>
-                    </div>
-                    <hr />
-                  </div>
-                </div>
-                <div
-                  style={{ marginTop: "53px", textAlign: "center" }}
-                >
-                  <h3>CONTACT</h3>
-                  <ContactForm />
-                </div>
-              </Col>
-             */}
             </Row>
           </div>
         </>
