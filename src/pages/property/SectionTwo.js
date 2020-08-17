@@ -68,8 +68,8 @@ export default () => {
         ) : (
           housesArr?.map((item, index) => (
             <Link
-              href="/properties/[pid]"
-              as={`/properties/${item?.slug}`}
+              href="/property/[pid]"
+              as={`/property/${item?.slug}`}
               key={index}
               passHref
             >
