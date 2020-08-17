@@ -164,7 +164,7 @@ export default function AcountSetting() {
                 fullWidth
                 placeholder="Address "
                 onChange={(e) => {
-                  form.setFieldValue("phone", e.target.value);
+                  form.setFieldValue("address", e.target.value);
                 }}
                 value={form.values.address}
                 error={!!form.errors.address && form.touched.address}
