@@ -359,27 +359,37 @@ DashBoardBody.SettingBanner = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+
     img {
       width: 150px;
       height: 150px;
       border-radius: 100%;
       border: none;
+      position: static;
+      margin-left: -151px;
       &.fill {
         object-fit: cover;
       }
+    }
+    .camera {
+      position: sticky;
+      margin-left: -27px;
+      margin-top: 5rem;
     }
     .anticon {
       font-size: 27px;
       color: #515c6f;
     }
-    input {
+    #profile {
       display: block;
-      height: 100%;
-      width: 100%;
+      background-color: #000;
+      width: 150px;
+      height: 150px;
       opacity: 0;
       cursor: pointer;
-      position: absolute;
+      border-radius: 100%;
+      left: 25rem;
+      position: sticky;
     }
 
     @media screen and (max-width: 1024px) {

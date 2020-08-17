@@ -4,12 +4,14 @@ import DashboardContainer from "styles/Container";
 import Body from "./Body";
 import MobileHeader from "./MobileHeader";
 import { store } from "store";
+import { useSelector } from "react-redux";
 
 function Layout({ children }) {
   const [showSideBar, setShowSideBar] = useState(false);
   const {
     user: { data },
   } = store.getState();
+  const userData = useSelector((state) => state.user.data?.user);
   return (
     <div style={{ overflow: "hidden", height: "100vh" }}>
       {data && !data?.user?.verified ? (
@@ -20,11 +22,9 @@ function Layout({ children }) {
             padding: "5px 0",
           }}
         >
-          We sent you an activation code check your email and click
-          the link to verify. Didn't receive email?{" "}
-          <span
-            style={{ textDecoration: "underline", cursor: "pointer" }}
-          >
+          We sent you an activation code check your email and click the link to
+          verify. Didn't receive email?{" "}
+          <span style={{ textDecoration: "underline", cursor: "pointer" }}>
             Resend Mail
           </span>
         </div>
@@ -33,7 +33,7 @@ function Layout({ children }) {
       )}
       <DashboardContainer>
         <MobileHeader
-          userData={data?.user}
+          userData={userData}
           showSideBar={showSideBar}
           setShowSideBar={setShowSideBar}
         />

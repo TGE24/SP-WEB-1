@@ -7,154 +7,178 @@ import { useFormik } from "formik";
 import { updateProfile, getUser } from "store/user/actions";
 import axios from "axios";
 import Loader from "components/Loader";
+import Button from "components/Button";
+import Input from "components/input";
 
 export default function AcountSetting() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.data?.user);
-  const {
-    user: { data },
-  } = store.getState();
 
-  const [profile, setProfile] = useState(userData?.picture);
   const [uploading, setUploading] = useState(false);
-  console.log(userData);
+  const [formLoading, setFormLoading] = useState(false);
+
   const onChange = (e) => {
     setUploading(true);
     const files = e.target.files[0];
-
     const formData = new FormData();
     formData.append("upload_preset", "ngflnmyo");
     formData.append("file", files);
     axios
-      .post(
-        "https://api.cloudinary.com/v1_1/tech-18/image/upload",
-        formData
-      )
+      .post("https://api.cloudinary.com/v1_1/tech-18/image/upload", formData)
       .then((res) => {
-        console.log(res.data.secure_url);
         const values = {
           name: userData?.name,
-
           address: userData?.address,
           picture: res.data.secure_url,
           phone: userData?.phone,
         };
         dispatch(updateProfile(values)).then((res) => {
-          dispatch(getuserData());
-          setProfile(userData?.picture);
+          dispatch(getUser());
           setUploading(false);
         });
       });
   };
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.name) {
+      errors.name = "Name is required";
+    }
+    if (!values.address) {
+      errors.address = "Address is required";
+    }
+    if (!values.phone) {
+      errors.phone = "Phone number is required";
+    }
+    return errors;
+  };
   const form = useFormik({
     initialValues: {
       name: userData?.name,
-      email: userData?.email,
       address: userData?.address,
       picture: userData?.picture,
       phone: userData?.phone,
     },
     onSubmit: (values) => {
-      console.log(values);
-      // dispatch(updateProfile(values)).then((res) => {
-      //   dispatch(getuserData());
-      // });
+      setFormLoading(true);
+      dispatch(updateProfile(values)).then((res) => {
+        dispatch(getUser());
+        setFormLoading(false);
+      });
     },
+    validate,
     validateOnChange: true,
   });
-
+  const onInputFocus = (name) => () => form.setFieldError(name, undefined);
   return (
     <>
       <DashBoardBody.Header>
         <h1>Account Settings</h1>
       </DashBoardBody.Header>
       <DashBoardBody>
-        <form onSubmit={form.onSubmit}>
-          <DashBoardBody.SettingBanner>
-            <div className="background">
-              {/* <div className="">
-                <h1>{userData?.name}</h1>
-                <h2>{userData?.email}</h2>
-              </div> */}
-            </div>
-            <div className="circle">
-              {uploading ? (
-                <Loader color="#fcad0a" size={40} />
-              ) : (
-                <span>
-                  <input
-                    type="file"
-                    name="file"
-                    onChange={onChange}
-                  />
-                  <img
-                    src={
-                      profile != null
-                        ? profile
-                        : "/assets/img/userData.png"
-                    }
-                    alt=""
-                  />
-                  <div className="camera">
-                    <CameraFilled size={100} />
-                  </div>
-                </span>
-              )}
-            </div>
-          </DashBoardBody.SettingBanner>
-
-          <DashBoardBody.Div>
-            <div className="input-control">
-              <label>First Name:</label>
-              <input
-                type="text"
-                value={userData?.name}
-                onChange={(e) => {
-                  setState(e.target.value);
-                  form.setFieldValue("name", e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="input-control">
-              <label>Email:</label>
-              <input
-                type="text"
-                value={userData?.email}
-                readOnly
-                disabled
-              />
-            </div>
-            <div className="input-group">
-              <div className="input-control">
-                <label>Phone Number:</label>
-                <div className="prefix">
-                  <span className="input-group-addon">+234</span>
-                  <input
-                    type="text"
-                    value={userData?.phone}
-                    onChange={(e) => {
-                      setState(e.target.value);
-                      form.setFieldValue("phone", e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="input-control">
-                <label>Address:</label>
+        <DashBoardBody.SettingBanner>
+          <div className="background">
+            {/* <div className="">
+              <h1>{userData?.name}</h1>
+              <h2>{userData?.email}</h2>
+            </div> */}
+          </div>
+          <div className="circle">
+            {uploading ? (
+              <Loader color="#fcad0a" size={40} />
+            ) : (
+              <>
                 <input
-                  type="text"
-                  value={userData?.address}
-                  onChange={(e) => {
-                    setState(e.target.value);
-                    form.setFieldValue("address", e.target.value);
-                  }}
+                  type="file"
+                  name="file"
+                  id="profile"
+                  onChange={onChange}
                 />
-              </div>
+                <img
+                  src={
+                    userData?.picture != null
+                      ? userData?.picture
+                      : "/assets/img/userData.png"
+                  }
+                  alt=""
+                />
+                <div className="camera">
+                  <CameraFilled size={100} />
+                </div>
+              </>
+            )}
+          </div>
+        </DashBoardBody.SettingBanner>
+
+        <DashBoardBody.Form onSubmit={form.handleSubmit}>
+          <div className="input-control">
+            <label>Name:</label>
+            <Input
+              name="name"
+              id="name"
+              round
+              big
+              fullWidth
+              placeholder="Name "
+              onChange={(e) => {
+                form.setFieldValue("name", e.target.value);
+              }}
+              value={form.values.name}
+              error={!!form.errors.name && form.touched.name}
+              errorText={form.touched.name ? form.errors.name : undefined}
+              onFocus={onInputFocus("name")}
+            />
+          </div>
+
+          <div className="input-control">
+            <label>Email:</label>
+            <input type="text" value={userData?.email} readOnly disabled />
+          </div>
+          <div className="input-group">
+            <div className="input-control">
+              <label>Phone Number:</label>
+              <Input
+                name="phone"
+                id="phone"
+                round
+                big
+                fullWidth
+                placeholder="Phone number "
+                onChange={(e) => {
+                  form.setFieldValue("phone", e.target.value);
+                }}
+                value={form.values.phone}
+                error={!!form.errors.phone && form.touched.phone}
+                errorText={form.touched.phone ? form.errors.phone : undefined}
+                onFocus={onInputFocus("phone")}
+              />
             </div>
-            <button type="submit">Save</button>
-          </DashBoardBody.Div>
-        </form>
+            <div className="input-control">
+              <label>Address:</label>
+              <Input
+                name="address"
+                id="address"
+                round
+                big
+                fullWidth
+                placeholder="Address "
+                onChange={(e) => {
+                  form.setFieldValue("phone", e.target.value);
+                }}
+                value={form.values.address}
+                error={!!form.errors.address && form.touched.address}
+                errorText={
+                  form.touched.address ? form.errors.address : undefined
+                }
+                onFocus={onInputFocus("address")}
+              />
+            </div>
+          </div>
+          <Button type="submit" loading={formLoading}>
+            Save
+          </Button>
+        </DashBoardBody.Form>
       </DashBoardBody>
     </>
   );
