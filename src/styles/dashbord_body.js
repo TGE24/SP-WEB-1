@@ -327,7 +327,7 @@ DashBoardBody.Row = styled.div`
 DashBoardBody.SettingBanner = styled.div`
   .background {
     height: 221px;
-    background: #c2c2c2;
+    background-image: url(${`https://res.cloudinary.com/ogcodes/image/upload/v1588292643/drawer_head.png`});
     display: flex;
     flex-direction: column;
     justify-content: center;

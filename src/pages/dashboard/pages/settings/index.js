@@ -26,7 +26,10 @@ export default function AcountSetting() {
     formData.append("upload_preset", "ngflnmyo");
     formData.append("file", files);
     axios
-      .post("https://api.cloudinary.com/v1_1/tech-18/image/upload", formData)
+      .post(
+        "https://api.cloudinary.com/v1_1/tech-18/image/upload",
+        formData
+      )
       .then((res) => {
         console.log(res.data.secure_url);
         const values = {
@@ -69,19 +72,27 @@ export default function AcountSetting() {
         <form onSubmit={form.onSubmit}>
           <DashBoardBody.SettingBanner>
             <div className="background">
-              <div className="">
+              {/* <div className="">
                 <h1>{userData?.name}</h1>
                 <h2>{userData?.email}</h2>
-              </div>
+              </div> */}
             </div>
             <div className="circle">
               {uploading ? (
                 <Loader color="#fcad0a" size={40} />
               ) : (
                 <span>
-                  <input type="file" name="file" onChange={onChange} />
+                  <input
+                    type="file"
+                    name="file"
+                    onChange={onChange}
+                  />
                   <img
-                    src={profile != null ? profile : "/assets/img/userData.png"}
+                    src={
+                      profile != null
+                        ? profile
+                        : "/assets/img/userData.png"
+                    }
                     alt=""
                   />
                   <div className="camera">
@@ -107,7 +118,12 @@ export default function AcountSetting() {
 
             <div className="input-control">
               <label>Email:</label>
-              <input type="text" value={userData?.email} readOnly disabled />
+              <input
+                type="text"
+                value={userData?.email}
+                readOnly
+                disabled
+              />
             </div>
             <div className="input-group">
               <div className="input-control">
