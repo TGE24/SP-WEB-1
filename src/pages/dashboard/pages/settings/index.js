@@ -2,33 +2,59 @@ import React, { useState } from "react";
 import DashBoardBody from "styles/dashbord_body";
 import { store } from "store";
 import { CameraFilled } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { updateProfile, getUser } from "store/user/actions";
+import axios from "axios";
+import Loader from "components/Loader";
 
 export default function AcountSetting() {
   const dispatch = useDispatch();
-
+  const userData = useSelector((state) => state.user.data?.user);
   const {
     user: { data },
   } = store.getState();
-  const { user } = data;
 
-  const [profile, setProfile] = useState(user?.picture);
-  console.log(user);
+  const [profile, setProfile] = useState(userData?.picture);
+  const [uploading, setUploading] = useState(false);
+  console.log(userData);
+  const onChange = (e) => {
+    setUploading(true);
+    const files = e.target.files[0];
 
+    const formData = new FormData();
+    formData.append("upload_preset", "ngflnmyo");
+    formData.append("file", files);
+    axios
+      .post("https://api.cloudinary.com/v1_1/tech-18/image/upload", formData)
+      .then((res) => {
+        console.log(res.data.secure_url);
+        const values = {
+          name: userData?.name,
+
+          address: userData?.address,
+          picture: res.data.secure_url,
+          phone: userData?.phone,
+        };
+        dispatch(updateProfile(values)).then((res) => {
+          dispatch(getuserData());
+          setProfile(userData?.picture);
+          setUploading(false);
+        });
+      });
+  };
   const form = useFormik({
     initialValues: {
-      name: user?.name,
-      email: user?.email,
-      address: user?.address,
-      picture: user?.picture,
-      phone: user?.phone,
+      name: userData?.name,
+      email: userData?.email,
+      address: userData?.address,
+      picture: userData?.picture,
+      phone: userData?.phone,
     },
     onSubmit: (values) => {
       console.log(values);
       // dispatch(updateProfile(values)).then((res) => {
-      //   dispatch(getUser());
+      //   dispatch(getuserData());
       // });
     },
     validateOnChange: true,
@@ -44,15 +70,25 @@ export default function AcountSetting() {
           <DashBoardBody.SettingBanner>
             <div className="background">
               <div className="">
-                <h1>{user?.name}</h1>
-                <h2>{user?.email}</h2>
+                <h1>{userData?.name}</h1>
+                <h2>{userData?.email}</h2>
               </div>
             </div>
             <div className="circle">
-              <img src="/assets/img/user.png" alt="" />
-              <div className="camera">
-                <CameraFilled size={100} />
-              </div>
+              {uploading ? (
+                <Loader color="#fcad0a" size={40} />
+              ) : (
+                <span>
+                  <input type="file" name="file" onChange={onChange} />
+                  <img
+                    src={profile != null ? profile : "/assets/img/userData.png"}
+                    alt=""
+                  />
+                  <div className="camera">
+                    <CameraFilled size={100} />
+                  </div>
+                </span>
+              )}
             </div>
           </DashBoardBody.SettingBanner>
 
@@ -61,7 +97,7 @@ export default function AcountSetting() {
               <label>First Name:</label>
               <input
                 type="text"
-                value={user?.name}
+                value={userData?.name}
                 onChange={(e) => {
                   setState(e.target.value);
                   form.setFieldValue("name", e.target.value);
@@ -71,7 +107,7 @@ export default function AcountSetting() {
 
             <div className="input-control">
               <label>Email:</label>
-              <input type="text" value={user?.email} readOnly disabled />
+              <input type="text" value={userData?.email} readOnly disabled />
             </div>
             <div className="input-group">
               <div className="input-control">
@@ -80,7 +116,7 @@ export default function AcountSetting() {
                   <span className="input-group-addon">+234</span>
                   <input
                     type="text"
-                    value={user?.phone}
+                    value={userData?.phone}
                     onChange={(e) => {
                       setState(e.target.value);
                       form.setFieldValue("phone", e.target.value);
@@ -92,7 +128,7 @@ export default function AcountSetting() {
                 <label>Address:</label>
                 <input
                   type="text"
-                  value={user?.address}
+                  value={userData?.address}
                   onChange={(e) => {
                     setState(e.target.value);
                     form.setFieldValue("address", e.target.value);

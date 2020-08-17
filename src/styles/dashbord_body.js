@@ -360,9 +360,26 @@ DashBoardBody.SettingBanner = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 100%;
+      border: none;
+      &.fill {
+        object-fit: cover;
+      }
+    }
     .anticon {
       font-size: 27px;
       color: #515c6f;
+    }
+    input {
+      display: block;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      cursor: pointer;
+      position: absolute;
     }
 
     @media screen and (max-width: 1024px) {
