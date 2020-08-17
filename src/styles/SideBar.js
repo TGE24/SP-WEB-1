@@ -25,6 +25,7 @@ const SideBar = styled.section`
 `;
 SideBar.InnerCont = styled.section`
   box-shadow: 0px 4px 9px rgba(81, 92, 111, 0.12);
+  height: 100%;
   @media only screen and (max-width: 1028px) {
     height: 100vh;
     padding-top: 22px;
@@ -83,6 +84,7 @@ SideBar.Links = styled.ul`
   flex: 1;
   background-color: ${Colors.textColor};
   width: 100%;
+  height: 78%;
   border-radius: 30px 30px 0 0;
   list-style: none;
   display: flex;
@@ -92,8 +94,9 @@ SideBar.Links = styled.ul`
   padding-bottom: 6vh;
   padding-left: 25px;
   box-sizing: border-box;
-  font-family: "GT Walsheim", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  font-family: "GT Walsheim", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif !important;
   li {
     opacity: 0.5;
     display: flex;

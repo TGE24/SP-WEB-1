@@ -79,10 +79,10 @@ export default function AcountSetting() {
       <DashBoardBody>
         <DashBoardBody.SettingBanner>
           <div className="background">
-            <div className="">
+            {/* <div className="">
               <h1>{userData?.name}</h1>
               <h2>{userData?.email}</h2>
-            </div>
+            </div> */}
           </div>
           <div className="circle">
             {uploading ? (

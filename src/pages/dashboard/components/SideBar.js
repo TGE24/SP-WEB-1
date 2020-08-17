@@ -47,7 +47,7 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
             alt="avatar"
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h4 className="user-name">{userData?.name || "User"}</h4>
+            <h4 className="user-name">{userData?.name}</h4>
             <h5 className="logout" onClick={() => dispatch(logout())}>
               Logout
             </h5>
@@ -59,7 +59,9 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
                 <li
                   key={index}
                   className={
-                    window.location.pathname === `${link.path}` ? "active" : ""
+                    window.location.pathname === `${link.path}`
+                      ? "active"
+                      : ""
                   }
                 >
                   <img src={link.icon} alt={link.name} />
@@ -78,7 +80,9 @@ const SideBar = ({ showSideBar, setShowSideBar, userData }) => {
                 <li
                   key={index}
                   className={
-                    window.location.pathname === `${link.path}` ? "active" : ""
+                    window.location.pathname === `${link.path}`
+                      ? "active"
+                      : ""
                   }
                 >
                   <img src={link.icon} alt={link.name} />
@@ -131,14 +135,20 @@ const userLink = [
     name: "My Expertise",
     path: "/dashboard/my-expertise",
     icon: "/assets/img/properties.png",
-    matchPaths: ["/dashboard/become-expert", "/dashboard/my-expertise"],
+    matchPaths: [
+      "/dashboard/become-expert",
+      "/dashboard/my-expertise",
+    ],
   },
 
   {
     name: "Account Setting",
     path: "/dashboard/account-settings",
     icon: "/assets/img/account.png",
-    matchPaths: ["/dashboard/account-settings", "/dashboard/change-password"],
+    matchPaths: [
+      "/dashboard/account-settings",
+      "/dashboard/change-password",
+    ],
   },
   {
     name: "Become an agent",
@@ -167,12 +177,12 @@ const agentLink = [
     icon: "/assets/img/properties.png",
     matchPaths: ["dashboard/reserved-properties"],
   },
-  {
-    name: "Sold Properties",
-    path: "/dashboard/sold-properties",
-    icon: "/assets/img/properties.png",
-    matchPaths: ["dashboard/sold-properties"],
-  },
+  // {
+  //   name: "Sold Properties",
+  //   path: "/dashboard/sold-properties",
+  //   icon: "/assets/img/properties.png",
+  //   matchPaths: ["dashboard/sold-properties"],
+  // },
   // {
   //   name: "Mortgage",
   //   path: "/dashboard/mortgage",
@@ -183,13 +193,19 @@ const agentLink = [
     name: "My Expertise",
     path: "/dashboard/my-expertise",
     icon: "/assets/img/properties.png",
-    matchPaths: ["/dashboard/become-expert", "/dashboard/my-expertise"],
+    matchPaths: [
+      "/dashboard/become-expert",
+      "/dashboard/my-expertise",
+    ],
   },
 
   {
     name: "Account Setting",
     path: "/dashboard/account-settings",
     icon: "/assets/img/account.png",
-    matchPaths: ["/dashboard/account-setting", "/dashboard/change-password"],
+    matchPaths: [
+      "/dashboard/account-setting",
+      "/dashboard/change-password",
+    ],
   },
 ];
