@@ -5,9 +5,13 @@ import Body from "./Body";
 import MobileHeader from "./MobileHeader";
 import { store } from "store";
 import { useSelector } from "react-redux";
+import { toastSuccess } from "helpers/Toast";
+import { requestVerification } from "store/auth/action";
+import { useDispatch } from "react-redux";
 
 function Layout({ children }) {
   const [showSideBar, setShowSideBar] = useState(false);
+  const dispatch = useDispatch();
   const {
     user: { data },
   } = store.getState();
@@ -22,9 +26,24 @@ function Layout({ children }) {
             padding: "5px 0",
           }}
         >
-          We sent you an activation code check your email and click the link to
-          verify. Didn't receive email?{" "}
-          <span style={{ textDecoration: "underline", cursor: "pointer" }}>
+          We sent you a verification link check your email and click
+          the link to verify. Didn't receive email?{" "}
+          <span
+            style={{
+              textDecoration: "underline",
+              cursor: "pointer",
+            }}
+            onClick={() => {
+              dispatch(requestVerification(data?.user?.email)).then(
+                (res) => {
+                  console.log(res);
+                  if (res?.action?.payload?.status === 200) {
+                    toastSuccess(res?.value?.data?.message);
+                  }
+                }
+              );
+            }}
+          >
             Resend Mail
           </span>
         </div>

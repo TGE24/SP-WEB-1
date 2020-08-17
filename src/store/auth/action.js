@@ -28,24 +28,11 @@ export const signup = (data) => async (dispatch) => {
     payload,
   });
 };
-export const googleAuth = () => async (dispatch) => {
-  const payload = api.get("/login/google");
+
+export const requestVerification = (data) => async (dispatch) => {
+  const payload = api.post("/verify_account", data);
   return dispatch({
-    type: authActionTypes.GOOGLE_SIGNUP.default,
-    payload,
-  });
-};
-export const twitterAuth = () => async (dispatch) => {
-  const payload = api.get("/login/twitter");
-  return dispatch({
-    type: authActionTypes.TWITTER_SIGNUP.default,
-    payload,
-  });
-};
-export const facebookAuth = () => async (dispatch) => {
-  const payload = api.get("/login/facebook");
-  return dispatch({
-    type: authActionTypes.FACEBOOK_SIGNUP.default,
+    type: authActionTypes.REQUEST_MAIL.default,
     payload,
   });
 };

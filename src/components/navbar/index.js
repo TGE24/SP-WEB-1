@@ -12,8 +12,10 @@ import {
 } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { closeModal, showModal } from "store/modal/action";
+import { requestVerification } from "store/auth/action";
 import { store } from "store";
 import Router from "next/router";
+import { toastSuccess } from "helpers/Toast";
 
 const Wrap = styled.div`
   .ant-affix {
@@ -77,6 +79,8 @@ const Navbar = () => {
     user: { data },
   } = store.getState();
 
+  const dispatch = useDispatch();
+
   const {
     auth: { data: authData },
   } = store.getState();
@@ -85,10 +89,17 @@ const Navbar = () => {
     setVisible(!visible);
   };
 
+  const handleVerificationRequest = () => {
+    dispatch(requestVerification(data?.user?.email)).then((res) => {
+      if (res?.payload?.status === 200) {
+        toastSuccess("Verification Email sent");
+      }
+    });
+  };
+
   const onClose = () => {
     setVisible(false);
   };
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -163,9 +174,24 @@ const Navbar = () => {
               padding: "5px 0",
             }}
           >
-            We sent you an activation code check your email and click
+            We sent you a verification link check your email and click
             the link to verify. Didn't receive email?{" "}
-            <span style={{ textDecoration: "underline" }}>
+            <span
+              style={{
+                textDecoration: "underline",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                dispatch(requestVerification(data?.user?.email)).then(
+                  (res) => {
+                    console.log(res);
+                    if (res?.action?.payload?.status === 200) {
+                      toastSuccess(res?.value?.data?.message);
+                    }
+                  }
+                );
+              }}
+            >
               Resend Mail
             </span>
           </div>

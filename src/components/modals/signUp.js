@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Divider, DatePicker } from "antd";
+import { Form, Input, Button, DatePicker } from "antd";
 import {
   MailOutlined,
   UserOutlined,
