@@ -1,4 +1,4 @@
-import { Layout, Row, Col, Card } from "antd";
+import { Layout, Row, Col, Card, Empty } from "antd";
 import { Services, SectionSeven } from "./styled";
 import Jump from "react-reveal/Jump";
 
@@ -13,61 +13,70 @@ export default () => (
     >
       <Services>
         <h3>Best Real Estate Deals</h3>
-        <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <h5>We offer the very best deals</h5>
         {/* <img
           src="/assets/prev.png"
           alt="Previous"
           className="previous"
         /> */}
-        <Row gutter={[0, 12]}>
-          {location.map((item, index) => (
-            <Col
-              xs={24}
-              sm={18}
-              md={12}
-              lg={6}
-              xl={6}
-              key={index}
-              className="column-6"
-            >
-              <Jump>
-                <Card
-                  title={
-                    <div
-                      style={{
-                        backgroundImage: `url(${item.image})`,
-                        height: "182.19px",
-                        backgroundRepeat: "no-repeat",
-                      }}
-                    ></div>
-                  }
-                  style={{ width: 253.86 }}
-                >
-                  <p
-                    style={{
-                      fontSize: "15px",
-                      textAlign: "start",
-                      margin: 0,
-                    }}
+        <Row
+          gutter={[0, 12]}
+          style={{ justifyContent: "center", alignItems: "center" }}
+        >
+          {location.length === 0 ? (
+            <Empty description={<span>NO DEALS YET</span>} />
+          ) : (
+            location.map((item, index) => (
+              <Col
+                xs={24}
+                sm={18}
+                md={12}
+                lg={6}
+                xl={6}
+                key={index}
+                className="column-6"
+              >
+                <Jump>
+                  <Card
+                    title={
+                      <div
+                        style={{
+                          backgroundImage: `url(${item.image})`,
+                          height: "182.19px",
+                          backgroundRepeat: "no-repeat",
+                        }}
+                      ></div>
+                    }
+                    style={{ width: 253.86 }}
                   >
-                    <span
+                    <p
                       style={{
-                        color: "#F9A602",
                         fontSize: "15px",
-                        marginRight: "18px",
+                        textAlign: "start",
+                        margin: 0,
                       }}
                     >
-                      Ancient Bungalo Ancient
-                    </span>{" "}
-                    <span style={{ float: "right" }}>₦436</span>
-                  </p>
-                  <p style={{ fontSize: "15px", textAlign: "start" }}>
-                    Calabar / Nigeria
-                  </p>
-                </Card>
-              </Jump>
-            </Col>
-          ))}
+                      <span
+                        style={{
+                          color: "#F9A602",
+                          fontSize: "15px",
+                          marginRight: "18px",
+                        }}
+                      >
+                        Ancient Bungalo Ancient
+                      </span>{" "}
+                      <span style={{ float: "right" }}>₦436</span>
+                    </p>
+                    <p
+                      style={{ fontSize: "15px", textAlign: "start" }}
+                    >
+                      Calabar / Nigeria
+                    </p>
+                  </Card>
+                </Jump>
+              </Col>
+            ))
+          )}
         </Row>
         {/* <img src="/assets/next.png" alt="Next" className="next" /> */}
       </Services>
@@ -75,37 +84,4 @@ export default () => (
   </SectionSeven>
 );
 
-const location = [
-  {
-    image: "/assets/l1.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l2.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l3.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l4.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l5.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l6.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l6.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l6.png",
-    city: "Rome",
-  },
-];
+const location = [];

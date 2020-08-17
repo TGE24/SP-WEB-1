@@ -14,7 +14,7 @@ export default () => (
     >
       <Services>
         <h3>Services We Offer</h3>
-        <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <h5>We offer the best services</h5>
         <Row>
           {services.map((item, index) => (
             <Col

@@ -14,7 +14,7 @@ export default () => (
     >
       <Services>
         <h3>Our Representatives</h3>
-        <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <h5>These are the people ready to work with you</h5>
         <Row gutter={[24, 24]}>
           {reps.map((item, index) => (
             <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>

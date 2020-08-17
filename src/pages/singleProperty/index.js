@@ -676,6 +676,7 @@ const PropertyDetail = () => {
                         width: "840px",
                         background: "#F5F4F4",
                         padding: "29.68px",
+                        margin: "auto",
                       }}
                       className="prop-details"
                     >

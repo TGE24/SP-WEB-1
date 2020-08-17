@@ -72,3 +72,11 @@ export const verifyPayment = (reference) => async (dispatch) => {
     payload,
   });
 };
+
+export const recentProperties = () => async (dispatch) => {
+  const payload = api.get("/property/recent");
+  return dispatch({
+    type: actionTypes.RECENT_PROPERTIES.default,
+    payload,
+  });
+};

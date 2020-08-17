@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   paystackData: null,
+  recentProperties: null,
 };
 
 export const propertyReducer = (state = initialState, action) => {
@@ -80,6 +81,28 @@ export const propertyReducer = (state = initialState, action) => {
     }
 
     case actionTypes.VERIFY_PAYMENT.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+    case actionTypes.RECENT_PROPERTIES.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    }
+    case actionTypes.RECENT_PROPERTIES.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+        recentProperties: { ...action.payload.data },
+      };
+    }
+    case actionTypes.RECENT_PROPERTIES.rejected: {
       return {
         ...state,
         loading: false,

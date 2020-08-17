@@ -7,4 +7,5 @@ export default {
   GET_HOUSE: actionTypes("GET_HOUSE"),
   PAYMENT: actionTypes("PAYMENT"),
   VERIFY_PAYMENT: actionTypes("VERIFY_PAYMENT"),
+  RECENT_PROPERTIES: actionTypes("RECENT_PROPERTIES"),
 };

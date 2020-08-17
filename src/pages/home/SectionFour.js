@@ -1,4 +1,4 @@
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, Empty } from "antd";
 import { Services, SectionFour } from "./styled";
 
 const { Content } = Layout;
@@ -13,37 +13,44 @@ export default () => (
     >
       <Services>
         <h3>Best Real Estate Locations</h3>
-        <h5>Lorem ipsum dolor et mum pas deryt feuityqu</h5>
+        <h5>check out our locations</h5>
         {/* <img src="/assets/prev.png" alt="Previous" className="previous" /> */}
-        <Row gutter={[16, 16]}>
-          {locations.map((item, index) => (
-            <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
-              <div
-                style={{
-                  background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${item.image})`,
-                  backgroundSize: "cover",
-                  height: "239px",
-                  backgroundRepeat: "no-repeat",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <h1
+        <Row
+          gutter={[16, 16]}
+          style={{ justifyContent: "center", alignItems: "center" }}
+        >
+          {locations.length === 0 ? (
+            <Empty description={<span>NO LOCATIONS YET</span>} />
+          ) : (
+            locations.map((item, index) => (
+              <Col xs={24} sm={18} md={12} lg={8} xl={8} key={index}>
+                <div
                   style={{
-                    color: "white",
-                    fontFamily: "Cookie",
-                    fontStyle: "normal",
-                    fontWeight: "300",
-                    fontSize: "60px",
-                    lineHeight: "67px",
+                    background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${item.image})`,
+                    backgroundSize: "cover",
+                    height: "239px",
+                    backgroundRepeat: "no-repeat",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
-                  {item.city}
-                </h1>
-              </div>
-            </Col>
-          ))}
+                  <h1
+                    style={{
+                      color: "white",
+                      fontFamily: "Cookie",
+                      fontStyle: "normal",
+                      fontWeight: "300",
+                      fontSize: "60px",
+                      lineHeight: "67px",
+                    }}
+                  >
+                    {item.city}
+                  </h1>
+                </div>
+              </Col>
+            ))
+          )}
         </Row>
         {/* <img src="/assets/next.png" alt="Next" className="next" /> */}
       </Services>
@@ -51,29 +58,4 @@ export default () => (
   </SectionFour>
 );
 
-const locations = [
-  {
-    image: "/assets/l1.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l2.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l3.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l4.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l5.png",
-    city: "Rome",
-  },
-  {
-    image: "/assets/l6.png",
-    city: "Rome",
-  },
-];
+const locations = [];

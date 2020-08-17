@@ -10,9 +10,9 @@ export default () => {
         <Zoom right cascade>
           <h1>We dont just serve , we employ!</h1>
         </Zoom>
-        <Rotate top right cascade>
+        {/* <Rotate top right cascade>
           <h2>comfortable, affordable,exotic,un uniquevvv</h2>
-        </Rotate>
+        </Rotate> */}
       </div>
     </CareerSectionOne>
   );
