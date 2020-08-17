@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "spread-properties",
   "main": "index.js",
+  "homepage": "https://spreadprolimited.com/",
   "scripts": {
     "dev": "next",
     "build": "next build",
