@@ -21,10 +21,13 @@ export default function AcountSetting() {
     setUploading(true);
     const files = e.target.files[0];
     const formData = new FormData();
-    formData.append("upload_preset", "ngflnmyo");
+    formData.append(
+      "upload_preset",
+      process.env.CLOUDINARY_PROFILE_UPLOAD_PRESET
+    );
     formData.append("file", files);
     axios
-      .post("https://api.cloudinary.com/v1_1/tech-18/image/upload", formData)
+      .post(process.env.CLOUDINARY_UPLOAD_URL, formData)
       .then((res) => {
         const values = {
           name: userData?.name,
@@ -70,7 +73,8 @@ export default function AcountSetting() {
     validate,
     validateOnChange: true,
   });
-  const onInputFocus = (name) => () => form.setFieldError(name, undefined);
+  const onInputFocus = (name) => () =>
+    form.setFieldError(name, undefined);
   return (
     <>
       <DashBoardBody.Header>
@@ -126,14 +130,21 @@ export default function AcountSetting() {
               }}
               value={form.values.name}
               error={!!form.errors.name && form.touched.name}
-              errorText={form.touched.name ? form.errors.name : undefined}
+              errorText={
+                form.touched.name ? form.errors.name : undefined
+              }
               onFocus={onInputFocus("name")}
             />
           </div>
 
           <div className="input-control">
             <label>Email:</label>
-            <input type="text" value={userData?.email} readOnly disabled />
+            <input
+              type="text"
+              value={userData?.email}
+              readOnly
+              disabled
+            />
           </div>
           <div className="input-group">
             <div className="input-control">
@@ -150,7 +161,9 @@ export default function AcountSetting() {
                 }}
                 value={form.values.phone}
                 error={!!form.errors.phone && form.touched.phone}
-                errorText={form.touched.phone ? form.errors.phone : undefined}
+                errorText={
+                  form.touched.phone ? form.errors.phone : undefined
+                }
                 onFocus={onInputFocus("phone")}
               />
             </div>
@@ -169,7 +182,9 @@ export default function AcountSetting() {
                 value={form.values.address}
                 error={!!form.errors.address && form.touched.address}
                 errorText={
-                  form.touched.address ? form.errors.address : undefined
+                  form.touched.address
+                    ? form.errors.address
+                    : undefined
                 }
                 onFocus={onInputFocus("address")}
               />
