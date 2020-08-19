@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-SemiBold.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Medium.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Regular.ttf");
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-ExtraLight.ttf");
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-ExtraBold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-ExtraBold.ttf");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("../fonts/Poppins-Black.ttf");
+  font-weight: 900;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Poppins", "Helvetica Neue", sans-serif !important;
+  color: #000;
+}
+
+button,
+input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Poppins", "Helvetica Neue", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "GT Walsheim", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Poppins",
+    "Helvetica Neue", sans-serif;
+}
+
+@media only screen and (max-width: 1080px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+}
+
+.form-input.full-width {
+  max-width: 100% !important;
+}
+
+.Toastify__toast-container.toast__container,
+.Toastify__toast.toast__toast,
+.Toastify__toast-body.toast__body {
+  padding: 0px;
+  margin: auto;
+  border-radius: 3px;
+  z-index: 99999999999999999999999;
+}
+
+.Toastify__toast-container.toast__container {
+  width: 100%;
+  max-width: 440px;
+}
+
+.Toastify__toast.toast__toast {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px 0 rgba(69, 69, 69, 0.2);
+}
+
+.Toastify__toast.toast__toast {
+  min-height: auto;
+}
+
+@media only screen and (max-width: 512px) {
+  .Toastify__toast-container.toast__container {
+    width: 100%;
+    max-width: 400px;
+    top: 10px;
+  }
+}
