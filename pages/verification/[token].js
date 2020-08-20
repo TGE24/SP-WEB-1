@@ -12,8 +12,9 @@ export default () => {
   React.useEffect(() => {
     dispatch(verify(token))
       .then((res) => {
-        if (res?.value.status === 200) {
-          router.push("/");
+        console.log(res);
+        if (res?.value?.status === 200) {
+          // router.push("/");
           toastSuccess("Email verified successfully");
           dispatch(getUser());
         }
@@ -21,7 +22,7 @@ export default () => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [dispatch]);
 
   return (
     <section className="verification-container">

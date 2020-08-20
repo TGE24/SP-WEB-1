@@ -89,17 +89,6 @@ const Navbar = () => {
     setVisible(!visible);
   };
 
-  const handleVerificationRequest = () => {
-    dispatch(requestVerification(data?.user?.email)).then((res) => {
-      if (res?.payload?.status === 200) {
-        toastSuccess("Verification Email sent");
-      }
-    });
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
 
   return (
     <>

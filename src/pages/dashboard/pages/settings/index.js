@@ -32,22 +32,23 @@ export default function AcountSetting() {
     setUploading(true);
     const files = e.target.files[0];
     const formData = new FormData();
-    formData.append("upload_preset", "ngflnmyo");
+    formData.append(
+      "upload_preset",
+      process.env.CLOUDINARY_PROFILE_UPLOAD_PRESET
+    );
     formData.append("file", files);
-    axios
-      .post("https://api.cloudinary.com/v1_1/tech-18/image/upload", formData)
-      .then((res) => {
-        const values = {
-          name: userData?.name,
-          address: userData?.address,
-          picture: res.data.secure_url,
-          phone: userData?.phone,
-        };
-        dispatch(updateProfile(values)).then((res) => {
-          dispatch(getUser());
-          setUploading(false);
-        });
+    axios.post(process.env.CLOUDINARY_UPLOAD_URL, formData).then((res) => {
+      const values = {
+        name: userData?.name,
+        address: userData?.address,
+        picture: res.data.secure_url,
+        phone: userData?.phone,
+      };
+      dispatch(updateProfile(values)).then((res) => {
+        dispatch(getUser());
+        setUploading(false);
       });
+    });
   };
   const header = {
     Authorization: "Bearer sk_live_0e774ab38d53157a2d3e49945f9721cd94173272",
