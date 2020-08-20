@@ -14,29 +14,24 @@ const Input = ({
   hideLabel = false,
   containerClass,
   errorText,
+  maxlength,
   ...rest
 }) => {
-  const [showPassword, setShowPassword] = React.useState(
-    type === "text"
-  );
+  const [showPassword, setShowPassword] = React.useState(type === "text");
   return (
-    <InputBlock.Container
-      fullWidth={fullWidth}
-      className={containerClass}
-    >
+    <InputBlock.Container fullWidth={fullWidth} className={containerClass}>
       <InputBlock.Label htmlFor={name} hide={hideLabel}>
         {label}
       </InputBlock.Label>
       <InputBlock
         name={name}
         fullWidth={fullWidth}
-        type={
-          passwordToggle ? (showPassword ? "text" : "password") : type
-        }
+        type={passwordToggle ? (showPassword ? "text" : "password") : type}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
         autocomplete="off"
+        max={maxlength}
         error={!!errorText}
         {...rest}
       />
