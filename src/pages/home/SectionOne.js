@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Search from "../../components/search";
+import Search from "components/search";
 import { Layout, Modal } from "antd";
 import Zoom from "react-reveal/Zoom";
 import Rotate from "react-reveal/Rotate";
-import ModalContent from "../../components/modals/buyNow.js";
+import ModalContent from "components/modals/buyNow.js";
 
 const { Content } = Layout;
 
