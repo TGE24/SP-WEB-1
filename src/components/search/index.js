@@ -21,7 +21,7 @@ const tailLayout = {
   },
 };
 
-const Demo = () => {
+const Search = () => {
   return (
     <Tabs className="tabs" type="card">
       <TabPane tab="RENT" key="1">
@@ -186,4 +186,4 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+export default Search;

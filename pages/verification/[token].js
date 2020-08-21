@@ -10,19 +10,19 @@ export default () => {
   const { token } = router.query;
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(verify(token))
-      .then((res) => {
-        console.log(res);
-        if (res?.value?.status === 200) {
-          // router.push("/");
-          toastSuccess("Email verified successfully");
-          dispatch(getUser());
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [dispatch]);
+    if (token)
+      dispatch(verify(token))
+        .then((res) => {
+          if (res?.value?.status === 200) {
+            router.push("/");
+            toastSuccess("Email verified successfully");
+            dispatch(getUser());
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+  }, [dispatch, token]);
 
   return (
     <section className="verification-container">
