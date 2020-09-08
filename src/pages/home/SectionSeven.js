@@ -8,11 +8,12 @@ export default () => (
   <SectionSeven>
     <Content
       style={{
-        padding: "50px",
+        padding: "82px 50px 50px 50px",
+        background: "whitesmoke",
       }}
     >
       <Services>
-        <h3>Best Real Estate Deals</h3>
+        <h3>Spread Promotions</h3>
         <h5>We offer the very best deals</h5>
         {/* <img
           src="/assets/prev.png"
@@ -24,7 +25,7 @@ export default () => (
           style={{ justifyContent: "center", alignItems: "center" }}
         >
           {location.length === 0 ? (
-            <Empty description={<span>NO DEALS YET</span>} />
+            <Empty description={<span>No Promos Yet</span>} />
           ) : (
             location.map((item, index) => (
               <Col
@@ -67,9 +68,7 @@ export default () => (
                       </span>{" "}
                       <span style={{ float: "right" }}>₦436</span>
                     </p>
-                    <p
-                      style={{ fontSize: "15px", textAlign: "start" }}
-                    >
+                    <p style={{ fontSize: "15px", textAlign: "start" }}>
                       Calabar / Nigeria
                     </p>
                   </Card>

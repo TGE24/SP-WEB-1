@@ -40,20 +40,6 @@ body {
 .ant-pagination-item:hover a {
   color: #fcad0a;
 }
-.buy-now {
-  background-color: #fcad0a !important;
-  border-radius: 50px !important;
-  margin-top: 31px;
-  border: none !important;
-  width: 138px;
-  height: 46px !important;
-  color: white !important;
-  text-transform: uppercase;
-  font-weight: 800;
-}
-.buy-now:hover {
-  color: white !important;
-}
 .column-6 {
   display: flex;
   justify-content: center;
@@ -118,6 +104,22 @@ body {
   .background {
     text-align: center;
     height: 70vh;
+    background-repeat: no-repeat;
+  }
+  .background h1 {
+    font-size: 32px;
+  }
+  .background p {
+    font-size: 13px;
+    color: white;
+    margin: 0 40px;
+  }
+}
+
+@media (max-width: 400px) {
+  .background {
+    text-align: center;
+    height: 80vh;
     background-repeat: no-repeat;
   }
   .background h1 {

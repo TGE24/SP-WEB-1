@@ -79,3 +79,11 @@
     padding: 0;
   }
 }
+
+@media (max-width: 400px) {
+  .tabs {
+    width: calc(100% - 51px);
+    position: absolute !important;
+    bottom: 35px;
+  }
+}

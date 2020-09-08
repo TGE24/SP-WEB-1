@@ -22,6 +22,9 @@ const tailLayout = {
 };
 
 const Search = () => {
+  const onFinish = (values) => {
+    console.log(values);
+  };
   return (
     <Tabs className="tabs" type="card">
       <TabPane tab="RENT" key="1">
@@ -30,6 +33,8 @@ const Search = () => {
           name="basic"
           layout="inline"
           className="search-form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
         >
           <Form.Item
             name="location"
@@ -91,14 +96,24 @@ const Search = () => {
               placeholder="Select a price range"
               optionFilterProp="children"
             >
-              <Option value="jack">₦500,000 - ₦1,000,000</Option>
-              <Option value="lucy">₦1,000,000 - ₦2,000,000</Option>
-              <Option value="tom">Above ₦2,000,000</Option>
+              <Option value="₦500,000 - ₦1,000,000">
+                ₦500,000 - ₦1,000,000
+              </Option>
+              <Option value="₦1,000,000 - ₦2,000,000">
+                ₦1,000,000 - ₦2,000,000
+              </Option>
+              <Option value="Above ₦2,000,000">
+                Above ₦2,000,000
+              </Option>
             </Select>
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button className="form-button" icon={<SearchOutlined />}>
+            <Button
+              className="form-button"
+              icon={<SearchOutlined />}
+              htmlType="submit"
+            >
               SEARCH
             </Button>
           </Form.Item>
@@ -176,7 +191,11 @@ const Search = () => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button className="form-button" icon={<SearchOutlined />}>
+            <Button
+              className="form-button"
+              icon={<SearchOutlined />}
+              htmlType="submit"
+            >
               SEARCH
             </Button>
           </Form.Item>

@@ -39,11 +39,7 @@ const RightMenu = () => {
       <Menu mode="horizontal">
         <Menu.Item key="mail">
           <Link href="/">
-            <a
-              className={
-                window.location.pathname === `/` ? "activeNav" : ""
-              }
-            >
+            <a className={window.location.pathname === `/` ? "activeNav" : ""}>
               Home
             </a>
           </Link>
@@ -52,9 +48,7 @@ const RightMenu = () => {
           <Link href="/properties" passHref>
             <a
               className={
-                window.location.pathname === `/properties`
-                  ? "activeNav"
-                  : ""
+                window.location.pathname === `/properties` ? "activeNav" : ""
               }
             >
               Properties
@@ -70,9 +64,7 @@ const RightMenu = () => {
           <Link href="/about">
             <a
               className={
-                window.location.pathname === `/about`
-                  ? "activeNav"
-                  : ""
+                window.location.pathname === `/about` ? "activeNav" : ""
               }
             >
               About Us
@@ -83,9 +75,7 @@ const RightMenu = () => {
           <Link href="/careers">
             <a
               className={
-                window.location.pathname === `/careers`
-                  ? "activeNav"
-                  : ""
+                window.location.pathname === `/careers` ? "activeNav" : ""
               }
             >
               Careers

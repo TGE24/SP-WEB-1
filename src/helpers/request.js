@@ -4,7 +4,7 @@ import { toastError } from "helpers/Toast";
 import parseError from "helpers/ParseError";
 
 const request = axios.create({
-  baseURL: "https://api.spreadprolimited.com/api",
+  baseURL: process.env.BASE_URL,
 });
 
 request.interceptors.request.use((config) => {

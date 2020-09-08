@@ -210,7 +210,7 @@ export const CareerSectionFour = styled.section`
     border: none;
     background: #f9a602;
     border-radius: 5.07115px;
-    width: 89px;
+    width: 129px;
     font-weight: 600;
     font-size: 10.4598px;
     line-height: 16px;
