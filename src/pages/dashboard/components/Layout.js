@@ -26,8 +26,8 @@ function Layout({ children }) {
             padding: "5px 0",
           }}
         >
-          We sent you a verification link check your email and click
-          the link to verify. Didn't receive email?{" "}
+          Verify your email to get the most out of Spread Properties.
+          Didn't receive an email?
           <span
             style={{
               textDecoration: "underline",
@@ -44,7 +44,7 @@ function Layout({ children }) {
               );
             }}
           >
-            Resend Mail
+            Resend Confirmation
           </span>
         </div>
       ) : (

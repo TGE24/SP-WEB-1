@@ -181,7 +181,7 @@ export const SectionTwo = styled.div`
   margin: 0;
   @media (max-width: 767px) {
     .ant-layout-content {
-      padding: 150px 0 26px 0 !important;
+      padding: 15px !important;
     }
   }
 `;
@@ -214,7 +214,7 @@ export const SectionSeven = styled.div`
   }
   @media (max-width: 767px) {
     .ant-layout-content {
-      padding: 15px !important;
+      padding: 150px 0 26px 0 !important;
     }
     .ant-card-bordered {
       width: 100% !important;

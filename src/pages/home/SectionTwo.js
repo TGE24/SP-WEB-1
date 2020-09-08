@@ -8,8 +8,7 @@ export default () => (
   <SectionTwo>
     <Content
       style={{
-        padding: "82px 50px 50px 50px",
-        background: "whitesmoke",
+        padding: "50px",
       }}
     >
       <Services>

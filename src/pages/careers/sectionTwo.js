@@ -7,8 +7,14 @@ import Rotate from "react-reveal/Rotate";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCareer } from "store/career/actions";
 import Loader from "../property/Loader";
+import Router from "next/router";
+import { store } from "store";
+import { showModal } from "store/modal/action";
 
 export default () => {
+  const {
+    auth: { data },
+  } = store.getState();
   const careers = useSelector((state) => state.careers.data);
   const loading = useSelector((state) => state.careers.loading);
   const dispatch = useDispatch();
@@ -19,6 +25,8 @@ export default () => {
     }
   }, [dispatch]);
 
+  console.log(data?.token);
+
   return (
     <CareerSectionTwo>
       <div className="header">
@@ -27,8 +35,7 @@ export default () => {
         </Zoom>
         <Rotate top right cascade>
           <h2>
-            We have Experts in variours feel ready to provide quality
-            services
+            We have Experts in variours feel ready to provide quality services
           </h2>
         </Rotate>
       </div>
@@ -46,7 +53,20 @@ export default () => {
                       <h1>{item.name}</h1>
                       <hr />
                       <h2>{item.description}</h2>
-                      <button>Apply</button>
+                      {!data?.token && (
+                        <button onClick={() => dispatch(showModal())}>
+                          Apply
+                        </button>
+                      )}
+                      {data?.token && (
+                        <button
+                          onClick={() =>
+                            Router.push("/dashboard/become-expert")
+                          }
+                        >
+                          Apply
+                        </button>
+                      )}
                     </div>
                   </div>
                 </Flip>

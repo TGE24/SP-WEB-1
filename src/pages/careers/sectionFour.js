@@ -17,8 +17,8 @@ export default () => {
                 </Col>
                 <Col xs={22} sm={23} md={23} lg={23} xl={23}>
                   <h2>
-                    Building experts to help you build or renovate
-                    your dream building.
+                    Building experts to help you build or renovate your dream
+                    building.
                   </h2>
                 </Col>
               </Row>
@@ -28,13 +28,12 @@ export default () => {
                 </Col>
                 <Col xs={22} sm={23} md={23} lg={23} xl={23}>
                   <h2>
-                    Professionals to work for you; Surveyor,
-                    Architect, Quantifiers, Property Consultant,
-                    Photographer/Cinematographer, Property
-                    registrar's.
+                    Professionals to work for you; Surveyor, Architect,
+                    Quantifiers, Property Consultant,
+                    Photographer/Cinematographer, Property registrar's.
                   </h2>
                 </Col>
-                <button>Apply</button>
+                <button>Request an expert</button>
               </Row>
             </div>
           </Col>

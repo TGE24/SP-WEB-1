@@ -6,10 +6,7 @@ import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "components/modals/signIn";
 import SignUp from "components/modals/signUp";
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { closeModal, showModal } from "store/modal/action";
 import { requestVerification } from "store/auth/action";
@@ -89,7 +86,6 @@ const Navbar = () => {
     setVisible(!visible);
   };
 
-
   return (
     <>
       <Drawer
@@ -115,10 +111,7 @@ const Navbar = () => {
         }}
         footer={null}
       >
-        <SignUp
-          setShowDrawer={setShowDrawer}
-          showDrawer={showDrawer}
-        />
+        <SignUp setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
       </Drawer>
       <Modal
         title="LOGIN"
@@ -141,10 +134,7 @@ const Navbar = () => {
           display: "none",
         }}
       >
-        <SignIn
-          setShowDrawer={setShowDrawer}
-          showDrawer={showDrawer}
-        />
+        <SignIn setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
       </Modal>
       <Wrap
         navColor={navColor}
@@ -163,25 +153,23 @@ const Navbar = () => {
               padding: "5px 0",
             }}
           >
-            We sent you a verification link check your email and click
-            the link to verify. Didn't receive email?{" "}
+            Verify your email to get the most out of Spread Properties. Didn't
+            receive an email?
             <span
               style={{
                 textDecoration: "underline",
                 cursor: "pointer",
               }}
               onClick={() => {
-                dispatch(requestVerification(data?.user?.email)).then(
-                  (res) => {
-                    console.log(res);
-                    if (res?.action?.payload?.status === 200) {
-                      toastSuccess(res?.value?.data?.message);
-                    }
+                dispatch(requestVerification(data?.user?.email)).then((res) => {
+                  console.log(res);
+                  if (res?.action?.payload?.status === 200) {
+                    toastSuccess(res?.value?.data?.message);
                   }
-                );
+                });
               }}
             >
-              Resend Mail
+              Resend COnfirmation
             </span>
           </div>
         ) : (
@@ -205,31 +193,28 @@ const Navbar = () => {
               </span>
             </div>
             <div className="social-cont">
-              <img
-                className="socials"
-                src="/assets/icons/fbSmall.png"
-                alt="fb"
-              />
-              <img
-                className="socials"
-                src="/assets/icons/igSmall.png"
-                alt="ig"
-              />
-              <img
-                className="socials"
-                src="/assets/icons/in.png"
-                alt="in"
-              />
-              <img
-                className="socials"
-                src="/assets/icons/twitterSmall.png"
-                alt="twitter"
-              />
-              <img
-                className="socials"
-                src="/assets/icons/snapchat.png"
-                alt="snap"
-              />
+              <a href="https://www.facebook.com/spreadproltd/" target="_blank">
+                <img
+                  className="socials"
+                  src="/assets/icons/fbSmall.png"
+                  alt="fb"
+                />
+              </a>
+              <a href="https://twitter.com/spreadproltd?s=20" target="_blank">
+                <img
+                  className="socials"
+                  src="/assets/icons/igSmall.png"
+                  alt="ig"
+                />
+              </a>
+              <img className="socials" src="/assets/icons/in.png" alt="in" />
+              <a href="https://twitter.com/spreadproltd?s=20" target="_blank">
+                <img
+                  className="socials"
+                  src="/assets/icons/twitterSmall.png"
+                  alt="twitter"
+                />
+              </a>
             </div>
           </Contacts>
           <nav className="menuBar">
@@ -242,11 +227,7 @@ const Navbar = () => {
               <div className="rightMenu">
                 <RightMenu setShowDrawer={setShowDrawer} />
               </div>
-              <Button
-                className="barsMenu"
-                type="primary"
-                onClick={drawer}
-              >
+              <Button className="barsMenu" type="primary" onClick={drawer}>
                 {React.createElement(
                   drawer ? MenuUnfoldOutlined : MenuFoldOutlined
                 )}
@@ -260,8 +241,7 @@ const Navbar = () => {
                   position: "absolute",
                   width: "100%",
                   left: "0",
-                  transition:
-                    "opacity 600ms, visibility 600ms, height 300ms",
+                  transition: "opacity 600ms, visibility 600ms, height 300ms",
                 }}
               >
                 <Menu mode="vertical" style={{ textAlign: "center" }}>
@@ -269,9 +249,7 @@ const Navbar = () => {
                     <Link href="/">
                       <a
                         className={
-                          window.location.pathname === `/`
-                            ? "activeNav"
-                            : ""
+                          window.location.pathname === `/` ? "activeNav" : ""
                         }
                       >
                         Home
@@ -344,9 +322,7 @@ const Navbar = () => {
                           marginBottom: "19px",
                         }}
                         className="nav-siginIn"
-                        onClick={() =>
-                          Router.push("/dashboard/wallet")
-                        }
+                        onClick={() => Router.push("/dashboard/wallet")}
                       >
                         Dashboard
                       </Button>
