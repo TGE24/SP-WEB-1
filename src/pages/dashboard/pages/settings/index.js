@@ -26,20 +26,18 @@ export default function AcountSetting() {
       process.env.CLOUDINARY_PROFILE_UPLOAD_PRESET
     );
     formData.append("file", files);
-    axios
-      .post(process.env.CLOUDINARY_UPLOAD_URL, formData)
-      .then((res) => {
-        const values = {
-          name: userData?.name,
-          address: userData?.address,
-          picture: res.data.secure_url,
-          phone: userData?.phone,
-        };
-        dispatch(updateProfile(values)).then((res) => {
-          dispatch(getUser());
-          setUploading(false);
-        });
+    axios.post(process.env.CLOUDINARY_UPLOAD_URL, formData).then((res) => {
+      const values = {
+        name: userData?.name,
+        address: userData?.address,
+        picture: res.data.secure_url,
+        phone: userData?.phone,
+      };
+      dispatch(updateProfile(values)).then((res) => {
+        dispatch(getUser());
+        setUploading(false);
       });
+    });
   };
 
   const validate = (values) => {
@@ -73,8 +71,7 @@ export default function AcountSetting() {
     validate,
     validateOnChange: true,
   });
-  const onInputFocus = (name) => () =>
-    form.setFieldError(name, undefined);
+  const onInputFocus = (name) => () => form.setFieldError(name, undefined);
   return (
     <>
       <DashBoardBody.Header>
@@ -130,21 +127,14 @@ export default function AcountSetting() {
               }}
               value={form.values.name}
               error={!!form.errors.name && form.touched.name}
-              errorText={
-                form.touched.name ? form.errors.name : undefined
-              }
+              errorText={form.touched.name ? form.errors.name : undefined}
               onFocus={onInputFocus("name")}
             />
           </div>
 
           <div className="input-control">
             <label>Email:</label>
-            <input
-              type="text"
-              value={userData?.email}
-              readOnly
-              disabled
-            />
+            <input type="text" value={userData?.email} readOnly disabled />
           </div>
           <div className="input-group">
             <div className="input-control">
@@ -161,9 +151,7 @@ export default function AcountSetting() {
                 }}
                 value={form.values.phone}
                 error={!!form.errors.phone && form.touched.phone}
-                errorText={
-                  form.touched.phone ? form.errors.phone : undefined
-                }
+                errorText={form.touched.phone ? form.errors.phone : undefined}
                 onFocus={onInputFocus("phone")}
               />
             </div>
@@ -182,9 +170,7 @@ export default function AcountSetting() {
                 value={form.values.address}
                 error={!!form.errors.address && form.touched.address}
                 errorText={
-                  form.touched.address
-                    ? form.errors.address
-                    : undefined
+                  form.touched.address ? form.errors.address : undefined
                 }
                 onFocus={onInputFocus("address")}
               />
