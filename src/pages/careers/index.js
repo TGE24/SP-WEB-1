@@ -3,7 +3,6 @@ import SectionOne from "./sectionOne";
 import SectionTwo from "./sectionTwo";
 import SectionThree from "./sectionThree";
 import SectionFour from "./sectionFour";
-import SectionFive from "./sectionFive";
 export default () => {
   return (
     <>
@@ -11,7 +10,6 @@ export default () => {
       <SectionTwo />
       <SectionThree />
       <SectionFour />
-      {/* <SectionFive /> */}
     </>
   );
 };

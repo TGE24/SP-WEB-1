@@ -12,10 +12,10 @@ export default () => (
           <div className="container-item">
             <h1>SERVICES</h1>
             <ul>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
-              <li>Lorem ipsum</li>
+              <li>Estate Management</li>
+              <li>Property Management</li>
+              <li>Real Estate Investment</li>
+              <li>Property Savings</li>
             </ul>
           </div>
         </Col>
@@ -53,8 +53,6 @@ export default () => (
         </Col> */}
       </Row>
     </div>
-    <div className="copy">
-      © Copyright 2019 Spreadpro. All Rights Reserved.
-    </div>
+    <div className="copy">© Copyright 2019 Spreadpro. All Rights Reserved.</div>
   </FooterContainer>
 );

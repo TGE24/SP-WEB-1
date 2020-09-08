@@ -10,6 +10,8 @@ export const AboutUsContainer = styled.section`
     margin: 0;
     height: 60vh;
     background: url("../assets/aboutus.png");
+    background-size: cover;
+    background-repeat: no-repeat;
     @media screen and (max-width: 767px) {
       background: none;
       height: 34vh;
@@ -136,8 +138,7 @@ export const AboutUsContainer = styled.section`
       .side-text {
         width: 100%;
         height: auto;
-        box-shadow: 3.52588px 3.52588px 8.81471px
-          rgba(81, 92, 111, 0.12);
+        box-shadow: 3.52588px 3.52588px 8.81471px rgba(81, 92, 111, 0.12);
         margin-left: 0;
         padding: 13px 10px;
         text-align: justify;

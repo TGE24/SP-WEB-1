@@ -6,7 +6,6 @@ export default () => {
   return (
     <AboutUsContainer>
       <div className="sectionOne">
-        <img src="../assets/aboutus.png" alt="" />
         <div className="over-lay">
           <h1>Who we are</h1>
           <h2>comfortable, affordable, exotic and unique</h2>
@@ -14,10 +13,6 @@ export default () => {
       </div>
       <div className="sectionTwo">
         <h1>About Our Company</h1>
-        {/* <h2>
-          {" "}
-          Blah blah blah blah blah blah Blah blah blah blah blah
-        </h2> */}
       </div>
       <div className="sectionThree">
         <Row>
@@ -25,47 +20,31 @@ export default () => {
             <div className="side-text">
               <h1>Who we are</h1>
               <h3 style={{ textAlign: "justify" }}>
-                The SpreadPro limited is a fast growing real estate
-                development, management and investment company. We are
-                a dynamic organization providing unprecedented real
-                estate solution for people of all class, style and
-                age. We also provide opportunities for all class of
-                people to own valuable commercial and Residential
-                properties in high profitable locations. We achieve
-                this by continually innovate affordable payment system
-                that best suites you. Our goal is to deliver
-                indomitable value to our customers. This drive us to
-                offer speedy Services that go beyond sales
+                The SpreadPro limited is a fast growing real estate development,
+                management and investment company. We are a dynamic organization
+                providing unprecedented real estate solution for people of all
+                class, style and age. We also provide opportunities for all
+                class of people to own valuable commercial and Residential
+                properties in high profitable locations. We achieve this by
+                continually innovate affordable payment system that best suites
+                you. Our goal is to deliver indomitable value to our customers.
+                This drive us to offer speedy Services that go beyond sales
               </h3>
             </div>
           </Col>
-          <Col
-            xs={0}
-            sm={2}
-            md={12}
-            lg={12}
-            xl={12}
-            className="no-display"
-          >
+          <Col xs={0} sm={2} md={12} lg={12} xl={12} className="no-display">
             <div className="side-image"></div>
           </Col>
 
-          <Col
-            xs={0}
-            sm={2}
-            md={12}
-            lg={12}
-            xl={12}
-            className="no-display"
-          >
+          <Col xs={0} sm={2} md={12} lg={12} xl={12} className="no-display">
             <div className="side-image2"></div>
           </Col>
           <Col xs={24} sm={24} md={12} lg={12} xl={12}>
             <div className="side-text">
               <h1>Our Mision</h1>
               <h3 style={{ textAlign: "justify" }}>
-                To provide cutting-edge affordable and luxury property
-                to people across the globe.
+                To provide cutting-edge affordable and luxury property to people
+                across the globe.
               </h3>
             </div>
           </Col>
@@ -74,19 +53,12 @@ export default () => {
             <div className="side-text">
               <h1>Our Vision</h1>
               <h3 style={{ textAlign: "justify" }}>
-                To create the world largest, affordable and luxury
-                real estate portfolio
+                To create the world largest, affordable and luxury real estate
+                portfolio
               </h3>
             </div>
           </Col>
-          <Col
-            xs={0}
-            sm={2}
-            md={12}
-            lg={12}
-            xl={12}
-            className="no-display"
-          >
+          <Col xs={0} sm={2} md={12} lg={12} xl={12} className="no-display">
             <div className="side-image3"></div>
           </Col>
         </Row>
@@ -98,9 +70,7 @@ export default () => {
               <List
                 size="small"
                 header={
-                  <Typography.Title level={1}>
-                    Why Choose Us
-                  </Typography.Title>
+                  <Typography.Title level={1}>Why Choose Us</Typography.Title>
                 }
                 dataSource={data}
                 renderItem={(item) => (
