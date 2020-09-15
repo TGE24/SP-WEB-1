@@ -25,6 +25,23 @@ const DashBoardBody = styled.section`
   }
 `;
 
+DashBoardBody.Referral = styled.div`
+  background: #fbfbfb;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  margin-top: 1rem;
+
+  button {
+    border: none;
+    border-radius: 14px;
+    width: 5rem;
+    padding: 4px;
+    color: #fcad0a;
+  }
+`;
+
 DashBoardBody.Header = styled.div`
   margin: 1rem 0rem;
   height: 66px;
@@ -226,8 +243,7 @@ DashBoardBody.SoldCard = styled.div`
     border: 1px solid #f0f0f0;
     &:hover {
       box-shadow: 0 1px 2px -2px rgba(0, 0, 0, 0.16),
-        0 3px 6px 0 rgba(0, 0, 0, 0.12),
-        0 5px 12px 4px rgba(0, 0, 0, 0.09);
+        0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09);
       border-color: transparent;
     }
     .image {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import DashBoardBody from "styles/dashbord_body";
-import { store } from "store";
 import { CameraFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
@@ -10,7 +10,6 @@ import Loader from "components/Loader";
 import Button from "components/Button";
 import Input from "components/input";
 import Select from "components/Select";
-import parseError from "helpers/ParseError";
 import { toastError, toastSuccess } from "helpers/Toast";
 
 export default function AcountSetting() {
@@ -18,11 +17,11 @@ export default function AcountSetting() {
   const userData = useSelector((state) => state.user.data?.user);
   const [uploading, setUploading] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
-
+  console.log(userData);
   const [isVerified, setVerfied] = useState(false);
 
   const [banks, setBanks] = useState([]);
-
+  const referral = `https://spreadprolimited.com/referral/${userData?.agent?.rep_code}`;
   const [bankCode, setBankCode] = useState();
   const [accountNumber, setAccountNumber] = useState(
     userData?.account_no == null ? "" : userData?.account_no
@@ -145,6 +144,7 @@ export default function AcountSetting() {
       setFormLoading(true);
       dispatch(updateProfile(values)).then((res) => {
         dispatch(getUser());
+        toastSuccess("Account number changed successfully");
         setFormLoading(false);
       });
     },
@@ -159,7 +159,7 @@ export default function AcountSetting() {
       picture: userData?.picture,
       phone: userData?.phone,
       bank_name: userData?.bank_name,
-      account_name: userData.account_name,
+      account_name: userData?.account_name,
       account_no: accountNumber,
     },
     onSubmit: (values) => {
@@ -214,7 +214,19 @@ export default function AcountSetting() {
             )}
           </div>
         </DashBoardBody.SettingBanner>
-
+        {userData?.privileges === "agent" ? (
+          <DashBoardBody.Referral>
+            <div className="">Your Referral: {referral}</div>
+            <CopyToClipboard
+              text={referral}
+              onCopy={() => toastSuccess("Copied")}
+            >
+              <button>Copy </button>
+            </CopyToClipboard>
+          </DashBoardBody.Referral>
+        ) : (
+          <div></div>
+        )}
         <DashBoardBody.Form onSubmit={form.handleSubmit}>
           <div className="input-control">
             <label>Name:</label>

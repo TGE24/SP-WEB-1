@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, DatePicker } from "antd";
-import {
-  MailOutlined,
-  UserOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
+import { MailOutlined, UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import { signup } from "store/auth/action";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,9 +8,15 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
   const [formData, setFormData] = useState({});
   const { loading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
+  const rep_code = localStorage.getItem("referral");
+  console.log(rep_code);
   const onFinish = (values) => {
     delete values.dob;
+
+    if (rep_code) {
+      values.rep_code = rep_code;
+    }
+
     const submitData = { ...formData, ...values };
     dispatch(signup(submitData))
       .then((res) => {
@@ -30,9 +32,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
     <Form name="signup" className="signup-form" onFinish={onFinish}>
       <Form.Item
         name="name"
-        rules={[
-          { required: true, message: "Please input your Full name!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Full name!" }]}
       >
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -41,9 +41,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer }) => {
       </Form.Item>
       <Form.Item
         name="email"
-        rules={[
-          { required: true, message: "Please input your Email!" },
-        ]}
+        rules={[{ required: true, message: "Please input your Email!" }]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
