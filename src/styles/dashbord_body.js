@@ -78,6 +78,26 @@ DashBoardBody.Banner = styled.div`
       flex-direction: column;
       justify-content: start;
       /* align-items: center; */
+      .amount-row {
+        display: flex;
+        width: 113%;
+        flex-direction: row;
+        justify-content: space-between;
+        .agent-wallet {
+          h2 {
+            font-size: 13px;
+            line-height: 16px;
+            font-weight: bold;
+            color: #fcad0a;
+          }
+          h1 {
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 40px;
+            color: #fcad0a;
+          }
+        }
+      }
 
       .circle {
         height: 48px;
@@ -122,8 +142,31 @@ DashBoardBody.Banner = styled.div`
       }
     }
   }
+  .request-money {
+    margin: -3% 0 0 5%;
+    position: static;
+    width: 134px;
+    height: 45px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    box-sizing: border-box;
+    box-shadow: -5px 5px 20px rgba(81, 92, 111, 0.12);
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+
+    text-align: center;
+
+    color: #fd901c;
+    @media screen and (max-width: 1024px) {
+      margin-left: 59%;
+    }
+  }
   .fund-wallet {
-    margin: -3% 0 0 82%;
     position: static;
     width: 134px;
     height: 45px;

@@ -25,9 +25,8 @@ export default function Wallet() {
   const userData = useSelector((state) => state.user.data);
   const loading = useSelector((state) => state.wallet.loading);
   const dispatch = useDispatch();
-  let walletBalance = formatMoney(
-    userData?.user?.property_balance?.balance
-  );
+  let walletBalance = formatMoney(userData?.user?.property_balance?.balance);
+  let agentBalance = formatMoney(userData?.user?.inspection_balance?.balance);
   useEffect(() => {
     dispatch(getTransaction(page));
   }, [dispatch, page]);
@@ -49,14 +48,14 @@ export default function Wallet() {
     setFormData({ ...formData });
     dispatch(fundWallet(formData)).then(() => {
       setVisible(false);
-      toastSuccess(
-        `You have Added ${actualAmount - charges} to your wallet`
-      );
+      toastSuccess(`You have Added ${actualAmount - charges} to your wallet`);
       setPage(0);
       dispatch(getTransaction(page));
       dispatch(getUser());
     });
   };
+
+  console.log(userData?.user);
 
   return (
     <>
@@ -71,9 +70,7 @@ export default function Wallet() {
           <Form.Item
             name="amount"
             label="Amount"
-            rules={[
-              { required: true, message: "Please enter An amount" },
-            ]}
+            rules={[{ required: true, message: "Please enter An amount" }]}
           >
             <NumberFormat
               thousandSeparator={true}
@@ -107,8 +104,21 @@ export default function Wallet() {
                 <img src="/assets/img/wallet-colored.png" alt="" />
               </div>
               <h3>{data?.user?.name}</h3>
-              <h2>Current account balance:</h2>
-              <h1>₦{walletBalance}</h1>
+              <div className="amount-row">
+                <div className="">
+                  <h2>Current account balance:</h2>
+                  <h1>₦{walletBalance}</h1>
+                </div>
+
+                {userData?.user?.privileges === "agent" ? (
+                  <div className="agent-wallet">
+                    <h2>Agent balance:</h2>
+                    <h1>₦{agentBalance}</h1>
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
             </div>
             <div className="wallet-card">
               <img src="/assets/img/wold.png" alt="" />
@@ -119,19 +129,35 @@ export default function Wallet() {
               </div>
             </div>
           </div>
+
+          {userData?.user?.privileges === "agent" ? (
+            <div
+              className="request-money"
+              style={{ cursor: "pointer", position: "relative" }}
+            >
+              <span>Withdraw</span>
+            </div>
+          ) : (
+            <div></div>
+          )}
           <div
             className="fund-wallet"
             onClick={() => setVisible(true)}
-            style={{ cursor: "pointer", position: "relative" }}
+            style={{
+              cursor: "pointer",
+              position: "relative",
+              margin:
+                userData?.user?.privileges === "agent"
+                  ? "-5% 0 0 82%"
+                  : "-3% 0 0 82%",
+            }}
           >
             <span>Fund Wallet</span>
           </div>
         </DashBoardBody.Banner>
         <DashBoardBody.WalletRecentActivity>
           <div className="row-header">
-            <h1 style={{ marginTop: "10px" }}>
-              YOUR RECENT ACTIVITIES
-            </h1>
+            <h1 style={{ marginTop: "10px" }}>YOUR RECENT ACTIVITIES</h1>
             <div className="sort-by">
               {/* <img
                 src="/assets/icons/sort-by.png"
@@ -157,9 +183,7 @@ export default function Wallet() {
               <Loader />
             ) : (
               wallet?.data?.data?.map((items, index) => {
-                const time = new Date(
-                  items.created_at
-                ).toDateString();
+                const time = new Date(items.created_at).toDateString();
                 const money = formatMoney(items.amount);
                 return (
                   <div
@@ -183,15 +207,10 @@ export default function Wallet() {
                     <div className="trailing-item">
                       <h1
                         style={{
-                          color:
-                            items.type === "credit"
-                              ? "green"
-                              : " #EB5757",
+                          color: items.type === "credit" ? "green" : " #EB5757",
                         }}
                       >
-                        {items?.type === "debit"
-                          ? "-₦" + money
-                          : "₦" + money}
+                        {items?.type === "debit" ? "-₦" + money : "₦" + money}
                       </h1>
                       <div className="date">{time}</div>
                     </div>
