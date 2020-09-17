@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { LockOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import SignIn from "components/modals/signIn";
+import ForgetPassword from "components/modals/resetpassword";
 import SignUp from "components/modals/signUp";
 import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -72,6 +73,7 @@ const Navbar = () => {
   const [showDrawer, setShowDrawer] = useState(showsignup);
   const show = useSelector((state) => state.modal.show);
   const showsignup = useSelector((state) => state.modal.signup);
+  const [forgetpass, setForgetpass] = useState(false);
   const {
     user: { data },
   } = store.getState();
@@ -114,7 +116,7 @@ const Navbar = () => {
         <SignUp setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
       </Drawer>
       <Modal
-        title="LOGIN"
+        title={forgetpass ? "FORGOT PASSWORD" : "LOGIN"}
         style={{
           // border: "1.77918px solid #FFFFFF",
           borderRadius: "6px",
@@ -134,7 +136,19 @@ const Navbar = () => {
           display: "none",
         }}
       >
-        <SignIn setShowDrawer={setShowDrawer} showDrawer={showDrawer} />
+        {forgetpass ? (
+          <ForgetPassword
+            setShowDrawer={setShowDrawer}
+            showDrawer={showDrawer}
+            setForgetpass={setForgetpass}
+          />
+        ) : (
+          <SignIn
+            setShowDrawer={setShowDrawer}
+            setForgetpass={setForgetpass}
+            showDrawer={showDrawer}
+          />
+        )}
       </Modal>
       <Wrap
         navColor={navColor}

@@ -1,7 +1,7 @@
 import { Form, Input, Button, Divider } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "store/auth/action";
+import { reset } from "store/auth/action";
 import { closeModal } from "store/modal/action";
 
 const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
@@ -9,7 +9,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
   const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    dispatch(login(values)).then(() => {
+    dispatch(reset(values)).then(() => {
       dispatch(closeModal());
     });
   };
@@ -31,28 +31,15 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
           size="large"
         />
       </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
-      >
-        <Input.Password
-          prefix={<LockOutlined className="site-form-item-icon" />}
-          type="password"
-          placeholder="Password"
-          size="large"
-        />
-      </Form.Item>
-
       <Form.Item>
         <a
           className="login-form-forgot"
-          onClick={() => setForgetpass(true)}
-          // href=""
+          onClick={() => setForgetpass(false)}
+          // href="#"
         >
-          Forgot password ?
+          Go back to Login
         </a>
       </Form.Item>
-
       <Form.Item className="center-align">
         <Button
           type="primary"
@@ -60,7 +47,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
           className="login-form-button"
           loading={loading}
         >
-          Log in
+          Reset
         </Button>
       </Form.Item>
       <Form.Item className="center-align">
