@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 
 const PasswordToggleBlock = styled.span`
-  position: absolute;
   z-index: 1;
   margin: 0;
   border: none;
@@ -20,10 +19,7 @@ const PasswordToggleBlock = styled.span`
     `}
 `;
 
-export default function PasswordToggle({
-  onChange,
-  initialValue = false,
-}) {
+export default function PasswordToggle({ onChange, initialValue = false }) {
   const [show, setShow] = useState(initialValue);
 
   useEffect(() => {

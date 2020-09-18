@@ -115,7 +115,52 @@ export const authReducer = (state = initialState, action) => {
         error: parseError(action.payload),
       };
     }
+    case authActionTypes.RESET_REQUEST.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    }
 
+    case authActionTypes.RESET_REQUEST.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    }
+
+    case authActionTypes.RESET_REQUEST.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
+    case authActionTypes.RESET_PASSWORD.pending: {
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    }
+
+    case authActionTypes.RESET_PASSWORD.fulfilled: {
+      return {
+        ...state,
+        loading: false,
+        error: null,
+      };
+    }
+
+    case authActionTypes.RESET_PASSWORD.rejected: {
+      return {
+        ...state,
+        loading: false,
+        error: parseError(action.payload),
+      };
+    }
     case authActionTypes.RESET: {
       return initialState;
     }

@@ -156,7 +156,7 @@ DashBoardBody.Banner = styled.div`
     justify-content: center;
     align-items: center;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 15px;x
     line-height: 20px;
 
     text-align: center;
