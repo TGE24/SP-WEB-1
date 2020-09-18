@@ -41,3 +41,7 @@ export const reset = (data) => async (dispatch) => {
   const payload = api.post("/forgot_password", data);
   return dispatch({ type: authActionTypes.RESET_REQUEST.default, payload });
 };
+export const resetPassword = ({ token, data }) => async (dispatch) => {
+  const payload = api.post("/verify_password/" + token, data);
+  return dispatch({ type: authActionTypes.RESET_PASSWORD.default, payload });
+};

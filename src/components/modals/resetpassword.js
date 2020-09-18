@@ -3,6 +3,7 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { reset } from "store/auth/action";
 import { closeModal } from "store/modal/action";
+import { toastSuccess } from "helpers/Toast";
 
 const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
   const { loading } = useSelector((state) => state.auth);
@@ -11,6 +12,7 @@ const NormalLoginForm = ({ setShowDrawer, showDrawer, setForgetpass }) => {
   const onFinish = (values) => {
     dispatch(reset(values)).then(() => {
       dispatch(closeModal());
+      toastSuccess("Please check your mailbox");
     });
   };
 
