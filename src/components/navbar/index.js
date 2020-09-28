@@ -143,12 +143,12 @@ const Navbar = () => {
             setForgetpass={setForgetpass}
           />
         ) : (
-          <SignIn
-            setShowDrawer={setShowDrawer}
-            setForgetpass={setForgetpass}
-            showDrawer={showDrawer}
-          />
-        )}
+            <SignIn
+              setShowDrawer={setShowDrawer}
+              setForgetpass={setForgetpass}
+              showDrawer={showDrawer}
+            />
+          )}
       </Modal>
       <Wrap
         navColor={navColor}
@@ -183,12 +183,12 @@ const Navbar = () => {
                 });
               }}
             >
-              Resend COnfirmation
+              Resend Confirmation
             </span>
           </div>
         ) : (
-          ""
-        )}
+            ""
+          )}
         <Affix
           offsetTop={0}
           onChange={(affixed) => {

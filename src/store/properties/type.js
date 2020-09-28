@@ -8,4 +8,5 @@ export default {
   PAYMENT: actionTypes("PAYMENT"),
   VERIFY_PAYMENT: actionTypes("VERIFY_PAYMENT"),
   RECENT_PROPERTIES: actionTypes("RECENT_PROPERTIES"),
+  SUBSCRIPTION: actionTypes("SUBSCRIPTION")
 };

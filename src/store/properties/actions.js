@@ -80,3 +80,11 @@ export const recentProperties = () => async (dispatch) => {
     payload,
   });
 };
+
+export const subscription = (data) => async (dispatch) => {
+  const payload = api.post("/subscription", data);
+  return dispatch({
+    type: actionTypes.SUBSCRIPTION.default,
+    payload
+  })
+}

@@ -5,7 +5,7 @@ import Map from "components/Map";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "constants/ammenities";
 import OnlineInspection from "components/modals/onlineInspection";
-import SaveForProperty from "components/modals/saveforproperty";
+import InstallmentPayment from "components/modals/saveforproperty";
 import OutrightPayment from "components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
 import RealEstateMockData from "data/realEstate.json";
@@ -302,629 +302,629 @@ const PropertyDetail = () => {
       {loading ? (
         <Loader />
       ) : (
-        <>
-          <Modal
-            title="ONLINE INSPECTION"
-            visible={onlineInspectionModal}
-            onCancel={() =>
-              setOnlineInspection(!onlineInspectionModal)
-            }
-            onOk={() => {
-              user?.verified
-                ? setPaymentMethod(!paymentMethod)
-                : toastWarning(
+          <>
+            <Modal
+              title="ONLINE INSPECTION"
+              visible={onlineInspectionModal}
+              onCancel={() =>
+                setOnlineInspection(!onlineInspectionModal)
+              }
+              onOk={() => {
+                user?.verified
+                  ? setPaymentMethod(!paymentMethod)
+                  : toastWarning(
                     "Please You need to verify your account before purchasing property"
                   );
-            }}
-            okText="Submit"
-          >
-            <OnlineInspection email={user?.email} />
-          </Modal>
-          <Modal
-            title="PAYMENT METHOD"
-            visible={paymentMethod}
-            onCancel={() => setPaymentMethod(!paymentMethod)}
-            footer={null}
-          >
-            <>
-              <div
-                style={{
-                  width: "312px",
-                  background: "#F5F4F4",
-                  display: "flex",
-                  textAlign: "left",
-                  margin: "15px auto",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  !outrightPaymentModal
-                    ? initializePayment(onlineInspectionPaystack)
-                    : initializeOutrightPayment(
+              }}
+              okText="Submit"
+            >
+              <OnlineInspection email={user?.email} />
+            </Modal>
+            <Modal
+              title="PAYMENT METHOD"
+              visible={paymentMethod}
+              onCancel={() => setPaymentMethod(!paymentMethod)}
+              footer={null}
+            >
+              <>
+                <div
+                  style={{
+                    width: "312px",
+                    background: "#F5F4F4",
+                    display: "flex",
+                    textAlign: "left",
+                    margin: "15px auto",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    !outrightPaymentModal
+                      ? initializePayment(onlineInspectionPaystack)
+                      : initializeOutrightPayment(
                         onOutrightPaymentPaystack
                       );
-                }}
-              >
-                <span style={{ width: "254px" }}>
-                  <p style={{ margin: "0", padding: "15px" }}>
-                    {" "}
+                  }}
+                >
+                  <span style={{ width: "254px" }}>
+                    <p style={{ margin: "0", padding: "15px" }}>
+                      {" "}
                     Pay Via Paystack
                   </p>
-                </span>
-                <span
+                  </span>
+                  <span
+                    style={{
+                      borderLeft: "1px solid #C4C4C4",
+                      padding: "10px",
+                    }}
+                  >
+                    <img src="/assets/icons/save.png" alt="iconic" />
+                  </span>
+                </div>
+                <div
                   style={{
-                    borderLeft: "1px solid #C4C4C4",
-                    padding: "10px",
+                    width: "312px",
+                    background: "#F5F4F4",
+                    display: "flex",
+                    textAlign: "left",
+                    marginTop: "10px",
+                    margin: "auto",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => {
+                    outrightPaymentModal
+                      ? onOutrightWalletPayment()
+                      : onlineInspectionWallet();
                   }}
                 >
-                  <img src="/assets/icons/save.png" alt="iconic" />
-                </span>
-              </div>
-              <div
-                style={{
-                  width: "312px",
-                  background: "#F5F4F4",
-                  display: "flex",
-                  textAlign: "left",
-                  marginTop: "10px",
-                  margin: "auto",
-                  cursor: "pointer",
-                }}
-                onClick={() => {
-                  outrightPaymentModal
-                    ? onOutrightWalletPayment()
-                    : onlineInspectionWallet();
-                }}
-              >
-                <span style={{ width: "254px" }}>
-                  <p style={{ margin: "0", padding: "15px" }}>
-                    {" "}
+                  <span style={{ width: "254px" }}>
+                    <p style={{ margin: "0", padding: "15px" }}>
+                      {" "}
                     E-Wallet
                   </p>
-                </span>
-                <span
-                  style={{
-                    borderLeft: "1px solid #C4C4C4",
-                    padding: "10px",
-                  }}
-                >
-                  <img src="/assets/icons/save1.png" alt="iconic" />
-                </span>
-              </div>
-            </>
-          </Modal>
-          <Modal
-            title="OUTRIGHT PAYMENT"
-            visible={outrightPaymentModal}
-            onCancel={() => setOutrightPayment(!outrightPaymentModal)}
-            onOk={() => {
-              user?.verified
-                ? setPaymentMethod(!paymentMethod)
-                : toastWarning(
+                  </span>
+                  <span
+                    style={{
+                      borderLeft: "1px solid #C4C4C4",
+                      padding: "10px",
+                    }}
+                  >
+                    <img src="/assets/icons/save1.png" alt="iconic" />
+                  </span>
+                </div>
+              </>
+            </Modal>
+            <Modal
+              title="OUTRIGHT PAYMENT"
+              visible={outrightPaymentModal}
+              onCancel={() => setOutrightPayment(!outrightPaymentModal)}
+              onOk={() => {
+                user?.verified
+                  ? setPaymentMethod(!paymentMethod)
+                  : toastWarning(
                     "Please You need to verify your account before purchasing property"
                   );
-            }}
-            okText="Submit"
-          >
-            <OutrightPayment
-              email={user?.email}
-              price={propertyDetails?.price}
-            />
-          </Modal>
-          <Modal
-            title="SAVE FOR PROPERTY"
-            visible={saveForProperty}
-            onCancel={() => setSaveForProperty(!saveForProperty)}
-            // onOk={() => initializePayment(onSuccess)}
-            okText="Submit"
-          >
-            <SaveForProperty email={user?.email} />
-          </Modal>
-          <Modal
-            title="INSPECT PROPERTY NOW"
-            visible={visible}
-            onCancel={handleCancel}
-            footer={[
-              <Button
-                key="back"
-                style={{
-                  background: "rgb(249, 166, 2)",
-                  border: "none",
-                  color: "white",
-                  textTransform: "uppercase",
-                  fontWeight: "500",
-                }}
-                onClick={() => {
-                  data?.token
-                    ? setOnlineInspection(!onlineInspectionModal)
-                    : dispatch(showModal());
-                  setVisible(!visible);
-                }}
-              >
-                Online Inspection
-              </Button>,
-              <Button
-                key="submit"
-                style={{
-                  background: "rgb(249, 166, 2)",
-                  border: "none",
-                  color: "white",
-                  textTransform: "uppercase",
-                  fontWeight: "500",
-                }}
-              >
-                Physical Inspection
-              </Button>,
-            ]}
-          >
-            <p>
-              Take a tour to our sites today...From our virtual tour
-              to the physical tour. We ensure we show you everything
-              you need to know about our property.
-            </p>
-          </Modal>
-          <Modal
-            title="SELECT PAYMENT PLANS"
-            visible={paymentPlan}
-            onCancel={() => setPaymentPlan(!paymentPlan)}
-            footer={[
-              // <Button
-              //   key="back"
-              //   style={{
-              //     background: "rgb(249, 166, 2)",
-              //     border: "none",
-              //     color: "white",
-              //     textTransform: "uppercase",
-              //     fontWeight: "500",
-              //   }}
-              //   onClick={() => {
-              //     data?.token
-              //       ? setSaveForProperty(!saveForProperty)
-              //       : dispatch(showModal());
-              //   }}
-              //   disabled={
-              //     !propertyDetails?.payment_type ===
-              //     "save for property"
-              //   }
-              // >
-              //   Instalmental Payment
-              // </Button>
-              <Button
-                key="submit"
-                style={{
-                  background: "rgb(249, 166, 2)",
-                  border: "none",
-                  color: "white",
-                  textTransform: "uppercase",
-                  fontWeight: "500",
-                }}
-                onClick={() => {
-                  data?.token
-                    ? setOutrightPayment(!outrightPaymentModal)
-                    : dispatch(showModal());
-                }}
-              >
-                Outright Payment
-              </Button>,
-            ]}
-          >
-            <p>Please select one of the two options</p>
-          </Modal>
-          <div className="prop-header">
-            <h1>A Place to call home</h1>
-            <p>
-              {propertyDetails?.name +
-                " " +
-                (propertyDetails?.location || "")}
-            </p>
-            <Button
-              className="purchase-btn"
-              disabled={propertyDetails?.purchased}
-              onClick={() => setPaymentPlan(!paymentPlan)}
+              }}
+              okText="Submit"
             >
-              {propertyDetails?.purchased ? "Purchased" : "Buy Now"}
-            </Button>
-          </div>
+              <OutrightPayment
+                email={user?.email}
+                price={propertyDetails?.price}
+              />
+            </Modal>
+            <Modal
+              title="INSTALLMENT PAYMENT"
+              visible={saveForProperty}
+              onCancel={() => setSaveForProperty(!saveForProperty)}
+              footer={null}
+            >
+              <InstallmentPayment email={user?.email} plans={propertyDetails?.plans} pid={pid} id={propertyDetails?.id} />
+            </Modal>
+            <Modal
+              title="INSPECT PROPERTY NOW"
+              visible={visible}
+              onCancel={handleCancel}
+              footer={[
+                <Button
+                  key="back"
+                  style={{
+                    background: "rgb(249, 166, 2)",
+                    border: "none",
+                    color: "white",
+                    textTransform: "uppercase",
+                    fontWeight: "500",
+                  }}
+                  onClick={() => {
+                    data?.token
+                      ? setOnlineInspection(!onlineInspectionModal)
+                      : dispatch(showModal());
+                    setVisible(!visible);
+                  }}
+                >
+                  Online Inspection
+              </Button>,
+                <Button
+                  key="submit"
+                  style={{
+                    background: "rgb(249, 166, 2)",
+                    border: "none",
+                    color: "white",
+                    textTransform: "uppercase",
+                    fontWeight: "500",
+                  }}
+                >
+                  Physical Inspection
+              </Button>,
+              ]}
+            >
+              <p>
+                Take a tour to our sites today...From our virtual tour
+                to the physical tour. We ensure we show you everything
+                you need to know about our property.
+            </p>
+            </Modal>
+            <Modal
+              title="SELECT PAYMENT PLANS"
+              visible={paymentPlan}
+              onCancel={() => setPaymentPlan(!paymentPlan)}
+              footer={[
+                <>
+                  <Button
+                    key="installment"
+                    style={{
+                      background: "rgb(249, 166, 2)",
+                      border: "none",
+                      color: "white",
+                      textTransform: "uppercase",
+                      fontWeight: "500",
+                    }}
+                    onClick={() => {
+                      data?.token
+                        ? setSaveForProperty(!saveForProperty)
+                        : dispatch(showModal());
+                    }}
+                    disabled={
+                      !propertyDetails?.installment
+                    }
+                  >
+                    Instalmental Payment
+              </Button>
+                  <Button
+                    key="outright"
+                    style={{
+                      background: "rgb(249, 166, 2)",
+                      border: "none",
+                      color: "white",
+                      textTransform: "uppercase",
+                      fontWeight: "500",
+                    }}
+                    onClick={() => {
+                      data?.token
+                        ? setOutrightPayment(!outrightPaymentModal)
+                        : dispatch(showModal());
+                    }}
+                  >
+                    Outright Payment
+              </Button>
+                </>
+              ]}
+            >
+              <p>Please select one of the two options</p>
+            </Modal>
+            <div className="prop-header">
+              <h1>A Place to call home</h1>
+              <p>
+                {propertyDetails?.name +
+                  " " +
+                  (propertyDetails?.location || "")}
+              </p>
+              <Button
+                className="purchase-btn"
+                disabled={propertyDetails?.purchased}
+                onClick={() => setPaymentPlan(!paymentPlan)}
+              >
+                {propertyDetails?.purchased ? "Purchased" : "Buy Now"}
+              </Button>
+            </div>
 
-          <div className="container">
-            <Row gutter={[24, 24]} className="cont-row">
-              <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                <div>
-                  <div className="prop-heading">
-                    <span>
-                      {!propertyDetails?.location ? (
-                        <Button
-                          className="purchase-btn"
-                          disabled={propertyDetails?.purchased}
-                          onClick={() => setVisible(!visible)}
-                        >
-                          Inspect Property
-                        </Button>
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                    <span>
-                      {propertyDetails?.purchased ? (
-                        <Button
-                          style={{
-                            background: "#d65550",
+            <div className="container">
+              <Row gutter={[24, 24]} className="cont-row">
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <div>
+                    <div className="prop-heading">
+                      <span>
+                        {!propertyDetails?.location ? (
+                          <Button
+                            className="purchase-btn"
+                            disabled={propertyDetails?.purchased}
+                            onClick={() => setVisible(!visible)}
+                          >
+                            Inspect Property
+                          </Button>
+                        ) : (
+                            ""
+                          )}
+                      </span>
+                      <span>
+                        {propertyDetails?.purchased ? (
+                          <Button
+                            style={{
+                              background: "#d65550",
 
-                            margin: "10px",
-                          }}
-                          disabled={true}
-                        >
-                          Purchased
-                        </Button>
-                      ) : (
-                        pid?.startsWith("house") && (
-                          <>
+                              margin: "10px",
+                            }}
+                            disabled={true}
+                          >
+                            Purchased
+                          </Button>
+                        ) : (
+                            pid?.startsWith("house") && (
+                              <>
+                                <Button
+                                  style={{
+                                    background:
+                                      propertyDetails?.transaction ===
+                                        "rent"
+                                        ? "#F9A602"
+                                        : "#515C6F",
+                                    margin: "10px",
+                                  }}
+                                  disabled={
+                                    propertyDetails?.transaction !==
+                                    "rent"
+                                  }
+                                >
+                                  For Rent
+                            </Button>
+                                <Button
+                                  style={{
+                                    background:
+                                      propertyDetails?.transaction ===
+                                        "mortgage"
+                                        ? "#F9A602"
+                                        : "#515C6F",
+                                    margin: "10px",
+                                  }}
+                                  disabled={
+                                    propertyDetails?.transaction !==
+                                    "mortgage"
+                                  }
+                                >
+                                  Mortgage
+                            </Button>
+                              </>
+                            )
+                          )}
+                        {propertyDetails?.purchased ? (
+                          ""
+                        ) : (
                             <Button
                               style={{
                                 background:
                                   propertyDetails?.transaction ===
-                                  "rent"
+                                    "sale" || pid?.startsWith("land")
                                     ? "#F9A602"
                                     : "#515C6F",
                                 margin: "10px",
                               }}
                               disabled={
-                                propertyDetails?.transaction !==
-                                "rent"
+                                propertyDetails?.transaction !== "sale" &&
+                                !pid?.startsWith("land")
                               }
                             >
-                              For Rent
+                              For Sale
                             </Button>
-                            <Button
-                              style={{
-                                background:
-                                  propertyDetails?.transaction ===
-                                  "mortgage"
-                                    ? "#F9A602"
-                                    : "#515C6F",
-                                margin: "10px",
-                              }}
-                              disabled={
-                                propertyDetails?.transaction !==
-                                "mortgage"
-                              }
-                            >
-                              Mortgage
-                            </Button>
-                          </>
-                        )
-                      )}
-                      {propertyDetails?.purchased ? (
-                        ""
-                      ) : (
-                        <Button
-                          style={{
-                            background:
-                              propertyDetails?.transaction ===
-                                "sale" || pid?.startsWith("land")
-                                ? "#F9A602"
-                                : "#515C6F",
-                            margin: "10px",
-                          }}
-                          disabled={
-                            propertyDetails?.transaction !== "sale" &&
-                            !pid?.startsWith("land")
-                          }
-                        >
-                          For Sale
-                        </Button>
-                      )}
-                    </span>
+                          )}
+                      </span>
+                    </div>
+                    <ImageGallery
+                      showPlayButton={false}
+                      autoPlay={true}
+                      items={images}
+                    />
                   </div>
-                  <ImageGallery
-                    showPlayButton={false}
-                    autoPlay={true}
-                    items={images}
-                  />
-                </div>
-                {pid?.startsWith("house") && (
-                  <>
-                    <div style={{ width: "840px", margin: "auto" }}>
-                      <h1>PROPERTY DETAILS</h1>
-                    </div>
-                    <div
-                      style={{
-                        width: "840px",
-                        background: "#F5F4F4",
-                        padding: "29.68px",
-                        margin: "auto",
-                      }}
-                      className="prop-details"
-                    >
-                      <List
-                        grid={{ gutter: 8, column: 2 }}
-                        bordered
-                        dataSource={ammenitiesData}
-                        renderItem={(item) => (
-                          <List.Item
-                            style={{
-                              fontSize: "17px",
-                              display: "flex",
-                              borderBottom:
-                                "0.957303px dashed #C1C1C1",
-                              margin: "11px",
-                              padding: "0",
-                            }}
-                            className="prop-item"
-                          >
-                            <span
-                              style={{
-                                textTransform: "uppercase",
-                                fontWeight: "bolder",
-                              }}
-                            >
-                              {item.title}
-                            </span>
-                            <span>{item.description}</span>
-                          </List.Item>
-                        )}
-                      />
-                    </div>
-                  </>
-                )}
-                {pid?.startsWith("land") && (
-                  <>
-                    <div style={{ width: "840px", margin: "auto" }}>
-                      <h1>PROPERTY DETAILS</h1>
-                    </div>
-                    <div
-                      style={{
-                        width: "840px",
-                        background: "#F5F4F4",
-                        padding: "29.68px",
-                        margin: "auto",
-                      }}
-                      className="prop-details"
-                    >
-                      <List
-                        grid={{ gutter: 8, column: 2 }}
-                        bordered
-                        dataSource={landAmmenities}
-                        renderItem={(item) => (
-                          <List.Item
-                            style={{
-                              fontSize: "17px",
-                              display: "flex",
-                              borderBottom:
-                                "0.957303px dashed #C1C1C1",
-                              margin: "11px",
-                              padding: "0",
-                            }}
-                            className="prop-item"
-                          >
-                            <span
-                              style={{
-                                textTransform: "uppercase",
-                                fontWeight: "bolder",
-                              }}
-                            >
-                              {item.title}
-                            </span>
-                            <span>{item.description}</span>
-                          </List.Item>
-                        )}
-                      />
-                    </div>
-                  </>
-                )}
-                {pid?.startsWith("house") && (
-                  <>
-                    <div
-                      style={{
-                        margin: "91.15px auto ",
-                        width: "840px",
-                      }}
-                      className="overview-text"
-                    >
-                      <h2>PROPERTY OVERVIEW</h2>
-                      <hr />
-                      <h4 style={{ textAlign: "justify" }}>
-                        {propertyDetails?.overview}
-                      </h4>
-                    </div>
-                    <div
-                      style={{
-                        margin: "91.15px auto ",
-                        width: "840px",
-                      }}
-                      className="prop-amenities"
-                    >
-                      <h2>PROPERTY AMENITIES</h2>
-                      <hr />
+                  {pid?.startsWith("house") && (
+                    <>
+                      <div style={{ width: "840px", margin: "auto" }}>
+                        <h1>PROPERTY DETAILS</h1>
+                      </div>
                       <div
                         style={{
                           width: "840px",
+                          background: "#F5F4F4",
+                          padding: "29.68px",
+                          margin: "auto",
                         }}
-                        className="amenities-details"
+                        className="prop-details"
                       >
                         <List
                           grid={{ gutter: 8, column: 2 }}
-                          dataSource={propertyDetails?.amenities}
+                          bordered
+                          dataSource={ammenitiesData}
                           renderItem={(item) => (
                             <List.Item
                               style={{
-                                fontSize: "15px",
+                                fontSize: "17px",
                                 display: "flex",
                                 borderBottom:
                                   "0.957303px dashed #C1C1C1",
                                 margin: "11px",
                                 padding: "0",
                               }}
-                              className="amenities-list"
+                              className="prop-item"
                             >
-                              <span>
-                                <img
-                                  style={{
-                                    width: "25px",
-                                    height: "25px",
-                                    margin: "0 14px",
-                                  }}
-                                  src={Ammenities[item]}
-                                  alt="icon"
-                                  className="amenities-img"
-                                />
+                              <span
+                                style={{
+                                  textTransform: "uppercase",
+                                  fontWeight: "bolder",
+                                }}
+                              >
+                                {item.title}
                               </span>
-                              <span>{item}</span>
+                              <span>{item.description}</span>
                             </List.Item>
                           )}
                         />
                       </div>
-                    </div>
-                  </>
-                )}
-                <div
-                  style={{ margin: "91.15px auto ", width: "840px" }}
-                  className="prop-video-cont"
-                >
-                  <div className="prop-video-cont">
-                    <h2>VIDEO</h2>
-                    <hr />
-                    <video
-                      width="840"
-                      height="482"
-                      controls
-                      className="prop-video"
-                      style={{ cursor: "pointer" }}
-                      poster={
-                        !propertyDetails?.video_url
-                          ? "/assets/video-placeholder.jpg"
-                          : ""
-                      }
-                      onClick={() =>
-                        propertyDetails?.purchased
-                          ? ""
-                          : !propertyDetails?.video_url
-                          ? setVisible(!visible)
-                          : ""
-                      }
-                    >
-                      {propertyDetails?.video_url && (
-                        <source
-                          src={propertyDetails?.video_url}
-                          type="video/mp4"
-                        />
-                      )}
-                    </video>
-                  </div>
-
-                  <div
-                    style={{
-                      margin: "91.15px auto ",
-                      width: "840px",
-                    }}
-                    className="location"
-                  >
-                    <h2>LOCATION</h2>
-                    <hr />
-                    <div style={mapStyles} className="map-cont">
-                      <Map
-                        isMarkerShown
-                        googleMapURL={process.env.GOOGLE_API_URL}
-                        loadingElement={
-                          <div style={{ height: `100%` }} />
-                        }
-                        containerElement={
-                          <div style={{ height: `100%` }} />
-                        }
-                        mapElement={
-                          <div style={{ height: `100%` }} />
-                        }
-                        latitude={propertyDetails?.lat}
-                        longitude={propertyDetails?.lng}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{ margin: "91.15px auto ", width: "840px" }}
-                  className="similar-prop"
-                >
-                  <h2>SIMILAR PROPERTIES</h2>
-                  <hr />
-                  <Row>
-                    {RealEstateMockData.map((item, index) => (
-                      <Col
-                        xs={24}
-                        sm={24}
-                        md={12}
-                        lg={8}
-                        xl={8}
-                        key={index}
+                    </>
+                  )}
+                  {pid?.startsWith("land") && (
+                    <>
+                      <div style={{ width: "840px", margin: "auto" }}>
+                        <h1>PROPERTY DETAILS</h1>
+                      </div>
+                      <div
+                        style={{
+                          width: "840px",
+                          background: "#F5F4F4",
+                          padding: "29.68px",
+                          margin: "auto",
+                        }}
+                        className="prop-details"
                       >
-                        <Card
-                          hoverable
-                          style={{ width: 253.86 }}
-                          className="similar-card"
-                          cover={
-                            <>
-                              <img alt="example" src={item.image} />
-                              <div
+                        <List
+                          grid={{ gutter: 8, column: 2 }}
+                          bordered
+                          dataSource={landAmmenities}
+                          renderItem={(item) => (
+                            <List.Item
+                              style={{
+                                fontSize: "17px",
+                                display: "flex",
+                                borderBottom:
+                                  "0.957303px dashed #C1C1C1",
+                                margin: "11px",
+                                padding: "0",
+                              }}
+                              className="prop-item"
+                            >
+                              <span
                                 style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  position: "relative",
-                                  bottom: "24px",
+                                  textTransform: "uppercase",
+                                  fontWeight: "bolder",
                                 }}
                               >
-                                <Tag
-                                  color="#313131"
-                                  style={{
-                                    position: "relative",
-                                    width: "66px",
-                                  }}
-                                >
-                                  Featured
-                                </Tag>
-                                <Tag
-                                  color="#F9A602"
-                                  style={{
-                                    position: "relative",
-                                    width: "60.07px",
-                                  }}
-                                >
-                                  {item.type}
-                                </Tag>
-                              </div>
-                            </>
-                          }
+                                {item.title}
+                              </span>
+                              <span>{item.description}</span>
+                            </List.Item>
+                          )}
+                        />
+                      </div>
+                    </>
+                  )}
+                  {pid?.startsWith("house") && (
+                    <>
+                      <div
+                        style={{
+                          margin: "91.15px auto ",
+                          width: "840px",
+                        }}
+                        className="overview-text"
+                      >
+                        <h2>PROPERTY OVERVIEW</h2>
+                        <hr />
+                        <h4 style={{ textAlign: "justify" }}>
+                          {propertyDetails?.overview}
+                        </h4>
+                      </div>
+                      <div
+                        style={{
+                          margin: "91.15px auto ",
+                          width: "840px",
+                        }}
+                        className="prop-amenities"
+                      >
+                        <h2>PROPERTY AMENITIES</h2>
+                        <hr />
+                        <div
+                          style={{
+                            width: "840px",
+                          }}
+                          className="amenities-details"
                         >
-                          <Meta
-                            title={item.title}
-                            description={item.location}
+                          <List
+                            grid={{ gutter: 8, column: 2 }}
+                            dataSource={propertyDetails?.amenities}
+                            renderItem={(item) => (
+                              <List.Item
+                                style={{
+                                  fontSize: "15px",
+                                  display: "flex",
+                                  borderBottom:
+                                    "0.957303px dashed #C1C1C1",
+                                  margin: "11px",
+                                  padding: "0",
+                                }}
+                                className="amenities-list"
+                              >
+                                <span>
+                                  <img
+                                    style={{
+                                      width: "25px",
+                                      height: "25px",
+                                      margin: "0 14px",
+                                    }}
+                                    src={Ammenities[item]}
+                                    alt="icon"
+                                    className="amenities-img"
+                                  />
+                                </span>
+                                <span>{item}</span>
+                              </List.Item>
+                            )}
                           />
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              marginTop: "14px",
-                              padding: "0 20px",
-                            }}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  <div
+                    style={{ margin: "91.15px auto ", width: "840px" }}
+                    className="prop-video-cont"
+                  >
+                    <div className="prop-video-cont">
+                      <h2>VIDEO</h2>
+                      <hr />
+                      <video
+                        width="840"
+                        height="482"
+                        controls
+                        className="prop-video"
+                        style={{ cursor: "pointer" }}
+                        poster={
+                          !propertyDetails?.video_url
+                            ? "/assets/video-placeholder.jpg"
+                            : ""
+                        }
+                        onClick={() =>
+                          propertyDetails?.purchased
+                            ? ""
+                            : !propertyDetails?.video_url
+                              ? setVisible(!visible)
+                              : ""
+                        }
+                      >
+                        {propertyDetails?.video_url && (
+                          <source
+                            src={propertyDetails?.video_url}
+                            type="video/mp4"
+                          />
+                        )}
+                      </video>
+                    </div>
+
+                    <div
+                      style={{
+                        margin: "91.15px auto ",
+                        width: "840px",
+                      }}
+                      className="location"
+                    >
+                      <h2>LOCATION</h2>
+                      <hr />
+                      <div style={mapStyles} className="map-cont">
+                        <Map
+                          isMarkerShown
+                          googleMapURL={process.env.GOOGLE_API_URL}
+                          loadingElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                          containerElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                          mapElement={
+                            <div style={{ height: `100%` }} />
+                          }
+                          latitude={propertyDetails?.lat}
+                          longitude={propertyDetails?.lng}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{ margin: "91.15px auto ", width: "840px" }}
+                    className="similar-prop"
+                  >
+                    <h2>SIMILAR PROPERTIES</h2>
+                    <hr />
+                    <Row>
+                      {RealEstateMockData.map((item, index) => (
+                        <Col
+                          xs={24}
+                          sm={24}
+                          md={12}
+                          lg={8}
+                          xl={8}
+                          key={index}
+                        >
+                          <Card
+                            hoverable
+                            style={{ width: 253.86 }}
+                            className="similar-card"
+                            cover={
+                              <>
+                                <img alt="example" src={item.image} />
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    position: "relative",
+                                    bottom: "24px",
+                                  }}
+                                >
+                                  <Tag
+                                    color="#313131"
+                                    style={{
+                                      position: "relative",
+                                      width: "66px",
+                                    }}
+                                  >
+                                    Featured
+                                </Tag>
+                                  <Tag
+                                    color="#F9A602"
+                                    style={{
+                                      position: "relative",
+                                      width: "60.07px",
+                                    }}
+                                  >
+                                    {item.type}
+                                  </Tag>
+                                </div>
+                              </>
+                            }
                           >
-                            {item.features.map((item2, index) => (
-                              <div key={index}>
-                                <img
-                                  src={item2}
-                                  alt="features"
-                                  height="25"
-                                />
-                                <h6>Bedrooms</h6>
-                              </div>
-                            ))}
-                          </div>
-                        </Card>
-                      </Col>
-                    ))}
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-          </div>
-        </>
-      )}
+                            <Meta
+                              title={item.title}
+                              description={item.location}
+                            />
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginTop: "14px",
+                                padding: "0 20px",
+                              }}
+                            >
+                              {item.features.map((item2, index) => (
+                                <div key={index}>
+                                  <img
+                                    src={item2}
+                                    alt="features"
+                                    height="25"
+                                  />
+                                  <h6>Bedrooms</h6>
+                                </div>
+                              ))}
+                            </div>
+                          </Card>
+                        </Col>
+                      ))}
+                    </Row>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          </>
+        )}
     </>
   );
 };
