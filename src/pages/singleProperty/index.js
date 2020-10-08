@@ -1,25 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, List, Card, Tag, Modal } from "antd";
+import { Button, Row, Col, List, Card, Tag, Modal, Form, Radio, DatePicker } from "antd";
 import ImageGallery from "react-image-gallery";
 import Map from "components/Map";
 import { usePaystackPayment } from "react-paystack";
 import Ammenities from "constants/ammenities";
 import OnlineInspection from "components/modals/onlineInspection";
-import InstallmentPayment from "components/modals/saveforproperty";
 import OutrightPayment from "components/modals/outrightPayment";
 import { useSelector, useDispatch } from "react-redux";
 import RealEstateMockData from "data/realEstate.json";
 import Loader from "./Loader";
+import AmmenitiesComponent from "./components/ammenities"
 import {
   getHouse,
   getLand,
   verifyPayment,
   payment,
+  subscription
 } from "store/properties/actions";
 import { showModal } from "store/modal/action";
 import { useRouter } from "next/router";
 import { store } from "store";
 import { toastSuccess, toastWarning } from "helpers/Toast";
+import { config, outrightConfig, installmentConfig } from "helpers/paystackConfig";
 
 const { Meta } = Card;
 
@@ -30,6 +32,9 @@ const mapStyles = {
 
 const PropertyDetail = () => {
   const [visible, setVisible] = useState(false);
+  const [plansArray, setPlansArray] = React.useState([]);
+  const [planCode, setPlanCode] = useState("");
+  const [startDate, setStartDate] = useState("");
   const [saveForProperty, setSaveForProperty] = useState(false);
   const [outrightPaymentModal, setOutrightPayment] = useState(false);
   const [paymentPlan, setPaymentPlan] = useState(false);
@@ -46,25 +51,25 @@ const PropertyDetail = () => {
   } = store.getState();
   const [paymentMethod, setPaymentMethod] = useState(false);
 
-  const config = {
-    reference: "" + Math.floor(Math.random() * 1000000000 + 1),
-    email: user?.email,
-    amount: 100000,
-    publicKey: process.env.PAYSTACK_KEY,
-    metadata: {
-      property_slug: propertyDetails?.slug,
-    },
-  };
+  //Online Inspection Config
+  config.email = user?.email
+  config.metadata = { property_slug: propertyDetails?.slug }
 
-  const outrightConfig = {
-    reference: "" + Math.floor(Math.random() * 1000000000 + 1),
-    email: user?.email,
-    amount: propertyDetails?.price * 100,
-    publicKey: process.env.PAYSTACK_KEY,
-    metadata: {
-      property_slug: propertyDetails?.slug,
-    },
-  };
+  //Outright Payment Config
+  outrightConfig.email = user?.email
+  outrightConfig.amount = propertyDetails?.price * 100
+  outrightConfig.metadata = { property_slug: propertyDetails?.slug }
+
+  //Installment Payment Config
+  installmentConfig.email = user?.email
+  installmentConfig.amount = propertyDetails?.commitment_charge * 100
+  installmentConfig.metadata = {
+    property_id: propertyDetails?.id,
+    property_slug: propertyDetails?.slug,
+    plan_code: planCode,
+    start_date: startDate
+  }
+
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -149,6 +154,36 @@ const PropertyDetail = () => {
     });
   };
 
+  const installmentPaymentPaystack = (res) => [
+    dispatch(verifyPayment(res.reference)).then((response) => {
+      if (response?.value?.data?.data?.status === "success") {
+        const data = {
+          authorization_code: response?.value?.data?.data?.authorization?.authorization_code,
+          card_type: response?.value?.data?.data?.authorization?.card_type,
+          last4: response?.value?.data?.data?.authorization?.last4,
+          exp_year: response?.value?.data?.data?.authorization?.exp_year,
+          bin: response?.value?.data?.data?.authorization?.bin,
+          bank: response?.value?.data?.data?.authorization?.bank,
+          channel: response?.value?.data?.data?.authorization?.channel,
+          signature: response?.value?.data?.data?.authorization?.signature,
+          reusable: response?.value?.data?.data?.authorization?.reusable,
+          country_code: response?.value?.data?.data?.authorization?.country_code,
+          plan_code: response?.value?.data?.data?.metadata?.plan_code,
+          property_type: pid?.startsWith("house") ? "house" : "land",
+          property_id: response?.value?.data?.data?.metadata?.property_id,
+          start_date: response?.value?.data?.data?.metadata?.start_date,
+          users_id: user?.id
+        }
+        dispatch(subscription(data)).then((res) => {
+          if (res?.value?.data?.success) {
+            router.push("/properties");
+            toastSuccess("Property purchase successful");
+          }
+        })
+      }
+    })
+  ]
+
   const onOutrightPaymentPaystack = (res) => {
     dispatch(verifyPayment(res.reference)).then((response) => {
       if (response?.value?.data?.data?.status === "success") {
@@ -174,6 +209,7 @@ const PropertyDetail = () => {
   const initializeOutrightPayment = usePaystackPayment(
     outrightConfig
   );
+  const initializeInstallmentPayment = usePaystackPayment(installmentConfig)
 
   useEffect(() => {
     pid?.startsWith("house")
@@ -214,65 +250,20 @@ const PropertyDetail = () => {
     setImages(newArray);
   }, [propertyDetails]);
 
-  const ammenitiesData = [
-    {
-      title: "Price",
-      description: propertyDetails?.price,
-    },
-    {
-      title: "Reference",
-      description: propertyDetails?.reference,
-    },
-    {
-      title: "Year built",
-      description: propertyDetails?.year_built,
-    },
-    {
-      title: "Contact",
-      description: propertyDetails?.contact,
-    },
-    {
-      title: "Status",
-      description: propertyDetails?.status,
-    },
-    {
-      title: "Type",
-      description:
-        propertyDetails?.house_subcategory?.subcategory_name,
-    },
-    {
-      title: "Home Area",
-      description: propertyDetails?.home_area + "SqrFt",
-    },
-    {
-      title: "Dimension",
-      description: propertyDetails?.dimension,
-    },
-    {
-      title: "Material",
-      description: propertyDetails?.material,
-    },
-    {
-      title: "Location",
-      description: propertyDetails?.location,
-    },
-    {
-      title: "Bed",
-      description: "2",
-    },
-    {
-      title: "Room",
-      description: propertyDetails?.rooms,
-    },
-    {
-      title: "Garadges",
-      description: "2",
-    },
-    {
-      title: "Bathroom",
-      description: propertyDetails?.bathrooms,
-    },
-  ];
+  useEffect(() => {
+    let newPlansArray = []
+    propertyDetails?.plans?.map((item) => {
+      const Obj = {
+        label: item.interval + " Month(s)",
+        value: item.plan_code,
+        amount: item.amount
+      }
+      newPlansArray.push(Obj)
+      return Obj
+    })
+    setPlansArray(newPlansArray)
+  }, [propertyDetails?.plans])
+
 
   const landAmmenities = [
     {
@@ -337,11 +328,10 @@ const PropertyDetail = () => {
                     cursor: "pointer",
                   }}
                   onClick={() => {
-                    !outrightPaymentModal
-                      ? initializePayment(onlineInspectionPaystack)
-                      : initializeOutrightPayment(
+                    outrightPaymentModal
+                      ? initializeOutrightPayment(
                         onOutrightPaymentPaystack
-                      );
+                      ) : initializePayment(onlineInspectionPaystack);
                   }}
                 >
                   <span style={{ width: "254px" }}>
@@ -414,9 +404,34 @@ const PropertyDetail = () => {
               title="INSTALLMENT PAYMENT"
               visible={saveForProperty}
               onCancel={() => setSaveForProperty(!saveForProperty)}
-              footer={null}
+              onOk={() => {
+                user?.verified
+                  ? initializeInstallmentPayment(installmentPaymentPaystack)
+                  : toastWarning(
+                    "Please You need to verify your account before purchasing property"
+                  );
+              }}
+              okText="Submit"
             >
-              <InstallmentPayment email={user?.email} plans={propertyDetails?.plans} pid={pid} id={propertyDetails?.id} />
+              <Form layout="vertical">
+                <Form.Item name="plan_code" label="Plans">
+                  <Radio.Group
+                    options={plansArray}
+                    onChange={(e) => {
+                      setPlanCode(e.target.value)
+                    }}
+                    optionType="button"
+                    buttonStyle="solid"
+                  />
+                </Form.Item>
+                <Form.Item name="start_date" label="Start Date">
+                  <DatePicker onChange={(_, string) => {
+                    setStartDate(string)
+                  }} />
+                </Form.Item>
+                <Form.Item >
+                </Form.Item>
+              </Form>
             </Modal>
             <Modal
               title="INSPECT PROPERTY NOW"
@@ -635,34 +650,7 @@ const PropertyDetail = () => {
                         }}
                         className="prop-details"
                       >
-                        <List
-                          grid={{ gutter: 8, column: 2 }}
-                          bordered
-                          dataSource={ammenitiesData}
-                          renderItem={(item) => (
-                            <List.Item
-                              style={{
-                                fontSize: "17px",
-                                display: "flex",
-                                borderBottom:
-                                  "0.957303px dashed #C1C1C1",
-                                margin: "11px",
-                                padding: "0",
-                              }}
-                              className="prop-item"
-                            >
-                              <span
-                                style={{
-                                  textTransform: "uppercase",
-                                  fontWeight: "bolder",
-                                }}
-                              >
-                                {item.title}
-                              </span>
-                              <span>{item.description}</span>
-                            </List.Item>
-                          )}
-                        />
+                        <AmmenitiesComponent price={propertyDetails?.price} reference={propertyDetails?.reference} yearBuilt={propertyDetails?.year_built} contact={propertyDetails?.contact} status={propertyDetails?.status} subcategory={propertyDetails?.house_subcategory?.subcategory_name} homeArea={propertyDetails?.home_area} dimension={propertyDetails?.dimension} material={propertyDetails?.material} location={propertyDetails?.location} rooms={propertyDetails?.rooms} bathroom s={propertyDetails?.bathrooms} />
                       </div>
                     </>
                   )}
