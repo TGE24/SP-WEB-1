@@ -25,8 +25,6 @@ export default () => {
     }
   }, [dispatch]);
 
-  console.log(data?.token);
-
   return (
     <CareerSectionTwo>
       <div className="header">
@@ -44,35 +42,35 @@ export default () => {
           {loading ? (
             <Loader />
           ) : (
-            careers?.careers.map((item, index) => (
-              <Col xs={24} sm={2} md={10} lg={6} xl={6} key={index}>
-                <Flip top cascade>
-                  <div className="career-card">
-                    <img src={item.image} alt="" />
-                    <div className="card-details">
-                      <h1>{item.name}</h1>
-                      <hr />
-                      <h2>{item.description}</h2>
-                      {!data?.token && (
-                        <button onClick={() => dispatch(showModal())}>
-                          Apply
-                        </button>
-                      )}
-                      {data?.token && (
-                        <button
-                          onClick={() =>
-                            Router.push("/dashboard/become-expert")
-                          }
-                        >
-                          Apply
-                        </button>
-                      )}
+              careers?.careers.map((item, index) => (
+                <Col xs={24} sm={2} md={10} lg={6} xl={6} key={index}>
+                  <Flip top cascade>
+                    <div className="career-card">
+                      <img src={item.image} alt="" />
+                      <div className="card-details">
+                        <h1>{item.name}</h1>
+                        <hr />
+                        <h2>{item.description}</h2>
+                        {!data?.token && (
+                          <button onClick={() => dispatch(showModal())}>
+                            Apply
+                          </button>
+                        )}
+                        {data?.token && (
+                          <button
+                            onClick={() =>
+                              Router.push("/dashboard/become-expert")
+                            }
+                          >
+                            Apply
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </Flip>
-              </Col>
-            ))
-          )}
+                  </Flip>
+                </Col>
+              ))
+            )}
         </Row>
       </div>
     </CareerSectionTwo>

@@ -88,3 +88,11 @@ export const subscription = (data) => async (dispatch) => {
     payload
   })
 }
+
+export const filter = (data) => async (dispatch) => {
+  const payload = api.post("/property/filter", data);
+  return dispatch({
+    type: actionTypes.FILTER.default,
+    payload
+  })
+}
