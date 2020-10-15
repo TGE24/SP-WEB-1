@@ -162,6 +162,7 @@ const PropertyDetail = () => {
           card_type: response?.value?.data?.data?.authorization?.card_type,
           last4: response?.value?.data?.data?.authorization?.last4,
           exp_year: response?.value?.data?.data?.authorization?.exp_year,
+          exp_month: response?.value?.data?.data?.authorization?.exp_month,
           bin: response?.value?.data?.data?.authorization?.bin,
           bank: response?.value?.data?.data?.authorization?.bank,
           channel: response?.value?.data?.data?.authorization?.channel,

@@ -7,7 +7,8 @@ const initialState = {
   error: null,
   paystackData: null,
   recentProperties: null,
-  actionLoading: false
+  actionLoading: false,
+  filterData: null
 };
 
 export const propertyReducer = (state = initialState, action) => {
@@ -112,6 +113,30 @@ export const propertyReducer = (state = initialState, action) => {
         loading: false,
         error: parseError(action.payload),
       };
+    }
+    case actionTypes.FILTER.pending: {
+      return {
+        ...state,
+        actionLoading: true,
+        error: false
+      }
+    }
+
+    case actionTypes.FILTER.fulfilled: {
+      return {
+        ...state,
+        actionLoading: false,
+        error: null,
+        filterData: { ...action.payload.data }
+      }
+    }
+
+    case actionTypes.FILTER.rejected: {
+      return {
+        ...state,
+        actionLoading: false,
+        error: parseError(action.payload)
+      }
     }
 
     default:
