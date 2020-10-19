@@ -8,6 +8,7 @@ import { filter } from "store/properties/actions";
 import { Empty, Row, Col, Card, Tag } from "antd";
 import Loader from "pages/property/Loader";
 import Link from "next/link";
+import { formatMoney } from "helpers/formatter";
 
 const Container = styled.div`
   width: 100%;
@@ -108,14 +109,13 @@ const App = () => {
                     key={index}
                     className="column-6"
                   >
-                    {/* <Zoom bottom> */}
                     <Card
                       hoverable
                       cover={
                         <>
                           <img
                             alt="example"
-                          // src={item?.take_two_images[0]?.img_url}
+                            src={item?.take_two_images[0]?.img_url}
                           />
                           <div
                             style={{
@@ -134,7 +134,7 @@ const App = () => {
                             >
                               Featured
                               </Tag>
-                            <Tag
+                            {/* <Tag
                               color="#F9A602"
                               style={{
                                 position: "relative",
@@ -146,7 +146,7 @@ const App = () => {
                                   ?.subcategory_name
                                 : item?.land_category
                                   ?.land_category}
-                            </Tag>
+                            </Tag> */}
                           </div>
                         </>
                       }
@@ -155,6 +155,7 @@ const App = () => {
                         title={item?.name}
                         description={item?.state + " " + item?.lga}
                       />
+                      <h4>{"₦" + formatMoney(item?.price)}</h4>
                       <div
                         style={{
                           display: "flex",
@@ -163,22 +164,8 @@ const App = () => {
                           padding: "0 13px",
                         }}
                       >
-                        {/* {item.features.map((item2, index) => (
-                        <div key={index}>
-                          <img
-                            src={item2}
-                            alt="features"
-                            height="25"
-                          />
-                          <h6>Bedrooms</h6>
-                        </div>
-                      ))} */}
                       </div>
-                      {/* <Button className="button" icon={<SearchOutlined />}>
-                    Search
-                  </Button> */}
                     </Card>
-                    {/* </Zoom> */}
                   </Col>
                 </Link>
               ))

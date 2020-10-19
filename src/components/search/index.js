@@ -100,10 +100,10 @@ const Search = ({ values }) => {
               placeholder="Select a price range"
               optionFilterProp="children"
             >
-              <Option value="+500000">
+              <Option value="500000-1000000">
                 ₦500,000 - ₦1,000,000
               </Option>
-              <Option value="+1000000">
+              <Option value="1000000-2000000">
                 ₦1,000,000 - ₦2,000,000
               </Option>
               <Option value="+2000000">
@@ -188,9 +188,15 @@ const Search = ({ values }) => {
               placeholder="Select a price range"
               optionFilterProp="children"
             >
-              <Option value="jack">₦500,000 - ₦1,000,000</Option>
-              <Option value="lucy">₦1,000,000 - ₦2,000,000</Option>
-              <Option value="tom">Above ₦2,000,000</Option>
+              <Option value="500000-1000000">
+                ₦500,000 - ₦1,000,000
+              </Option>
+              <Option value="1000000-2000000">
+                ₦1,000,000 - ₦2,000,000
+              </Option>
+              <Option value="+2000000">
+                Above ₦2,000,000
+              </Option>
             </Select>
           </Form.Item>
 
