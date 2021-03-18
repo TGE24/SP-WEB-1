@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "antd": "4.4.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "formik": "2.1.5",
     "localforage": "1.7.4",
     "next": "^9.4.2",
